@@ -192,6 +192,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AnalyticsTreeController.cs" />
+    <Compile Include="Models\SectionTreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoStartup.cs" />
   </ItemGroup>
@@ -199,6 +201,9 @@
   <ItemGroup>
     <None Include="App_Plugins\Analytics\package.manifest" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
