@@ -200,12 +200,21 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App_Plugins\Analytics\package.manifest" />
+    <None Include="App_Plugins\Analytics\settings.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\settings.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\real-time.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)App_Plugins\*.*" "$(SolutionDir)Analytics.Site\App_Plugins" /Y /E</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
