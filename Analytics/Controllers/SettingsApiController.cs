@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Hosting;
 using System.Xml;
 using Analytics.Models;
+using umbraco.controls;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
@@ -65,9 +67,35 @@ namespace Analytics.Controllers
             return settings;
         }
 
-        public bool PostSettings()
+        public List<SettingsValue> PostSettings(List<SettingsValue> settings)
         {
-            return true;
+            //Update the XML config file on disk
+
+            //Path to the settings.config file
+            var configPath = HostingEnvironment.MapPath(ConfigPath);
+
+            //Load settings.config XML file
+            XmlDocument settingsXml = new XmlDocument();
+            settingsXml.Load(configPath);
+
+            //Get all child nodes of <Analytics> node
+            XmlNodeList analayticsNode = settingsXml.SelectNodes("//Analytics");
+
+            //Loop over child nodes inside <Analytics> node
+            foreach (XmlNode settingNode in analayticsNode)
+            {
+                foreach (XmlNode setting in settingNode.ChildNodes)
+                {
+                    //Go & populate our model from each item in the XML file
+                    setting.InnerText = settings.SingleOrDefault(x => x.Key == setting.Name).Value;
+                }
+            }
+
+            //Save the XML file back down to disk
+            settingsXml.Save(configPath);
+
+            //Return the same settings that passed in
+            return settings;
         }
     }
 }

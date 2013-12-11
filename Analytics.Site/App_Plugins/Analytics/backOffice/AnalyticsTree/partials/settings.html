@@ -1,19 +1,12 @@
 ﻿<div ng-controller="Analytics.SettingsController">
     <div class="umb-pane">
-        <div ng-repeat="setting in settings">
-            {{ setting.Label }}<br/>
-            {{ setting.Description }}<br/>
-            {{ setting.Key }}<br />
-            {{ setting.Value }}
-
-            <umb-control-group label="setting.Label" description="setting.Description">
-                <input type="text" name="setting.Key" id="setting.Key" value="setting.Value" />
-            </umb-control-group>
-        </div>
+        <umb-control-group ng-repeat="setting in settings" label="{{ setting.Label }}" description="{{ setting.Description }}">
+            <input type="text" name="{{ setting.Key }}" id="{{ setting.Key }}" value="{{ setting.Value }}" ng-model="setting.Value" />
+        </umb-control-group>
 
         <div class="umb-tab-buttons">
             <div class="btn-group">
-                <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                <button ng-click="save(settings)" data-hotkey="ctrl+s" class="btn btn-success">
                     <localize key="buttons_save">Save</localize>
                 </button>
             </div>
