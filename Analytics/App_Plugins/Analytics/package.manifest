@@ -2,5 +2,6 @@
 	javascript: [
 	    '~/App_Plugins/Analytics/backoffice/analyticstree/controllers/view.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/edit.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/settings.controller.js'
 	]
 }

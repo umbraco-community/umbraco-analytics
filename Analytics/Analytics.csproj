@@ -193,17 +193,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
+    <Compile Include="Controllers\SettingsApiController.cs" />
     <Compile Include="Models\SectionTreeNode.cs" />
+    <Compile Include="Models\SettingsValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoStartup.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App_Plugins\Analytics\package.manifest" />
     <None Include="App_Plugins\Analytics\settings.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Settings.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\settings.html" />
