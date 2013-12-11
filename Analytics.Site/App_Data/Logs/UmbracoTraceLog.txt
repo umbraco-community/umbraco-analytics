@@ -490,3 +490,5 @@
 2013-12-11 14:58:10,147 [10] INFO  Umbraco.Core.PluginManager - [Thread 6] Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
 2013-12-11 14:58:10,153 [10] INFO  Umbraco.Core.PluginManager - [Thread 6] Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 20 (took 6ms)
 2013-12-11 15:00:24,780 [10] WARN  Umbraco.Web.UmbracoModule - [Thread 11] Umbraco has no content
+2013-12-11 15:03:09,333 [10] WARN  Umbraco.Web.UmbracoModule - [Thread 26] Umbraco has no content
+2013-12-11 15:08:09,768 [10] WARN  Umbraco.Web.UmbracoModule - [Thread 28] Umbraco has no content
