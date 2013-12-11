@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Hosting;
 using System.Xml;
 using Analytics.Models;
-using umbraco.controls;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 

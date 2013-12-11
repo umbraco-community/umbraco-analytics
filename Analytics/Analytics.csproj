@@ -228,6 +228,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AnalyticsApiController.cs" />
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
     <Compile Include="Controllers\SettingsApiController.cs" />
     <Compile Include="Models\SectionTreeNode.cs" />
