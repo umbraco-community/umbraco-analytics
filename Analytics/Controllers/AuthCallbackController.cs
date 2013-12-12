@@ -1,4 +1,6 @@
-﻿namespace Analytics.Controllers
+﻿using System;
+
+namespace Analytics.Controllers
 {
     /// <summary>
     /// Taken from tutorial at
@@ -8,7 +10,10 @@
     {
         protected override Google.Apis.Auth.OAuth2.Mvc.FlowMetadata FlowData
         {
-            get { return new AppFlowMetadata(); }
+            get { 
+                //return new AppFlowMetadata();
+                return null;
+            }
         }
     }
 }

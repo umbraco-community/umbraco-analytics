@@ -252,6 +252,9 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
+    <Content Include="App_Plugins\Analytics\lib\angular-chart.js\angular-chartjs.js" />
+    <Content Include="App_Plugins\Analytics\lib\chart.js\chart.0.2.js" />
+    <Content Include="App_Plugins\Analytics\lib\chart.js\chart.0.2.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

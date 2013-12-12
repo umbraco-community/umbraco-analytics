@@ -19,7 +19,6 @@ namespace Analytics.Controllers
 
         public async Task<RealtimeData> GetRealTimeStats(CancellationToken cancellationToken)
         {
-            var authResult = await new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).AuthorizeAsync(cancellationToken);
 
             // Register the base client (auth, api key etc..)
             var baseClient              = new BaseClientService.Initializer();
