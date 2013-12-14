@@ -3,6 +3,7 @@ using System.Web.Hosting;
 using System.Xml;
 using System.Xml.Linq;
 using Umbraco.Core;
+using Umbraco.Core.Configuration;
 using Umbraco.Core.Models;
 
 namespace Analytics

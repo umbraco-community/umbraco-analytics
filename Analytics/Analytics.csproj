@@ -244,17 +244,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Browser.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Settings.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\country.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\language.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\os.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\browser.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\page-views.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\unique-visitors.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\visits.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\settings.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\real-time.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
-    <Content Include="App_Plugins\Analytics\lib\angular-chart.js\angular-chartjs.js" />
-    <Content Include="App_Plugins\Analytics\lib\chart.js\chart.0.2.js" />
-    <Content Include="App_Plugins\Analytics\lib\chart.js\chart.0.2.min.js" />
+    <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
+    <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
+    <Content Include="App_Plugins\Analytics\lib\chartjs\chart.0.2.js" />
+    <Content Include="App_Plugins\Analytics\lib\chartjs\chart.0.2.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
