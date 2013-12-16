@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Hosting;
 using System.Xml;
+using umbraco.BusinessLogic;
 using Umbraco.Core;
 
 namespace Analytics
@@ -25,6 +26,7 @@ namespace Analytics
             {
                 //So let's create it the section
                 sectionService.MakeNew("Analytics", "analytics", "icon-pulse");
+
             }
         }
 

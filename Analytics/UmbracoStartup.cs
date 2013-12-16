@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Web.Hosting;
-using System.Xml;
-using umbraco.cms.businesslogic.packager;
+﻿using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
+using Umbraco.Core.Services;
 
 namespace Analytics
 {
