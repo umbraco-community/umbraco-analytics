@@ -17,9 +17,10 @@ namespace Analytics.Controllers
         private const string ApplicationName    = "Analytics for Umbraco";
         private const string ClientID           = "206456221167-1cm2983v0d6i5emt132316ommn6hsv8j.apps.googleusercontent.com";
 
+
+
         public async Task<RealtimeData> GetRealTimeStats(CancellationToken cancellationToken)
         {
-
             // Register the base client (auth, api key etc..)
             var baseClient              = new BaseClientService.Initializer();
             baseClient.ApiKey           = ApiKey;

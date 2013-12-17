@@ -129,6 +129,9 @@
     <Reference Include="Our.Umbraco.uGoLive.Checks">
       <HintPath>..\packages\UmbracoCms.Core.7.0.0\lib\Our.Umbraco.uGoLive.Checks.dll</HintPath>
     </Reference>
+    <Reference Include="Skybrud.Social">
+      <HintPath>..\packages\Skybrud.Social.0.1.1\lib\Skybrud.Social.dll</HintPath>
+    </Reference>
     <Reference Include="SQLCE4Umbraco">
       <HintPath>..\packages\UmbracoCms.Core.7.0.0\lib\SQLCE4Umbraco.dll</HintPath>
     </Reference>
@@ -228,9 +231,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.cs">
+      <DependentUpon>OAuth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.designer.cs">
+      <DependentUpon>OAuth.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AnalyticsApiController.cs" />
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
-    <Compile Include="Controllers\AuthCallbackController.cs" />
     <Compile Include="Controllers\SettingsApiController.cs" />
     <Compile Include="Models\SectionTreeNode.cs" />
     <Compile Include="Models\SettingsValue.cs" />
@@ -262,6 +271,9 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\OAuth.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
     <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
     <Content Include="App_Plugins\Analytics\lib\chartjs\chart.0.2.js" />

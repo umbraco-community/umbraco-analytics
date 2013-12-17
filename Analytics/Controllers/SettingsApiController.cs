@@ -96,5 +96,106 @@ namespace Analytics.Controllers
             //Return the same settings that passed in
             return settings;
         }
+
+        public SettingsValue GetSetting(string key)
+        {
+            //Path to the settings.config file
+            var configPath = HostingEnvironment.MapPath(ConfigPath);
+
+            //Load settings.config XML file
+            XmlDocument settingsXml = new XmlDocument();
+            settingsXml.Load(configPath);
+
+            //Get specific node 
+            XmlNode settingNode = settingsXml.SelectSingleNode("//Analytics/" + key);
+
+            if (settingNode != null)
+            {
+                //Go & populate our model
+                var setting         = new SettingsValue();
+                setting.Key         = settingNode.Name;
+                setting.Label       = settingNode.Attributes["label"].Value;
+                setting.Description = settingNode.Attributes["description"].Value;
+                setting.Value       = settingNode.InnerText;
+
+                return setting;
+            }
+
+            return null;
+        }
+
+        public string GetSettingValue(string key)
+        {
+            //Path to the settings.config file
+            var configPath = HostingEnvironment.MapPath(ConfigPath);
+
+            //Load settings.config XML file
+            XmlDocument settingsXml = new XmlDocument();
+            settingsXml.Load(configPath);
+
+            //Get specific node 
+            XmlNode settingNode = settingsXml.SelectSingleNode("//Analytics/" + key);
+
+            if (settingNode != null)
+            {
+                return settingNode.InnerText;
+            }
+
+            return string.Empty;
+        }
+
+        public SettingsValue PostSetting(SettingsValue setting)
+        {
+            //Update the XML config file on disk
+
+            //Path to the settings.config file
+            var configPath = HostingEnvironment.MapPath(ConfigPath);
+
+            //Load settings.config XML file
+            XmlDocument settingsXml = new XmlDocument();
+            settingsXml.Load(configPath);
+
+            //Get all child nodes of <Analytics> node
+            XmlNode settingNode = settingsXml.SelectSingleNode("//Analytics/" + setting.Key);
+
+            //Go & update the value
+            if (settingNode != null)
+            {
+                settingNode.InnerText = setting.Value;
+            }
+
+            //Save the XML file back down to disk
+            settingsXml.Save(configPath);
+
+            //Return the same setting that passed in
+            return setting;
+        }
+
+        public string PostSettingValue(string key, string value)
+        {
+            //Update the XML config file on disk
+
+            //Path to the settings.config file
+            var configPath = HostingEnvironment.MapPath(ConfigPath);
+
+            //Load settings.config XML file
+            XmlDocument settingsXml = new XmlDocument();
+            settingsXml.Load(configPath);
+
+            //Get all child nodes of <Analytics> node
+            XmlNode settingNode = settingsXml.SelectSingleNode("//Analytics/" + key);
+
+            //Go & update the value
+            if (settingNode != null)
+            {
+                settingNode.InnerText = value;
+            }
+
+            //Save the XML file back down to disk
+            settingsXml.Save(configPath);
+
+            //Return the same setting that passed in
+            return value;
+        }
     }
 }
