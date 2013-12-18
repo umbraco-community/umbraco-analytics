@@ -231,6 +231,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyticsConfig.cs" />
+    <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.cs">
+      <DependentUpon>OAuthCallback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.designer.cs">
+      <DependentUpon>OAuthCallback.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.cs">
       <DependentUpon>OAuth.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -272,6 +280,9 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="App_Plugins\Analytics\backOffice\OAuth.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

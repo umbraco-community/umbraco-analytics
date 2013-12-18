@@ -16,12 +16,12 @@
             //Open a dialog window to oAuth
             window.open("http://google.com", "oAuthAnayltics", "location=0,status=0,width=800,height=400");
 
-            //It will callback to http://analytics.com/oAuth/callback or similar
+            //It will callback to http://analytics-oauth.azurewebsites.net/callback/oAuth.aspx?origin=http://localhost:62315
 
             //Once we have got token at anlytics.com site in popup
 
             //It does a WebAPI post to the Umbraco Site
-            //http://localhost:62315/umbraco/Analytics/SettingsApi/PostSettingValue?key=refreshToken&value=blah
+            //http://localhost:62315/umbraco/Analytics/oAuthApi/PostSettingValue?key=refreshToken&value=blah
 
             //Once got OK back from WebAPI that the setting file has been posted/updated
 
