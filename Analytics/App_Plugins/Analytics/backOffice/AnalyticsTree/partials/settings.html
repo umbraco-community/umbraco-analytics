@@ -1,5 +1,9 @@
 ﻿<div ng-controller="Analytics.SettingsController">
     <div class="umb-pane">
+        <umb-control-group label="Authorisation" description="Login with Google via oAuth to verify">
+            <button class="btn btn-success" ng-click="auth()">Authorise</button>
+        </umb-control-group>
+
         <umb-control-group ng-repeat="setting in settings" label="{{ setting.Label }}" description="{{ setting.Description }}">
             <input type="text" name="{{ setting.Key }}" id="{{ setting.Key }}" value="{{ setting.Value }}" ng-model="setting.Value" />
         </umb-control-group>
@@ -11,6 +15,5 @@
                 </button>
             </div>
         </div>
-
     </div>
 </div>

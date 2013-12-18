@@ -6,6 +6,32 @@
             $scope.settings = response.data;
         });
 
+        //Show Auth?
+        //TODO: Check if token from oAuth exists or not
+        $scope.showAuth = true;
+
+        //Auth - Click
+        $scope.auth = function () {
+
+            //Open a dialog window to oAuth
+            window.open("http://google.com", "oAuthAnayltics");
+
+            //It will callback to http://analytics.com/oAuth/callback or similar
+
+            //Once we have got token at anlytics.com site in popup
+
+            //It does a WebAPI post to the Umbraco Site
+            //http://localhost:62315/umbraco/Analytics/SettingsApi/PostSettingValue?key=refreshToken&value=blah
+
+            //Once got OK back from WebAPI that the setting file has been posted/updated
+
+            //Close Popup Window
+
+            //Set showAuth to false
+
+            //Maybe show a sucess message with ng-show perhaps in it's place?
+        };
+
         //Save - click...
         $scope.save = function (settings) {
             

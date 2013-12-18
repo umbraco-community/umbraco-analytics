@@ -189,6 +189,7 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
                 // Get all accounts we have access to
                 AnalyticsAccountsResponse accounts = service.Analytics.GetAccounts();
 
+
                 // Write information to the user
                 Content.Text = "<div class=\"error\">" + (accounts.Items.Length == 0 ? "Noes! Seems you don't have access to any accounts." : "Yay! You have access to <b>" + accounts.Items.Length + "</b> accounts.") + "</div>";
 
