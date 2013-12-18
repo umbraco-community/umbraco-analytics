@@ -14,7 +14,7 @@
         $scope.auth = function () {
 
             //Open a dialog window to oAuth
-            window.open("http://google.com", "oAuthAnayltics");
+            window.open("http://google.com", "oAuthAnayltics", "location=0,status=0,width=800,height=400");
 
             //It will callback to http://analytics.com/oAuth/callback or similar
 

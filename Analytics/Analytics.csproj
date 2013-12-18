@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="Controllers\AnalyticsApiController.cs" />
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
+    <Compile Include="Controllers\oAuthApiController.cs" />
     <Compile Include="Controllers\SettingsApiController.cs" />
     <Compile Include="Models\SectionTreeNode.cs" />
     <Compile Include="Models\SettingsValue.cs" />
