@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Skybrud.Social.Google;
 using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.Analytics.Objects;
@@ -40,6 +41,19 @@ namespace Analytics.Controllers
             // Return the profiles
             return profiles;
         }
+
+        public AnalyticsProfile[] GetProfilesFromAccount(string accountId)
+        {
+            //Get Account
+            var account = GetGoogleService().Analytics.GetAccounts().Items.SingleOrDefault(x => x.Id == accountId);
+
+            // Get the profiles from the Google Analytics API
+            var profiles = GetGoogleService().Analytics.GetProfiles(account).Items;
+
+            // Return the profiles
+            return profiles;
+        }
+
 
 
         /// <summary>

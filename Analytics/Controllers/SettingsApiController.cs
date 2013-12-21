@@ -197,5 +197,31 @@ namespace Analytics.Controllers
             //Return the same setting that passed in
             return value;
         }
+
+        public bool GetAuth()
+        {
+            //Check to see if RefreshToken has a value or not
+            //Assume if there is a value we have auth'd from Google with oAuth
+
+            //Path to the settings.config file
+            var configPath = HostingEnvironment.MapPath(ConfigPath);
+
+            //Load settings.config XML file
+            XmlDocument settingsXml = new XmlDocument();
+            settingsXml.Load(configPath);
+
+            //Get specific node 
+            XmlNode refreshNode = settingsXml.SelectSingleNode("//Analytics/RefreshToken");
+
+            //Make sure we found it
+            if (refreshNode != null)
+            {
+                //If we have a value (aka bigger than 0) then we have a refresh token
+                //Aka we have Auth'd against Google
+                return refreshNode.InnerText.Length > 0;
+            }
+
+            return false;
+        }
     }
 }
