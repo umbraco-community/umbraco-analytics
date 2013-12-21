@@ -21,6 +21,18 @@ angular.module("umbraco.resources")
 
             getprofiles: function (accountId) {
                 return $http.get("Analytics/AnalyticsApi/GetProfilesFromAccount?accountId=" + accountId);
+            },
+
+            saveAccount: function (accountData, profileData) {
+
+                //Merge the two JSON objects into one
+                var postData = jQuery.extend(accountData, profileData);
+                console.log("Values in saveAccount resource before POST");
+                console.log(accountData);
+                console.log(profileData);
+                console.log(postData);
+                
+                return $http.post("Analytics/SettingsApi/PostAccountProfile", angular.toJson(postData));
             }
 
         };

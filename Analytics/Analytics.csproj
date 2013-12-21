@@ -250,6 +250,7 @@
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
     <Compile Include="Controllers\oAuthApiController.cs" />
     <Compile Include="Controllers\SettingsApiController.cs" />
+    <Compile Include="Models\AccountProfile.cs" />
     <Compile Include="Models\SectionTreeNode.cs" />
     <Compile Include="Models\SettingsValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,6 +261,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App_Plugins\Analytics\package.manifest" />
+    <None Include="App_Plugins\Analytics\account.config" />
     <None Include="App_Plugins\Analytics\settings.config" />
     <None Include="packages.config" />
   </ItemGroup>

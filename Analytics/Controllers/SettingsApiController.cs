@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Hosting;
 using System.Xml;
 using Analytics.Models;
+using Skybrud.Social.Google.Analytics.Objects;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Analytics.Controllers
 {
@@ -21,6 +24,8 @@ namespace Analytics.Controllers
         /// Does what it says on the tin - the path to the settings.config file
         /// </summary>
         private const string ConfigPath = "~/App_Plugins/Analytics/settings.config";
+
+        private const string AccountPath = "~/App_Plugins/Analytics/account.config";
 
         /// <summary>
         /// Gets Settings from the XML settings.config
@@ -222,6 +227,29 @@ namespace Analytics.Controllers
             }
 
             return false;
+        }
+
+
+        public AccountProfile GetAccountProfile()
+        {
+            //Open JSON file from disk
+            var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(AccountPath));
+
+            //Deserialize to .NET object
+            var accountProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<AccountProfile>(profileAsJson);
+
+            return accountProfile;
+        }
+
+        public AccountProfile PostAccountProfile(AccountProfile profile)
+        {
+            //Convert the posted object down into JSON
+            var profileAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(profile, Formatting.Indented);
+
+            //Open file on disk & save contents
+            File.WriteAllText(HostingEnvironment.MapPath(AccountPath), profileAsJson);
+
+            return profile;
         }
     }
 }

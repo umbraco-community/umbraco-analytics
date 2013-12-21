@@ -48,14 +48,27 @@
         };
 
         //Save - click...
-        $scope.save = function (settings) {
-            
+        $scope.save = function (settings, account, profile) {
+
+            console.log("From Controller Pre Save");
+            console.log(settings);
+            console.log(account);
+            console.log(profile);
+
             //Save settings resource - does a WebAPI POST call
             settingsResource.save(settings).then(function (response) {
                 $scope.settings = response.data;
                 
                 //Display Success message
                 notificationsService.success("Success settings have been saved");
+            });
+
+            //Save settings resource - does a WebAPI POST call
+            settingsResource.saveAccount(account, profile).then(function (response) {
+                //Don't need anything from response.data back
+
+                //Display Success message
+                notificationsService.success("Success account details have been saved");
             });
         };
 
