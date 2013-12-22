@@ -261,6 +261,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="App_Plugins\Analytics\profile.config" />
     <None Include="App_Plugins\Analytics\package.manifest" />
     <None Include="App_Plugins\Analytics\account.config" />
     <None Include="App_Plugins\Analytics\settings.config" />

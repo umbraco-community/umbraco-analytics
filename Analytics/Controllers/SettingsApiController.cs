@@ -23,9 +23,9 @@ namespace Analytics.Controllers
         /// <summary>
         /// Does what it says on the tin - the path to the settings.config file
         /// </summary>
-        private const string ConfigPath = "~/App_Plugins/Analytics/settings.config";
-
-        private const string AccountPath = "~/App_Plugins/Analytics/account.config";
+        private const string ConfigPath     = "~/App_Plugins/Analytics/settings.config";
+        private const string AccountPath    = "~/App_Plugins/Analytics/account.config";
+        private const string ProfilePath    = "~/App_Plugins/Analytics/profile.config";
 
         /// <summary>
         /// Gets Settings from the XML settings.config
@@ -233,21 +233,38 @@ namespace Analytics.Controllers
         public AccountProfile GetAccountProfile()
         {
             //Open JSON file from disk
-            var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(AccountPath));
+            var accountAsJson = File.ReadAllText(HostingEnvironment.MapPath(AccountPath));
+            var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(ProfilePath));
 
             //Deserialize to .NET object
-            var accountProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<AccountProfile>(profileAsJson);
+            var account = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsAccount>(accountAsJson);
+            var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsProfile>(profileAsJson);
+
+            var accountProfile      = new AccountProfile();
+            accountProfile.Account  = account;
+            accountProfile.Profile  = profile;
 
             return accountProfile;
         }
 
-        public AccountProfile PostAccountProfile(AccountProfile profile)
+        public AnalyticsAccount PostAccount(AnalyticsAccount account)
+        {
+            //Convert the posted object down into JSON
+            var accountAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(account, Formatting.Indented);
+
+            //Open file on disk & save contents
+            File.WriteAllText(HostingEnvironment.MapPath(AccountPath), accountAsJson);
+
+            return account;
+        }
+
+        public AnalyticsProfile PostProfile(AnalyticsProfile profile)
         {
             //Convert the posted object down into JSON
             var profileAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(profile, Formatting.Indented);
 
             //Open file on disk & save contents
-            File.WriteAllText(HostingEnvironment.MapPath(AccountPath), profileAsJson);
+            File.WriteAllText(HostingEnvironment.MapPath(ProfilePath), profileAsJson);
 
             return profile;
         }

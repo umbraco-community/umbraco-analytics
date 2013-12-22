@@ -64,11 +64,19 @@
             });
 
             //Save settings resource - does a WebAPI POST call
-            settingsResource.saveAccount(account, profile).then(function (response) {
+            settingsResource.saveAccount(account).then(function (response) {
                 //Don't need anything from response.data back
 
                 //Display Success message
                 notificationsService.success("Success account details have been saved");
+            });
+
+            //Save settings resource - does a WebAPI POST call
+            settingsResource.saveProfile(profile).then(function (response) {
+                //Don't need anything from response.data back
+
+                //Display Success message
+                notificationsService.success("Success profile details have been saved");
             });
         };
 
