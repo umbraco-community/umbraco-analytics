@@ -86,6 +86,52 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
+        /// Get Sources
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetSources(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Source },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Keywords
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetKeywords(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Keyword },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
         /// Get Browser Vendors
         /// </summary>
         /// <param name="profile"></param>
@@ -177,28 +223,6 @@ namespace Analytics.Controllers
             return data;
         }
 
-        /// <summary>
-        /// Get Keywords
-        /// </summary>
-        /// <param name="profile"></param>
-        /// <returns></returns>
-        public AnalyticsDataResponse GetKeywords(string profile)
-        {
-            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
-
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Keyword },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
-
-            // Return the data as JSON
-            return data;
-        }
 
         /// <summary>
         /// Get Social Network Sources
@@ -223,28 +247,6 @@ namespace Analytics.Controllers
             return data;
         }
 
-        /// <summary>
-        /// Get Sources
-        /// </summary>
-        /// <param name="profile"></param>
-        /// <returns></returns>
-        public AnalyticsDataResponse GetSources(string profile)
-        {
-            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
-
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Source },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
-
-            // Return the data as JSON
-            return data;
-        }
 
         /// <summary>
         /// 

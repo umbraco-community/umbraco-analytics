@@ -1,0 +1,45 @@
+﻿<div ng-controller="Analytics.PageViewsController">
+    <div class="umb-pane">
+        
+        <h4>Last 30 Days - Views</h4>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Page Path</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in views.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <hr/>
+        
+        <h4>Last 30 Days - Sources</h4>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Source</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in sources.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

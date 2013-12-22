@@ -34,13 +34,9 @@ namespace Analytics.Controllers
                 var treeNodes = new List<SectionTreeNode>();
                 //treeNodes.Add(new SectionTreeNode() { Id = "real-time", Title = "Real Time", Icon = "icon-connection", Route = string.Format("{0}/view/{1}", mainRoute, "real-time") });
                 
-                treeNodes.Add(new SectionTreeNode() { Id = "visits", Title = "Visits", Icon = "icon-chart", Route = string.Format("{0}/view/{1}", mainRoute, "visits") });
-                treeNodes.Add(new SectionTreeNode() { Id = "unique-visits", Title = "Unique Visitors", Icon = "icon-chart-curve", Route = string.Format("{0}/view/{1}", mainRoute, "unique-visitors") });
-                treeNodes.Add(new SectionTreeNode() { Id = "page-views", Title = "Page Views", Icon = "icon-activity", Route = string.Format("{0}/view/{1}", mainRoute, "page-views") });
-
-
-                treeNodes.Add(new SectionTreeNode() { Id = "social", Title = "Social Network", Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "social") });
+                treeNodes.Add(new SectionTreeNode() { Id = "views", Title = "Views", Icon = "icon-activity", Route = string.Format("{0}/view/{1}", mainRoute, "views") });
                 treeNodes.Add(new SectionTreeNode() { Id = "keywords", Title = "Keywords", Icon = "icon-tags", Route = string.Format("{0}/view/{1}", mainRoute, "keywords") });
+                treeNodes.Add(new SectionTreeNode() { Id = "social", Title = "Social Network", Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "social") });
                 treeNodes.Add(new SectionTreeNode() { Id = "os", Title = "Operating System", Icon = "icon-windows", Route = string.Format("{0}/view/{1}", mainRoute, "os") });
                 treeNodes.Add(new SectionTreeNode() { Id = "screenres", Title = "Screen Resolution", Icon = "icon-display", Route = string.Format("{0}/view/{1}", mainRoute, "screenres") });
                 treeNodes.Add(new SectionTreeNode() { Id = "devices", Title = "Devices", Icon = "icon-iphone", Route = string.Format("{0}/view/{1}", mainRoute, "devices") });

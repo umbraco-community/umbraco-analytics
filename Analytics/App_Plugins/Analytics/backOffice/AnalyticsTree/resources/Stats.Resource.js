@@ -37,5 +37,21 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetOperatingSystems?profile=95037");
             },
 
+            getsocialnetworks: function () {
+                return $http.get("Analytics/AnalyticsApi/GetSocialNetworkSources?profile=95037");
+            },
+
+            getkeywords: function () {
+                return $http.get("Analytics/AnalyticsApi/GetKeywords?profile=95037");
+            },
+
+            getvisits: function () {
+                return $http.get("Analytics/AnalyticsApi/GetVisits?profile=95037");
+            },
+
+            getsources: function () {
+                return $http.get("Analytics/AnalyticsApi/GetSources?profile=95037");
+            },
+
         };
     });
