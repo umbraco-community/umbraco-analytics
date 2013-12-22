@@ -249,6 +249,48 @@ namespace Analytics.Controllers
             // Return the data as JSON
             return data;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetCountry(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Country }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetLanguage(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Language }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
         
     }
 

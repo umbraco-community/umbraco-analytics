@@ -1,5 +1,22 @@
-﻿<div>
+﻿<div ng-controller="Analytics.LanguageController">
     <div class="umb-pane">
-        <h4>Language Stats Here</h4>
+        <h4>Last 30 Days</h4>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Browser</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in data.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

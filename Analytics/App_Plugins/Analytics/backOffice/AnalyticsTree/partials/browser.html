@@ -1,9 +1,47 @@
 ﻿<div ng-controller="Analytics.BrowserController">
     <div class="umb-pane">
-        <h4>Browser Stats Here</h4>
+        
+        <h4>Last 30 Days - Browser</h4>
 
-        <h5>Example Chart Below</h5>
-        <canvas donutchart options="myChartOptions" data="myChartData" width="300" height="300"></canvas>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Browser</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in browser.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <hr/>
+        
+        <h4>Last 30 Days - Browser Specific</h4>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Browser</th>
+                    <th>Version</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in browserspecifics.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                    <td>{{ row.Cells[3] }}</td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 </div>
