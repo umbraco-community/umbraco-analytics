@@ -6,6 +6,7 @@ using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.Analytics.Responses;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
+using Analytics.SkybrudSocialExtensionMethods;
 
 namespace Analytics.Controllers
 {
@@ -75,7 +76,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new [] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.PagePath }
+                new[] { AnalyticsDimension.PagePath },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -96,7 +99,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] {AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] {AnalyticsDimension.Browser }
+                new[] {AnalyticsDimension.Browser },
+                null,
+                new []{ "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -117,7 +122,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Browser, AnalyticsDimension.BrowserVersion }
+                new[] { AnalyticsDimension.Browser, AnalyticsDimension.BrowserVersion },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -138,7 +145,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.DeviceCategory }
+                new[] { AnalyticsDimension.DeviceCategory },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -159,7 +168,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.MobileDeviceBranding, AnalyticsDimension.MobileDeviceModel }
+                new[] { AnalyticsDimension.MobileDeviceBranding, AnalyticsDimension.MobileDeviceModel },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -180,7 +191,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Keyword }
+                new[] { AnalyticsDimension.Keyword },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -201,7 +214,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.SocialNetwork }
+                new[] { AnalyticsDimension.SocialNetwork },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -222,7 +237,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Source }
+                new[] { AnalyticsDimension.Source },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -243,7 +260,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.OperatingSystem, AnalyticsDimension.OperatingSystemVersion }
+                new[] { AnalyticsDimension.OperatingSystem, AnalyticsDimension.OperatingSystemVersion },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -266,7 +285,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.ScreenResolution }
+                new[] { AnalyticsDimension.ScreenResolution },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -287,7 +308,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Country }
+                new[] { AnalyticsDimension.Country },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON
@@ -308,7 +331,9 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Language }
+                new[] { AnalyticsDimension.Language },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
             );
 
             // Return the data as JSON

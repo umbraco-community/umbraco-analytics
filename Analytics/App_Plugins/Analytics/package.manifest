@@ -9,6 +9,9 @@
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/browser.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/language.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/country.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/device.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/screenres.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/os.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/settings.resource.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/stats.resource.js'
 	]

@@ -1,18 +1,18 @@
-﻿<div ng-controller="Analytics.BrowserController">
+﻿<div ng-controller="Analytics.DeviceController">
     <div class="umb-pane">
         
-        <h4>Last 30 Days - Browser</h4>
+        <h4>Last 30 Days - Device Types</h4>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Browser</th>
+                    <th>Device Type</th>
                     <th>Vists</th>
                     <th>Page Views</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in browsers.Rows">
+                <tr ng-repeat="row in devicetypes.Rows">
                     <td>{{ row.Cells[0] }}</td>
                     <td>{{ row.Cells[1] }}</td>
                     <td>{{ row.Cells[2] }}</td>
@@ -22,19 +22,19 @@
         
         <hr/>
         
-        <h4>Last 30 Days - Browser Specific</h4>
+        <h4>Last 30 Days - Devices</h4>
 
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Browser</th>
-                    <th>Version</th>
+                    <th>Device</th>
+                    <th>Model</th>
                     <th>Vists</th>
                     <th>Page Views</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in browserspecifics.Rows">
+                <tr ng-repeat="row in devices.Rows">
                     <td>{{ row.Cells[0] }}</td>
                     <td>{{ row.Cells[1] }}</td>
                     <td>{{ row.Cells[2] }}</td>

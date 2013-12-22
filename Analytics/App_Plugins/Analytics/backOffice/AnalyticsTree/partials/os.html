@@ -1,5 +1,25 @@
-﻿<div>
+﻿<div ng-controller="Analytics.OSController">
     <div class="umb-pane">
-        <h4>Operating System Stats Here</h4>
+
+        <h4>Last 30 Days</h4>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Operating System</th>
+                    <th>Version</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in os.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                    <td>{{ row.Cells[3] }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

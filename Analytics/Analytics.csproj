@@ -267,12 +267,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\OS.Controller.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\ScreenRes.Controller.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Device.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Country.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Language.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Browser.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Settings.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\screenres.html" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\devices.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\country.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\language.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\os.html" />

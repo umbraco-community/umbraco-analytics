@@ -1,4 +1,4 @@
-﻿<div ng-controller="Analytics.OSController">
+﻿<div ng-controller="Analytics.ScreenResController">
     <div class="umb-pane">
 
         <h4>Last 30 Days</h4>
@@ -6,20 +6,19 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Operating System</th>
-                    <th>Version</th>
+                    <th>Resolution</th>
                     <th>Vists</th>
                     <th>Page Views</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in os.Rows">
+                <tr ng-repeat="row in resolutions.Rows">
                     <td>{{ row.Cells[0] }}</td>
                     <td>{{ row.Cells[1] }}</td>
                     <td>{{ row.Cells[2] }}</td>
-                    <td>{{ row.Cells[3] }}</td>
                 </tr>
             </tbody>
         </table>
+
     </div>
 </div>
