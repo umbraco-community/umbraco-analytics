@@ -230,6 +230,29 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetOperatingSystems(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.OperatingSystem, AnalyticsDimension.OperatingSystemVersion }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+
+
+        /// <summary>
         /// Get the screen resolutions
         /// </summary>
         /// <param name="profile"></param>
