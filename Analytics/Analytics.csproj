@@ -254,6 +254,7 @@
     <Compile Include="Models\SectionTreeNode.cs" />
     <Compile Include="Models\SettingsValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkybrudSocialExtensionMethods\GoogleAnalyticsExtensionMethods.cs" />
     <Compile Include="UmbracoStartup.cs" />
     <Compile Include="Install.cs" />
     <Compile Include="Uninstall.cs" />
