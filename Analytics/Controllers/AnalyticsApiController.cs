@@ -42,6 +42,11 @@ namespace Analytics.Controllers
             return profiles;
         }
 
+        /// <summary>
+        /// Get Profiles from a specific Account ID
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public AnalyticsProfile[] GetProfilesFromAccount(string accountId)
         {
             //Get Account
@@ -57,7 +62,7 @@ namespace Analytics.Controllers
 
 
         /// <summary>
-        /// 
+        /// Get Visits
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -70,13 +75,181 @@ namespace Analytics.Controllers
                 DateTime.Now.Subtract(TimeSpan.FromDays(31)),
                 DateTime.Now,
                 new [] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Date }
+                new[] { AnalyticsDimension.PagePath }
             );
 
             // Return the data as JSON
             return data;
         }
-    
+
+        /// <summary>
+        /// Get Browser Vendors
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetBrowser(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] {AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] {AnalyticsDimension.Browser }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Browser Specific Version
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetBrowserVersion(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Browser, AnalyticsDimension.BrowserVersion }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Device Types
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetDeviceTypes(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.DeviceCategory }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Devices
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetDevices(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.MobileDeviceBranding, AnalyticsDimension.MobileDeviceModel }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Keywords
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetKeywords(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Keyword }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Social Network Sources
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetSocialNetworkSources(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.SocialNetwork }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get Sources
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetSources(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Source }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+
+        /// <summary>
+        /// Get the screen resolutions
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public AnalyticsDataResponse GetScreenRes(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.ScreenResolution }
+            );
+
+            // Return the data as JSON
+            return data;
+        }
+        
     }
 
 }
