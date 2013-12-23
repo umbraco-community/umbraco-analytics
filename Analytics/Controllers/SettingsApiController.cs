@@ -232,32 +232,34 @@ namespace Analytics.Controllers
         }
 
 
-        public AnalyticsAccount GetAccount()
+        public Account GetAccount()
         {
             //Open JSON file from disk
             var accountAsJson = File.ReadAllText(HostingEnvironment.MapPath(AccountPath));
 
             //Deserialize to .NET object
-            var account = JsonConverter.ParseObject(accountAsJson, AnalyticsAccount.Parse);
+            var account = Newtonsoft.Json.JsonConvert.DeserializeObject<Account>(accountAsJson);
 
             return account;
         }
 
-        public AnalyticsProfile GetProfile()
+        public Profile GetProfile()
         {
             //Open JSON file from disk
             var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(ProfilePath));
 
             //Deserialize to .NET object
-            var profile = JsonConverter.ParseObject(profileAsJson, AnalyticsProfile.Parse);
+            var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<Profile>(profileAsJson);
 
             return profile;
         }
 
-        public dynamic PostAccount(dynamic account)
+        public dynamic PostAccount(Account account)
         {
             //Convert the posted object down into JSON
             var accountAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(account, Formatting.Indented);
+
+            
 
             //Open file on disk & save contents
             File.WriteAllText(HostingEnvironment.MapPath(AccountPath), accountAsJson);
@@ -265,7 +267,7 @@ namespace Analytics.Controllers
             return account;
         }
 
-        public dynamic PostProfile(dynamic profile)
+        public dynamic PostProfile(Profile profile)
         {
             //Convert the posted object down into JSON
             var profileAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(profile, Formatting.Indented);
