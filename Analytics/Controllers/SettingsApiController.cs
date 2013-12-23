@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Web.Hosting;
+using System.Web.Http;
 using System.Xml;
 using Analytics.Models;
 using Skybrud.Social.Google.Analytics.Objects;
@@ -230,24 +231,29 @@ namespace Analytics.Controllers
         }
 
 
-        public AccountProfile GetAccountProfile()
+        public AnalyticsAccount GetAccount()
         {
             //Open JSON file from disk
             var accountAsJson = File.ReadAllText(HostingEnvironment.MapPath(AccountPath));
-            var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(ProfilePath));
 
             //Deserialize to .NET object
             var account = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsAccount>(accountAsJson);
-            var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsProfile>(profileAsJson);
 
-            var accountProfile      = new AccountProfile();
-            accountProfile.Account  = account;
-            accountProfile.Profile  = profile;
-
-            return accountProfile;
+            return account;
         }
 
-        public AnalyticsAccount PostAccount(AnalyticsAccount account)
+        public AnalyticsProfile GetProfile()
+        {
+            //Open JSON file from disk
+            var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(ProfilePath));
+
+            //Deserialize to .NET object
+            var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsProfile>(profileAsJson);
+
+            return profile;
+        }
+
+        public dynamic PostAccount(dynamic account)
         {
             //Convert the posted object down into JSON
             var accountAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(account, Formatting.Indented);
@@ -258,7 +264,7 @@ namespace Analytics.Controllers
             return account;
         }
 
-        public AnalyticsProfile PostProfile(AnalyticsProfile profile)
+        public dynamic PostProfile(dynamic profile)
         {
             //Convert the posted object down into JSON
             var profileAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(profile, Formatting.Indented);

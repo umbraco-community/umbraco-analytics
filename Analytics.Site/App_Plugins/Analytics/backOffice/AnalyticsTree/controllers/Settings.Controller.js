@@ -9,6 +9,17 @@
             $scope.settings = response.data;
         });
 
+        //Get Account JSON & bind back to dropdown
+        settingsResource.getaccount().then(function (response) {
+            $scope.account = response.data;
+        });
+
+        //Get Profile JSON & bind back to dropdown
+        settingsResource.getprofile().then(function (response) {
+            $scope.profile = response.data;
+        });
+
+
         //Get oAuth Check - WebAPI GET (Basically checks if RefreshToken has a value)
         settingsResource.checkauth().then(function (response) {
 
@@ -49,11 +60,6 @@
 
         //Save - click...
         $scope.save = function (settings, account, profile) {
-
-            console.log("From Controller Pre Save");
-            console.log(settings);
-            console.log(account);
-            console.log(profile);
 
             //Save settings resource - does a WebAPI POST call
             settingsResource.save(settings).then(function (response) {

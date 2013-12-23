@@ -24,12 +24,20 @@ angular.module("umbraco.resources")
             },
 
             saveAccount: function (accountData) {
-                return $http.post("Analytics/SettingsApi/PostAccount", accountData);
+                return $http.post("Analytics/SettingsApi/PostAccount", angular.toJson(accountData));
             },
 
             saveProfile: function (profileData) {
-                return $http.post("Analytics/SettingsApi/PostProfile", profileData);
-            }
+                return $http.post("Analytics/SettingsApi/PostProfile", angular.toJson(profileData));
+            },
+
+            getaccount: function () {
+                return $http.get("Analytics/SettingsApi/GetAccount");
+            },
+
+            getprofile: function () {
+                return $http.get("Analytics/SettingsApi/GetProfile");
+            },
 
         };
     });
