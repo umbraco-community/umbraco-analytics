@@ -11,12 +11,12 @@
 
         //Get Account JSON & bind back to dropdown
         settingsResource.getaccount().then(function (response) {
-            $scope.account = response.data;
+            $scope.selectedaccount = response.data;
         });
 
         //Get Profile JSON & bind back to dropdown
         settingsResource.getprofile().then(function (response) {
-            $scope.profile = response.data;
+            $scope.selectedprofile = response.data;
         });
 
 
@@ -47,6 +47,7 @@
                         $scope.profiles = response.data;
                     });
                 };
+
             }
         });
 

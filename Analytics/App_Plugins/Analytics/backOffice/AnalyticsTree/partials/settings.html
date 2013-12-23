@@ -19,13 +19,13 @@
 
                     <div class="controls controls-row">
                         
-                        <select name="account" ng-model="account" ng-change="accountSelected(account)" ng-options="account.Name for account in accounts">
+                        <select name="account" ng-model="selectedaccount" ng-change="accountSelected(selectedaccount)" ng-options="account.Name for account in accounts">
                             <option value="">-- Select an Account --</option>
                         </select>
 
                         <br />
 
-                        <select name="profile" ng-show="account" ng-model="profile" ng-options="profile.Name for profile in profiles">
+                        <select name="profile" ng-model="selectedprofile" ng-options="profile.name for profile in profiles">
                             <option value="">-- Select a Profile --</option>
                         </select>
 
@@ -48,13 +48,13 @@
         
         <h4>DEBUG</h4>
         <textarea>{{ settings | json }}</textarea><br />
-        <textarea>{{ account | json }}</textarea><br/>
-        <textarea>{{ profile | json }}</textarea>
+        <textarea>{{ selectedaccount | json }}</textarea><br/>
+        <textarea>{{ selectedprofile | json }}</textarea>
 
 
         <div class="umb-tab-buttons">
             <div class="btn-group">
-                <button ng-click="save(settings, account, profile)" data-hotkey="ctrl+s" class="btn btn-success">
+                <button ng-click="save(settings, selectedaccount, selectedprofile)" data-hotkey="ctrl+s" class="btn btn-success">
                     <localize key="buttons_save">Save</localize>
                 </button>
             </div>
