@@ -259,8 +259,6 @@ namespace Analytics.Controllers
             //Convert the posted object down into JSON
             var accountAsJson = Newtonsoft.Json.JsonConvert.SerializeObject(account, Formatting.Indented);
 
-            
-
             //Open file on disk & save contents
             File.WriteAllText(HostingEnvironment.MapPath(AccountPath), accountAsJson);
 

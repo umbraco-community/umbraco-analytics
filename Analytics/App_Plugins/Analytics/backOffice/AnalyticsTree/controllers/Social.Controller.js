@@ -1,9 +1,17 @@
 ﻿angular.module("umbraco").controller("Analytics.SocialController",
-    function ($scope, statsResource) {
+    function ($scope, statsResource, settingsResource) {
+        
+        var profileID = "";
 
-        //Get Browser via statsResource - does WebAPI GET call
-        statsResource.getsocialnetworks().then(function (response) {
-            $scope.social = response.data;
+        //Get Profile
+        settingsResource.getprofile().then(function(response) {
+            $scope.profile = response.data;
+            profileID = response.data.Id;
+
+            //Get Browser via statsResource - does WebAPI GET call
+            statsResource.getsocialnetworks(profileID).then(function (response) {
+                $scope.social = response.data;
+            });
         });
 
     });

@@ -1,9 +1,18 @@
 ﻿angular.module("umbraco").controller("Analytics.OSController",
-    function ($scope, statsResource) {
+    function ($scope, statsResource, settingsResource) {
 
-        //Get Browser via statsResource - does WebAPI GET call
-        statsResource.getos().then(function (response) {
-            $scope.os = response.data;
+        var profileID = "";
+
+        //Get Profile
+        settingsResource.getprofile().then(function(response) {
+            $scope.profile = response.data;
+            profileID = response.data.Id;
+
+            //Get Browser via statsResource - does WebAPI GET call
+            statsResource.getos(profileID).then(function (response) {
+                $scope.os = response.data;
+            });
+
         });
 
     });
