@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Xml;
 using Analytics.Models;
 using Skybrud.Social.Google.Analytics.Objects;
+using Skybrud.Social.Json;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 using Formatting = Newtonsoft.Json.Formatting;
@@ -237,7 +238,7 @@ namespace Analytics.Controllers
             var accountAsJson = File.ReadAllText(HostingEnvironment.MapPath(AccountPath));
 
             //Deserialize to .NET object
-            var account = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsAccount>(accountAsJson);
+            var account = JsonConverter.ParseObject(accountAsJson, AnalyticsAccount.Parse);
 
             return account;
         }
@@ -248,7 +249,7 @@ namespace Analytics.Controllers
             var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(ProfilePath));
 
             //Deserialize to .NET object
-            var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<AnalyticsProfile>(profileAsJson);
+            var profile = JsonConverter.ParseObject(profileAsJson, AnalyticsProfile.Parse);
 
             return profile;
         }
