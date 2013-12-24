@@ -1,6 +1,11 @@
-﻿using umbraco.cms.businesslogic.packager;
+﻿using System.Linq;
+using System.Web.UI.WebControls;
+using umbraco.BusinessLogic;
+using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
 using Umbraco.Core.Services;
+using umbraco.NodeFactory;
+using Umbraco.Web.Trees;
 
 namespace Analytics
 {
@@ -21,6 +26,34 @@ namespace Analytics
 
             //Add OLD Style Package Event
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
+
+            //Add Tree Node Rendering Event - Used to check if user is admin to display settings node in tree
+            TreeControllerBase.TreeNodesRendering += TreeControllerBase_TreeNodesRendering;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void TreeControllerBase_TreeNodesRendering(TreeControllerBase sender, TreeNodesRenderingEventArgs e)
+        {
+            //Get Current User
+            var currentUser = User.GetCurrent();
+
+            //This will only run on the analyticsTree & if the user is NOT admin
+            if (sender.TreeAlias == "analyticsTree" && !currentUser.IsAdmin())
+            {
+                //setting node to remove
+                var settingNode = e.Nodes.SingleOrDefault(x => x.Id.ToString() == "settings");
+
+                //Ensure we found the node
+                if (settingNode != null)
+                {
+                    //Remove the settings node from the collection
+                    e.Nodes.Remove(settingNode);
+                }
+            }
         }
 
         /// <summary>
