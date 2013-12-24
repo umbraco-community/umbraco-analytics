@@ -1,7 +1,7 @@
 ﻿<div ng-controller="Analytics.SettingsController">
     <div class="umb-pane">
         <umb-control-group ng-hide="hasAuthd()" label="Authorisation" description="Login with Google via oAuth to verify">
-            <button class="btn btn-success" ng-click="auth()">Authorise</button>
+            <button class="btn btn-success" ng-click="auth()">Authorize</button>
         </umb-control-group>
 
         <umb-control-group ng-repeat="setting in settings" label="{{ setting.Label }}" description="{{ setting.Description }}">
