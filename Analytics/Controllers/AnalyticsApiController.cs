@@ -61,26 +61,20 @@ namespace Analytics.Controllers
         }
 
 
+
         /// <summary>
         /// Get Visits
         /// </summary>
         /// <param name="profile"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetVisits(string profile, DateTime? startDate, DateTime? endDate)
+        public AnalyticsDataResponse GetVisits(string profile)
         {
-            if (!startDate.HasValue)
-                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
-            if (!endDate.HasValue)
-                endDate = DateTime.Now;
-            
 
             // Get the visits from the Google Analytics API
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                startDate.Value ,
-                endDate.Value,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
                 new [] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.PagePath },
                 null,

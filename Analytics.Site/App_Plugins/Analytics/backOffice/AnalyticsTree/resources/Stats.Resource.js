@@ -45,8 +45,8 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetKeywords?profile=" + profileID);
             },
 
-            getvisits: function (profileID, startDate, endDate) { 
-                return $http.get("Analytics/AnalyticsApi/GetVisits", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            getvisits: function (profileID) {
+                return $http.get("Analytics/AnalyticsApi/GetVisits?profile=" + profileID);
             },
 
             getsources: function (profileID) {
