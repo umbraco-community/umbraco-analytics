@@ -60,6 +60,10 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
                 //Ouput an error message
                 Content.Text += "Okay. Something went wrong.";
             }
+
+            // Clear the session state
+            Session.Remove("Analytics_" + state);
+
         }
 
     }
