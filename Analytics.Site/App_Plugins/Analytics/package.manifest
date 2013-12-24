@@ -3,8 +3,6 @@
 		'~/App_Plugins/Analytics/lib/chartjs/chart.0.2.min.js',
 		'~/App_Plugins/Analytics/lib/angular-chartjs/angular-chartjs.js',
 		'~/App_Plugins/Analytics/lib/angles/angles.js',
-		'~/App_Plugins/Analytics/lib/momentjs/moment.min.js',
-		'~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js',
 	    '~/App_Plugins/Analytics/backoffice/analyticstree/controllers/view.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/edit.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/settings.controller.js',
