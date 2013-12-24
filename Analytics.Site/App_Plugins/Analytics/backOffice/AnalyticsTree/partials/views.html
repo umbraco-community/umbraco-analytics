@@ -1,8 +1,15 @@
 ﻿<div ng-controller="Analytics.PageViewsController">
     <div class="umb-pane">
         
+        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+            <i class="glyphicon glyphicon-calendar icon-calendar icon-large"></i>
+            <span></span> <b class="caret"></b>
+        </div>
+
         <h4>Last 30 Days - Views</h4>
         <h6>Showing stats for {{ profile.WebsiteUrl }} </h6>
+        
+       
 
         <table class="table table-striped">
             <thead>

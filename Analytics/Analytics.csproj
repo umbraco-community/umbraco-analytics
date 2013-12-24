@@ -309,6 +309,9 @@
     <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
     <Content Include="App_Plugins\Analytics\lib\chartjs\chart.0.2.js" />
     <Content Include="App_Plugins\Analytics\lib\chartjs\chart.0.2.min.js" />
+    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs2.css" />
+    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs3.css" />
+    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker.js" />
     <Content Include="App_Plugins\Analytics\lib\momentjs\moment-with-langs.js" />
     <Content Include="App_Plugins\Analytics\lib\momentjs\moment-with-langs.min.js" />
     <Content Include="App_Plugins\Analytics\lib\momentjs\moment.js" />
