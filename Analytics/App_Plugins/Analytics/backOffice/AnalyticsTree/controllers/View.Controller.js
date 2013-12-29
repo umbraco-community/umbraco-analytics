@@ -12,7 +12,8 @@
  
         assetsService.load(
                 ["/App_Plugins/Analytics/lib/momentjs/moment.min.js",
-                "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"])
+                "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js",
+                "/App_Plugins/Analytics/lib/chartjs/chart.0.2.min.js"])
             .then(function () {
 
                 $('#reportrange').daterangepicker(
