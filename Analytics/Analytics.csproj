@@ -249,6 +249,7 @@
     <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.designer.cs">
       <DependentUpon>OAuth.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChartHelper.cs" />
     <Compile Include="Controllers\AnalyticsApiController.cs" />
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
     <Compile Include="Controllers\oAuthApiController.cs" />
