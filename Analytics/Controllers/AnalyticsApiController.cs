@@ -206,7 +206,7 @@ namespace Analytics.Controllers
             //Store API result in our new object along with chart data
             var deviceResult        = new DeviceTypeResult();
             deviceResult.ApiResult  = data;                             //The data back from Google's API
-            deviceResult.ChartData  = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+            deviceResult.ChartData  = ChartData.Mode1(data);   //Add chart data to device result via Helper
             
             // Return the data as JSON
             return deviceResult;

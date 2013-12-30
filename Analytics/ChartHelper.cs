@@ -50,7 +50,7 @@ namespace Analytics
             }
 
             //Set chart data sets on chart data object
-            chartData.datasets = chartDataSets;
+            chartData.datasets = chartDataSets.ToArray();
 
             //Return the data
             return chartData;
