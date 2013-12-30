@@ -30,6 +30,14 @@ namespace Analytics.Models
         public string [] labels { get; set; }
 
         public ChartDataSet[] datasets { get; set; }
+
+        public static string GetFillColor(int pos) {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 0.5)" : "rgba(151, 187, 205, 0.5)";
+        }
+
+        public static string GetStrokeColor(int pos) {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 1)" : "rgba(151, 187, 205, 1)";
+        }
         
         public static ChartData Mode1(AnalyticsDataResponse data) {
 
@@ -46,13 +54,24 @@ namespace Analytics.Models
             // Add a dataset for each metric
             for (int metric = 0; metric < metrics; metric++) {
 
+                // Initialize the data object
                 ChartDataSet ds = cd.datasets[metric] = new ChartDataSet();
-                ds.fillColor = "rgba(245, 112, 32, 0.5)";
-                ds.strokeColor = "rgba(245, 112, 32, 1)";
+                ds.fillColor = GetFillColor(metric);
+                ds.strokeColor = GetStrokeColor(metric);
                 ds.data = new object[data.Rows.Length];
 
                 for (int row = 0; row < data.Rows.Length; row++) {
-                    ds.data[row] = data.Rows[row].Cells[dimensions + metric];
+
+                    // Get the value
+                    string value = data.Rows[row].Cells[dimensions + metric];
+
+                    // Set the value with the proper type
+                    if (Regex.IsMatch(value, "^[0-9]+$")) {
+                        ds.data[row] = Int32.Parse(value);
+                    } else {
+                        ds.data[row] = value;
+                    }
+
                 }
 
             }
@@ -76,13 +95,24 @@ namespace Analytics.Models
             // Add a dataset for each metric
             for (int metric = 0; metric < metrics; metric++) {
 
+                // Initialize the data object
                 ChartDataSet ds = cd.datasets[metric] = new ChartDataSet();
-                ds.fillColor = "rgba(245, 112, 32, 0.5)";
+                ds.fillColor = GetFillColor(metric);
                 ds.strokeColor = "rgba(245, 112, 32, 1)";
                 ds.data = new object[data.Rows.Length];
 
                 for (int row = 0; row < data.Rows.Length; row++) {
-                    ds.data[row] = data.Rows[metric].Cells[dimensions + row];
+
+                    // Get the value
+                    string value = data.Rows[metric].Cells[dimensions + row];
+
+                    // Set the value with the proper type
+                    if (Regex.IsMatch(value, "^[0-9]+$")) {
+                        ds.data[row] = Int32.Parse(value);
+                    } else {
+                        ds.data[row] = value;
+                    }
+                
                 }
 
             }
