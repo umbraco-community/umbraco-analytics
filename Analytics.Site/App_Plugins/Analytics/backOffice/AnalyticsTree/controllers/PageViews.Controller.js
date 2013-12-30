@@ -10,11 +10,9 @@
                 "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"])
             .then(function () {
 
-                $scope.startDate = moment().subtract('days', 29).format("YYYY-MM-DD");
-                $scope.endDate = moment().format("YYYY-MM-DD");
+                $scope.startDate = moment().subtract('days', 29);
+                $scope.endDate = moment();
 
-                console.log($scope.startDate);
-                console.log($scope.endDate);
 
                 //Get Profile
                 settingsResource.getprofile().then(function (response) {
@@ -22,7 +20,7 @@
                     profileID = response.data.Id;
 
                     //Get Browser via statsResource - does WebAPI GET call
-                    statsResource.getvisits(profileID, $scope.startDate, $scope.endDate).then(function (response) {
+                    statsResource.getvisits(profileID, $scope.startDate.format("YYYY-MM-DD"), $scope.endDate.format("YYYY-MM-DD")).then(function (response) {
                         $scope.views = response.data;
                     });
 
@@ -37,8 +35,8 @@
                    {
                        startDate: $scope.startDate,
                        endDate: $scope.endDate,
-                       minDate: '01/01/2010',
-                       maxDate: moment(),
+                       minDate: '01/01/2012',
+                       maxDate: moment().format("MM/DD/YYYY"),
                        dateLimit: { days: 60 },
                        showDropdowns: true,
                        showWeekNumbers: true,
