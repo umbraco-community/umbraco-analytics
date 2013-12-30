@@ -10,26 +10,9 @@
 
             //Get Browser via statsResource - does WebAPI GET call
             statsResource.getdevicetypes(profileID).then(function (response) {
-                $scope.devicetypes = response.data;
+                $scope.devicetypes = response.data.ApiResult;
 
-                //For labels (need to loop over our API JSON and create an array for labels)
-                //For data (need to loop over our API JSON)
-                //First dataset is Visits, second is pageviews
-                var chartData = {
-                    labels: ["Desktop", "Mobile", "Tablet"],
-                    datasets: [
-                        {
-                            fillColor: "rgba(245,112, 32,0.5)",
-                            strokeColor: "rgba(245, 112, 32, 1)",
-                            data: [87736, 2880, 2057]
-                        },
-                        {
-                            fillColor: "rgba(245,112, 32,0.5)",
-                            strokeColor: "rgba(245, 112, 32, 1)",
-                            data: [236897, 5711, 5623]
-                        }
-                    ]
-                };
+                var chartData = response.data.ChartData;
 
                 //Create Bar Chart
                 var ctx = document.getElementById("deviceType").getContext("2d");
