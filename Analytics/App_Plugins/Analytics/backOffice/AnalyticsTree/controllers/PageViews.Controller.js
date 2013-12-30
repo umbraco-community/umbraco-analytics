@@ -4,7 +4,8 @@
         var profileID = "";
 
 
-
+        $scope.loadingViews = true;
+        
         assetsService.load(
                 ["/App_Plugins/Analytics/lib/momentjs/moment.min.js",
                 "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"])
@@ -22,6 +23,7 @@
                     //Get Browser via statsResource - does WebAPI GET call
                     statsResource.getvisits(profileID, $scope.startDate.format("YYYY-MM-DD"), $scope.endDate.format("YYYY-MM-DD")).then(function (response) {
                         $scope.views = response.data;
+                        $scope.loadingViews = false;
                     });
 
                     //Get Browser specific via statsResource - does WebAPI GET call
@@ -68,8 +70,11 @@
                        }
                    },
                    function (start, end) {
+                       $scope.loadingViews = true;
                        statsResource.getvisits(profileID, start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')).then(function (response) {
+
                            $scope.views = response.data;
+                           $scope.loadingViews = false;
                        });
                        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                    }

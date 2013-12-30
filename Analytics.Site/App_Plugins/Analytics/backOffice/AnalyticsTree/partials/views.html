@@ -19,7 +19,8 @@
                     <th>Page Views</th>
                 </tr>
             </thead>
-            <tbody>
+            <p ng-show="loadingViews">Loading data...</p>
+            <tbody ng-show="!loadingViews">
                 <tr ng-repeat="row in views.Rows">
                     <td>{{ row.Cells[0] }}</td>
                     <td>{{ row.Cells[1] }}</td>
