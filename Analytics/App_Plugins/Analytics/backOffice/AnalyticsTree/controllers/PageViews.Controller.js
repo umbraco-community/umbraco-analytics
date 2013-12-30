@@ -71,6 +71,7 @@
                        statsResource.getvisits(profileID, start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')).then(function (response) {
                            $scope.views = response.data;
                        });
+                       $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                    }
                 );
                 //Set the initial state of the picker label
