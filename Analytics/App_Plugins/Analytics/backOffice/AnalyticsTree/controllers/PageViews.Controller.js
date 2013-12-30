@@ -37,8 +37,8 @@
                    {
                        startDate: $scope.startDate,
                        endDate: $scope.endDate,
-                       minDate: '01/01/2010',
-                       maxDate: moment(),
+                       minDate: '01/01/2012',
+                       maxDate: moment().format("MM/DD/YYYY"),
                        dateLimit: { days: 60 },
                        showDropdowns: true,
                        showWeekNumbers: true,
