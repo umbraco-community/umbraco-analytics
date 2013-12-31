@@ -21,7 +21,7 @@
 
             //Get Browser specific via statsResource - does WebAPI GET call
             statsResource.getdevices(profileID).then(function (response) {
-                $scope.devices = response.data;
+                $scope.devices = response.data.ApiResult;
             });
 
         });

@@ -37,6 +37,10 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetOperatingSystems?profile=" + profileID);
             },
 
+            getosversions: function (profileID) {
+                return $http.get("Analytics/AnalyticsApi/GetOperatingSystemVersions?profile=" + profileID);
+            },
+
             getsocialnetworks: function (profileID) {
                 return $http.get("Analytics/AnalyticsApi/GetSocialNetworkSources?profile=" + profileID);
             },

@@ -10,7 +10,13 @@
 
             //Get Browser via statsResource - does WebAPI GET call
             statsResource.getsocialnetworks(profileID).then(function (response) {
-                $scope.social = response.data;
+                $scope.social = response.data.ApiResult;
+
+                var chartData = response.data.ChartData;
+
+                //Create Bar Chart
+                var ctx = document.getElementById("social").getContext("2d");
+                var socialChart = new Chart(ctx).Bar(chartData);
             });
         });
 

@@ -2,7 +2,7 @@
 
 namespace Analytics.Models
 {
-    public class DeviceTypeResult
+    public class StatsApiResult
     {
         public AnalyticsDataResponse ApiResult { get; set; }
 

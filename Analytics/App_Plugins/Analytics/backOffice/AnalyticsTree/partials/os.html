@@ -6,8 +6,31 @@
             <span></span> <b class="caret"></b>
         </div>        
         
-        <h4>Last 30 Days</h4>
+        <h4>Last 30 Days - OS</h4>
         <h6>Showing stats for {{ profile.WebsiteUrl }} </h6>
+        
+        <canvas id="os" width="650" height="450"></canvas>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Operating System</th>
+                    <th>Vists</th>
+                    <th>Page Views</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in os.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <hr />
+
+        <h4>Last 30 Days - OS Versions</h4>
 
         <table class="table table-striped">
             <thead>
@@ -19,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in os.Rows">
+                <tr ng-repeat="row in osVersions.Rows">
                     <td>{{ row.Cells[0] }}</td>
                     <td>{{ row.Cells[1] }}</td>
                     <td>{{ row.Cells[2] }}</td>

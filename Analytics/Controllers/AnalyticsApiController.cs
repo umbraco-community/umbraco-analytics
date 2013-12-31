@@ -120,7 +120,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetKeywords(string profile)
+        public StatsApiResult GetKeywords(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -134,8 +134,13 @@ namespace Analytics.Controllers
                 new[] { "-" + AnalyticsMetrics.Visits }
             );
 
+            //Store API result in our new object along with chart data
+            var keywordsResult          = new StatsApiResult();
+            keywordsResult.ApiResult    = data;                             //The data back from Google's API
+            keywordsResult.ChartData    = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
             // Return the data as JSON
-            return data;
+            return keywordsResult;
         }
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetBrowser(string profile)
+        public StatsApiResult GetBrowser(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -157,8 +162,13 @@ namespace Analytics.Controllers
                 new []{ "-" + AnalyticsMetrics.Visits }
             );
 
+            //Store API result in our new object along with chart data
+            var browsersResult          = new StatsApiResult();
+            browsersResult.ApiResult    = data;                             //The data back from Google's API
+            browsersResult.ChartData    = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
             // Return the data as JSON
-            return data;
+            return browsersResult;
         }
 
         /// <summary>
@@ -166,7 +176,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetBrowserVersion(string profile)
+        public StatsApiResult GetBrowserVersion(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -180,8 +190,13 @@ namespace Analytics.Controllers
                 new[] { "-" + AnalyticsMetrics.Visits }
             );
 
+            //Store API result in our new object along with chart data
+            var browserVersionsResult       = new StatsApiResult();
+            browserVersionsResult.ApiResult = data;                             //The data back from Google's API
+            browserVersionsResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
             // Return the data as JSON
-            return data;
+            return browserVersionsResult;
         }
 
         /// <summary>
@@ -189,7 +204,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public DeviceTypeResult GetDeviceTypes(string profile)
+        public StatsApiResult GetDeviceTypes(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -204,9 +219,9 @@ namespace Analytics.Controllers
             );
 
             //Store API result in our new object along with chart data
-            var deviceResult        = new DeviceTypeResult();
+            var deviceResult        = new StatsApiResult();
             deviceResult.ApiResult  = data;                             //The data back from Google's API
-            deviceResult.ChartData  = ChartData.Mode1(data);   //Add chart data to device result via Helper
+            deviceResult.ChartData  = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
             
             // Return the data as JSON
             return deviceResult;
@@ -217,7 +232,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetDevices(string profile)
+        public StatsApiResult GetDevices(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -231,8 +246,13 @@ namespace Analytics.Controllers
                 new[] { "-" + AnalyticsMetrics.Visits }
             );
 
+            //Store API result in our new object along with chart data
+            var devicesResult = new StatsApiResult();
+            devicesResult.ApiResult = data;                             //The data back from Google's API
+            devicesResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
             // Return the data as JSON
-            return data;
+            return devicesResult;
         }
 
 
@@ -241,7 +261,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetSocialNetworkSources(string profile)
+        public StatsApiResult GetSocialNetworkSources(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -255,17 +275,49 @@ namespace Analytics.Controllers
                 new[] { "-" + AnalyticsMetrics.Visits }
             );
 
-            // Return the data as JSON
-            return data;
-        }
+            //Store API result in our new object along with chart data
+            var socialResult       = new StatsApiResult();
+            socialResult.ApiResult = data;                             //The data back from Google's API
+            socialResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
 
+            // Return the data as JSON
+            return socialResult;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetOperatingSystems(string profile)
+        public StatsApiResult GetOperatingSystems(string profile)
+        {
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.OperatingSystem },
+                null,
+                new[] { "-" + AnalyticsMetrics.Visits }
+            );
+
+            //Store API result in our new object along with chart data
+            var osResult        = new StatsApiResult();
+            osResult.ApiResult  = data;                             //The data back from Google's API
+            osResult.ChartData  = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return osResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetOperatingSystemVersions(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -279,8 +331,13 @@ namespace Analytics.Controllers
                 new[] { "-" + AnalyticsMetrics.Visits }
             );
 
+            //Store API result in our new object along with chart data
+            var osVersionResult         = new StatsApiResult();
+            osVersionResult.ApiResult   = data;                             //The data back from Google's API
+            osVersionResult.ChartData   = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
             // Return the data as JSON
-            return data;
+            return osVersionResult;
         }
 
 

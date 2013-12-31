@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Analytics.Models;
 using Skybrud.Social.Google.Analytics.Responses;
@@ -12,48 +13,58 @@ namespace Analytics
     {
         public static ChartData GetChartData(AnalyticsDataResponse apiResults)
         {
-            //Chart Data object to return
-            var chartData = new ChartData();
+            // Get the amount of dimensions and metrics
+            int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == "DIMENSION");
+            int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == "METRIC");
 
-            //Create a list we can use to store labels & convert to array
-            var labels = new List<string>();
-
-            //Loop over data and get values out & into our chart object
-            foreach (var row in apiResults.Rows)
+            // Initialize the data object
+            ChartData cd = new ChartData
             {
-                //Add the first item in the cells array, as it's the label
-                labels.Add(row.Cells[0]);
+                labels      = apiResults.Rows.Select(row => row.Cells[0]).ToArray(),
+                datasets    = new ChartDataSet[metrics]
+            };
+
+            // Add a dataset for each metric
+            for (int metric = 0; metric < metrics; metric++)
+            {
+
+                // Initialize the data object
+                ChartDataSet ds = cd.datasets[metric] = new ChartDataSet();
+                ds.fillColor    = GetFillColor(metric);
+                ds.strokeColor  = GetStrokeColor(metric);
+                ds.data         = new object[apiResults.Rows.Length];
+
+                for (int row = 0; row < apiResults.Rows.Length; row++)
+                {
+
+                    // Get the value
+                    string value = apiResults.Rows[row].Cells[dimensions + metric];
+
+                    // Set the value with the proper type
+                    if (Regex.IsMatch(value, "^[0-9]+$"))
+                    {
+                        ds.data[row] = Int32.Parse(value);
+                    }
+                    else
+                    {
+                        ds.data[row] = value;
+                    }
+
+                }
+
             }
 
-            //Set the labels
-            chartData.labels = labels.ToArray();
+            return cd;
+        }
 
-            //Create a list of data sets so we can add it to object
-            var chartDataSets = new List<ChartDataSet>();
+        public static string GetFillColor(int pos)
+        {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 0.5)" : "rgba(151, 187, 205, 0.5)";
+        }
 
-            //TODO: Fix logic as needs to grab value from each row to build up data
-            foreach (var row in apiResults.Rows)
-            {
-                var dataSetToAdd            = new ChartDataSet();
-                dataSetToAdd.fillColor      = "rgba(245, 112, 32, 0.5)";
-                dataSetToAdd.strokeColor    = "rgba(245, 112, 32, 1)";
-
-                //Get the cell data array & convert to list so can easily remove the first item
-                var cells = row.Cells.ToList();
-                cells.Remove(cells.First());
-
-                //Convert the list back to an array
-                dataSetToAdd.data = cells.ToArray();
-
-                //Add the dataset
-                chartDataSets.Add(dataSetToAdd);
-            }
-
-            //Set chart data sets on chart data object
-            chartData.datasets = chartDataSets.ToArray();
-
-            //Return the data
-            return chartData;
+        public static string GetStrokeColor(int pos)
+        {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 1)" : "rgba(151, 187, 205, 1)";
         }
     }
 }
