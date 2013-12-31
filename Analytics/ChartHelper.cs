@@ -64,7 +64,7 @@ namespace Analytics
             // Initialize the data object
             LineChartData cd = new LineChartData
             {
-                labels      = apiResults.Rows.Select(row => row.Cells[0]).ToArray(),
+                labels      = apiResults.Rows.Select(row => row.Cells[1] + "/" + row.Cells[0]).ToArray(),
                 datasets    = new LineChartDataSet[metrics]
             };
 
