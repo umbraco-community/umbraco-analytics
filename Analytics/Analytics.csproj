@@ -256,6 +256,7 @@
     <Compile Include="Controllers\SettingsApiController.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountProfile.cs" />
+    <Compile Include="Models\LineChartData.cs" />
     <Compile Include="Models\ChartData.cs" />
     <Compile Include="Models\StatsApiResult.cs" />
     <Compile Include="Models\Profile.cs" />

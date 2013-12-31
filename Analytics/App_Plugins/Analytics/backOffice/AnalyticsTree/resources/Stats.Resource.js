@@ -57,5 +57,9 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetSources?profile=" + profileID);
             },
 
+            getvisitcharts: function (profileID) {
+                return $http.get("Analytics/AnalyticsApi/GetVisitsOverMonths?profile=" + profileID);
+            },
+
         };
     });

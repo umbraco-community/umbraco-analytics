@@ -62,6 +62,31 @@ namespace Analytics.Controllers
             return profiles;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public LineChartData GetVisitsOverMonths(string profile)
+        {
+            // Get the visits from the Google Analytics API
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
+                profile,
+                DateTime.Now.Subtract(TimeSpan.FromDays(365)),
+                DateTime.Now,
+                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
+                new[] { AnalyticsDimension.Year, AnalyticsDimension.Month },
+                null,
+                new[] { AnalyticsDimension.Year }
+            );
+
+            //Store API result in our new object along with chart data
+            var visitsMonthResult = ChartHelper.GetLineChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return visitsMonthResult;
+
+        }
 
         /// <summary>
         /// Get Visits

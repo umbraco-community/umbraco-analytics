@@ -49,12 +49,56 @@ namespace Analytics
                     {
                         ds.data[row] = value;
                     }
-
                 }
-
             }
 
             return cd;
+        }
+
+        public static LineChartData GetLineChartData(AnalyticsDataResponse apiResults)
+        {            
+            // Get the amount of dimensions and metrics
+            int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == "DIMENSION");
+            int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == "METRIC");
+
+            // Initialize the data object
+            LineChartData cd = new LineChartData
+            {
+                labels      = apiResults.Rows.Select(row => row.Cells[0]).ToArray(),
+                datasets    = new LineChartDataSet[metrics]
+            };
+
+            // Add a dataset for each metric
+            for (int metric = 0; metric < metrics; metric++)
+            {
+
+                // Initialize the data object
+                LineChartDataSet ds = cd.datasets[metric] = new LineChartDataSet();
+                ds.fillColor        = GetFillColor(metric);
+                ds.strokeColor      = GetStrokeColor(metric);
+                ds.pointColor       = GetFillColor(metric);
+                ds.pointStrokeColor = GetStrokeColor(metric);
+                ds.data             = new object[apiResults.Rows.Length];
+
+                for (int row = 0; row < apiResults.Rows.Length; row++)
+                {
+                    // Get the value
+                    string value = apiResults.Rows[row].Cells[dimensions + metric];
+
+                    // Set the value with the proper type
+                    if (Regex.IsMatch(value, "^[0-9]+$"))
+                    {
+                        ds.data[row] = Int32.Parse(value);
+                    }
+                    else
+                    {
+                        ds.data[row] = value;
+                    }
+                }
+            }
+
+            return cd;
+            
         }
 
         public static string GetFillColor(int pos)

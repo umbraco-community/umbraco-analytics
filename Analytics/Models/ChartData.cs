@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Skybrud.Social.Google.Analytics.Responses;
-
+﻿
 namespace Analytics.Models
 {
     public class ChartData
