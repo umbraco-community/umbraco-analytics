@@ -11,12 +11,23 @@
 
         //Get Account JSON & bind back to dropdown
         settingsResource.getaccount().then(function (response) {
-            $scope.selectedaccount = response.data;
+            if (response.data === "null") {
+                $scope.selectedaccount = null;
+            }
+            else {
+                $scope.selectedaccount = response.data;
+            }
+            
         });
 
         //Get Profile JSON & bind back to dropdown
         settingsResource.getprofile().then(function (response) {
-            $scope.selectedprofile = response.data;
+            if (response.data === "null") {
+                $scope.selectedprofile = null;
+            }
+            else {
+                $scope.selectedprofile = response.data;
+            }
         });
 
 

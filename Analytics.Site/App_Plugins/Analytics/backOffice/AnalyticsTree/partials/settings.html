@@ -25,18 +25,18 @@
 
                         <br />
 
-                        <select name="profile" ng-model="selectedprofile" ng-options="profile.name for profile in profiles">
+                        <select name="profile" ng-show="selectedaccount !== 'null'" ng-model="selectedprofile" ng-options="profile.Name for profile in profiles">
                             <option value="">-- Select a Profile --</option>
                         </select>
 
-                        <div ng-show="selectedprofile">
+                        <div ng-show="selectedprofile !== 'null'">
                             <hr />
 
                             <h4>Selected Profile</h4>
 
                             <h5>Name: {{ selectedprofile.Name }}</h5>
                             <h5>Website: {{ selectedprofile.WebsiteUrl }}</h5>
-                            <h5>Id: {{ profselectedprofileile.Id }}</h5>
+                            <h5>Id: {{ selectedprofile.Id }}</h5>
                             <h5>Web Property Id: {{ selectedprofile.WebPropertyId }}</h5>
                         </div>
 
