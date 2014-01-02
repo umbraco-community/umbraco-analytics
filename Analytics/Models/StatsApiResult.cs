@@ -6,6 +6,6 @@ namespace Analytics.Models
     {
         public AnalyticsDataResponse ApiResult { get; set; }
 
-        public ChartData ChartData { get; set; }
+        public dynamic ChartData { get; set; }
     }
 }

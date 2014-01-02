@@ -55,14 +55,14 @@ namespace Analytics
             return cd;
         }
 
-        public static LineChartData GetLineChartData(AnalyticsDataResponse apiResults)
+        public static ChartData GetLineChartData(AnalyticsDataResponse apiResults)
         {            
             // Get the amount of dimensions and metrics
             int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == "DIMENSION");
             int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == "METRIC");
 
             // Initialize the data object
-            LineChartData cd = new LineChartData
+            ChartData cd = new ChartData
             {
                 labels      = apiResults.Rows.Select(row => row.Cells[1] + "/" + row.Cells[0]).ToArray(),
                 datasets    = new LineChartDataSet[metrics]
@@ -99,6 +99,29 @@ namespace Analytics
 
             return cd;
             
+        }
+
+        public static dynamic GetGeoChartData(AnalyticsDataResponse apiResults)
+        {
+            List<object> geoChartData = new List<object>();
+
+            var headerRow = new[] {"Country", "Visits"};
+            geoChartData.Add(headerRow);
+
+            foreach (var row in apiResults.Rows)
+            {
+                //Get Data out of the api results
+                var country     = row.Cells[0];
+                var visits      = Convert.ToInt32(row.Cells[1]);
+
+                //Create an array
+                var dataRow = new object[] { country, visits };
+
+                geoChartData.Add(dataRow);
+            }
+
+            //Return the object
+            return geoChartData;
         }
 
         public static string GetFillColor(int pos)

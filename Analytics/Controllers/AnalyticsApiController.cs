@@ -67,7 +67,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public LineChartData GetVisitsOverMonths(string profile)
+        public ChartData GetVisitsOverMonths(string profile)
         {
             // Get the visits from the Google Analytics API
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
@@ -395,7 +395,7 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetCountry(string profile)
+        public StatsApiResult GetCountry(string profile)
         {
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
@@ -409,8 +409,13 @@ namespace Analytics.Controllers
                 new[] { "-" + AnalyticsMetrics.Visits }
             );
 
+            //Store API result in our new object along with chart data
+            var countryResult       = new StatsApiResult();
+            countryResult.ApiResult = data;                                 //The data back from Google's API
+            countryResult.ChartData = ChartHelper.GetGeoChartData(data);    //Add chart data to device result via Helper
+
             // Return the data as JSON
-            return data;
+            return countryResult;
         }
 
         /// <summary>
