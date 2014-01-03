@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Analytics.Models;
 using Skybrud.Social.Google;
 using Skybrud.Social.Google.Analytics;
@@ -76,13 +77,19 @@ namespace Analytics.Controllers
             if (!endDate.HasValue)
                 endDate = DateTime.Now;
 
+            TimeSpan span = endDate.Value - startDate.Value;
+
+            var dimensions = new[] {AnalyticsDimension.Year, AnalyticsDimension.Month};
+            //if (span.TotalDays < 90)
+            //    dimensions = new[] {AnalyticsDimension.Month,AnalyticsDimension.Day};
+
             // Get the visits from the Google Analytics API
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
                 startDate.Value,
                 endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Year, AnalyticsDimension.Month },
+                dimensions,
                 null,
                 new[] { AnalyticsDimension.Year }
             );
