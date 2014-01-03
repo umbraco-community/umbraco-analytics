@@ -5,17 +5,20 @@
 
 
         $scope.loadingViews = true;
+
         
-       
         var dateFilter = settingsResource.getDateFilter();
         if (dateFilter.startDate == null) {
             dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
             dateFilter.endDate = moment().format('YYYY-MM-DD');
             settingsResource.setDateFilter(dateFilter.startDate, dateFilter.endDate);
         }
-                
+       
+        console.log("start setting value in controller");
+        
         $scope.dateFilter = dateFilter;
-
+        console.log($scope.dateFilter);
+        console.log("done setting value in controller");
 
 
                 //Get Profile
@@ -33,7 +36,7 @@
                     });
 
                     //Get Browser via statsResource - does WebAPI GET call
-                    statsResource.getvisits(profileID, $scope.startDate, $scope.endDate).then(function (response) {
+                    statsResource.getvisits(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                         $scope.views        = response.data;
                         $scope.loadingViews = false;
 

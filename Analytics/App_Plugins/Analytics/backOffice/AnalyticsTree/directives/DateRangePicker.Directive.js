@@ -1,13 +1,18 @@
 ﻿angular.module("umbraco").directive('dateRangePicker', function () {
     return {
         require: 'ngModel',
-        link: function (scope, element, attrs, ngModelCtrl, settingsResource, assetsService) {
+        link: function (scope, element, attrs, ctrl) {
             $(function () {
-              
+
+                console.log("value in directive");
+                console.log(ctrl.$viewValue);
+                console.log(ctrl.$viewValue.startDate);
+
+                
                 element.daterangepicker(
                    {
-                       startDate: moment(ngModelCtrl.$viewValue.startDate),
-                       endDate: moment(ngModelCtrl.$viewValue.endDate),
+                       startDate: moment(ctrl.$viewValue.startDate),
+                       endDate: moment(ctrl.$viewValue.endDate),
                        minDate: '01/01/2010',
                        maxDate: moment().format("DD/MM/YYYY"),
                        dateLimit: { days: 60 },
@@ -42,33 +47,20 @@
                    },
                    function (start, end) {
                       
-                       settingsResource.setDateFilter(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+                       //settingsResource.setDateFilter(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
 
                        var dateFilter = {};
                        dateFilter.startDate = start.format('YYYY-MM-DD');
                        dateFilter.endDate = end.format('YYYY-MM-DD');
-                       ngModelCtrl.$setViewValue(dateFilter);
+                       ctrl.$setViewValue(dateFilter);
                        scope.$apply();
                        
                        angular.element(element.children()[1]).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                    }
                 );
                 
-                angular.element(element.children()[1]).html(moment(ngModelCtrl.$viewValue.startDate).format('MMMM D, YYYY') + ' - ' + moment(ngModelCtrl.$viewValue.endDate).format('MMMM D, YYYY'));
-            
+                angular.element(element.children()[1]).html(moment(ctrl.$viewValue.startDate).format('MMMM D, YYYY') + ' - ' + moment(ctrl.$viewValue.endDate).format('MMMM D, YYYY'));
 
-                //element.datepicker({
-                //    showOn: "both",
-                //    changeYear: true,
-                //    changeMonth: true,
-                //    dateFormat: 'yy-mm-dd',
-                //    maxDate: new Date(),
-                //    yearRange: '1920:2012',
-                //    onSelect: function (dateText, inst) {
-                //        ngModelCtrl.$setViewValue(dateText);
-                //        scope.$apply();
-                //    }
-                //});
             });
         }
     }
