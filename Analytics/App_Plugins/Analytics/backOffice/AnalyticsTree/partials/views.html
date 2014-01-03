@@ -19,7 +19,7 @@
             <p ng-show="loadingViews">Loading data...</p>
             <tbody ng-show="!loadingViews">
                 <tr ng-repeat="row in views.Rows">
-                    <td>{{ row.Cells[0] }}</td>
+                    <td><a href="{{ row.Cells[0] }}" target="_blank">{{ row.Cells[0] }}</a></td>
                     <td>{{ row.Cells[1] }}</td>
                     <td>{{ row.Cells[2] }}</td>
                 </tr>
