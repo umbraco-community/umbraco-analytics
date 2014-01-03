@@ -12,7 +12,6 @@
             .then(function () {
 
                 var dateFilter = settingsResource.getDateFilter();
-                console.log(dateFilter);
                 if (dateFilter.startDate == null) {
                     dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
                     dateFilter.endDate = moment().format('YYYY-MM-DD');
