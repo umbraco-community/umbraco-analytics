@@ -11,8 +11,15 @@
                 "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"])
             .then(function () {
 
-                $scope.startDate = moment().subtract('days', 29);
-                $scope.endDate = moment();
+                var dateFilter = settingsResource.getDateFilter();
+                console.log(dateFilter);
+                if (dateFilter.startDate == null) {
+                    dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
+                    dateFilter.endDate = moment().format('YYYY-MM-DD');
+                    settingsResource.setDateFilter(dateFilter.startDate, dateFilter.endDate);
+                }
+                $scope.startDate = dateFilter.startDate;
+                $scope.endDate = dateFilter.endDate;
 
 
                 //Get Profile
@@ -30,7 +37,7 @@
                     });
 
                     //Get Browser via statsResource - does WebAPI GET call
-                    statsResource.getvisits(profileID, $scope.startDate.format("YYYY-MM-DD"), $scope.endDate.format("YYYY-MM-DD")).then(function (response) {
+                    statsResource.getvisits(profileID, $scope.startDate, $scope.endDate).then(function (response) {
                         $scope.views        = response.data;
                         $scope.loadingViews = false;
 
@@ -45,8 +52,8 @@
 
                 $('#reportrange').daterangepicker(
                    {
-                       startDate: $scope.startDate,
-                       endDate: $scope.endDate,
+                       startDate: moment($scope.startDate),
+                       endDate: moment($scope.endDate),
                        minDate: '01/01/2012',
                        maxDate: moment().format("MM/DD/YYYY"),
                        dateLimit: { days: 60 },
@@ -81,6 +88,7 @@
                    },
                    function (start, end) {
                        $scope.loadingViews = true;
+                       settingsResource.setDateFilter(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
                        statsResource.getvisits(profileID, start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')).then(function (response) {
 
                            $scope.views = response.data;
@@ -90,7 +98,7 @@
                    }
                 );
                 //Set the initial state of the picker label
-                $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+                $('#reportrange span').html(moment($scope.startDate).format('MMMM D, YYYY') + ' - ' + moment($scope.endDate).format('MMMM D, YYYY'));
 
             });
 
