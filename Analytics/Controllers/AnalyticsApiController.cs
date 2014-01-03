@@ -129,14 +129,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetSources(string profile)
+        public AnalyticsDataResponse GetSources(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.Source },
                 null,
@@ -187,14 +191,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetBrowser(string profile)
+        public StatsApiResult GetBrowser(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] {AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] {AnalyticsDimension.Browser },
                 null,
@@ -215,14 +223,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetBrowserVersion(string profile)
+        public StatsApiResult GetBrowserVersion(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.Browser, AnalyticsDimension.BrowserVersion },
                 null,
@@ -243,14 +255,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetDeviceTypes(string profile)
+        public StatsApiResult GetDeviceTypes(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.DeviceCategory },
                 null,
@@ -271,14 +287,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetDevices(string profile)
+        public StatsApiResult GetDevices(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.MobileDeviceBranding, AnalyticsDimension.MobileDeviceModel },
                 null,
@@ -300,14 +320,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetSocialNetworkSources(string profile)
+        public StatsApiResult GetSocialNetworkSources(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.SocialNetwork },
                 null,
@@ -328,14 +352,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetOperatingSystems(string profile)
+        public StatsApiResult GetOperatingSystems(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.OperatingSystem },
                 null,
@@ -356,14 +384,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetOperatingSystemVersions(string profile)
+        public StatsApiResult GetOperatingSystemVersions(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.OperatingSystem, AnalyticsDimension.OperatingSystemVersion },
                 null,
@@ -386,14 +418,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetScreenRes(string profile)
+        public AnalyticsDataResponse GetScreenRes(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.ScreenResolution },
                 null,
@@ -409,14 +445,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public StatsApiResult GetCountry(string profile)
+        public StatsApiResult GetCountry(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.Country },
                 null,
@@ -437,14 +477,18 @@ namespace Analytics.Controllers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public AnalyticsDataResponse GetLanguage(string profile)
+        public AnalyticsDataResponse GetLanguage(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.Language },
                 null,
