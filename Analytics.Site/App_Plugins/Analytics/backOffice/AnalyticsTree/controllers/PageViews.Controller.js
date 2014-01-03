@@ -7,19 +7,18 @@
         $scope.loadingViews = true;
         
         assetsService.load(
-                ["/App_Plugins/Analytics/lib/momentjs/moment.min.js",
-                "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"])
+                ["/App_Plugins/Analytics/lib/momentjs/moment.min.js"])
             .then(function () {
 
                 var dateFilter = settingsResource.getDateFilter();
-                console.log(dateFilter);
                 if (dateFilter.startDate == null) {
                     dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
                     dateFilter.endDate = moment().format('YYYY-MM-DD');
                     settingsResource.setDateFilter(dateFilter.startDate, dateFilter.endDate);
                 }
-                $scope.startDate = dateFilter.startDate;
-                $scope.endDate = dateFilter.endDate;
+                
+                $scope.dateFilter = dateFilter;
+
 
 
                 //Get Profile
@@ -50,55 +49,7 @@
 
                 });
 
-                $('#reportrange').daterangepicker(
-                   {
-                       startDate: moment($scope.startDate),
-                       endDate: moment($scope.endDate),
-                       minDate: '01/01/2012',
-                       maxDate: moment().format("MM/DD/YYYY"),
-                       dateLimit: { days: 60 },
-                       showDropdowns: true,
-                       showWeekNumbers: true,
-                       timePicker: false,
-                       timePickerIncrement: 1,
-                       timePicker12Hour: true,
-                       ranges: {
-                           'Today': [moment(), moment()],
-                           'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-                           'Last 7 Days': [moment().subtract('days', 6), moment()],
-                           'Last 30 Days': [moment().subtract('days', 29), moment()],
-                           'This Month': [moment().startOf('month'), moment().endOf('month')],
-                           'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-                       },
-                       opens: 'left',
-                       buttonClasses: ['btn btn-default'],
-                       applyClass: 'btn-small btn-primary',
-                       cancelClass: 'btn-small',
-                       format: 'MM/DD/YYYY',
-                       separator: ' to ',
-                       locale: {
-                           applyLabel: 'Submit',
-                           fromLabel: 'From',
-                           toLabel: 'To',
-                           customRangeLabel: 'Custom Range',
-                           daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                           monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                           firstDay: 1
-                       }
-                   },
-                   function (start, end) {
-                       $scope.loadingViews = true;
-                       settingsResource.setDateFilter(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
-                       statsResource.getvisits(profileID, start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')).then(function (response) {
 
-                           $scope.views = response.data;
-                           $scope.loadingViews = false;
-                       });
-                       $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                   }
-                );
-                //Set the initial state of the picker label
-                $('#reportrange span').html(moment($scope.startDate).format('MMMM D, YYYY') + ' - ' + moment($scope.endDate).format('MMMM D, YYYY'));
 
             });
 
