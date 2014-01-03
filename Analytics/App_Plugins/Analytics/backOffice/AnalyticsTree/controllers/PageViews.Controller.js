@@ -14,11 +14,8 @@
             settingsResource.setDateFilter(dateFilter.startDate, dateFilter.endDate);
         }
        
-        console.log("start setting value in controller");
-        
         $scope.dateFilter = dateFilter;
-        console.log($scope.dateFilter);
-        console.log("done setting value in controller");
+      
 
 
                 //Get Profile

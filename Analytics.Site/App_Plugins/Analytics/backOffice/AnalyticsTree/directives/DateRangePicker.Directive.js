@@ -1,18 +1,18 @@
 ﻿angular.module("umbraco").directive('dateRangePicker', function () {
     return {
+        restrict: 'A',
         require: 'ngModel',
-        link: function (scope, element, attrs, ctrl) {
+        scope: {
+            ngModel: '=',
+        },
+        template: '<i class="glyphicon glyphicon-calendar icon-calendar icon-large"></i> <span></span> <b class="caret"></b>',
+        link: function (scope, element, attrs) {
             $(function () {
-
-                console.log("value in directive");
-                console.log(ctrl.$viewValue);
-                console.log(ctrl.$viewValue.startDate);
-
                 
                 element.daterangepicker(
                    {
-                       startDate: moment(ctrl.$viewValue.startDate),
-                       endDate: moment(ctrl.$viewValue.endDate),
+                       startDate: moment(scope.ngModel.startDate),
+                       endDate: moment(scope.ngModel.endDate),
                        minDate: '01/01/2010',
                        maxDate: moment().format("DD/MM/YYYY"),
                        dateLimit: { days: 60 },
@@ -52,14 +52,14 @@
                        var dateFilter = {};
                        dateFilter.startDate = start.format('YYYY-MM-DD');
                        dateFilter.endDate = end.format('YYYY-MM-DD');
-                       ctrl.$setViewValue(dateFilter);
+                       scope.ngModel = dateFilter;
                        scope.$apply();
                        
                        angular.element(element.children()[1]).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                    }
                 );
                 
-                angular.element(element.children()[1]).html(moment(ctrl.$viewValue.startDate).format('MMMM D, YYYY') + ' - ' + moment(ctrl.$viewValue.endDate).format('MMMM D, YYYY'));
+                angular.element(element.children()[1]).html(moment(scope.ngModel.startDate).format('MMMM D, YYYY') + ' - ' + moment(scope.ngModel.endDate).format('MMMM D, YYYY'));
 
             });
         }
