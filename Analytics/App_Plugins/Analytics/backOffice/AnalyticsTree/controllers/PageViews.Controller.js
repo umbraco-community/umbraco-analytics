@@ -30,7 +30,7 @@
                 });
 
                 //Get Browser specific via statsResource - does WebAPI GET call
-                statsResource.getsources(profileID).then(function (response) {
+                statsResource.getsources(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.sources = response.data;
                 });
 
