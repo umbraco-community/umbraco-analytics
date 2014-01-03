@@ -14,6 +14,14 @@
                 });
             });
 
+        $scope.dateFilter = settingsResource.getDateFilter();
+
+        $scope.$watch('dateFilter', function() {
+
+            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+            initChart();
+        });
+        
         function initChart() {
             //Get Profile
             settingsResource.getprofile().then(function(response) {
@@ -21,7 +29,7 @@
                 profileID       = response.data.Id;
 
                 //Get Countires via statsResource - does WebAPI GET call
-                statsResource.getcountries(profileID).then(function (response) {
+                statsResource.getcountries(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.data         = response.data.ApiResult;
                     $scope.loadingViews = false;
 
