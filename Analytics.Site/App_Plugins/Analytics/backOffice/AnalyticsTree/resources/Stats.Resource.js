@@ -5,44 +5,54 @@ angular.module("umbraco.resources")
             
             //TODO: Get Profile ID from saved profile in settings
 
-            getlanguage: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetLanguage?profile=" + profileID);
+            getlanguage: function (profileID, startDate, endDate) {
+              
+                return $http.get("Analytics/AnalyticsApi/GetLanguage", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getcountries: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetCountry?profile=" + profileID);
+            getcountries: function (profileID, startDate, endDate) {
+              
+                return $http.get("Analytics/AnalyticsApi/GetCountry", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getbrowsers: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetBrowser?profile=" + profileID);
+            getbrowsers: function (profileID, startDate, endDate) {
+              
+                return $http.get("Analytics/AnalyticsApi/GetBrowser", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getbrowserspecifics: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetBrowserVersion?profile=" + profileID);
+            getbrowserspecifics: function (profileID, startDate, endDate) {
+                
+                return $http.get("Analytics/AnalyticsApi/GetBrowserVersion", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getdevicetypes: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetDeviceTypes?profile=" + profileID);
+            getdevicetypes: function (profileID, startDate, endDate) {
+               
+                return $http.get("Analytics/AnalyticsApi/GetDeviceTypes", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getdevices: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetDevices?profile=" + profileID);
+            getdevices: function (profileID, startDate, endDate) {
+               
+                return $http.get("Analytics/AnalyticsApi/GetDevices", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getresolutions: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetScreenRes?profile=" + profileID);
+            getresolutions: function (profileID, startDate, endDate) {
+              
+                return $http.get("Analytics/AnalyticsApi/GetScreenRes", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getos: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetOperatingSystems?profile=" + profileID);
+            getos: function (profileID, startDate, endDate) {
+               
+                return $http.get("Analytics/AnalyticsApi/GetOperatingSystems", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getosversions: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetOperatingSystemVersions?profile=" + profileID);
+            getosversions: function (profileID, startDate, endDate) {
+               
+                return $http.get("Analytics/AnalyticsApi//GetOperatingSystemVersions", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getsocialnetworks: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetSocialNetworkSources?profile=" + profileID);
+            getsocialnetworks: function (profileID, startDate, endDate) {
+               
+                return $http.get("Analytics/AnalyticsApi/GetSocialNetworkSources", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
             getkeywords: function (profileID, startDate, endDate) {
@@ -53,8 +63,9 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetVisits", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
-            getsources: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetSources?profile=" + profileID);
+            getsources: function (profileID, startDate, endDate) {
+               
+                return $http.get("Analytics/AnalyticsApi/GetSources", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
             getvisitcharts: function (profileID, startDate, endDate) {
