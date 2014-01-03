@@ -1,23 +1,20 @@
 ﻿angular.module("umbraco").controller("Analytics.PageViewsController",
-    function ($scope, statsResource, settingsResource, assetsService) {
+    function ($scope, statsResource, settingsResource) {
 
         var profileID = "";
 
 
         $scope.loadingViews = true;
         
-        assetsService.load(
-                ["/App_Plugins/Analytics/lib/momentjs/moment.min.js"])
-            .then(function () {
-
-                var dateFilter = settingsResource.getDateFilter();
-                if (dateFilter.startDate == null) {
-                    dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
-                    dateFilter.endDate = moment().format('YYYY-MM-DD');
-                    settingsResource.setDateFilter(dateFilter.startDate, dateFilter.endDate);
-                }
+       
+        var dateFilter = settingsResource.getDateFilter();
+        if (dateFilter.startDate == null) {
+            dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
+            dateFilter.endDate = moment().format('YYYY-MM-DD');
+            settingsResource.setDateFilter(dateFilter.startDate, dateFilter.endDate);
+        }
                 
-                $scope.dateFilter = dateFilter;
+        $scope.dateFilter = dateFilter;
 
 
 
@@ -51,7 +48,7 @@
 
 
 
-            });
+           
 
 
     });

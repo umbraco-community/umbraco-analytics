@@ -3,12 +3,7 @@
         require: 'ngModel',
         link: function (scope, element, attrs, ngModelCtrl, settingsResource, assetsService) {
             $(function () {
-                
-                assetsService.load(
-                ["/App_Plugins/Analytics/lib/momentjs/moment.min.js",
-                "/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"])
-            .then(function () {
-                
+              
                 element.daterangepicker(
                    {
                        startDate: moment(ngModelCtrl.$viewValue.startDate),
@@ -60,7 +55,7 @@
                 );
                 
                 $('#reportrange span').html(moment(ngModelCtrl.$viewValue.startDate).format('MMMM D, YYYY') + ' - ' + moment(ngModelCtrl.$viewValue.endDate).format('MMMM D, YYYY'));
-            });
+            
 
                 //element.datepicker({
                 //    showOn: "both",
