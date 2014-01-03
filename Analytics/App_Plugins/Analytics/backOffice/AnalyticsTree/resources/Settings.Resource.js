@@ -1,6 +1,6 @@
 ﻿
 angular.module("umbraco.resources")
-    .factory("settingsResource", function ($http) {
+    .factory("settingsResource", function ($http, $cookies) {
         return {
             
             checkauth: function () {
@@ -38,6 +38,20 @@ angular.module("umbraco.resources")
             getprofile: function () {
                 return $http.get("Analytics/SettingsApi/GetProfile");
             },
+            
+            setDateFilter: function(startDate, endDate) {
+                $cookies.analyticsStartDate = startDate;
+                $cookies.analyticsEndDate = endDate;
+            },
+            getDateFilter: function() {
+
+                var dateFilter = {};
+
+                dateFilter.startDate = $cookies.analyticsStartDate;
+                dateFilter.endDate = $cookies.analyticsEndDate;
+
+                return dateFilter;
+            }
 
         };
     });
