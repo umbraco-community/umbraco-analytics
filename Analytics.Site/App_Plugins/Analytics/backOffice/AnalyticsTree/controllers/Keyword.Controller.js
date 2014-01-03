@@ -17,11 +17,11 @@
                 statsResource.getkeywords(profileID,$scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.keywords = response.data.ApiResult;
 
-                    var chartData = response.data.ChartData;
+                    //var chartData = response.data.ChartData;
 
-                    //Create Bar Chart
-                    var ctx = document.getElementById("keywords").getContext("2d");
-                    var keywordsChart = new Chart(ctx).Bar(chartData);
+                    ////Create Bar Chart
+                    //var ctx = document.getElementById("keywords").getContext("2d");
+                    //var keywordsChart = new Chart(ctx).Bar(chartData);
                 });
 
             });
