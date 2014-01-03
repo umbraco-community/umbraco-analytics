@@ -45,8 +45,8 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetSocialNetworkSources?profile=" + profileID);
             },
 
-            getkeywords: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetKeywords?profile=" + profileID);
+            getkeywords: function (profileID, startDate, endDate) {
+                return $http.get("Analytics/AnalyticsApi/GetKeywords", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
             getvisits: function (profileID, startDate, endDate) {
@@ -57,8 +57,8 @@ angular.module("umbraco.resources")
                 return $http.get("Analytics/AnalyticsApi/GetSources?profile=" + profileID);
             },
 
-            getvisitcharts: function (profileID) {
-                return $http.get("Analytics/AnalyticsApi/GetVisitsOverMonths?profile=" + profileID);
+            getvisitcharts: function (profileID, startDate, endDate) {
+                return $http.get("Analytics/AnalyticsApi/GetVisitsOverMonths", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
         };

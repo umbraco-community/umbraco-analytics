@@ -66,14 +66,21 @@ namespace Analytics.Controllers
         /// 
         /// </summary>
         /// <param name="profile"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
         /// <returns></returns>
-        public ChartData GetVisitsOverMonths(string profile)
+        public ChartData GetVisitsOverMonths(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+
             // Get the visits from the Google Analytics API
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(365)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.Year, AnalyticsDimension.Month },
                 null,
@@ -144,15 +151,22 @@ namespace Analytics.Controllers
         /// Get Keywords
         /// </summary>
         /// <param name="profile"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
         /// <returns></returns>
-        public StatsApiResult GetKeywords(string profile)
+        public StatsApiResult GetKeywords(string profile, DateTime? startDate, DateTime? endDate)
         {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
                 profile,
-                DateTime.Now.Subtract(TimeSpan.FromDays(31)),
-                DateTime.Now,
+                startDate.Value,
+                endDate.Value,
                 new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
                 new[] { AnalyticsDimension.Keyword },
                 null,

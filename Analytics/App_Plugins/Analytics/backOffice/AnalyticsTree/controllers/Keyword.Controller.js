@@ -14,7 +14,7 @@
                 profileID = response.data.Id;
 
                 //Get Browser via statsResource - does WebAPI GET call
-                statsResource.getkeywords(profileID).then(function (response) {
+                statsResource.getkeywords(profileID,$scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.keywords = response.data.ApiResult;
 
                     var chartData = response.data.ChartData;

@@ -14,7 +14,7 @@
                 profileID = response.data.Id;
 
                 //Get chart data for monthly visit chart
-                statsResource.getvisitcharts(profileID).then(function (response) {
+                statsResource.getvisitcharts(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     var chartData = response.data;
 
                     //Create Line Chart
