@@ -6,6 +6,8 @@
         $scope.dateFilter = settingsResource.getDateFilter();
 
         $scope.$watch('dateFilter', function () {
+            
+            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
             //Get Profile
             settingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
