@@ -13,9 +13,9 @@
                    {
                        startDate: moment(scope.ngModel.startDate),
                        endDate: moment(scope.ngModel.endDate),
-                       minDate: '01/01/2010',
+                       minDate: '01/01/1990',
                        maxDate: moment().format("DD/MM/YYYY"),
-                       dateLimit: { days: 60 },
+                       dateLimit: { days: 6000 },
                        showDropdowns: true,
                        showWeekNumbers: true,
                        timePicker: false,
