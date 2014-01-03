@@ -3,22 +3,28 @@
 
         var profileID = "";
 
-        //Get Profile
-        settingsResource.getprofile().then(function(response) {
-            $scope.profile = response.data;
-            profileID = response.data.Id;
+        $scope.dateFilter = settingsResource.getDateFilter();
 
-            //Get Browser via statsResource - does WebAPI GET call
-            statsResource.getkeywords(profileID).then(function (response) {
-                $scope.keywords = response.data.ApiResult;
+        $scope.$watch('dateFilter', function () {
+            
+            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+            //Get Profile
+            settingsResource.getprofile().then(function(response) {
+                $scope.profile = response.data;
+                profileID = response.data.Id;
 
-                var chartData = response.data.ChartData;
+                //Get Browser via statsResource - does WebAPI GET call
+                statsResource.getkeywords(profileID).then(function (response) {
+                    $scope.keywords = response.data.ApiResult;
 
-                //Create Bar Chart
-                var ctx = document.getElementById("keywords").getContext("2d");
-                var keywordsChart = new Chart(ctx).Bar(chartData);
+                    var chartData = response.data.ChartData;
+
+                    //Create Bar Chart
+                    var ctx = document.getElementById("keywords").getContext("2d");
+                    var keywordsChart = new Chart(ctx).Bar(chartData);
+                });
+
             });
-
         });
 
     });
