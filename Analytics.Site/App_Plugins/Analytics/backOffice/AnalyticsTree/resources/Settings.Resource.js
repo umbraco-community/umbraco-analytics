@@ -48,6 +48,13 @@ angular.module("umbraco.resources")
                 var dateFilter = {};
                 dateFilter.startDate = $cookieStore.get("analyticsStartDate");
                 dateFilter.endDate = $cookieStore.get("analyticsEndDate");
+                
+                if (dateFilter.startDate == null) {
+                    dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
+                    dateFilter.endDate = moment().format('YYYY-MM-DD');
+                    setDateFilter(dateFilter.startDate, dateFilter.endDate);
+                }
+                
                 return dateFilter;
             }
 
