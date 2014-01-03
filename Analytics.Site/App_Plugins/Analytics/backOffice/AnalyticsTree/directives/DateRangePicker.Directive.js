@@ -50,11 +50,11 @@
                        ngModelCtrl.$setViewValue(dateFilter);
                        scope.$apply();
                        
-                       $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                       angular.element(element.children()[1]).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                    }
                 );
                 
-                $('#reportrange span').html(moment(ngModelCtrl.$viewValue.startDate).format('MMMM D, YYYY') + ' - ' + moment(ngModelCtrl.$viewValue.endDate).format('MMMM D, YYYY'));
+                angular.element(element.children()[1]).html(moment(ngModelCtrl.$viewValue.startDate).format('MMMM D, YYYY') + ' - ' + moment(ngModelCtrl.$viewValue.endDate).format('MMMM D, YYYY'));
             
 
                 //element.datepicker({
