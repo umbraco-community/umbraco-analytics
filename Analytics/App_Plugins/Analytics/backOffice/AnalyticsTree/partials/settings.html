@@ -5,7 +5,7 @@
             <button class="btn btn-success" ng-click="auth()"><span class="icon-lock"></span> Authorize</button>
         </umb-control-group>
 
-        <umb-control-group ng-repeat="setting in settings" label="{{ setting.Label }}" description="{{ setting.Description }}">
+        <umb-control-group ng-repeat="setting in settings" label="{{ setting.Label }}" description="{{ setting.Description }}" style="display:none;">
             <input type="text" name="{{ setting.Key }}" id="{{ setting.Key }}" value="{{ setting.Value }}" ng-model="setting.Value" />
         </umb-control-group>
 
