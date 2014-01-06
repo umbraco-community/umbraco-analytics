@@ -6,7 +6,7 @@
             ngModel: '=',
         },
         template: '<i class="glyphicon glyphicon-calendar icon-calendar icon-large"></i> <span></span> <b class="caret"></b>',
-        link: function (scope, element, attrs,ngModel) {
+        link: function (scope, element) {
             $(function () {
                 
                 element.daterangepicker(
@@ -53,7 +53,7 @@
                        dateFilter.startDate = start.format('YYYY-MM-DD');
                        dateFilter.endDate = end.format('YYYY-MM-DD');
                        scope.ngModel = dateFilter;
-                       scope.ngModel = "test";
+                      
                        scope.$apply();
 
                        
