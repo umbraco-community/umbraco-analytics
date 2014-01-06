@@ -315,9 +315,7 @@
     <Content Include="App_Plugins\Analytics\backOffice\OAuth.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="App_Plugins\Analytics\installer\PostInstall.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="App_Plugins\Analytics\installer\PostInstall.ascx" />
     <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
     <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
     <Content Include="App_Plugins\Analytics\lib\chartjs\chart.0.2.js" />

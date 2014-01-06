@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PostInstall.ascx.cs" Inherits=Analytics.Installer.PostInstall" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PostInstall.ascx.cs" Inherits="Analytics.Installer.PostInstall" %>
 
 
 
