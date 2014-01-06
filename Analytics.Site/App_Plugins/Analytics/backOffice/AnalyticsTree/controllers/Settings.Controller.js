@@ -45,10 +45,23 @@
             //Only load/fetch if showAuth is true
             if (hasUserAuthd === true) {
 
+                console.log("get accounts");
                 //Get all accounts via settingsResource - does WebAPI GET call
                 settingsResource.getaccounts().then(function (response) {
                     $scope.accounts = response.data;
+
+                    if ($scope.selectedaccount != null) {
+                        $scope.selectedaccount = _.where($scope.accounts, { Id: $scope.selectedaccount.Id })[0];
+                        
+                        settingsResource.getprofiles($scope.selectedaccount.Id).then(function (response) {
+                            $scope.profiles = response.data;
+                            if ($scope.selectedprofile != null) {
+                                $scope.selectedprofile = _.where($scope.profiles, { Id: $scope.selectedprofile.Id })[0];
+                            }
+                        });
+                    }
                 });
+
 
                 //When an account is selected
                 $scope.accountSelected = function (selectedAccount) {
