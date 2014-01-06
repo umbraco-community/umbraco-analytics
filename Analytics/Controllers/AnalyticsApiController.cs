@@ -70,18 +70,31 @@ namespace Analytics.Controllers
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public ChartData GetVisitsOverMonths(string profile, DateTime? startDate, DateTime? endDate)
+        public ChartData GetVisitsOverTime(string profile, DateTime? startDate, DateTime? endDate)
         {
             if (!startDate.HasValue)
                 startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
             if (!endDate.HasValue)
                 endDate = DateTime.Now;
 
+            //Span of time
             TimeSpan span = endDate.Value - startDate.Value;
 
-            var dimensions = new[] {AnalyticsDimension.Year, AnalyticsDimension.Month};
-            //if (span.TotalDays < 90)
-            //    dimensions = new[] {AnalyticsDimension.Month,AnalyticsDimension.Day};
+            //Dimensions that changes based on time period
+            var dimensions = new string[]{};
+
+
+            //If less than 60 days show days
+            if (span.TotalDays < 60)
+            {
+                dimensions = new[] {AnalyticsDimension.Year, AnalyticsDimension.Month, AnalyticsDimension.Day};
+            }
+            else
+            {
+                dimensions = new[] { AnalyticsDimension.Year, AnalyticsDimension.Month };
+            }
+
+           
 
             // Get the visits from the Google Analytics API
             AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(

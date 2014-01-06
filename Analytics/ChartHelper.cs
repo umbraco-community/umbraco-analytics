@@ -61,10 +61,21 @@ namespace Analytics
             int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == "DIMENSION");
             int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == "METRIC");
 
+            var chartLabels = new string[]{};
+
+            if (apiResults.ColumnHeaders.Count() == 5)
+            {
+                chartLabels = apiResults.Rows.Select(row => row.Cells[2] + "/" + row.Cells[1] + "/" + row.Cells[0]).ToArray();
+            }
+            else
+            {
+                chartLabels = apiResults.Rows.Select(row => row.Cells[1] + "/" + row.Cells[0]).ToArray();
+            }
+
             // Initialize the data object
             ChartData cd = new ChartData
             {
-                labels      = apiResults.Rows.Select(row => row.Cells[1] + "/" + row.Cells[0]).ToArray(),
+                labels      = chartLabels,
                 datasets    = new LineChartDataSet[metrics]
             };
 

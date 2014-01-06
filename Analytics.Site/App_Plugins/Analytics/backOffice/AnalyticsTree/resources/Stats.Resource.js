@@ -69,7 +69,7 @@ angular.module("umbraco.resources")
             },
 
             getvisitcharts: function (profileID, startDate, endDate) {
-                return $http.get("Analytics/AnalyticsApi/GetVisitsOverMonths", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+                return $http.get("Analytics/AnalyticsApi/GetVisitsOverTime", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
         };
