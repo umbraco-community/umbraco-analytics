@@ -424,3 +424,6 @@
 2014-01-06 14:15:19,644 [19] INFO  Umbraco.Core.PluginManager - [Thread 53] Completed resolution of types of umbraco.interfaces.ITree, found 35 (took 12ms)
 2014-01-06 14:16:14,921 [19] INFO  Umbraco.Core.PluginManager - [Thread 66] Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
 2014-01-06 14:16:14,929 [19] INFO  Umbraco.Core.PluginManager - [Thread 66] Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 20 (took 7ms)
+2014-01-06 14:36:54,773 [19] INFO  Umbraco.Web.Security.WebSecurity - [Thread 59] User Id: 0 logged in
+2014-01-06 14:36:58,529 [19] INFO  Umbraco.Core.PluginManager - [Thread 89] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-01-06 14:36:58,529 [19] INFO  Umbraco.Core.PluginManager - [Thread 89] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 5 (took 0ms)
