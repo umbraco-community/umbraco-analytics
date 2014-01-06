@@ -301,6 +301,7 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\settings.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Stats.Resource.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\services\DateRange.Service.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
     <Content Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx">

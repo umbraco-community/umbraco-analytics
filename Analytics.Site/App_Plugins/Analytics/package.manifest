@@ -19,7 +19,8 @@
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/pageviews.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/settings.resource.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/stats.resource.js',
-		'~/App_Plugins/Analytics/backoffice/analyticstree/directives/daterangepicker.directive.js'
+		'~/App_Plugins/Analytics/backoffice/analyticstree/directives/daterangepicker.directive.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/services/daterange.service.js'
 	],
 	css: [
        '~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css',

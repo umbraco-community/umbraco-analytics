@@ -1,13 +1,18 @@
 ﻿angular.module("umbraco").controller("Analytics.PageViewsController",
-    function ($scope, statsResource, settingsResource) {
+    function ($scope, statsResource, settingsResource, dateRangeService) {
 
         var profileID = "";
 
         $scope.dateFilter = settingsResource.getDateFilter();
 
+        //$scope.$on('DateFilterChanged', function (event, x) {
+        //    console.log("catch change");
+        //    $scope.dateFilter = x;
+        //});
+        
         $scope.$watch('dateFilter', function () {
             
-            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+           
             //Get Profile
             settingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
