@@ -1,5 +1,6 @@
 ﻿<div ng-controller="Analytics.SettingsController">
-    <div class="umb-pane">
+    <div class="umb-pane form-horizontal">
+        
         <umb-control-group ng-hide="hasAuthd()" label="Authorisation" description="Login with Google via oAuth to verify">
             <button class="btn btn-success" ng-click="auth()"><span class="icon-lock"></span> Authorize</button>
         </umb-control-group>
@@ -16,7 +17,7 @@
                         Account
                         <small>Select which account you wish to view settings from</small>
                     </label>
-
+                  
                     <div class="controls controls-row">
                         
                         <select name="account" ng-model="selectedaccount" ng-change="accountSelected(selectedaccount)" ng-options="account.Name for account in accounts">
@@ -46,10 +47,10 @@
         </div>
 
         
-       <!-- <h4>DEBUG</h4>
-        <textarea>{{ settings | json }}</textarea><br />
-        <textarea>{{ selectedaccount | json }}</textarea><br/>
-        <textarea>{{ selectedprofile | json }}</textarea>-->
+        <!-- <h4>DEBUG</h4>
+            <textarea>{{ settings | json }}</textarea><br />
+            <textarea>{{ selectedaccount | json }}</textarea><br/>
+            <textarea>{{ selectedprofile | json }}</textarea>-->
 
 
         <div class="umb-tab-buttons">
