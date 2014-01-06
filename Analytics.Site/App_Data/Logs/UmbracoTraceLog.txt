@@ -686,3 +686,11 @@
 2014-01-06 15:13:44,425 [19] INFO  Umbraco.Core.PluginManager - [Thread 83] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 5 (took 0ms)
 2014-01-06 15:13:45,551 [19] INFO  Umbraco.Core.PluginManager - [Thread 71] Starting resolution types of umbraco.interfaces.ITree
 2014-01-06 15:13:45,577 [19] INFO  Umbraco.Core.PluginManager - [Thread 71] Completed resolution of types of umbraco.interfaces.ITree, found 35 (took 25ms)
+2014-01-06 16:01:31,905 [19] INFO  Umbraco.Core.PluginManager - [Thread 72] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-01-06 16:01:31,905 [19] INFO  Umbraco.Core.PluginManager - [Thread 72] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 5 (took 0ms)
+2014-01-06 16:01:35,558 [19] INFO  Umbraco.Core.PluginManager - [Thread 6] Starting resolution types of Umbraco.Core.Persistence.Mappers.BaseMapper
+2014-01-06 16:01:35,563 [19] INFO  Umbraco.Core.PluginManager - [Thread 6] Completed resolution of types of Umbraco.Core.Persistence.Mappers.BaseMapper, found 20 (took 4ms)
+2014-01-06 16:01:35,633 [19] INFO  Umbraco.Web.Security.WebSecurity - [Thread 6] User Id: 0 logged in
+2014-01-06 16:01:46,734 [19] INFO  umbraco.CreatedPackageTasks - [Thread 33] Xml save started
+2014-01-06 16:12:46,148 [19] INFO  Umbraco.Core.PluginManager - [Thread 64] Starting resolution types of Umbraco.Web.Trees.TreeController
+2014-01-06 16:12:46,149 [19] INFO  Umbraco.Core.PluginManager - [Thread 64] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 5 (took 0ms)
