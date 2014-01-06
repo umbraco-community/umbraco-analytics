@@ -694,3 +694,5 @@
 2014-01-06 16:01:46,734 [19] INFO  umbraco.CreatedPackageTasks - [Thread 33] Xml save started
 2014-01-06 16:12:46,148 [19] INFO  Umbraco.Core.PluginManager - [Thread 64] Starting resolution types of Umbraco.Web.Trees.TreeController
 2014-01-06 16:12:46,149 [19] INFO  Umbraco.Core.PluginManager - [Thread 64] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 5 (took 0ms)
+2014-01-06 18:32:08,856 [19] INFO  umbraco.BusinessLogic.Log - [Thread 67] Log scrubbed.  Removed all items older than 2013-11-07 18:32:08
+2014-01-06 18:32:08,909 [19] INFO  Umbraco.Core.UmbracoApplicationBase - [Thread 67] Application shutdown. Reason: BinDirChangeOrDirectoryRename
