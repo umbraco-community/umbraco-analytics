@@ -1,10 +1,16 @@
 ﻿<div ng-controller="Analytics.DashboardController">
-    
+    <style>
+        canvas{
+        width: 100% !important;
+        max-width: 800px;
+        height: auto !important;
+    }
+    </style>
     <h4>Views</h4>
 
     <div class="row-fluid">
         <div class="span6">
-            <canvas id="viewMonths" width="650" height="450"></canvas>
+            <canvas id="viewMonths"></canvas>
         </div>
         <div class="span6">
             <table class="table table-striped">
