@@ -17,6 +17,7 @@
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/social.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/keyword.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/pageviews.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/dashboard.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/settings.resource.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/stats.resource.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/directives/daterangepicker.directive.js',
