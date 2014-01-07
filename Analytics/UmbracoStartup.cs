@@ -21,6 +21,9 @@ namespace Analytics
             //Check to see if language keys for section needs to be added
             Install.AddSectionLanguageKeys();
 
+            //Add Section Dashboard XML
+            Install.AddSectionDashboard();
+
             //Add OLD Style Package Event
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
 

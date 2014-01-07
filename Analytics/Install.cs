@@ -106,5 +106,64 @@ namespace Analytics
                 langXml.Save(langFilePath);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void AddSectionDashboard()
+        {
+            bool saveFile = false;
+
+            //Open up language file
+            //umbraco/config/lang/en.xml
+            var dashboardPath = "~/config/dashboard.config";
+
+            //Path to the file resolved
+            var dashboardFilePath = HostingEnvironment.MapPath(dashboardPath);
+
+            //Load settings.config XML file
+            XmlDocument dashboardXml = new XmlDocument();
+            dashboardXml.Load(dashboardFilePath);
+
+            // Section Node
+            XmlNode findSection = dashboardXml.SelectSingleNode("//section [@alias='AnalyticsDashboardSection']");
+
+            //Couldn't find it
+            if (findSection == null)
+            {
+                //Let's add the xml
+                var xmlToAdd = "<section alias='AnalyticsDashboardSection'>" +
+                                    "<areas>" +
+                                        "<area>analytics</area>" +
+                                    "</areas>" +
+                                    "<tab caption='Last 7 days'>" +
+                                        "<control addPanel='true' panelCaption=''>/App_Plugins/Analytics/backOffice/AnalyticsTree/partials/dashboard.html</control>" +
+                                    "</tab>" +
+                               "</section>";
+
+                //Get the main root <dashboard> node
+                XmlNode dashboardNode = dashboardXml.SelectSingleNode("//dashBoard");
+
+                if (dashboardNode != null)
+                {
+                    //Load in the XML string above
+                    XmlDocument xmlNodeToAdd = new XmlDocument();
+                    xmlNodeToAdd.LoadXml(xmlToAdd);
+
+                    //Append the xml above to the dashboard node
+                    dashboardNode.AppendChild(xmlNodeToAdd);
+
+                    //Save the file flag to true
+                    saveFile = true;
+                }
+            }
+
+            //If saveFile flag is true then save the file
+            if (saveFile)
+            {
+                //Save the XML file
+                dashboardXml.Save(dashboardFilePath);
+            }
+        }
     }
 }
