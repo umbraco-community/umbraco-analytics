@@ -26,11 +26,11 @@
 
                         <br />
 
-                        <select name="profile" ng-show="selectedaccount !== 'null'" ng-model="selectedprofile" ng-options="profile.Name for profile in profiles">
+                        <select name="profile" ng-show="selectedaccount" ng-model="selectedprofile" ng-options="profile.Name for profile in profiles" style="margin-top:10px">
                             <option value="">-- Select a Profile --</option>
                         </select>
 
-                        <div ng-show="selectedprofile !== 'null'">
+                        <div ng-show="selectedprofile">
                             <hr />
 
                             <h4>Selected Profile</h4>
