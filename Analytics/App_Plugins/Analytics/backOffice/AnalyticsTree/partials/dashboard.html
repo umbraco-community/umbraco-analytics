@@ -1,3 +1,63 @@
 ﻿<div ng-controller="Analytics.DashboardController">
     
+    <h4>Views</h4>
+    <canvas id="viewMonths" width="650" height="450"></canvas>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Page Path</th>
+                <th>Vists</th>
+                <th>Page Views</th>
+            </tr>
+        </thead>
+        <p ng-show="loadingViews">Loading data...</p>
+        <tbody ng-show="!loadingViews">
+            <tr ng-repeat="row in views.Rows| limitTo:10">
+                <td><a href="{{ row.Cells[0] }}" target="_blank">{{ row.Cells[0] }}</a></td>
+                <td>{{ row.Cells[1] }}</td>
+                <td>{{ row.Cells[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/umbraco/#/analytics/analyticsTree/view/views">View more details</a>
+
+    <h4>Sources</h4>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Source</th>
+                <th>Vists</th>
+                <th>Page Views</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in sources.Rows| limitTo:10">
+                <td>{{ row.Cells[0] }}</td>
+                <td>{{ row.Cells[1] }}</td>
+                <td>{{ row.Cells[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/umbraco/#/analyticsanalytics/analyticsTree/view/views">View more details</a>
+    
+     <h4>Keywords</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Keyword</th>
+                <th>Vists</th>
+                <th>Page Views</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in keywords.Rows| limitTo:10">
+                <td>{{ row.Cells[0] }}</td>
+                <td>{{ row.Cells[1] }}</td>
+                <td>{{ row.Cells[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+     <a href="/umbraco/#/analyticsanalytics/analyticsTree/view/keywords">View more details</a>
 </div>
