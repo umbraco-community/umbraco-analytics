@@ -688,3 +688,5 @@
 2014-01-07 10:02:09,277 [25] INFO  Umbraco.Core.PluginManager - [Thread 55] Completed resolution of types of Umbraco.Web.Trees.TreeController, found 5 (took 0ms)
 2014-01-07 10:02:10,530 [25] INFO  Umbraco.Core.PluginManager - [Thread 67] Starting resolution types of umbraco.interfaces.ITree
 2014-01-07 10:02:10,539 [25] INFO  Umbraco.Core.PluginManager - [Thread 67] Completed resolution of types of umbraco.interfaces.ITree, found 35 (took 8ms)
+2014-01-07 10:02:59,791 [25] INFO  umbraco.BusinessLogic.Log - [Thread 56] Log scrubbed.  Removed all items older than 2013-11-08 10:02:59
+2014-01-07 10:02:59,794 [25] INFO  Umbraco.Core.UmbracoApplicationBase - [Thread 56] Application shutdown. Reason: BinDirChangeOrDirectoryRename
