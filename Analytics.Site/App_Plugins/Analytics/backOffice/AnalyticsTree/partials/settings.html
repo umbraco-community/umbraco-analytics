@@ -1,6 +1,9 @@
 ﻿<div ng-controller="Analytics.SettingsController">
     <div class="umb-pane form-horizontal">
         <h4>Settings</h4>
+        
+        <p class="alert alert-warning" ng-show="!selectedprofile" >Before you can use Analytics for Umbraco bla bla bla</p>
+
         <umb-control-group ng-hide="hasAuthd()" label="Authorisation" description="Login with Google via oAuth to verify">
             <button class="btn btn-success" ng-click="auth()"><span class="icon-lock"></span> Authorize</button>
         </umb-control-group>
@@ -10,6 +13,9 @@
         </umb-control-group>
 
         <!-- Done as regular HTML, as need settings & account. Using umb-control-group has seperate scope -->
+        
+      
+
         <div class="umb-property">
             <div class="control-group umb-control-group">
                 <div class="umb-el-wrap">
