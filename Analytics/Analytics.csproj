@@ -294,6 +294,7 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\DateRangePicker.Directive.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\dashboard.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\views.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\keywords.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\social.html" />
