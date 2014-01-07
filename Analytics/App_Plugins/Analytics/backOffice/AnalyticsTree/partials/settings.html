@@ -1,7 +1,9 @@
 ﻿<div ng-controller="Analytics.SettingsController">
     <div class="umb-pane form-horizontal">
         
-        <p class="alert alert-warning" ng-show="!selectedprofile" >Before you can use Analytics for Umbraco bla bla bla</p>
+        <p class="alert alert-warning" ng-show="!selectedprofile">
+            Before you can use Analytics, you need to choose a profile you wish to use to view statistics.
+        </p>
 
         <h4>Settings</h4>
 
@@ -52,14 +54,7 @@
                 </div>
             </div>
         </div>
-
         
-        <!-- <h4>DEBUG</h4>
-            <textarea>{{ settings | json }}</textarea><br />
-            <textarea>{{ selectedaccount | json }}</textarea><br/>
-            <textarea>{{ selectedprofile | json }}</textarea>-->
-
-
         <div class="umb-tab-buttons">
             <div class="btn-group">
                 <button ng-disabled="!selectedprofile" ng-click="save(settings, selectedaccount, selectedprofile)" data-hotkey="ctrl+s" class="btn btn-success">
