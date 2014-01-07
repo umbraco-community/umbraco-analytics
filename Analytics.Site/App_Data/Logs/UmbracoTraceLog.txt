@@ -885,3 +885,5 @@
 2014-01-07 15:29:37,639 [71] INFO  Umbraco.Web.Search.ExamineEvents - [Thread 107] Adding examine event handlers for index providers: 3
 2014-01-07 15:29:45,048 [71] INFO  Umbraco.Core.PluginManager - [Thread 104] Starting resolution types of umbraco.interfaces.ITree
 2014-01-07 15:29:45,053 [71] INFO  Umbraco.Core.PluginManager - [Thread 104] Completed resolution of types of umbraco.interfaces.ITree, found 35 (took 5ms)
+2014-01-07 15:30:39,332 [71] INFO  umbraco.BusinessLogic.Log - [Thread 5] Log scrubbed.  Removed all items older than 2013-11-08 15:30:39
+2014-01-07 15:30:39,334 [71] INFO  Umbraco.Core.UmbracoApplicationBase - [Thread 5] Application shutdown. Reason: ConfigurationChange
