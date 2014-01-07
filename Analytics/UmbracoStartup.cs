@@ -22,7 +22,7 @@ namespace Analytics
             Install.AddSectionLanguageKeys();
 
             //Add Section Dashboard XML
-            Install.AddSectionDashboard();
+            //Install.AddSectionDashboard();
 
             //Add OLD Style Package Event
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
