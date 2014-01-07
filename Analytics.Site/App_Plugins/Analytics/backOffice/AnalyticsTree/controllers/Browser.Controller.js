@@ -2,11 +2,11 @@
     function ($scope, $location, statsResource, settingsResource) {
 
         var profileID = "";
-
+        $scope.loadingViews = true;
         $scope.dateFilter = settingsResource.getDateFilter();
 
         $scope.$watch('dateFilter', function () {
-            
+            $scope.loadingViews = true;
             settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
             //Get Profile
             settingsResource.getprofile().then(function (response) {
@@ -34,6 +34,8 @@
                     statsResource.getbrowserspecifics(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                         $scope.browserspecifics = response.data.ApiResult;
                     });
+                    
+                    $scope.loadingViews = false;
                 }
             });
         });

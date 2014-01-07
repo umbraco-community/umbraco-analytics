@@ -23,6 +23,7 @@
         });
         
         function initChart() {
+            $scope.loadingViews = true;
             //Get Profile
             settingsResource.getprofile().then(function(response) {
                 $scope.profile  = response.data;
