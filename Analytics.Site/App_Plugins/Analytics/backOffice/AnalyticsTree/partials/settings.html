@@ -55,7 +55,7 @@
 
         <div class="umb-tab-buttons">
             <div class="btn-group">
-                <button ng-click="save(settings, selectedaccount, selectedprofile)" data-hotkey="ctrl+s" class="btn btn-success">
+                <button ng-disabled="!selectedprofile" ng-click="save(settings, selectedaccount, selectedprofile)" data-hotkey="ctrl+s" class="btn btn-success">
                     <localize key="buttons_save">Save</localize>
                 </button>
             </div>
