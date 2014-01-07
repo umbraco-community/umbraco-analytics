@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.PageViewsController",
-    function ($scope, statsResource, settingsResource, dateRangeService) {
+    function ($scope, $location, statsResource, settingsResource, dateRangeService) {
 
         var profileID = "";
 
@@ -18,6 +18,11 @@
                 $scope.profile = response.data;
                 profileID = response.data.Id;
 
+                if (profileID == null || profileID == "") {
+                    $location.path("/analytics/analyticsTree/edit/settings");
+                    return;
+                }
+                
                 //Get chart data for monthly visit chart
                 statsResource.getvisitcharts(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     var chartData = response.data;

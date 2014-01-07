@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.CountryController",
-    function ($scope, statsResource, settingsResource, assetsService) {
+    function ($scope, $location, statsResource, settingsResource, assetsService) {
 
         var profileID = "";
 
@@ -28,6 +28,11 @@
                 $scope.profile  = response.data;
                 profileID       = response.data.Id;
 
+                if (profileID == null || profileID == "") {
+                    $location.path("/analytics/analyticsTree/edit/settings");
+                    return;
+                }
+                
                 //Get Countires via statsResource - does WebAPI GET call
                 statsResource.getcountries(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.data         = response.data.ApiResult;

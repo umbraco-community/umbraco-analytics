@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.DeviceController",
-    function ($scope, statsResource, settingsResource) {
+    function ($scope,$location, statsResource, settingsResource) {
 
         var profileID = "";
         $scope.dateFilter = settingsResource.getDateFilter();
@@ -11,6 +11,11 @@
             settingsResource.getprofile().then(function(response) {
                 $scope.profile = response.data;
                 profileID = response.data.Id;
+                
+                if (profileID == null || profileID == "") {
+                    $location.path("/analytics/analyticsTree/edit/settings");
+                    return;
+                }
 
                 //Get Browser via statsResource - does WebAPI GET call
                 statsResource.getdevicetypes(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
