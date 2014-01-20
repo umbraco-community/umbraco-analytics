@@ -113,8 +113,9 @@
     <Reference Include="Our.Umbraco.uGoLive.Checks">
       <HintPath>..\packages\UmbracoCms.Core.7.0.0\lib\Our.Umbraco.uGoLive.Checks.dll</HintPath>
     </Reference>
-    <Reference Include="Skybrud.Social">
-      <HintPath>..\packages\Skybrud.Social.0.1.1\lib\Skybrud.Social.dll</HintPath>
+    <Reference Include="Skybrud.Social, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Skybrud.Social.0.1.2\lib\Skybrud.Social.dll</HintPath>
     </Reference>
     <Reference Include="SQLCE4Umbraco">
       <HintPath>..\packages\UmbracoCms.Core.7.0.0\lib\SQLCE4Umbraco.dll</HintPath>

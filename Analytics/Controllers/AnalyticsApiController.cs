@@ -81,31 +81,29 @@ namespace Analytics.Controllers
             TimeSpan span = endDate.Value - startDate.Value;
 
             //Dimensions that changes based on time period
-            var dimensions = new string[]{};
+            AnalyticsDimensionCollection dimensions;
 
 
             //If less than 60 days show days
             if (span.TotalDays < 60)
             {
-                dimensions = new[] {AnalyticsDimension.Year, AnalyticsDimension.Month, AnalyticsDimension.Day};
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month + AnalyticsDimension.Day;
             }
             else
             {
-                dimensions = new[] { AnalyticsDimension.Year, AnalyticsDimension.Month };
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month;
             }
 
            
 
             // Get the visits from the Google Analytics API
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                dimensions,
-                null,
-                new[] { AnalyticsDimension.Year }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = dimensions,
+                Sorting = new AnalyticsSortOptions().AddAscending(AnalyticsDimension.Year)
+            });
 
             //Store API result in our new object along with chart data
             var visitsMonthResult = ChartHelper.GetLineChartData(data);   //Add chart data to device result via Helper
@@ -130,15 +128,13 @@ namespace Analytics.Controllers
                  endDate = DateTime.Now;
 
             // Get the visits from the Google Analytics API
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new [] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.PagePath },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.PagePath,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             // Return the data as JSON
             return data;
@@ -157,15 +153,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Source },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.Source,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             // Return the data as JSON
             return data;
@@ -187,15 +181,13 @@ namespace Analytics.Controllers
 
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Keyword },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.Keyword,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var keywordsResult          = new StatsApiResult();
@@ -219,15 +211,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] {AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] {AnalyticsDimension.Browser },
-                null,
-                new []{ "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.Browser,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var browsersResult          = new StatsApiResult();
@@ -251,15 +241,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Browser, AnalyticsDimension.BrowserVersion },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.Browser + AnalyticsDimension.BrowserVersion,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var browserVersionsResult       = new StatsApiResult();
@@ -283,15 +271,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.DeviceCategory },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.DeviceCategory,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var deviceResult        = new StatsApiResult();
@@ -315,15 +301,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.MobileDeviceBranding, AnalyticsDimension.MobileDeviceModel },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.MobileDeviceBranding + AnalyticsDimension.MobileDeviceModel,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var devicesResult = new StatsApiResult();
@@ -348,15 +332,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.SocialNetwork },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.SocialNetwork,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var socialResult       = new StatsApiResult();
@@ -380,15 +362,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.OperatingSystem },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.OperatingSystem,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var osResult        = new StatsApiResult();
@@ -412,15 +392,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.OperatingSystem, AnalyticsDimension.OperatingSystemVersion },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.OperatingSystem + AnalyticsDimension.OperatingSystemVersion,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var osVersionResult         = new StatsApiResult();
@@ -446,15 +424,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.ScreenResolution },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.ScreenResolution,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             // Return the data as JSON
             return data;
@@ -473,15 +449,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Country },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.Country,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             //Store API result in our new object along with chart data
             var countryResult       = new StatsApiResult();
@@ -505,15 +479,13 @@ namespace Analytics.Controllers
                 endDate = DateTime.Now;
             //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
 
-            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(
-                profile,
-                startDate.Value,
-                endDate.Value,
-                new[] { AnalyticsMetrics.Visits, AnalyticsMetrics.Pageviews },
-                new[] { AnalyticsDimension.Language },
-                null,
-                new[] { "-" + AnalyticsMetrics.Visits }
-            );
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Visits + AnalyticsMetric.Pageviews,
+                Dimensions = AnalyticsDimension.Language,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Visits)
+            });
 
             // Return the data as JSON
             return data;
