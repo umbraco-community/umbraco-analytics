@@ -1,6 +1,6 @@
-/*! umbraco - v7.0.0-Beta - 2013-11-21
+/*! umbraco - v7.0.0-Beta - 2014-01-20
  * https://github.com/umbraco/umbraco-cms/tree/7.0.0
- * Copyright (c) 2013 Umbraco HQ;
+ * Copyright (c) 2014 Umbraco HQ;
  * Licensed MIT
  */
 
@@ -30,8 +30,10 @@ function authResource($q, $http, umbRequestHelper, angularHelper) {
                 $http.post(
                     umbRequestHelper.getApiUrl(
                         "authenticationApiBaseUrl",
-                        "PostLogin",
-                        [{ username: username }, { password: password }])),
+                        "PostLogin"), {
+                            username: username,
+                            password: password
+                        }),
                 'Login failed for user ' + username);
         },
         
@@ -306,7 +308,7 @@ function contentResource($q, $http, umbDataFormatter, umbRequestHelper) {
          */
         emptyRecycleBin: function() {
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "contentApiBaseUrl",
                         "EmptyRecycleBin")),
@@ -335,7 +337,7 @@ function contentResource($q, $http, umbDataFormatter, umbRequestHelper) {
          */
         deleteById: function(id) {
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "contentApiBaseUrl",
                         "DeleteById",
@@ -909,7 +911,7 @@ function dataTypeResource($q, $http, umbDataFormatter, umbRequestHelper) {
          *        alert('its gone!');
          *    });
          * </pre> 
-         * 
+         *  
          * @param {String} editorAlias string alias of editor type to retrive prevalues configuration for
          * @param {Int} id id of datatype to retrieve prevalues for        
          * @returns {Promise} resourcePromise object.
@@ -927,7 +929,7 @@ function dataTypeResource($q, $http, umbDataFormatter, umbRequestHelper) {
                        "dataTypeApiBaseUrl",
                        "GetPreValues",
                        [{ editorAlias: editorAlias }, { dataTypeId: dataTypeId }])),
-               'Failed to retreive pre values for editor id ' + editorId);
+               'Failed to retreive pre values for editor alias ' + editorAlias);
         },
 
         /**
@@ -1029,7 +1031,7 @@ function dataTypeResource($q, $http, umbDataFormatter, umbRequestHelper) {
          */
         deleteById: function(id) {
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "dataTypeApiBaseUrl",
                         "DeleteById",
@@ -1397,7 +1399,7 @@ function legacyResource($q, $http, umbRequestHelper) {
             } 
 
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "legacyApiBaseUrl",
                         "DeleteLegacyItem",
@@ -1568,7 +1570,17 @@ function macroResource($q, $http, umbRequestHelper) {
             var query = "macroAlias=" + macroAlias + "&pageId=" + pageId;
             if (macroParamDictionary) {
                 var counter = 0;
-                _.each(macroParamDictionary, function(val, key) {
+                _.each(macroParamDictionary, function (val, key) {
+                    //check for null
+                    val = val ? val : "";
+                    //need to detect if the val is a string or an object
+                    if (!angular.isString(val)) {
+                        //if it's not a string we'll send it through the json serializer
+                        var json = angular.toJson(val);
+                        //then we need to url encode it so that it's safe
+                        val = encodeURIComponent(json);
+                    }                    
+
                     query += "&macroParams[" + counter + "].key=" + key + "&macroParams[" + counter + "].value=" + val;
                     counter++;
                 });
@@ -1752,7 +1764,7 @@ function mediaResource($q, $http, umbDataFormatter, umbRequestHelper) {
          */
         deleteById: function(id) {
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "mediaApiBaseUrl",
                         "DeleteById",
@@ -2004,7 +2016,7 @@ function mediaResource($q, $http, umbDataFormatter, umbRequestHelper) {
          */
         emptyRecycleBin: function() {
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "mediaApiBaseUrl",
                         "EmptyRecycleBin")),
@@ -2137,7 +2149,7 @@ function memberResource($q, $http, umbDataFormatter, umbRequestHelper) {
          */
         deleteByKey: function (key) {
             return umbRequestHelper.resourcePromise(
-                $http.delete(
+                $http.post(
                     umbRequestHelper.getApiUrl(
                         "memberApiBaseUrl",
                         "DeleteByKey",

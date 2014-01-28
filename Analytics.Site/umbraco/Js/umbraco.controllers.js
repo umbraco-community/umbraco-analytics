@@ -1,11 +1,43 @@
-/*! umbraco - v7.0.0-Beta - 2013-11-21
+/*! umbraco - v7.0.0-Beta - 2014-01-20
  * https://github.com/umbraco/umbraco-cms/tree/7.0.0
- * Copyright (c) 2013 Umbraco HQ;
+ * Copyright (c) 2014 Umbraco HQ;
  * Licensed MIT
  */
 
 (function() { 
 
+
+/**
+ * @ngdoc controller
+ * @name Umbraco.MainController
+ * @function
+ * 
+ * @description
+ * The controller for the AuthorizeUpgrade login page
+ * 
+ */
+function AuthorizeUpgradeController($scope, $window) {
+    
+    //Add this method to the scope - this method will be called by the login dialog controller when the login is successful
+    // then we'll handle the redirect.
+    $scope.submit = function (event) {
+
+        var qry = $window.location.search.trimStart("?").split("&");
+        var redir = _.find(qry, function(item) {
+            return item.startsWith("redir=");
+        });
+        if (redir) {
+            $window.location = decodeURIComponent(redir.split("=")[1]);
+        }
+        else {
+            $window.location = "/";
+        }
+        
+    };
+
+}
+
+angular.module('umbraco').controller("Umbraco.AuthorizeUpgradeController", AuthorizeUpgradeController);
 /**
  * @ngdoc controller
  * @name Umbraco.DashboardController
@@ -75,7 +107,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.ContentPickerController",
 		args.event.preventDefault();
 		args.event.stopPropagation();
 
-		eventsService.publish("Umbraco.Dialogs.ContentPickerController.Select", args);
+		eventsService.emit("dialogs.contentPicker.select", args);
 	    
 		if (dialogOptions && dialogOptions.multiPicker) {
 
@@ -108,6 +140,8 @@ angular.module("umbraco").controller("Umbraco.Dialogs.ContentPickerController",
 angular.module("umbraco")
     .controller("Umbraco.Dialogs.HelpController", function ($scope, $location, $routeParams, helpService, userService) {
         $scope.section = $routeParams.section;
+        $scope.version = Umbraco.Sys.ServerVariables.application.version + " assembly: " + Umbraco.Sys.ServerVariables.application.assemblyVersion;
+        
         if(!$scope.section){
             $scope.section ="content";
         }
@@ -320,7 +354,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.LegacyDeleteController", L
 
 //used for the media picker dialog
 angular.module("umbraco").controller("Umbraco.Dialogs.LinkPickerController",
-	function ($scope, eventsService, entityResource, contentResource, $log) {
+	function ($scope, eventsService, dialogService, entityResource, contentResource, mediaHelper, $log) {
 	var dialogOptions = $scope.$parent.dialogOptions;
 	
 	$scope.dialogTreeEventHandler = $({});
@@ -346,11 +380,20 @@ angular.module("umbraco").controller("Umbraco.Dialogs.LinkPickerController",
 		}
 	}
 
+	$scope.switchToMediaPicker = function(){
+		dialogService.mediaPicker({callback: function(media){
+					$scope.target.id = undefined;
+					$scope.target.name = media.name;
+					$scope.target.url = mediaHelper.getMediaPropertyValue({mediaModel: media});
+				}});
+	};
+
+
 	$scope.dialogTreeEventHandler.bind("treeNodeSelect", function(ev, args){
 		args.event.preventDefault();
 		args.event.stopPropagation();
 
-		eventsService.publish("Umbraco.Dialogs.LinkPickerController.Select", args);
+		eventsService.emit("dialogs.linkPicker.select", args);
 	    
 		var c = $(args.event.target.parentElement);
 
@@ -362,7 +405,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.LinkPickerController",
 		    }
 
 		    $scope.selectedEl = c;
-		    $scope.target = args.node;
+		    $scope.target.id = args.node.id;
 		    $scope.target.name = args.node.name;
 
 		    $scope.selectedEl.find("i.umb-tree-icon")
@@ -387,7 +430,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.LinkPickerController",
 
 	});
 });
-angular.module("umbraco").controller("Umbraco.Dialogs.LoginController", function ($scope, userService, legacyJsLoader, $routeParams, $window) {
+angular.module("umbraco").controller("Umbraco.Dialogs.LoginController", function ($scope, localizationService, userService) {
     
     /**
      * @ngdoc function
@@ -399,9 +442,11 @@ angular.module("umbraco").controller("Umbraco.Dialogs.LoginController", function
      * signs the user in
      */
     var d = new Date();
-    var weekday = new Array("Super Sunday", "Manic Monday", "Tremendous Tuesday", "Wonderful Wednesday", "Thunder Thursday", "Friendly Friday", "Shiny Saturday");
+    //var weekday = new Array("Super Sunday", "Manic Monday", "Tremendous Tuesday", "Wonderful Wednesday", "Thunder Thursday", "Friendly Friday", "Shiny Saturday");
+    localizationService.localize("login_greeting"+d.getDay()).then(function(label){
+        $scope.greeting = label;
+    }); // weekday[d.getDay()];
     
-    $scope.today = weekday[d.getDay()];
     $scope.errorMsg = "";
     
     $scope.loginSubmit = function (login, password) {
@@ -422,7 +467,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.LoginController", function
 
         userService.authenticate(login, password)
             .then(function (data) {               
-                $scope.submit(true);                
+                $scope.submit(true);
             }, function (reason) {
                 $scope.errorMsg = reason.errorMsg;
                 
@@ -464,7 +509,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.MacroPickerController", fu
 //used for the media picker dialog
 angular.module("umbraco")
     .controller("Umbraco.Dialogs.MediaPickerController",
-        function($scope, mediaResource, umbRequestHelper, entityResource, $log, imageHelper, eventsService, treeService) {
+        function ($scope, mediaResource, umbRequestHelper, entityResource, $log, imageHelper, eventsService, treeService, $cookies) {
 
             var dialogOptions = $scope.$parent.dialogOptions;
             $scope.onlyImages = dialogOptions.onlyImages;
@@ -557,7 +602,7 @@ angular.module("umbraco")
                 if (image.contentTypeAlias.toLowerCase() == 'folder' && !select) {
                     $scope.gotoFolder(image);
                 }else{
-                    eventsService.publish("Umbraco.Dialogs.MediaPickerController.Select", image);
+                    eventsService.emit("dialogs.mediaPicker.select", image);
                     
                     if ($scope.multiPicker) {
                         $scope.select(image);
@@ -583,7 +628,7 @@ angular.module("umbraco")
                 if (image.contentTypeAlias.toLowerCase() == 'folder') {
                     $scope.gotoFolder(image);
                 }else{
-                    eventsService.publish("Umbraco.Dialogs.MediaPickerController.Select", image);
+                    eventsService.emit("dialogs.mediaPicker.select", image);
                     
                     if ($scope.multiPicker) {
                         $scope.select(image);
@@ -639,7 +684,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.MemberGroupPickerControlle
             args.event.stopPropagation();
 
 
-            eventsService.publish("Umbraco.Dialogs.MemberGroupPickerController.Select", args);
+            eventsService.emit("dialogs.memberGroupPicker.select", args);
             
             //This is a tree node, so we don't have an entity to pass in, it will need to be looked up
             //from the server in this method.
@@ -728,7 +773,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.MemberPickerController",
                 return;
             }
 
-            eventsService.publish("Umbraco.Dialogs.MemberPickerController.Select", args);
+            eventsService.emit("dialogs.memberPickerController", args);
             
             //This is a tree node, so we don't have an entity to pass in, it will need to be looked up
             //from the server in this method.
@@ -1002,7 +1047,7 @@ angular.module("umbraco").controller("Umbraco.Dialogs.TreePickerController",
 		args.event.preventDefault();
 		args.event.stopPropagation();
 
-		eventsService.publish("Umbraco.Dialogs.TreePickerController.Select", args);
+		eventsService.emit("dialogs.treePickerController.select", args);
 	    
 		if (args.node.filtered) {
 		    return;
@@ -1114,27 +1159,19 @@ angular.module("umbraco").controller("Umbraco.Dialogs.YsodController", YsodContr
  * 
 */
 function LegacyController($scope, $routeParams, $element) {
-
 	$scope.legacyPath = decodeURIComponent($routeParams.url);
-    
-    //$scope.$on('$routeChangeSuccess', function () {
-    //    var asdf = $element;
-    //});
 }
 
 angular.module("umbraco").controller('Umbraco.LegacyController', LegacyController);
 /** This controller is simply here to launch the login dialog when the route is explicitly changed to /login */
-angular.module('umbraco').controller("Umbraco.LoginController", function ($scope, userService, $location) {
+angular.module('umbraco').controller("Umbraco.LoginController", function (eventsService, $scope, userService, $location) {
 
-    userService._showLoginDialog();
-    
-    //when a user is authorized redirect - this will only be handled here when we are actually on the /login route
-    $scope.$on("authenticated", function(evt, data) {
-    	//reset the avatar
-        $scope.avatar = "assets/img/application/logo.png";
-        $location.path("/").search("");
+    userService._showLoginDialog(); 
+       
+    eventsService.on("app.ready", function(){
+    	$scope.avatar = "assets/img/application/logo.png";
+    	$location.path("/").search("");
     });
-
 });
 
 /**
@@ -1146,10 +1183,8 @@ angular.module('umbraco').controller("Umbraco.LoginController", function ($scope
  * The main application controller
  * 
  */
-function MainController($scope, $rootScope, $location, $routeParams, $timeout, $http, $log, appState, treeService, notificationsService, userService, navigationService, historyService, legacyJsLoader, updateChecker) {
+function MainController($scope, $rootScope, $location, $routeParams, $timeout, $http, $log, appState, treeService, notificationsService, userService, navigationService, historyService, updateChecker, assetsService, eventsService, umbRequestHelper) {
 
-    var legacyTreeJsLoaded = false;
-    
     //the null is important because we do an explicit bool check on this in the view
     //the avatar is by default the umbraco logo    
     $scope.authenticated = null;
@@ -1185,28 +1220,18 @@ function MainController($scope, $rootScope, $location, $routeParams, $timeout, $
             return;
         }
 
-        $rootScope.$emit("closeDialogs", event);
+        eventsService.emit("app.closeDialogs", event);
     };
 
     //when a user logs out or timesout
-    $scope.$on("notAuthenticated", function() {
+    eventsService.on("app.notAuthenticated", function() {
         $scope.authenticated = null;
         $scope.user = null;
     });
     
-    //when a user is authorized setup the data
-    $scope.$on("authenticated", function (evt, data) {
-
-        //We need to load in the legacy tree js but only once no matter what user has logged in 
-        if (!legacyTreeJsLoaded) {
-            legacyJsLoader.loadLegacyTreeJs($scope).then(
-                function (result) {
-                    legacyTreeJsLoaded = true;
-
-                    //TODO: We could wait for this to load before running the UI ?
-                });
-        }
-
+    //when the app is read/user is logged in, setup the data
+    eventsService.on("app.ready", function (evt, data) {
+        
         $scope.authenticated = data.authenticated;
         $scope.user = data.user;
 
@@ -1257,7 +1282,6 @@ function MainController($scope, $rootScope, $location, $routeParams, $timeout, $
 //register it
 angular.module('umbraco').controller("Umbraco.MainController", MainController);
 
-
 /**
  * @ngdoc controller
  * @name Umbraco.NavigationController
@@ -1268,7 +1292,7 @@ angular.module('umbraco').controller("Umbraco.MainController", MainController);
  * 
  * @param {navigationService} navigationService A reference to the navigationService
  */
-function NavigationController($scope, $rootScope, $location, $log, $routeParams, $timeout, appState, navigationService, keyboardService, dialogService, historyService, sectionResource, angularHelper) {
+function NavigationController($scope, $rootScope, $location, $log, $routeParams, $timeout, appState, navigationService, keyboardService, dialogService, historyService, eventsService, sectionResource, angularHelper) {
 
     //TODO: Need to think about this and an nicer way to acheive what this is doing.
     //the tree event handler i used to subscribe to the main tree click events
@@ -1301,20 +1325,20 @@ function NavigationController($scope, $rootScope, $location, $log, $routeParams,
     //trigger dialods with a hotkey:
     //TODO: Unfortunately this will also close the login dialog.
     keyboardService.bind("esc", function () {
-        $rootScope.$emit("closeDialogs");
+        eventsService.emit("app.closeDialogs");
     });
 
     $scope.selectedId = navigationService.currentId;
 
     //Listen for global state changes
-    $scope.$on("appState.globalState.changed", function (e, args) {
+    eventsService.on("appState.globalState.changed", function (e, args) {
         if (args.key === "showNavigation") {
             $scope.showNavigation = args.value;
         }
     });
 
     //Listen for menu state changes
-    $scope.$on("appState.menuState.changed", function (e, args) {
+    eventsService.on("appState.menuState.changed", function (e, args) {
         if (args.key === "showMenuDialog") {
             $scope.showContextMenuDialog = args.value;
         }
@@ -1333,7 +1357,7 @@ function NavigationController($scope, $rootScope, $location, $log, $routeParams,
     });
 
     //Listen for section state changes
-    $scope.$on("appState.sectionState.changed", function (e, args) {
+    eventsService.on("appState.sectionState.changed", function (e, args) {
         //section changed
         if (args.key === "currentSection") {
             $scope.currentSection = args.value;
@@ -1345,7 +1369,7 @@ function NavigationController($scope, $rootScope, $location, $log, $routeParams,
     });
 
     //This reacts to clicks passed to the body element which emits a global call to close all dialogs
-    $rootScope.$on("closeDialogs", function (event) {
+    eventsService.on("app.closeDialogs", function (event) {
         if (appState.getGlobalState("stickyNavigation")) {
             navigationService.hideNavigation();
             //TODO: don't know why we need this? - we are inside of an angular event listener.
@@ -1354,12 +1378,12 @@ function NavigationController($scope, $rootScope, $location, $log, $routeParams,
     });
 
     //when a user logs out or timesout
-    $scope.$on("notAuthenticated", function () {
+    eventsService.on("app.notAuthenticated", function () {
         $scope.authenticated = false;
     });
 
-    //when a user is authorized setup the data
-    $scope.$on("authenticated", function (evt, data) {
+    //when the application is ready and the user is authorized setup the data
+    eventsService.on("app.ready", function (evt, data) {
         $scope.authenticated = true;
     });
 
@@ -1417,11 +1441,83 @@ angular.module('umbraco').controller("Umbraco.NavigationController", NavigationC
  * Controls the search functionality in the site
  *  
  */
-function SearchController($scope, searchService, $log, navigationService) {
+function SearchController($scope, searchService, $log, $location, navigationService) {
 
     $scope.searchTerm = null;
     $scope.searchResults = [];
     $scope.isSearching = false;
+    $scope.selectedResult = -1;
+
+
+    $scope.navigateResults = function(ev){
+        //38: up 40: down, 13: enter
+
+        switch(ev.keyCode){
+            case 38:
+                    iterateResults(true);
+                break;
+            case 40:
+                    iterateResults(false);
+                break;
+            case 13:
+                $location.path($scope.selectedItem.editorPath);
+                navigationService.hideSearch();
+                break;
+        }
+    };
+
+
+    var group = undefined;
+    var groupIndex = -1;
+    var itemIndex = -1;
+    $scope.selectedItem = undefined;
+        
+
+    function iterateResults(up){
+        //default group
+        if(!group){
+            group = $scope.groups[0];
+            groupIndex = 0;
+        }
+
+        if(up){
+            if(itemIndex === 0){
+                if(groupIndex === 0){
+                    gotoGroup($scope.groups.length-1, true);
+                }else{
+                    gotoGroup(groupIndex-1, true);
+                }
+            }else{
+                gotoItem(itemIndex-1);
+            }
+        }else{
+            if(itemIndex < group.results.length-1){
+                gotoItem(itemIndex+1);
+            }else{
+                if(groupIndex === $scope.groups.length-1){
+                    gotoGroup(0);
+                }else{
+                    gotoGroup(groupIndex+1);
+                }
+            }
+        }
+    }
+
+    function gotoGroup(index, up){
+        groupIndex = index;
+        group = $scope.groups[groupIndex];
+        
+        if(up){
+            gotoItem(group.results.length-1);
+        }else{
+            gotoItem(0); 
+        }
+    }
+
+    function gotoItem(index){
+        itemIndex = index;
+        $scope.selectedItem = group.results[itemIndex];
+    }
 
     //watch the value change but don't do the search on every change - that's far too many queries
     // we need to debounce
@@ -1429,12 +1525,14 @@ function SearchController($scope, searchService, $log, navigationService) {
         if ($scope.searchTerm) {
             $scope.isSearching = true;
             navigationService.showSearch();
+            $scope.selectedItem = undefined;
             searchService.searchAll({ term: $scope.searchTerm }).then(function (result) {
-                $scope.searchResults = result;
+                $scope.groups = _.filter(result, function(group){return group.results.length > 0;});
             });
         }else{
             $scope.isSearching = false;
             navigationService.hideSearch();
+            $scope.selectedItem = undefined;
         }
     }, 100));
 
@@ -1444,62 +1542,65 @@ angular.module('umbraco').controller("Umbraco.SearchController", SearchControlle
 angular.module("umbraco")
 	.controller("Umbraco.Editors.Content.CopyController",
 	function ($scope, eventsService, contentResource, navigationService, appState, treeService) {
-	var dialogOptions = $scope.$parent.dialogOptions;
-	
-	$scope.dialogTreeEventHandler = $({});
-	var node = dialogOptions.currentNode;
 
-	$scope.dialogTreeEventHandler.bind("treeNodeSelect", function(ev, args){
-		args.event.preventDefault();
-		args.event.stopPropagation();
+	    var dialogOptions = $scope.$parent.dialogOptions;
 
-		eventsService.publish("Umbraco.Editors.Content.CopyController.Select", args);
-	    
-		var c = $(args.event.target.parentElement);
-		if ($scope.selectedEl) {
-		    $scope.selectedEl.find(".temporary").remove();
-		    $scope.selectedEl.find("i.umb-tree-icon").show();
-		}
+	    $scope.relateToOriginal = false;
+	    $scope.dialogTreeEventHandler = $({});
 
-		var temp = "<i class='icon umb-tree-icon sprTree icon-check blue temporary'></i>";
-		var icon = c.find("i.umb-tree-icon");
-		if (icon.length > 0) {
-		    icon.hide().after(temp);
-		} else {
-		    c.prepend(temp);
-		}
+	    var node = dialogOptions.currentNode;
 
-		$scope.target = args.node;
-		$scope.selectedEl = c;
+	    $scope.dialogTreeEventHandler.bind("treeNodeSelect", function (ev, args) {
+	        args.event.preventDefault();
+	        args.event.stopPropagation();
 
+	        eventsService.emit("editors.content.copyController.select", args);
+
+	        var c = $(args.event.target.parentElement);
+	        if ($scope.selectedEl) {
+	            $scope.selectedEl.find(".temporary").remove();
+	            $scope.selectedEl.find("i.umb-tree-icon").show();
+	        }
+
+	        var temp = "<i class='icon umb-tree-icon sprTree icon-check blue temporary'></i>";
+	        var icon = c.find("i.umb-tree-icon");
+	        if (icon.length > 0) {
+	            icon.hide().after(temp);
+	        } else {
+	            c.prepend(temp);
+	        }
+
+	        $scope.target = args.node;
+	        $scope.selectedEl = c;
+
+	    });
+
+	    $scope.copy = function () {
+	        contentResource.copy({ parentId: $scope.target.id, id: node.id, relateToOriginal: $scope.relateToOriginal })
+                .then(function (path) {
+                    $scope.error = false;
+                    $scope.success = true;
+
+                    //get the currently edited node (if any)
+                    var activeNode = appState.getTreeState("selectedNode");
+
+                    //we need to do a double sync here: first sync to the copied content - but don't activate the node,
+                    //then sync to the currenlty edited content (note: this might not be the content that was copied!!)
+
+                    navigationService.syncTree({ tree: "content", path: path, forceReload: true, activate: false }).then(function (args) {
+                        if (activeNode) {
+                            var activeNodePath = treeService.getPath(activeNode).join();
+                            //sync to this node now - depending on what was copied this might already be synced but might not be
+                            navigationService.syncTree({ tree: "content", path: activeNodePath, forceReload: false, activate: true });
+                        }
+                    });
+
+                }, function (err) {
+                    $scope.success = false;
+                    $scope.error = err;
+                });
+	    };
 	});
-
-	$scope.copy = function(){
-		contentResource.copy({parentId: $scope.target.id, id: node.id, relateToOriginal: $scope.relate})
-			.then(function(path){
-				$scope.error = false;
-				$scope.success = true;
-
-                //get the currently edited node (if any)
-			    var activeNode = appState.getTreeState("selectedNode");
-			    
-			    //we need to do a double sync here: first sync to the copied content - but don't activate the node,
-			    //then sync to the currenlty edited content (note: this might not be the content that was copied!!)
-
-			    navigationService.syncTree({ tree: "content", path: path, forceReload: true, activate: false }).then(function(args) {
-			        if (activeNode) {
-			            var activeNodePath = treeService.getPath(activeNode).join();
-			            //sync to this node now - depending on what was copied this might already be synced but might not be
-			            navigationService.syncTree({ tree: "content", path: activeNodePath, forceReload: false, activate: true });
-			        }
-			    });
-
-			},function(err){
-				$scope.success = false;
-				$scope.error = err;
-			});
-	};
-});
 /**
  * @ngdoc controller
  * @name Umbraco.Editors.Content.CreateController
@@ -1564,7 +1665,7 @@ angular.module("umbraco").controller("Umbraco.Editors.Content.DeleteController",
  * @description
  * The controller for the content editor
  */
-function ContentEditController($scope, $routeParams, $q, $timeout, $window, appState, contentResource, navigationService, notificationsService, angularHelper, serverValidationManager, contentEditingHelper, treeService, fileManager, formHelper, umbRequestHelper, keyboardService, umbModelMapper, editorState) {
+function ContentEditController($scope, $routeParams, $q, $timeout, $window, appState, contentResource, navigationService, notificationsService, angularHelper, serverValidationManager, contentEditingHelper, treeService, fileManager, formHelper, umbRequestHelper, keyboardService, umbModelMapper, editorState, $http) {
 
     //setup scope vars
     $scope.defaultButton = null;
@@ -1665,9 +1766,31 @@ function ContentEditController($scope, $routeParams, $q, $timeout, $window, appS
         }
     }
     
+    /** Syncs the content item to it's tree node - this occurs on first load and after saving */
+    function syncTreeNode(content, path, initialLoad) {        
+
+        //If this is a child of a list view then we can't actually sync the real tree
+        if (!$scope.content.isChildOfListView) {
+            navigationService.syncTree({ tree: "content", path: path.split(","), forceReload: initialLoad !== true }).then(function (syncArgs) {
+                $scope.currentNode = syncArgs.node;
+            });
+        }
+        else if (initialLoad === true) {
+            //if this is a child of a list view and it's the initial load of the editor, we need to get the tree node 
+            // from the server so that we can load in the actions menu.
+            umbRequestHelper.resourcePromise(
+                $http.get(content.treeNodeUrl),
+                'Failed to retreive data for child node ' + content.id).then(function(node) {
+                    $scope.currentNode = node;
+                });
+        }
+    }
+
     /** This is a helper method to reduce the amount of code repitition for actions: Save, Publish, SendToPublish */
     function performSave(args) {
         var deferred = $q.defer();
+
+        $scope.busy = true;
 
         if (formHelper.submitForm({ scope: $scope, statusMessage: args.statusMessage })) {
 
@@ -1683,12 +1806,11 @@ function ContentEditController($scope, $routeParams, $q, $timeout, $window, appS
                     });
 
                     editorState.set($scope.content);
+                    $scope.busy = false;
 
                     configureButtons(data);
 
-                    navigationService.syncTree({ tree: "content", path: data.path.split(","), forceReload: true }).then(function (syncArgs) {
-                        $scope.currentNode = syncArgs.node;
-                    });
+                    syncTreeNode($scope.content, data.path);
 
                     deferred.resolve(data);
                     
@@ -1701,11 +1823,13 @@ function ContentEditController($scope, $routeParams, $q, $timeout, $window, appS
                     });
 
                     editorState.set($scope.content);
+                    $scope.busy = false;
 
                     deferred.reject(err);
                 });
         }
         else {
+            $scope.busy = false;
             deferred.reject();
         }
 
@@ -1741,9 +1865,8 @@ function ContentEditController($scope, $routeParams, $q, $timeout, $window, appS
                 // if there are any and then clear them so the collection no longer persists them.
                 serverValidationManager.executeAndClearAllSubscriptions();
 
-                navigationService.syncTree({ tree: "content", path: data.path.split(",") }).then(function(syncArgs) {
-                    $scope.currentNode = syncArgs.node;
-                });
+                syncTreeNode($scope.content, data.path, true);
+
             });
     }
 
@@ -1767,9 +1890,8 @@ function ContentEditController($scope, $routeParams, $q, $timeout, $window, appS
 
                     configureButtons(data);
 
-                    navigationService.syncTree({ tree: "content", path: data.path.split(","), forceReload: true }).then(function (syncArgs) {
-                        $scope.currentNode = syncArgs.node;
-                    });
+                    syncTreeNode($scope.content, data.path);
+
                 });
         }
         
@@ -1792,17 +1914,22 @@ function ContentEditController($scope, $routeParams, $q, $timeout, $window, appS
                 $scope.save().then(function(data){
                       $window.open('dialogs/preview.aspx?id='+data.id,'umbpreview');  
                 });
-            }else{
+            }
+            else {
                 $window.open('dialogs/preview.aspx?id='+content.id,'umbpreview');
             }    
     };
     
     /** this method is called for all action buttons and then we proxy based on the btn definition */
     $scope.performAction = function(btn) {
+
         if (!btn || !angular.isFunction(btn.handler)) {
             throw "btn.handler must be a function reference";
         }
-        btn.handler.apply(this);
+        
+        if(!$scope.busy){
+            btn.handler.apply(this);    
+        }
     };
 
 }
@@ -1852,7 +1979,7 @@ angular.module("umbraco").controller("Umbraco.Editors.Content.MoveController",
 		args.event.preventDefault();
 		args.event.stopPropagation();
 
-		eventsService.publish("Umbraco.Editors.Content.MoveController.Select", args);
+		eventsService.emit("editors.content.moveController.select", args);
 	    
 		var c = $(args.event.target.parentElement);
 
@@ -1991,7 +2118,7 @@ function startupLatestEditsController($scope) {
 }
 angular.module("umbraco").controller("Umbraco.Dashboard.StartupLatestEditsController", startupLatestEditsController);
 
-function MediaFolderBrowserDashboardController($rootScope, $scope, assetsService, $routeParams, $timeout, $element, $location, umbRequestHelper, mediaResource, imageHelper) {
+function MediaFolderBrowserDashboardController($rootScope, $scope, assetsService, $routeParams, $timeout, $element, $location, umbRequestHelper,navigationService, mediaResource, $cookies) {
         var dialogOptions = $scope.$parent.dialogOptions;
 
         $scope.filesUploading = [];
@@ -2020,6 +2147,7 @@ function MediaFolderBrowserDashboardController($rootScope, $scope, assetsService
             $scope.loadChildren($scope.options.formData.currentFolder);
             $scope.queue = [];
             $scope.filesUploading = [];
+            navigationService.reloadSection("media");
         });
 
         $scope.$on('fileuploadprocessalways', function(e,data) {
@@ -2340,12 +2468,32 @@ angular.module("umbraco").controller("Umbraco.Editors.Media.DeleteController", M
  * @description
  * The controller for the media editor
  */
-function mediaEditController($scope, $routeParams, appState, mediaResource, navigationService, notificationsService, angularHelper, serverValidationManager, contentEditingHelper, fileManager, treeService, formHelper, umbModelMapper, editorState) {
+function mediaEditController($scope, $routeParams, appState, mediaResource, navigationService, notificationsService, angularHelper, serverValidationManager, contentEditingHelper, fileManager, treeService, formHelper, umbModelMapper, editorState, umbRequestHelper, $http) {
 
     //setup scope vars
     $scope.nav = navigationService;
     $scope.currentSection = appState.getSectionState("currentSection");
     $scope.currentNode = null; //the editors affiliated node
+
+    /** Syncs the content item to it's tree node - this occurs on first load and after saving */
+    function syncTreeNode(content, path, initialLoad) {
+
+        //If this is a child of a list view then we can't actually sync the real tree
+        if (!$scope.content.isChildOfListView) {
+            navigationService.syncTree({ tree: "media", path: path.split(","), forceReload: initialLoad !== true }).then(function (syncArgs) {
+                $scope.currentNode = syncArgs.node;
+            });
+        }
+        else if (initialLoad === true) {
+            //if this is a child of a list view and it's the initial load of the editor, we need to get the tree node 
+            // from the server so that we can load in the actions menu.
+            umbRequestHelper.resourcePromise(
+                $http.get(content.treeNodeUrl),
+                'Failed to retreive data for child node ' + content.id).then(function (node) {
+                    $scope.currentNode = node;
+                });
+        }
+    }
 
     if ($routeParams.create) {
 
@@ -2371,16 +2519,16 @@ function mediaEditController($scope, $routeParams, appState, mediaResource, navi
                 // if there are any and then clear them so the collection no longer persists them.
                 serverValidationManager.executeAndClearAllSubscriptions();
 
-                navigationService.syncTree({ tree: "media", path: data.path }).then(function (syncArgs) {
-                    $scope.currentNode = syncArgs.node;
-                });
+                syncTreeNode($scope.content, data.path, true);
                 
             });
     }
     
     $scope.save = function () {
 
-        if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+        if (!$scope.busy && formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+
+            $scope.busy = true;
 
             mediaResource.save($scope.content, $routeParams.create, fileManager.getFiles())
                 .then(function(data) {
@@ -2394,10 +2542,9 @@ function mediaEditController($scope, $routeParams, appState, mediaResource, navi
                     });
 
                     editorState.set($scope.content);
+                    $scope.busy = false;
 
-                    navigationService.syncTree({ tree: "media", path: data.path, forceReload: true }).then(function (syncArgs) {
-                        $scope.currentNode = syncArgs.node;
-                    });
+                    syncTreeNode($scope.content, data.path);
 
                 }, function(err) {
 
@@ -2408,7 +2555,10 @@ function mediaEditController($scope, $routeParams, appState, mediaResource, navi
                     });
                     
                     editorState.set($scope.content);
+                    $scope.busy = false;
                 });
+        }else{
+            $scope.busy = false;
         }
         
     };
@@ -2459,7 +2609,7 @@ angular.module("umbraco").controller("Umbraco.Editors.Media.MoveController",
 		args.event.preventDefault();
 		args.event.stopPropagation();
 
-		eventsService.publish("Umbraco.Editors.Media.MoveController.Select", args);
+		eventsService.emit("editors.media.moveController.select", args);
 	    
 		var c = $(args.event.target.parentElement);
 
@@ -2647,8 +2797,10 @@ function MemberEditController($scope, $routeParams, $location, $q, $window, appS
     
     $scope.save = function() {
 
-        if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+        if (!$scope.busy && formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
             
+            $scope.busy = true;
+
             memberResource.save($scope.content, $routeParams.create, fileManager.getFiles())
                 .then(function(data) {
 
@@ -2663,7 +2815,8 @@ function MemberEditController($scope, $routeParams, $location, $q, $window, appS
                     });
                     
                     editorState.set($scope.content);
-
+                    $scope.busy = false;
+                    
                     var path = buildTreePath(data);
 
                     navigationService.syncTree({ tree: "member", path: path.split(","), forceReload: true }).then(function (syncArgs) {
@@ -2679,8 +2832,10 @@ function MemberEditController($scope, $routeParams, $location, $q, $window, appS
                     });
                     
                     editorState.set($scope.content);
-
+                    $scope.busy = false;
                 });
+        }else{
+            $scope.busy = false;
         }
         
     };
@@ -2827,20 +2982,22 @@ angular.module('umbraco')
 	
 	function($scope, dialogService, entityResource, $log, iconHelper){
 
-		if(angular.isObject($scope.model.value)){
-			$scope.model.type = $scope.model.value.type;
-			$scope.model.id = $scope.model.value.id;
-		}else{
-			$scope.model.type = "content";
-		}		
+	    if (!$scope.model) {
+	        $scope.model = {};
+	    }
+	    if (!$scope.model.value) {
+	        $scope.model.value = {
+	            type: "content"
+	        };
+	    }
 
-		if($scope.model.id && $scope.model.type !== "member"){
+		if($scope.model.value.id && $scope.model.value.type !== "member"){
 			var ent = "Document";
-			if($scope.model.type === "media"){
+			if($scope.model.value.type === "media"){
 				ent = "Media";
 			}
 			
-			entityResource.getById($scope.model.id, ent).then(function(item){
+			entityResource.getById($scope.model.value.id, ent).then(function(item){
 				item.icon = iconHelper.convertFromLegacyIcon(item.icon);
 				$scope.node = item;
 			});
@@ -2849,31 +3006,30 @@ angular.module('umbraco')
 
 		$scope.openContentPicker =function(){
 			var d = dialogService.treePicker({
-								section: $scope.model.type,
-								treeAlias: $scope.model.type,
+								section: $scope.model.value.type,
+								treeAlias: $scope.model.value.type,
 								scope: $scope, 
 								multiPicker: false,
 								callback: populate});
 		};
 
 		$scope.clear = function() {
-		    $scope.model.id = undefined;
+		    $scope.model.value.id = undefined;
 		    $scope.node = undefined;
 		};
 		
 	    $scope.$on("formSubmitting", function (ev, args) {
-	    	if($scope.model.type === "member"){
-	    		$scope.model.id = -1;
+	    	if($scope.model.value.type === "member"){
+	    		$scope.model.value.id = -1;
+	    		$scope.model.value.query = "";
 	    	}
-
-			$scope.model.value = {type: $scope.model.type, id: $scope.model.id};
 	    });
 
 		function populate(item){
 				$scope.clear();
 				item.icon = iconHelper.convertFromLegacyIcon(item.icon);
 				$scope.node = item;
-				$scope.model.id = item.id;
+				$scope.model.value.id = item.id;
 		}
 });
 function booleanEditorController($scope, $rootScope, assetsService) {
@@ -3088,6 +3244,7 @@ function ColorPickerController($scope) {
     $scope.selectItem = function (color) {
         $scope.model.value = color;
     };
+    $scope.isConfigured = $scope.model.config && $scope.model.config.items && _.keys($scope.model.config.items).length > 0;
 }
 
 angular.module("umbraco").controller("Umbraco.PropertyEditors.ColorPickerController", ColorPickerController);
@@ -3120,7 +3277,8 @@ angular.module('umbraco')
 
 		if($scope.cfg.startNode.type === "member"){
 		    $scope.cfg.entityType = "Member";		    
-		}else if ($scope.cfg.type === "media") {
+		}
+		else if ($scope.cfg.startNode.type === "media") {
 			$scope.cfg.entityType = "Media";
 		}
 
@@ -3147,39 +3305,36 @@ angular.module('umbraco')
 
 		$scope.remove =function(index){
 			$scope.renderModel.splice(index, 1);
-			$scope.ids.splice(index, 1);
-			$scope.model.value = trim($scope.ids.join(), ",");
 		};
 
 
 		$scope.add =function(item){
 			if($scope.ids.indexOf(item.id) < 0){
 				item.icon = iconHelper.convertFromLegacyIcon(item.icon);
-
-				$scope.ids.push(item.id);
 				$scope.renderModel.push({name: item.name, id: item.id, icon: item.icon});
-				$scope.model.value = trim($scope.ids.join(), ",");
 			}	
 		};
 
 	    $scope.clear = function() {
-	        $scope.model.value = "";
 	        $scope.renderModel = [];
-	        $scope.ids = [];
-	    };
-	   
-	    $scope.sortableOptions = {
-	        update: function(e, ui) {
-	        	var r = [];
-	        	angular.forEach($scope.renderModel, function(value, key){
-	        		r.push(value.id);
-	        	});
-
-	        	$scope.ids = r;
-	        	$scope.model.value = trim($scope.ids.join(), ",");
-	        }
 	    };
 
+	    //We need to watch our renderModel so that we can update the underlying $scope.model.value properly, this is required
+	    // because the ui-sortable doesn't dispatch an event after the digest of the sort operation. Any of the events for UI sortable
+	    // occur after the DOM has updated but BEFORE the digest has occured so the model has NOT changed yet - it even states so in the docs.
+	    // In their source code there is no event so we need to just subscribe to our model changes here.
+        //This also makes it easier to manage models, we update one and the rest will just work.
+	    $scope.$watch(function() {
+	        //return the joined Ids as a string to watch
+	        return _.map($scope.renderModel, function(i) {
+	            return i.id;
+	        }).join();
+	    }, function (newVal) {
+	        $scope.ids = _.map($scope.renderModel, function (i) {
+	            return i.id;
+	        });
+	        $scope.model.value = trim($scope.ids.join(), ",");
+	    });
 
 	    $scope.$on("formSubmitting", function (ev, args) {
 			$scope.model.value = trim($scope.ids.join(), ",");
@@ -3368,7 +3523,7 @@ function fileUploadController($scope, $element, $compile, imageHelper, fileManag
     /** Clears the file collections when content is saving (if we need to clear) or after saved */
     function clearFiles() {        
         //clear the files collection (we don't want to upload any!)
-        fileManager.setFiles($scope.id, []);
+        fileManager.setFiles($scope.model.alias, []);
         //clear the current files
         $scope.files = [];
     }
@@ -3407,7 +3562,7 @@ function fileUploadController($scope, $element, $compile, imageHelper, fileManag
         _.each($scope.persistedFiles, function (file) {
             
             var thumbnailUrl = umbRequestHelper.getApiUrl(
-                        "mediaApiBaseUrl",
+                        "imagesApiBaseUrl",
                         "GetBigThumbnail",
                         [{ originalImagePath: file.file }]);
 
@@ -3435,13 +3590,13 @@ function fileUploadController($scope, $element, $compile, imageHelper, fileManag
     $scope.$on("filesSelected", function (event, args) {
         $scope.$apply(function () {
             //set the files collection
-            fileManager.setFiles($scope.model.id, args.files);
+            fileManager.setFiles($scope.model.alias, args.files);
             //clear the current files
             $scope.files = [];
             var newVal = "";
             for (var i = 0; i < args.files.length; i++) {
                 //save the file object to the scope's files collection
-                $scope.files.push({ id: $scope.model.id, file: args.files[i] });
+                $scope.files.push({ alias: $scope.model.alias, file: args.files[i] });
                 newVal += args.files[i].name + ",";
             }
             //set clear files to false, this will reset the model too
@@ -3490,7 +3645,7 @@ angular.module("umbraco")
         };
 })
 .controller("Umbraco.PropertyEditors.FolderBrowserController",
-    function ($rootScope, $scope, assetsService, $routeParams, $timeout, $element, $location, umbRequestHelper, mediaResource, imageHelper) {
+    function ($rootScope, $scope, assetsService, $routeParams, $timeout, $element, $location, $log, umbRequestHelper, mediaResource, imageHelper, navigationService, editorState) {
         var dialogOptions = $scope.$parent.dialogOptions;
 
         $scope.creating = $routeParams.create;
@@ -3498,7 +3653,7 @@ angular.module("umbraco")
         if(!$scope.creating){
 
             $scope.filesUploading = [];
-            $scope.options = {
+            $scope.options = {                
                 url: umbRequestHelper.getApiUrl("mediaApiBaseUrl", "PostAddFile"),
                 autoUpload: true,
                 disableImageResize: /Android(?!.*Chrome)|Opera/
@@ -3521,6 +3676,14 @@ angular.module("umbraco")
 
             $scope.$on('fileuploadstop', function(event, files){
                 $scope.loadChildren($scope.options.formData.currentFolder);
+                
+                //sync the tree - don't force reload since we're not updating this particular node (i.e. its name or anything),
+                // then we'll get the resulting tree node which we can then use to reload it's children.
+                var path = editorState.current.path;
+                navigationService.syncTree({ tree: "media", path: path, forceReload: false }).then(function (syncArgs) {
+                    navigationService.reloadNode(syncArgs.node);
+                });
+
                 $scope.queue = [];
                 $scope.filesUploading = [];
             });
@@ -3723,8 +3886,8 @@ function listViewController($rootScope, $scope, $routeParams, $injector, notific
         pageSize: 10,
         pageNumber: 1,
         filter: '',
-        orderBy: 'Id',
-        orderDirection: "desc"
+        orderBy: 'SortOrder',
+        orderDirection: "asc"
     };
 
 
@@ -3946,15 +4109,18 @@ angular.module('umbraco')
 		
 		if($scope.model.value){
 			var macros = $scope.model.value.split('>');
-			angular.forEach(macros, function(syntax, key){
 
+			angular.forEach(macros, function(syntax, key){
 				if(syntax && syntax.length > 10){
 					//re-add the char we split on
 					syntax = syntax + ">";
 					var parsed = macroService.parseMacroSyntax(syntax);
+					if(!parsed){
+						parsed = {};
+					}
+					
 					parsed.syntax = syntax;
 					collectDetails(parsed);
-
 					$scope.renderModel.push(parsed);
 				}
 			});
@@ -3964,7 +4130,6 @@ angular.module('umbraco')
 		function collectDetails(macro){
 			macro.details = "";
 			if(macro.marcoParamsDictionary){
-			
 				angular.forEach((macro.marcoParamsDictionary), function(value, key){
 					macro.details += key + ": " + value + " ";	
 				});	
@@ -4082,14 +4247,14 @@ function ($scope, assetsService, dialogService, $log, imageHelper) {
 //this controller simply tells the dialogs service to open a mediaPicker window
 //with a specified callback, this callback will receive an object with a selection on it
 angular.module('umbraco').controller("Umbraco.PropertyEditors.MediaPickerController",
-    function($rootScope, $scope, dialogService, mediaResource, imageHelper, $log) {
+    function($rootScope, $scope, dialogService, mediaResource, imageHelper, $timeout) {
 
         //check the pre-values for multi-picker
         var multiPicker = $scope.model.config.multiPicker !== '0' ? true : false;
 
         function setupViewModel() {
             $scope.images = [];
-            $scope.ids = [];
+            $scope.ids = []; 
 
             if ($scope.model.value) {
                 $scope.ids = $scope.model.value.split(',');
@@ -4138,13 +4303,19 @@ angular.module('umbraco').controller("Umbraco.PropertyEditors.MediaPickerControl
 
        $scope.sortableOptions = {
            update: function(e, ui) {
-                var r = [];
-                angular.forEach($scope.renderModel, function(value, key){
-                    r.push(value.id);
-                });
+               var r = [];
+               //TODO: Instead of doing this with a half second delay would be better to use a watch like we do in the 
+               // content picker. THen we don't have to worry about setting ids, render models, models, we just set one and let the 
+               // watch do all the rest.
+                $timeout(function(){
+                    angular.forEach($scope.images, function(value, key){
+                        r.push(value.id);
+                    });
 
-                $scope.ids = r;
-                $scope.sync();
+                    $scope.ids = r;
+                    $scope.sync();
+                }, 500, false);
+                
             }
         };
 
@@ -4327,51 +4498,44 @@ angular.module('umbraco')
 
 		$scope.remove =function(index){
 			$scope.renderModel.splice(index, 1);
-			$scope.ids.splice(index, 1);
-			$scope.model.value = trim($scope.ids.join(), ",");
 		};
 
 		$scope.add =function(item){
 			if($scope.ids.indexOf(item.id) < 0){
 				item.icon = iconHelper.convertFromLegacyIcon(item.icon);
-
-				$scope.ids.push(item.id);
-				$scope.renderModel.push({name: item.name, id: item.id, icon: item.icon});
-				$scope.model.value = trim($scope.ids.join(), ",");
+				$scope.renderModel.push({name: item.name, id: item.id, icon: item.icon});				
 			}	
 		};
 
 	    $scope.clear = function() {
-	        $scope.model.value = "";
 	        $scope.renderModel = [];
-	        $scope.ids = [];
 	    };
 	   
-
-	    $scope.sortableOptions = {
-	        update: function(e, ui) {
-	        	var r = [];
-	        	angular.forEach($scope.renderModel, function(value, key){
-	        		r.push(value.id);
-	        	});
-
-	        	$scope.ids = r;
-	        	$scope.model.value = trim($scope.ids.join(), ",");
-	        }
-	    };
-
+	    //We need to watch our renderModel so that we can update the underlying $scope.model.value properly, this is required
+	    // because the ui-sortable doesn't dispatch an event after the digest of the sort operation. Any of the events for UI sortable
+	    // occur after the DOM has updated but BEFORE the digest has occured so the model has NOT changed yet - it even states so in the docs.
+	    // In their source code there is no event so we need to just subscribe to our model changes here.
+	    //This also makes it easier to manage models, we update one and the rest will just work.
+	    $scope.$watch(function () {
+	        //return the joined Ids as a string to watch
+	        return _.map($scope.renderModel, function (i) {
+	            return i.id;
+	        }).join();
+	    }, function (newVal) {
+	        $scope.ids = _.map($scope.renderModel, function (i) {
+	            return i.id;
+	        });
+	        $scope.model.value = trim($scope.ids.join(), ",");
+	    });
 
 	    $scope.$on("formSubmitting", function (ev, args) {
 			$scope.model.value = trim($scope.ids.join(), ",");
 	    });
 
-
-
 		function trim(str, chr) {
 			var rgxtrim = (!chr) ? new RegExp('^\\s+|\\s+$', 'g') : new RegExp('^'+chr+'+|'+chr+'+$', 'g');
 			return str.replace(rgxtrim, '');
 		}
-
 
 		function populate(data){
 			if(angular.isArray(data)){
@@ -4508,13 +4672,11 @@ angular.module("umbraco")
                 $scope.model.value[idx].edit = false;
             };
             
-            $scope.delete = function (idx) {
-               
-                $scope.model.value.splice(idx, 1);
-                
+            $scope.delete = function (idx) {               
+                $scope.model.value.splice(idx, 1);               
             };
 
-            $scope.add = function () {
+            $scope.add = function ($event) {
                 if ($scope.newCaption == "") {
                     $scope.hasError = true;
                 } else {
@@ -4537,7 +4699,7 @@ angular.module("umbraco")
                             this.internal = $scope.newInternal;
                             this.edit = false;
                             this.isInternal = true;
-                            this.iternalName = $scope.newInternalName;
+                            this.internalName = $scope.newInternalName;
                             this.type = "internal";
                             this.title = $scope.newCaption;
                         };
@@ -4550,6 +4712,7 @@ angular.module("umbraco")
                     $scope.newInternalName = '';
 
                 }
+                $event.preventDefault();
             };
 
             $scope.switch = function ($event) {
@@ -4557,8 +4720,11 @@ angular.module("umbraco")
                 $event.preventDefault();
             };
             
-            $scope.switchLinkType = function ($event,link) {
-                link.isInternal = !link.isInternal;
+            $scope.switchLinkType = function ($event, link) {
+                link.isInternal = !link.isInternal;                
+                link.type = link.isInternal ? "internal" : "external";
+                if (!link.isInternal)
+                    link.link = $scope.newLink;
                 $event.preventDefault();
             };
             
@@ -4566,18 +4732,16 @@ angular.module("umbraco")
                 if ($scope.currentEditLink != null) {
                     $scope.currentEditLink.internal = data.id;
                     $scope.currentEditLink.internalName = data.name;
+                    $scope.currentEditLink.link = data.id;
                 } else {
                     $scope.newInternal = data.id;
                     $scope.newInternalName = data.name;
                 }
-            }
-
-            
-
+            }            
         });
 angular.module("umbraco")
     .controller("Umbraco.PropertyEditors.RTEController",
-    function ($rootScope, $element, $scope, $q, dialogService, $log, imageHelper, assetsService, $timeout, tinyMceService, angularHelper, stylesheetResource) {
+    function ($rootScope, $scope, $q, dialogService, $log, imageHelper, assetsService, $timeout, tinyMceService, angularHelper, stylesheetResource) {
 
         tinyMceService.configuration().then(function(tinyMceConfig){
 
@@ -4635,6 +4799,9 @@ angular.module("umbraco")
             });
 
 
+            //stores a reference to the editor
+            var tinyMceEditor = null;
+
             //wait for queue to end
             $q.all(await).then(function () {
                 
@@ -4656,11 +4823,15 @@ angular.module("umbraco")
                             menubar: false,
                             statusbar: false,
                             height: editorConfig.dimensions.height,
+                            width: editorConfig.dimensions.width,
                             toolbar: toolbar,
                             content_css: stylesheets.join(','),
                             relative_urls: false,
                             style_formats: styleFormats,
                             setup: function (editor) {
+
+                                //set the reference
+                                tinyMceEditor = editor;
 
                                 //We need to listen on multiple things here because of the nature of tinymce, it doesn't 
                                 //fire events when you think!
@@ -4681,21 +4852,7 @@ angular.module("umbraco")
                                         $scope.model.value = editor.getContent();
                                     });
                                 });
-                                //listen for formSubmitting event (the result is callback used to remove the event subscription)
-                                var unsubscribe = $scope.$on("formSubmitting", function () {
-
-                                    //TODO: Here we should parse out the macro rendered content so we can save on a lot of bytes in data xfer
-                                    // we do parse it out on the server side but would be nice to do that on the client side before as well.
-                                    $scope.model.value = editor.getContent();
-                                });
-
-                                //when the element is disposed we need to unsubscribe!
-                                // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom 
-                                // element might still be there even after the modal has been hidden.
-                                $element.bind('$destroy', function () {
-                                    unsubscribe();
-                                });
-
+                                
                                 //Create the insert media plugin
                                 tinyMceService.createMediaPicker(editor, $scope);
 
@@ -4709,7 +4866,7 @@ angular.module("umbraco")
                                 tinyMceService.createInsertMacro(editor, $scope);
                             }
                         });
-                    }, 500);
+                    }, 200);
                 }
                 
                 loadTinyMce();
@@ -4717,10 +4874,27 @@ angular.module("umbraco")
                 //here we declare a special method which will be called whenever the value has changed from the server
                 //this is instead of doing a watch on the model.value = faster
                 $scope.model.onValueChanged = function (newVal, oldVal) {
-                    //update the display val again if it has changed from the server
-                    //TODO: Perhaps we don't need to re-load the whole editor, can probably just re-set the value ?
-                    loadTinyMce();
+                    //update the display val again if it has changed from the server;
+                    tinyMceEditor.setContent(newVal, { format: 'raw' });
+                    //we need to manually fire this event since it is only ever fired based on loading from the DOM, this
+                    // is required for our plugins listening to this event to execute
+                    tinyMceEditor.fire('LoadContent', null);
                 };
+                
+                //listen for formSubmitting event (the result is callback used to remove the event subscription)
+                var unsubscribe = $scope.$on("formSubmitting", function () {
+
+                    //TODO: Here we should parse out the macro rendered content so we can save on a lot of bytes in data xfer
+                    // we do parse it out on the server side but would be nice to do that on the client side before as well.
+                    $scope.model.value = tinyMceEditor.getContent();
+                });
+
+                //when the element is disposed we need to unsubscribe!
+                // NOTE: this is very important otherwise if this is part of a modal, the listener still exists because the dom 
+                // element might still be there even after the modal has been hidden.
+                $scope.$on('$destroy', function () {
+                    unsubscribe();
+                });
             });
         });
 
