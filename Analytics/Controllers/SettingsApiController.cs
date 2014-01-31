@@ -7,6 +7,7 @@ using System.Xml;
 using Analytics.Models;
 using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Json;
+using Umbraco.Core.Configuration;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 using Formatting = Newtonsoft.Json.Formatting;
@@ -252,6 +253,11 @@ namespace Analytics.Controllers
             var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<Profile>(profileAsJson);
 
             return profile;
+        }
+
+        public string GetUmbracoVersion()
+        {
+            return UmbracoVersion.Current.ToString();
         }
 
         public dynamic PostAccount(Account account)

@@ -4,39 +4,53 @@ angular.module("umbraco.resources")
         return {
             
             checkauth: function () {
-                return $http.get("Analytics/SettingsApi/GetAuth");
+                return $http.get(this.getApiPath()+"Analytics/SettingsApi/GetAuth");
             },
 
             getall: function () {
-                return $http.get("Analytics/SettingsApi/GetSettings");
+                return $http.get(this.getApiPath() + "Analytics/SettingsApi/GetSettings");
             },
 
             save: function (settings) {
-                return $http.post("Analytics/SettingsApi/PostSettings", angular.toJson(settings));
+                return $http.post(this.getApiPath() + "Analytics/SettingsApi/PostSettings", angular.toJson(settings));
             },
 
             getaccounts: function () {
-                return $http.get("Analytics/AnalyticsApi/GetAccounts");
+                return $http.get(this.getApiPath() + "Analytics/AnalyticsApi/GetAccounts");
             },
 
             getprofiles: function (accountId) {
-                return $http.get("Analytics/AnalyticsApi/GetProfilesFromAccount?accountId=" + accountId);
+                return $http.get(this.getApiPath() + "Analytics/AnalyticsApi/GetProfilesFromAccount?accountId=" + accountId);
             },
 
             saveAccount: function (accountData) {
-                return $http.post("Analytics/SettingsApi/PostAccount", angular.toJson(accountData));
+                return $http.post(this.getApiPath() + "Analytics/SettingsApi/PostAccount", angular.toJson(accountData));
             },
 
             saveProfile: function (profileData) {
-                return $http.post("Analytics/SettingsApi/PostProfile", angular.toJson(profileData));
+                return $http.post(this.getApiPath() + "Analytics/SettingsApi/PostProfile", angular.toJson(profileData));
             },
 
             getaccount: function () {
-                return $http.get("Analytics/SettingsApi/GetAccount");
+                return $http.get(this.getApiPath() + "Analytics/SettingsApi/GetAccount");
             },
 
             getprofile: function () {
-                return $http.get("Analytics/SettingsApi/GetProfile");
+                return $http.get(this.getApiPath() + "Analytics/SettingsApi/GetProfile");
+            },
+            
+            getApiPath: function() {
+                var path = $cookieStore.get("analyticsUmbracoVersion");
+                if (path == null) {
+                    try {
+                        var version = $http.get("backoffice/Analytics/SettingsApi/GetUmbracoVersion");
+                        path = "backoffice/";
+                    } catch (err) {
+                        path = "";
+                    }
+                    
+                }
+                return path;
             },
             
             setDateFilter: function (startDate, endDate) {

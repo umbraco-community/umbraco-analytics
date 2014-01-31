@@ -29,6 +29,7 @@ namespace Analytics
 
             //Add Tree Node Rendering Event - Used to check if user is admin to display settings node in tree
             TreeControllerBase.TreeNodesRendering += TreeControllerBase_TreeNodesRendering;
+ 
         }
 
         /// <summary>
