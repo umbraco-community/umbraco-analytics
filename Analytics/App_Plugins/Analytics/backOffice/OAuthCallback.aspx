@@ -13,6 +13,10 @@
             h1 {
                 margin: 0 0 25px 0;
             }
+
+            a:link {
+                color: #08c;
+            }
         </style>
     </head>
     <body>
