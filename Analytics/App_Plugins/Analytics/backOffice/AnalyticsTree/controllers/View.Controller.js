@@ -13,7 +13,4 @@
 
         $scope.templatePartialURL = '../App_Plugins/Analytics/backoffice/analyticsTree/partials/' + viewName + '.html';
         $scope.sectionName = $routeParams.id;
-
-        
-
     });

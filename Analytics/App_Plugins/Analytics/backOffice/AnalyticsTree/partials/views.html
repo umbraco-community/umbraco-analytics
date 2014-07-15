@@ -1,31 +1,36 @@
 ﻿<div ng-controller="Analytics.PageViewsController">
+    <style>
+        canvas {
+            position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
+        }
+    </style>
     <div class="umb-pane">
         <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
         </div>
 
         <h4>Views</h4>
      
-       
+        <div class="clearfix"></div>
         <div ng-show="loadingViews">
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
 
         <canvas id="viewMonths" width="650" height="450"></canvas>
 
-        <table class="table table-striped">
+        <table id="tbl-views" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Page Path</th>
-                    <th>Visits</th>
-                    <th>Page Views</th>
+                    <th id="pagepath"><a href="#" ng-click="sort('pagepath')" prevent-default>Page Path <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default>Visits <i class="fa fa-sort"></i></a></th>
+                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default>Page Views <i class="fa fa-sort"></i></a></th>
                 </tr>
             </thead>
             <p ng-show="loadingViews">Loading data...</p>
             <tbody ng-show="!loadingViews">
-                <tr ng-repeat="row in views.Rows">
-                    <td><a href="{{ row.Cells[0] }}" target="_blank">{{ row.Cells[0] }}</a></td>
-                    <td>{{ row.Cells[1] }}</td>
-                    <td>{{ row.Cells[2] }}</td>
+                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                    <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
+                    <td>{{ item.visits }}</td>
+                    <td>{{ item.pageviews }}</td>
                 </tr>
             </tbody>
         </table>
@@ -34,19 +39,19 @@
         
         <h4>Sources</h4>
 
-        <table class="table table-striped">
+        <table id="tbl-sources" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Source</th>
-                    <th>Visits</th>
-                    <th>Page Views</th>
+                    <th id="s_source"><a href="#" ng-click="sort('s_source')" prevent-default>Source <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="s_visits"><a href="#" ng-click="sort('s_visits')" prevent-default>Visits <i class="fa fa-sort"></i></a></th>
+                    <th id="s_pageviews"><a href="#" ng-click="sort('s_pageviews')" prevent-default>Page Views <i class="fa fa-sort"></i></a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in sources.Rows">
-                    <td>{{ row.Cells[0] }}</td>
-                    <td>{{ row.Cells[1] }}</td>
-                    <td>{{ row.Cells[2] }}</td>
+                <tr ng-repeat="item in itemSources | orderBy:sortField:descending">
+                    <td>{{ item.s_source }}</td>
+                    <td>{{ item.s_visits }}</td>
+                    <td>{{ item.s_pageviews }}</td>
                 </tr>
             </tbody>
         </table>
