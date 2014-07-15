@@ -6,23 +6,24 @@
 
         <h4>Language</h4>
         
+        <div class="clearfix"></div>
         <div ng-show="loadingViews">
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
 
-        <table class="table table-striped">
+        <table id="tbl-languages" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Language</th>
-                    <th>Visits</th>
-                    <th>Page Views</th>
+                    <th id="language"><a href="#" ng-click="sort('language')" prevent-default>Language <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default>Visits <i class="fa fa-sort"></i></a></th>
+                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default>Page Views <i class="fa fa-sort"></i></a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in data.Rows">
-                    <td>{{ row.Cells[0] }}</td>
-                    <td>{{ row.Cells[1] }}</td>
-                    <td>{{ row.Cells[2] }}</td>
+                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                    <td>{{ item.language }}</td>
+                    <td>{{ item.visits }}</td>
+                    <td>{{ item.pageviews }}</td>
                 </tr>
             </tbody>
         </table>
