@@ -17,6 +17,7 @@
             else {
                 $scope.selectedaccount = response.data;
             }
+            
         });
 
         //Get Profile JSON & bind back to dropdown

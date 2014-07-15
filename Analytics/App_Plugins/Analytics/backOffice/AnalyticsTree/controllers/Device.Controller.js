@@ -1,23 +1,7 @@
 ﻿angular.module("umbraco").controller("Analytics.DeviceController",
-    function ($scope, $location, statsResource, settingsResource, assetsService) {
+    function ($scope,$location, statsResource, settingsResource) {
 
         var profileID = "";
-
-        // items list array
-        $scope.types = [];
-        $scope.items = [];
-
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('fa fa-sort'); //icon-sort  // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-down'); //icon-caret-down
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-up'); //icon-caret-up
-        }
-
         $scope.dateFilter = settingsResource.getDateFilter();
         $scope.loadingViews = true;
         
@@ -38,33 +22,6 @@
                 statsResource.getdevicetypes(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.devicetypes = response.data.ApiResult;
 
-                    // clear existing items
-                    $scope.types.length = 0;
-                    // push objects to items array
-                    angular.forEach($scope.devicetypes.Rows, function (item) {
-                        $scope.types.push({
-                            dt_devicetype: item.Cells[0],
-                            dt_visits: parseInt(item.Cells[1]),
-                            dt_pageviews: parseInt(item.Cells[2])
-                        });
-                    });
-
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-devicetypes", newSortField);
-                    };
-
-                    var defaultSort = "pageviews"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting(defaultSort);
-
                     var chartData = response.data.ChartData;
 
                     //Create Bar Chart
@@ -75,40 +32,8 @@
                 //Get Browser specific via statsResource - does WebAPI GET call
                 statsResource.getdevices(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.devices = response.data.ApiResult;
-
-                    // clear existing items
-                    $scope.items.length = 0;
-                    // push objects to items array
-                    angular.forEach($scope.devices.Rows, function (item) {
-                        $scope.items.push({
-                            device: item.Cells[0],
-                            model: item.Cells[1],
-                            visits: parseInt(item.Cells[2]),
-                            pageviews: parseInt(item.Cells[3])
-                        });
-                    });
-
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-devices", newSortField);
-                    };
-
-                    var defaultSort = "pageviews"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting(defaultSort);
                 });
 
             });
         });
-
-        //load the seperat css for the editor to avoid it blocking our js loading
-        assetsService.loadCss("/umbraco/assets/css/umbraco.css");
-        assetsService.loadCss("/App_Plugins/Analytics/backOffice/AnalyticsTree/icons/css/font-awesome.css");
     });

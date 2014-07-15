@@ -1,36 +1,30 @@
 ﻿<div ng-controller="Analytics.SocialController">
-    <style>
-        canvas {
-            position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
-        }
-    </style>
     <div class="umb-pane">
         
         <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
         </div>
 
         <h4>Social network</h4>
-
-        <div class="clearfix"></div>
+        
         <div ng-show="loadingViews">
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
 
         <canvas id="social" width="650" height="450"></canvas>
 
-        <table id="tbl-social" class="table table-striped">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th id="socialnetwork"><a href="#" ng-click="sort('socialnetwork')" prevent-default>Social Network <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
-                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default>Visits <i class="fa fa-sort"></i></a></th>
-                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default>Page Views <i class="fa fa-sort"></i></a></th>
+                    <th>Social Network</th>
+                    <th>Visits</th>
+                    <th>Page Views</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items | orderBy:sortField:descending">
-                    <td>{{ item.socialnetwork }}</td>
-                    <td>{{ item.visits }}</td>
-                    <td>{{ item.pageviews }}</td>
+                <tr ng-repeat="row in social.Rows">
+                    <td>{{ row.Cells[0] }}</td>
+                    <td>{{ row.Cells[1] }}</td>
+                    <td>{{ row.Cells[2] }}</td>
                 </tr>
             </tbody>
         </table>
