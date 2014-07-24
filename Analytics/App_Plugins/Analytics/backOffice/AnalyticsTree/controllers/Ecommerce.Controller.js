@@ -45,7 +45,7 @@
                         $scope.itemProducts.push({
                             productSku: item.Cells[0],
                             productName: item.Cells[1],
-                            amount: parseInt(item.Cells[2]),
+                            quantity: parseInt(item.Cells[2]),
                             revenue: parseFloat(item.Cells[3])
                         });
                     });
@@ -59,7 +59,7 @@
                         iconSorting("tbl-bestsellers", newSortField);
                     };
 
-                    var defaultSort = "amount"; // default sorting
+                    var defaultSort = "quantity"; // default sorting
                     $scope.sortField = defaultSort;
                     $scope.descending = true; // most amount first
 
@@ -110,16 +110,21 @@
                     var _transactions = $scope.storedetails.Rows[0].Cells[0];
                     var _transactionRevenue = $scope.storedetails.Rows[0].Cells[1];
                     var _itemsPerPurchase = $scope.storedetails.Rows[0].Cells[2];
+                    var _itemQuantity = $scope.storedetails.Rows[0].Cells[3];
+                    var _conversionRate = $scope.storedetails.Rows[0].Cells[4];
 
                     $scope.info = {
                         transactions: parseInt(_transactions),
                         revenue: 0.0,
                         avgRevenue: 0.0,
-                        itemsPerPurchase: parseFloat(_itemsPerPurchase)
+                        itemsPerPurchase: parseFloat(_itemsPerPurchase),
+                        itemQuantity: parseInt(_itemQuantity),
+                        conversionRate: parseFloat(_conversionRate)
                     }
 
-                    $scope.info.revenue = Math.round(parseFloat(_transactionRevenue));
-                    $scope.info.avgRevenue = parseFloat(_transactions) > 0 ? Math.round(parseFloat(_transactionRevenue) / parseFloat(_transactions)) : 0.0;
+                    $scope.info.revenue = parseFloat(_transactionRevenue).toFixed(2);
+                    $scope.info.avgRevenue = parseFloat(_transactions) > 0 ? (parseFloat(_transactionRevenue) / parseFloat(_transactions)).toFixed(2) : 0.0;
+                    $scope.info.conversionRate = $scope.info.conversionRate.toFixed(2);
                 });
 
             });
