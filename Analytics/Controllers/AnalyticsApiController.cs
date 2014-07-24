@@ -756,7 +756,7 @@ namespace Analytics.Controllers
             {
                 StartDate = startDate.Value,
                 EndDate = endDate.Value,
-                Metrics = AnalyticsMetric.Transactions + AnalyticsMetric.TransactionRevenue + AnalyticsMetric.ItemsPerPurchase + AnalyticsMetric.ItemQuantity + AnalyticsMetric.TransactionsPerVisit,
+                Metrics = AnalyticsMetric.Transactions + AnalyticsMetric.TransactionRevenue + AnalyticsMetric.ItemsPerPurchase,
                 Dimensions = null,
                 Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.TransactionRevenue)
             });

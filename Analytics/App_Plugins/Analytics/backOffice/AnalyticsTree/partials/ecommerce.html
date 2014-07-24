@@ -14,10 +14,8 @@
         <div id="stat-boxes">
             <div class="box-info">Transactions<span class="count">{{ info.transactions }}</span></div>
             <div class="box-info">Revenue<span class="count">{{ info.revenue | currency:"DKK" }}</span></div>
-            <div class="box-info">Avg. Revenue Per Purchase<span class="count">{{ info.avgRevenue | currency:"DKK" }}</span></div>
+            <div class="box-info">Avg. Revenue<span class="count">{{ info.avgRevenue | currency:"DKK" }}</span></div>
             <div class="box-info">Avg. Items Per Purchase<span class="count">{{ info.itemsPerPurchase }}</span></div>
-            <div class="box-info">Quantities<span class="count">{{ info.itemQuantity }}</span></div>
-            <div class="box-info">Conversion Rate<span class="count">{{ info.conversionRate + " %" }}</span></div>
         </div>
 
         <h5>Bestsellers</h5>
@@ -26,7 +24,7 @@
                 <tr>
                     <th id="productSku"><a href="#" ng-click="sort('productSku')" prevent-default>Product SKU <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
                     <th id="productName"><a href="#" ng-click="sort('productName')" prevent-default>Product Name <i class="fa fa-sort"></i></a></th>
-                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default>Quantity <i class="fa fa-sort"></i></a></th>
+                    <th id="amount"><a href="#" ng-click="sort('amount')" prevent-default>Amount <i class="fa fa-sort"></i></a></th>
                     <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
                 </tr>
             </thead>
@@ -34,7 +32,7 @@
                 <tr ng-repeat="item in itemProducts | orderBy:sortField:descending">
                     <td>{{ item.productSku }}</td>
                     <td>{{ item.productName }}</td>
-                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.amount }}</td>
                     <td>{{ item.revenue | currency:"DKK" }}</td>
                 </tr>
             </tbody>
