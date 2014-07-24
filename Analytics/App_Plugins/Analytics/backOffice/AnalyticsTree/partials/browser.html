@@ -12,11 +12,19 @@
         <h4>Browser</h4>
         
         <div class="clearfix"></div>
-        <div ng-show="loadingViews">
+        <div ng-show="loadingViews" class="loading-bar">
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
 
-        <canvas id="browsers" width="650" height="450"></canvas>
+        <div class="chart-container">
+            <canvas id="browsers" width="650" height="450"></canvas>
+            <div class="chart-legend">
+                <ul>
+                    <li class="serie-blue">Page Views</li>
+                    <li class="serie-red">Visits</li>
+                </ul>
+            </div>
+        </div>
 
         <table id="tbl-browsers" class="table table-striped">
             <thead>

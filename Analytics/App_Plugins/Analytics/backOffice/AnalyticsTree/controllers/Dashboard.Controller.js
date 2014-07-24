@@ -19,6 +19,13 @@
                 $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-up'); //icon-caret-up
         }
 
+        function fitToContainer(canvas) {
+            canvas.style.width = '95%'; //'100%'
+            //canvas.style.height = '100%';
+            canvas.width = canvas.offsetWidth;
+            //canvas.height = canvas.offsetHeight;
+        }
+
         $scope.dateFilter = {};
         $scope.dateFilter.startDate = moment().subtract('days', 6).format('YYYY-MM-DD');
         $scope.dateFilter.endDate = moment().format('YYYY-MM-DD');
@@ -37,7 +44,12 @@
                 var chartData = response.data;
 
                 //Create Line Chart
-                var ctx = document.getElementById("viewMonths").getContext("2d");
+                var canvas = document.getElementById("viewMonths"),
+                    ctx = canvas.getContext('2d');
+                //var ctx = document.getElementById("viewMonths").getContext("2d");
+                canvas.height = 300;
+                fitToContainer(canvas);
+
                 var viewMonthsChart = new Chart(ctx).Line(chartData);
             });
 

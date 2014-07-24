@@ -1,0 +1,41 @@
+﻿<div ng-controller="Analytics.TransactionController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+        </div>   
+           
+        <h4>Transactions</h4>
+        
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="viewTransactions" width="650" height="250"></canvas>
+            <div class="chart-legend">
+                <ul>
+                    <li class="serie-red">Transactions</li>
+                </ul>
+            </div>
+        </div>
+
+        <table id="tbl-transactions" class="table table-striped">
+            <thead>
+                <tr>
+                    <th id="transactionId"><a href="#" ng-click="sort('transactionId')" prevent-default>Transaction-id <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
+                    <th id="amount"><a href="#" ng-click="sort('amount')" prevent-default>Amount <i class="fa fa-sort"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemTransactions | orderBy:sortField:descending">
+                    <td>{{ item.transactionId }}</td>
+                    <td>{{ item.revenue | currency:"DKK" }}</td>
+                    <td>{{ item.amount }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

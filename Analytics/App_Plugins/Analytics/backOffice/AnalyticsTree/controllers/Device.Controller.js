@@ -58,12 +58,12 @@
                         iconSorting("tbl-devicetypes", newSortField);
                     };
 
-                    var defaultSort = "pageviews"; // default sorting
+                    var defaultSort = "dt_pageviews"; // default sorting
                     $scope.sortField = defaultSort;
                     $scope.descending = true; // most pageviews first
 
                     // change sort icons
-                    iconSorting(defaultSort);
+                    iconSorting("tbl-devicetypes", defaultSort);
 
                     var chartData = response.data.ChartData;
 
@@ -102,7 +102,7 @@
                     $scope.descending = true; // most pageviews first
 
                     // change sort icons
-                    iconSorting(defaultSort);
+                    iconSorting("tbl-devices", defaultSort);
                 });
 
             });

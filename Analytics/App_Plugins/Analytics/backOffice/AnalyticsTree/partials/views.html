@@ -1,9 +1,4 @@
 ﻿<div ng-controller="Analytics.PageViewsController">
-    <style>
-        canvas {
-            position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
-        }
-    </style>
     <div class="umb-pane">
         <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
         </div>
@@ -11,11 +6,19 @@
         <h4>Views</h4>
      
         <div class="clearfix"></div>
-        <div ng-show="loadingViews">
+        <div ng-show="loadingViews" class="loading-bar">
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
-
-        <canvas id="viewMonths" width="650" height="450"></canvas>
+        
+        <div class="chart-container">
+            <canvas id="viewMonths" width="650" height="450"></canvas>
+            <div class="chart-legend">
+                <ul>
+                    <li class="serie-blue">Page Views</li>
+                    <li class="serie-red">Visits</li>
+                </ul>
+            </div>
+        </div>
 
         <table id="tbl-views" class="table table-striped">
             <thead>

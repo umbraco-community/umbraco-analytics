@@ -3,6 +3,7 @@
 		'~/App_Plugins/Analytics/lib/chartjs/Chart.min.js',
 		'~/App_Plugins/Analytics/lib/angular-chartjs/angular-chartjs.js',
 		'~/App_Plugins/Analytics/lib/angles/angles.js',
+		'~/App_Plugins/Analytics/lib/accountingjs/accounting.min.js',
 		'~/App_Plugins/Analytics/lib/momentjs/moment.min.js',
 		'~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js',
 	    '~/App_Plugins/Analytics/backoffice/analyticstree/controllers/view.controller.js',
@@ -18,6 +19,10 @@
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/keyword.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/pageviews.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/dashboard.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/ecommerce.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/transaction.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/productperformance.controller.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/salesperformance.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/settings.resource.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/resources/stats.resource.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/directives/daterangepicker.directive.js',
@@ -25,5 +30,6 @@
 	],
 	css: [
        '~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css',
+	   '~/App_Plugins/Analytics/css/analytics.css'
 	]
 }

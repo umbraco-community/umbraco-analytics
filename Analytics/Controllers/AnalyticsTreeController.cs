@@ -43,15 +43,16 @@ namespace Analytics.Controllers
                 treeNodes.Add(new SectionTreeNode() { Id = "browser", Title = "Browser", Icon = "icon-browser-window", Route = string.Format("{0}/view/{1}", mainRoute, "browser") });
                 treeNodes.Add(new SectionTreeNode() { Id = "language", Title = "Language", Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "language") });
                 treeNodes.Add(new SectionTreeNode() { Id = "country", Title = "Country", Icon = "icon-globe", Route = string.Format("{0}/view/{1}", mainRoute, "country") });
+                treeNodes.Add(new SectionTreeNode() { Id = "ecommerce", Title = "eCommerce", Icon = "icon-shopping-basket", Route = string.Format("{0}/view/{1}", mainRoute, "ecommerce") });
                 treeNodes.Add(new SectionTreeNode() { Id = "settings", Title = "Settings", Icon = "icon-settings" , Route = string.Format("{0}/edit/{1}", mainRoute, "settings") });
-                
 
                 foreach (var item in treeNodes)
                 {
                     //When clicked - /App_Plugins/Diagnostics/backoffice/diagnosticsTree/edit.html
                     //URL in address bar - /developer/diagnosticsTree/General/someID
                     //var route = string.Format("/analytics/analyticsTree/view/{0}", item.Value);
-                    var nodeToAdd = CreateTreeNode(item.Id, null, queryStrings, item.Title, item.Icon, false, item.Route);
+                    bool hasChildNodes = item.Id == "ecommerce" ? true : false;
+                    var nodeToAdd = CreateTreeNode(item.Id, null, queryStrings, item.Title, item.Icon, hasChildNodes, item.Route);
 
                     //Add it to the collection
                     nodes.Add(nodeToAdd);
@@ -59,6 +60,28 @@ namespace Analytics.Controllers
 
                 //Return the nodes
                 return nodes;
+            }
+
+
+            if (id == "ecommerce")
+            {
+                //Main Route
+                var mainRoute = "/analytics/analyticsTree";
+
+                var childNodes = new TreeNodeCollection();
+                var childTreeNodes = new List<SectionTreeNode>();
+                childTreeNodes.Add(new SectionTreeNode() { Id = "transactions", Title = "Transactions", Icon = "icon-credit-card", Route = string.Format("{0}/view/{1}", mainRoute, "transactions") });
+                childTreeNodes.Add(new SectionTreeNode() { Id = "productperformance", Title = "Product Performance", Icon = "icon-barcode", Route = string.Format("{0}/view/{1}", mainRoute, "productperformance") });
+                childTreeNodes.Add(new SectionTreeNode() { Id = "salesperformance", Title = "Sales Performance", Icon = "icon-bill", Route = string.Format("{0}/view/{1}", mainRoute, "salesperformance") });
+
+                foreach (var c in childTreeNodes)
+                {
+                    var childnodeToAdd = CreateTreeNode(c.Id, null, queryStrings, c.Title, c.Icon, false, c.Route);
+
+                    //Add it to the collection
+                    childNodes.Add(childnodeToAdd);
+                }
+                return childNodes;
             }
 
             //this tree doesn't suport rendering more than 1 level

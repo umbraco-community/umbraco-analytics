@@ -1,0 +1,48 @@
+﻿<div ng-controller="Analytics.ProductPerformanceController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+        </div>   
+           
+        <h4>Product Performance</h4>
+        
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <h5>Unique Purchases</h5>
+        <div class="chart-container">
+            <canvas id="viewProductPerformance" width="650" height="250"></canvas>
+            <div class="chart-legend">
+                <ul>
+                    <li class="serie-red">Unique Purchases</li>
+                </ul>
+            </div>
+        </div>
+
+        <table id="tbl-productperformance" class="table table-striped">
+            <thead>
+                <tr>
+                    <th id="productSku"><a href="#" ng-click="sort('productSku')" prevent-default>Product SKU <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="productName"><a href="#" ng-click="sort('productName')" prevent-default>Product Name <i class="fa fa-sort"></i></a></th>
+                    <th id="uniquePurchases"><a href="#" ng-click="sort('uniquePurchases')" prevent-default>Unique Purchases <i class="fa fa-sort"></i></a></th>
+                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
+                    <th id="revenuePerItem"><a href="#" ng-click="sort('revenuePerItem')" prevent-default>Revenue Per Item <i class="fa fa-sort"></i></a></th>
+                    <th id="itemsPerPurchase"><a href="#" ng-click="sort('itemsPerPurchase')" prevent-default>Items Per Purchase <i class="fa fa-sort"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemProducts | orderBy:sortField:descending">
+                    <td>{{ item.productSku }}</td>
+                    <td>{{ item.productName }}</td>
+                    <td>{{ item.uniquePurchases }}</td>
+                    <td>{{ item.revenue | currency:"DKK" }}</td>
+                    <td>{{ item.revenuePerItem | currency:"DKK" }}</td>
+                    <td>{{ item.itemsPerPurchase }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

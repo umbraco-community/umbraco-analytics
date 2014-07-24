@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
 using Umbraco.Web.Trees;
+using Analytics.Models;
+using Analytics.Controllers;
 
 namespace Analytics
 {
@@ -53,6 +56,35 @@ namespace Analytics
                 {
                     //Remove the settings node from the collection
                     e.Nodes.Remove(settingNode);
+                }
+            }
+
+            AnalyticsApiController gaApi = new AnalyticsApiController();
+            SettingsApiController settingsApi = new SettingsApiController();
+            Profile profile = settingsApi.GetProfile();
+            if (profile != null)
+            {
+                if (sender.TreeAlias == "analyticsTree")
+                {
+                    var ecommerceNode = e.Nodes.SingleOrDefault(x => x.Id.ToString() == "ecommerce");
+                    if (ecommerceNode != null)
+                    {
+                        try
+                        {
+                            // check if profile has any ecommerce data for last 3 years
+                            StatsApiResult transactions = gaApi.GetTransactions(profile.Id, DateTime.Now.AddYears(-3), DateTime.Now);
+                            if (transactions.ApiResult.Rows.Count() == 0)
+                            {
+                                //Remove the ecommerce node from the collection
+                                e.Nodes.Remove(ecommerceNode);
+                            }
+                        }
+                        catch
+                        {
+                            //Remove the ecommerce node from the collection
+                            e.Nodes.Remove(ecommerceNode);
+                        }
+                    }
                 }
             }
         }

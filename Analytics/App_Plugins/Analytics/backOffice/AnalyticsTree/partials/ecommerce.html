@@ -1,0 +1,61 @@
+﻿<div ng-controller="Analytics.EcommerceController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+        </div>   
+           
+        <h4>eCommerce</h4>
+        
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <div id="stat-boxes">
+            <div class="box-info">Transactions<span class="count">{{ info.transactions }}</span></div>
+            <div class="box-info">Revenue<span class="count">{{ info.revenue | currency:"DKK" }}</span></div>
+            <div class="box-info">Avg. Revenue<span class="count">{{ info.avgRevenue | currency:"DKK" }}</span></div>
+            <div class="box-info">Avg. Items Per Purchase<span class="count">{{ info.itemsPerPurchase }}</span></div>
+        </div>
+
+        <h5>Bestsellers</h5>
+        <table id="tbl-bestsellers" class="table table-striped">
+            <thead>
+                <tr>
+                    <th id="productSku"><a href="#" ng-click="sort('productSku')" prevent-default>Product SKU <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="productName"><a href="#" ng-click="sort('productName')" prevent-default>Product Name <i class="fa fa-sort"></i></a></th>
+                    <th id="amount"><a href="#" ng-click="sort('amount')" prevent-default>Amount <i class="fa fa-sort"></i></a></th>
+                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemProducts | orderBy:sortField:descending">
+                    <td>{{ item.productSku }}</td>
+                    <td>{{ item.productName }}</td>
+                    <td>{{ item.amount }}</td>
+                    <td>{{ item.revenue | currency:"DKK" }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h5>Revenue Per Source</h5>
+        <table id="tbl-revenuepersource" class="table table-striped">
+            <thead>
+                <tr>
+                    <th id="r_source"><a href="#" ng-click="sort('r_source')" prevent-default>Source <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
+                    <th id="r_keyword"><a href="#" ng-click="sort('r_keyword')" prevent-default>Keyword <i class="fa fa-sort"></i></a></th>
+                    <th id="r_transactions"><a href="#" ng-click="sort('r_transactions')" prevent-default>Transactions <i class="fa fa-sort"></i></a></th>
+                    <th id="r_revenue"><a href="#" ng-click="sort('r_revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemRevenuePerSource | orderBy:sortField:descending">
+                    <td>{{ item.r_source }}</td>
+                    <td>{{ item.r_keyword }}</td>
+                    <td>{{ item.r_transactions }}</td>
+                    <td>{{ item.r_revenue | currency:"DKK" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
