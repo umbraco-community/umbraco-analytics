@@ -55,7 +55,7 @@
                     angular.forEach($scope.transactions.Rows, function (item) {
                         $scope.itemTransactions.push({
                             transactionId: item.Cells[0],
-                            amount: parseInt(item.Cells[1]),
+                            quantity: parseInt(item.Cells[1]),
                             revenue: parseFloat(item.Cells[2])
                         });
                     });

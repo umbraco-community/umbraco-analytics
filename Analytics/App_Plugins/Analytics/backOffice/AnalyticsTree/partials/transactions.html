@@ -25,14 +25,14 @@
                 <tr>
                     <th id="transactionId"><a href="#" ng-click="sort('transactionId')" prevent-default>Transaction-id <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
                     <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
-                    <th id="amount"><a href="#" ng-click="sort('amount')" prevent-default>Amount <i class="fa fa-sort"></i></a></th>
+                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default>Quantity <i class="fa fa-sort"></i></a></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in itemTransactions | orderBy:sortField:descending">
                     <td>{{ item.transactionId }}</td>
                     <td>{{ item.revenue | currency:"DKK" }}</td>
-                    <td>{{ item.amount }}</td>
+                    <td>{{ item.quantity }}</td>
                 </tr>
             </tbody>
         </table>
