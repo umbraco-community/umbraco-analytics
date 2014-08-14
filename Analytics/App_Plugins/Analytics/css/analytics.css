@@ -1,10 +1,16 @@
-﻿.loading-bar {
+﻿canvas {
+    position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
+}
+.date-filter {
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+.loading-bar {
     overflow: hidden;
     margin-left: -20px;
     margin-right: -20px;
-}
-canvas {
-    position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
 }
 .chart-container {
     position: relative;

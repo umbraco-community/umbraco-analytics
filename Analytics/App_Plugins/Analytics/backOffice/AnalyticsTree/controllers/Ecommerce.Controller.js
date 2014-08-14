@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.EcommerceController",
-    function ($scope, $location, statsResource, settingsResource, assetsService) {
+    function ($scope, $location, statsResource, settingsResource) {
 
         var profileID = "";
 
@@ -129,10 +129,6 @@
 
             });
         });
-
-        //load the seperat css for the editor to avoid it blocking our js loading
-        assetsService.loadCss("/umbraco/assets/css/umbraco.css");
-        assetsService.loadCss("/App_Plugins/Analytics/backOffice/AnalyticsTree/icons/css/font-awesome.css");
     });
 
 // sample use {{ value | currency:"USD" }}

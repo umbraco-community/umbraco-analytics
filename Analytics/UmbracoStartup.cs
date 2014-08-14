@@ -59,12 +59,13 @@ namespace Analytics
                 }
             }
 
-            AnalyticsApiController gaApi = new AnalyticsApiController();
-            SettingsApiController settingsApi = new SettingsApiController();
-            Profile profile = settingsApi.GetProfile();
-            if (profile != null)
+            
+            if (sender.TreeAlias == "analyticsTree")
             {
-                if (sender.TreeAlias == "analyticsTree")
+                AnalyticsApiController gaApi = new AnalyticsApiController();
+                SettingsApiController settingsApi = new SettingsApiController();
+                Profile profile = settingsApi.GetProfile();
+                if (profile != null)
                 {
                     var ecommerceNode = e.Nodes.SingleOrDefault(x => x.Id.ToString() == "ecommerce");
                     if (ecommerceNode != null)
