@@ -13,7 +13,4 @@
 
         $scope.templatePartialURL = '../App_Plugins/Analytics/backoffice/analyticsTree/partials/' + viewName + '.html';
         $scope.sectionName = $routeParams.id;
-
-        //load the seperat css for the editor to avoid it blocking our js loading
-        assetsService.loadCss("/App_Plugins/Analytics/backOffice/AnalyticsTree/icons/css/font-awesome.css");
     });

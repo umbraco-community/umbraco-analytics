@@ -24,16 +24,16 @@
         <table id="tbl-salesperformance" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="date"><a href="#" ng-click="sort('date')" prevent-default>Date <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
-                    <th id="uniquePurchases"><a href="#" ng-click="sort('uniquePurchases')" prevent-default>Unique Purchases <i class="fa fa-sort"></i></a></th>
-                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
+                    <th id="date"><a href="#" ng-click="sort('date')" prevent-default><span>Date</span> <i class="icon"></i></a></th>
+                    <th id="uniquePurchases"><a href="#" ng-click="sort('uniquePurchases')" prevent-default><span>Unique Purchases</span> <i class="icon"></i></a></th>
+                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span>Revenue</span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in itemSales | orderBy:sortField:descending">
                     <td>{{ item.date | date:'yyyy-MM-dd' }}</td>
                     <td>{{ item.uniquePurchases }}</td>
-                    <td>{{ item.revenue | currency:"DKK" }}</td>
+                    <td>{{ item.revenue | currency:'DKK' }}</td>
                 </tr>
             </tbody>
         </table>

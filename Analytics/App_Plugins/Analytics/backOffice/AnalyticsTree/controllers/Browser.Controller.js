@@ -10,12 +10,12 @@
         // change sort icons
         function iconSorting(tableId, field) {
             $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('fa fa-sort'); //icon-sort  // reset sort icon for columns with existing icons
+                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
             });
             if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-down'); //icon-caret-down
+                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
             else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-up'); //icon-caret-up
+                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
         }
 
         $scope.loadingViews = true;

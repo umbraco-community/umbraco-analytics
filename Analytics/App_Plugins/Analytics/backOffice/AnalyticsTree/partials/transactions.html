@@ -23,15 +23,15 @@
         <table id="tbl-transactions" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="transactionId"><a href="#" ng-click="sort('transactionId')" prevent-default>Transaction-id <i class="fa fa-sort"></i></a></th> <!-- icon-sort -->
-                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default>Revenue <i class="fa fa-sort"></i></a></th>
-                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default>Quantity <i class="fa fa-sort"></i></a></th>
+                    <th id="transactionId"><a href="#" ng-click="sort('transactionId')" prevent-default><span>Transaction-id</span> <i class="icon"></i></a></th>
+                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span>Revenue</span> <i class="icon"></i></a></th>
+                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default><span>Quantity</span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in itemTransactions | orderBy:sortField:descending">
                     <td>{{ item.transactionId }}</td>
-                    <td>{{ item.revenue | currency:"DKK" }}</td>
+                    <td>{{ item.revenue | currency:'DKK' }}</td>
                     <td>{{ item.quantity }}</td>
                 </tr>
             </tbody>

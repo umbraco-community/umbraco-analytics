@@ -1,6 +1,12 @@
 ﻿canvas {
     position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
 }
+table.table a {
+    text-decoration: none;
+}
+table.table a span:hover {
+    text-decoration: underline;
+}
 .date-filter {
     background: #fff;
     cursor: pointer;

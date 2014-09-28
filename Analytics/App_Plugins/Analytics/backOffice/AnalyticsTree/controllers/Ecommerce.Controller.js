@@ -10,12 +10,12 @@
         // change sort icons
         function iconSorting(tableId, field) {
             $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('fa fa-sort'); //icon-sort  // reset sort icon for columns with existing icons
+                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
             });
             if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-down'); //icon-caret-down
+                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
             else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('fa fa-sort-up'); //icon-caret-up
+                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
         }
 
         $scope.dateFilter = settingsResource.getDateFilter();
@@ -130,28 +130,3 @@
             });
         });
     });
-
-// sample use {{ value | currency:"USD" }}
-angular.module('filters', []).filter('currency', function () {
-    return function (number, currencyCode) {
-        var currency = {
-            USD: "$",
-            GBP: "£",
-            AUD: "$",
-            EUR: "€",
-            CAD: "$",
-            MIXED: "~"
-        },
-        thousand, decimal, format;
-        if ($.inArray(currencyCode, ["USD", "AUD", "CAD", "MIXED"]) >= 0) {
-            thousand = ",";
-            decimal = ".";
-            format = "%s %v";
-        } else {
-            thousand = ".";
-            decimal = ",";
-            format = "%s %v";
-        };
-        return accounting.formatMoney(number, currency[currencyCode], 2, thousand, decimal, format);
-    };
-});
