@@ -72,5 +72,40 @@ angular.module("umbraco.resources")
                 return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetVisitsOverTime", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
             },
 
+            gettransactions: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetTransactions", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            gettransactionscharts: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetTransactionsOverTime", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getproductperformance: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetProductPerformance", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getproductperformancecharts: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetProductPerformanceOverTime", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getsalesperformance: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetSalesPerformance", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getsalesperformancecharts: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetSalesPerformanceOverTime", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getstoredetails: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetStoreDetails", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getbestsellers: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetBestSellers", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            },
+
+            getrevenuepersource: function (profileID, startDate, endDate) {
+                return $http.get(settingsResource.getApiPath() + "Analytics/AnalyticsApi/GetRevenuePerSource", { params: { profile: profileID, startDate: startDate, endDate: endDate } });
+            }
         };
     });

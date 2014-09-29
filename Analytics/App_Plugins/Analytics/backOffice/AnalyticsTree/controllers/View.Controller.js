@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.ViewController",
-    function ($scope, $routeParams, settingsResource) {
+    function ($scope, $routeParams, settingsResource, assetsService) {
 
         //Currently loading /umbraco/general.html
         //Need it to look at /App_Plugins/
@@ -13,7 +13,4 @@
 
         $scope.templatePartialURL = '../App_Plugins/Analytics/backoffice/analyticsTree/partials/' + viewName + '.html';
         $scope.sectionName = $routeParams.id;
-
-        
-
     });

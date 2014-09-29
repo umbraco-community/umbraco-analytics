@@ -32,6 +32,8 @@ namespace Analytics
                 ChartDataSet ds = cd.datasets[metric] = new ChartDataSet();
                 ds.fillColor    = GetFillColor(metric);
                 ds.strokeColor  = GetStrokeColor(metric);
+                ds.highlightFill = GetHighlightFillColor(metric);
+                ds.highlightStroke = GetHighlightStrokeColor(metric);
                 ds.data         = new object[apiResults.Rows.Length];
 
                 for (int row = 0; row < apiResults.Rows.Length; row++)
@@ -89,6 +91,8 @@ namespace Analytics
                 ds.strokeColor      = GetStrokeColor(metric);
                 ds.pointColor       = GetFillColor(metric);
                 ds.pointStrokeColor = GetStrokeColor(metric);
+                ds.pointHighlightFill = GetPointHighlightFillColor();
+                ds.pointHighlightStroke = GetPointHighlightStrokeColor(metric);
                 ds.data             = new object[apiResults.Rows.Length];
 
                 for (int row = 0; row < apiResults.Rows.Length; row++)
@@ -141,6 +145,26 @@ namespace Analytics
         }
 
         public static string GetStrokeColor(int pos)
+        {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 0.8)" : "rgba(151, 187, 205, 0.8)";
+        }
+
+        public static string GetHighlightFillColor(int pos)
+        {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 0.75)" : "rgba(151, 187, 205, 0.75)";
+        }
+
+        public static string GetHighlightStrokeColor(int pos)
+        {
+            return pos % 2 == 0 ? "rgba(245, 112, 32, 1)" : "rgba(151, 187, 205, 1)";
+        }
+
+        public static string GetPointHighlightFillColor()
+        {
+            return "#fff";
+        }
+
+        public static string GetPointHighlightStrokeColor(int pos)
         {
             return pos % 2 == 0 ? "rgba(245, 112, 32, 1)" : "rgba(151, 187, 205, 1)";
         }

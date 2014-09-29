@@ -1,28 +1,29 @@
 ﻿<div ng-controller="Analytics.KeywordController">
     <div class="umb-pane">
         
-        <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
         </div>   
            
-       <h4>Keywords</h4>
+        <h4>Keywords</h4>
         
-        <div ng-show="loadingViews">
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
 
-        <table class="table table-striped">
+        <table id="tbl-keywords" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Keyword</th>
-                    <th>Vists</th>
-                    <th>Page Views</th>
+                    <th id="keyword"><a href="#" ng-click="sort('keyword')" prevent-default><span>Keyword</span> <i class="icon"></i></a></th>
+                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
+                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in keywords.Rows">
-                    <td>{{ row.Cells[0] }}</td>
-                    <td>{{ row.Cells[1] }}</td>
-                    <td>{{ row.Cells[2] }}</td>
+                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                    <td>{{ item.keyword }}</td>
+                    <td>{{ item.visits }}</td>
+                    <td>{{ item.pageviews }}</td>
                 </tr>
             </tbody>
         </table>

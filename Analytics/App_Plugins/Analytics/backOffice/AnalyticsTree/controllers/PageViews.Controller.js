@@ -3,6 +3,21 @@
 
         var profileID = "";
 
+        // items list array
+        $scope.items = [];
+        $scope.itemSources = [];
+
+        // change sort icons
+        function iconSorting(tableId, field) {
+            $('#' + tableId + ' th i').each(function () {
+                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
+            });
+            if ($scope.descending)
+                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
+            else
+                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
+        }
+
         $scope.dateFilter = settingsResource.getDateFilter();
 
         //$scope.$on('DateFilterChanged', function (event, x) {
@@ -37,14 +52,66 @@
                     $scope.views = response.data;
                     $scope.loadingViews = false;
 
+                    // clear existing items
+                    $scope.items.length = 0;
+                    // push objects to items array
+                    angular.forEach($scope.views.Rows, function (item) {
+                        $scope.items.push({
+                            pagepath: item.Cells[0],
+                            visits: parseInt(item.Cells[1]),
+                            pageviews: parseInt(item.Cells[2])
+                        });
+                    });
+
+                    $scope.sort = function (newSortField) {
+                        if ($scope.sortField == newSortField)
+                            $scope.descending = !$scope.descending;
+
+                        // sort by new field and change sort icons
+                        $scope.sortField = newSortField;
+                        iconSorting("tbl-views", newSortField);
+                    };
+
+                    var defaultSort = "pageviews"; // default sorting
+                    $scope.sortField = defaultSort;
+                    $scope.descending = true; // most pageviews first
+
+                    // change sort icons
+                    iconSorting("tbl-views", defaultSort);
                 });
 
                 //Get Browser specific via statsResource - does WebAPI GET call
                 statsResource.getsources(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.sources = response.data;
+
+                    // clear existing items
+                    $scope.itemSources.length = 0;
+                    // push objects to items array
+                    angular.forEach($scope.sources.Rows, function (item) {
+                        $scope.itemSources.push({
+                            s_source: item.Cells[0],
+                            s_visits: parseInt(item.Cells[1]),
+                            s_pageviews: parseInt(item.Cells[2])
+                        });
+                    });
+
+                    $scope.sort = function (newSortField) {
+                        if ($scope.sortField == newSortField)
+                            $scope.descending = !$scope.descending;
+
+                        // sort by new field and change sort icons
+                        $scope.sortField = newSortField;
+                        iconSorting("tbl-sources", newSortField);
+                    };
+
+                    var defaultSort = "s_pageviews"; // default sorting
+                    $scope.sortField = defaultSort;
+                    $scope.descending = true; // most pageviews first
+
+                    // change sort icons
+                    iconSorting("tbl-sources", defaultSort);
                 });
 
             });
         });
-
     });

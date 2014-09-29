@@ -54,6 +54,7 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
 
                 //Ouput some info about the user
                 Content.Text = "Hi there " + user.Name + ". We have saved your information to a config file, so Umbraco can pull stats from your Analytics account.";
+                Content.Text += "<br /><br />You can now <a href=\"javascript: self.close()\">close this window</a>.";
             } 
             catch
             {

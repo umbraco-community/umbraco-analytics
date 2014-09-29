@@ -490,7 +490,347 @@ namespace Analytics.Controllers
             // Return the data as JSON
             return data;
         }
-        
+
+
+        /// <summary>
+        /// Get Transactions
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetTransactions(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Transactions + AnalyticsMetric.TransactionRevenue,
+                Dimensions = AnalyticsDimension.TransactionId,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.Transactions)
+            });
+
+            //Store API result in our new object along with chart data
+            var transactionsResult = new StatsApiResult();
+            transactionsResult.ApiResult = data;                             //The data back from Google's API
+            transactionsResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return transactionsResult;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public ChartData GetTransactionsOverTime(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+
+            //Span of time
+            TimeSpan span = endDate.Value - startDate.Value;
+
+            //Dimensions that changes based on time period
+            AnalyticsDimensionCollection dimensions;
+
+
+            //If less than 60 days show days
+            if (span.TotalDays < 60)
+            {
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month + AnalyticsDimension.Day;
+            }
+            else
+            {
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month;
+            }
+
+
+
+            // Get the visits from the Google Analytics API
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Transactions,
+                Dimensions = dimensions,
+                Sorting = new AnalyticsSortOptions().AddAscending(AnalyticsDimension.Year)
+            });
+
+            //Store API result in our new object along with chart data
+            var transactionsResult = ChartHelper.GetLineChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return transactionsResult;
+
+        }
+
+        /// <summary>
+        /// Get ProductPerformance
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetProductPerformance(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.UniquePurchases + AnalyticsMetric.ItemRevenue + AnalyticsMetric.RevenuePerItem + AnalyticsMetric.ItemsPerPurchase,
+                Dimensions = AnalyticsDimension.ProductSku + AnalyticsDimension.ProductName,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.ItemRevenue)
+            });
+
+            //Store API result in our new object along with chart data
+            var productsResult = new StatsApiResult();
+            productsResult.ApiResult = data;                             //The data back from Google's API
+            productsResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return productsResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public ChartData GetProductPerformanceOverTime(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+
+            //Span of time
+            TimeSpan span = endDate.Value - startDate.Value;
+
+            //Dimensions that changes based on time period
+            AnalyticsDimensionCollection dimensions;
+
+
+            //If less than 60 days show days
+            if (span.TotalDays < 60)
+            {
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month + AnalyticsDimension.Day;
+            }
+            else
+            {
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month;
+            }
+
+
+
+            // Get the visits from the Google Analytics API
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.UniquePurchases,
+                Dimensions = dimensions,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.UniquePurchases)
+            });
+
+            //Store API result in our new object along with chart data
+            var transactionsResult = ChartHelper.GetLineChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return transactionsResult;
+
+        }
+
+        /// <summary>
+        /// Get SalesPerformance
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetSalesPerformance(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.TransactionRevenue + AnalyticsMetric.UniquePurchases,
+                Dimensions = AnalyticsDimension.Date,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.TransactionRevenue)
+            });
+
+            //Store API result in our new object along with chart data
+            var salesResult = new StatsApiResult();
+            salesResult.ApiResult = data;                             //The data back from Google's API
+            salesResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return salesResult;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public ChartData GetSalesPerformanceOverTime(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+
+            //Span of time
+            TimeSpan span = endDate.Value - startDate.Value;
+
+            //Dimensions that changes based on time period
+            AnalyticsDimensionCollection dimensions;
+
+
+            //If less than 60 days show days
+            if (span.TotalDays < 60)
+            {
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month + AnalyticsDimension.Day;
+            }
+            else
+            {
+                dimensions = AnalyticsDimension.Year + AnalyticsDimension.Month;
+            }
+
+
+
+            // Get the visits from the Google Analytics API
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.TransactionRevenue,
+                Dimensions = dimensions,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.TransactionRevenue)
+            });
+
+            //Store API result in our new object along with chart data
+            var transactionsResult = ChartHelper.GetLineChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return transactionsResult;
+
+        }
+
+        /// <summary>
+        /// Get StoreDetails
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetStoreDetails(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Transactions + AnalyticsMetric.TransactionRevenue + AnalyticsMetric.ItemsPerPurchase + AnalyticsMetric.ItemQuantity + AnalyticsMetric.TransactionsPerVisit,
+                Dimensions = null,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.TransactionRevenue)
+            });
+
+            //Store API result in our new object along with chart data
+            var productsResult = new StatsApiResult();
+            productsResult.ApiResult = data;                             //The data back from Google's API
+            productsResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return productsResult;
+        }
+
+        /// <summary>
+        /// Get BestSellers
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetBestSellers(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.UniquePurchases + AnalyticsMetric.ItemRevenue,
+                Dimensions = AnalyticsDimension.ProductSku + AnalyticsDimension.ProductName,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.ItemRevenue)
+            });
+
+            //Store API result in our new object along with chart data
+            var productsResult = new StatsApiResult();
+            productsResult.ApiResult = data;                             //The data back from Google's API
+            productsResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return productsResult;
+        }
+
+        /// <summary>
+        /// Get RevenuePerSource
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public StatsApiResult GetRevenuePerSource(string profile, DateTime? startDate, DateTime? endDate)
+        {
+            if (!startDate.HasValue)
+                startDate = DateTime.Now.Subtract(TimeSpan.FromDays(31));
+            if (!endDate.HasValue)
+                endDate = DateTime.Now;
+            //Profile, Start Date, End Date, Metrics (Array), Dimensions (Array)
+
+            AnalyticsDataResponse data = GetGoogleService().Analytics.GetData(profile, new AnalyticsDataOptions
+            {
+                StartDate = startDate.Value,
+                EndDate = endDate.Value,
+                Metrics = AnalyticsMetric.Transactions + AnalyticsMetric.TransactionRevenue,
+                Dimensions = AnalyticsDimension.Source + AnalyticsDimension.Keyword,
+                Sorting = new AnalyticsSortOptions().AddDescending(AnalyticsMetric.TransactionRevenue)
+            });
+
+            //Store API result in our new object along with chart data
+            var sourceResult = new StatsApiResult();
+            sourceResult.ApiResult = data;                             //The data back from Google's API
+            sourceResult.ChartData = ChartHelper.GetChartData(data);   //Add chart data to device result via Helper
+
+            // Return the data as JSON
+            return sourceResult;
+        }
     }
 
 }

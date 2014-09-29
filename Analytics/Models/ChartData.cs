@@ -56,6 +56,10 @@ namespace Analytics.Models
 
         public string strokeColor { get; set; }
 
+        public string highlightFill { get; set; }
+
+        public string highlightStroke { get; set; }
+
         public object[] data { get; set; }
     }
 
@@ -69,6 +73,10 @@ namespace Analytics.Models
         public string pointColor { get; set; }
 
         public string pointStrokeColor { get; set; }
+
+        public string pointHighlightFill { get; set; }
+
+        public string pointHighlightStroke { get; set; }
 
         public object[] data { get; set; }
     }

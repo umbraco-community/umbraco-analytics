@@ -1,0 +1,81 @@
+﻿canvas {
+    position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
+}
+table.table a {
+    text-decoration: none;
+}
+table.table a span:hover {
+    text-decoration: underline;
+}
+.date-filter {
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+.loading-bar {
+    overflow: hidden;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+.chart-container {
+    position: relative;
+}
+.chart-legend {
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    margin-left: 30px;
+}
+.chart-legend ul {
+    list-style: none;
+    margin: 30px auto 0;
+}
+.chart-legend li {
+    text-indent: 24px;
+    line-height: 24px;
+    position: relative;
+    font-weight: 200;
+    display: block;
+    font-size: 0.8em;
+    min-height: 24px;
+}
+.chart-legend  li:before {
+    display: block;
+    width: 16px;
+    height: 12px;
+    position: absolute;
+    padding: 1px;
+    left: 0;
+    top: 3px;
+    content: "";
+}
+.chart-legend  li.serie-red:before {
+    border: 1px solid rgba(245, 112, 32, 0.8);
+    background-color: rgba(245, 112, 32, 0.5);
+}
+.chart-legend  li.serie-blue:before {
+    border: 1px solid rgba(151, 187, 205, 0.8);
+    background-color: rgba(151, 187, 205, 0.5);
+}
+
+#stat-boxes {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+#stat-boxes .box-info {
+    width: 200px;
+    padding: 15px;
+    margin: 0px 15px 15px 0px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    min-height: 55px;
+}
+#stat-boxes .box-info .count {
+    font-size: 28px;
+    line-height: 1.5;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}

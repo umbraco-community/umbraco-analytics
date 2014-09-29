@@ -5,7 +5,7 @@
         scope: {
             ngModel: '=',
         },
-        template: '<i class="glyphicon glyphicon-calendar icon-calendar icon-large"></i> <span></span> <b class="caret"></b>',
+        template: '<i class="glyphicon glyphicon-calendar icon-calendar icon-large"></i> <span></span> <b class="caret" style="margin-top:9px;"></b>',
         link: function (scope, element) {
             $(function () {
                 
