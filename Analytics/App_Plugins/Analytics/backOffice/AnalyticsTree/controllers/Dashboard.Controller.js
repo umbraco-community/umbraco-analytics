@@ -20,7 +20,7 @@
         }
 
         function fitToContainer(canvas) {
-            canvas.style.width = '95%'; //'100%'
+            canvas.style.width = '95%';
             //canvas.style.height = '100%';
             canvas.width = canvas.offsetWidth;
             //canvas.height = canvas.offsetHeight;
@@ -43,14 +43,52 @@
             statsResource.getvisitcharts(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                 var chartData = response.data;
 
-                //Create Line Chart
-                var canvas = document.getElementById("viewMonths"),
-                    ctx = canvas.getContext('2d');
-                //var ctx = document.getElementById("viewMonths").getContext("2d");
-                canvas.height = 300;
-                fitToContainer(canvas);
+                var canvasId = "viewMonths";
+                var canvas = document.getElementById(canvasId),
+                    canvasWidth = canvas.clientWidth,
+                    canvasHeight = canvas.clientHeight;
 
-                var viewMonthsChart = new Chart(ctx).Line(chartData);
+                // Replace the chart canvas element
+                $('#' + canvasId).replaceWith('<canvas id="' + canvasId + '" width="' + canvasWidth + '" height="' + canvasHeight + '"></canvas>');
+
+                var options = {
+                    labelTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\">"
+                        + "<% for (var i=0; i<datasets.length; i++){%>"
+                        + "<li><span style=\"background-color:<%=datasets[i].fillColor%>;border-color:<%=datasets[i].strokeColor%>\"></span>"
+                        + "<%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%>"
+                        + "</ul>",
+                    bezierCurve: false,
+                    scaleBeginAtZero: true,
+                    responsive: true
+                };
+
+                // Draw the chart / Create Line Chart
+                var ctx = $('#' + canvasId).get(0).getContext("2d");
+                var viewMonthsChart = new Chart(ctx).Line(chartData, options);
+
+                // Create legend
+                var legendHolder = document.createElement('div');
+                legendHolder.className = "chart-legend-holder dashboard-view";
+                legendHolder.innerHTML = viewMonthsChart.generateLegend();
+
+                var helpers = Chart.helpers;
+                helpers.each(legendHolder.firstChild.childNodes, function (legendNode, index) {
+
+                    if (index == 0) {
+                        var t = document.createTextNode("Visits");
+                        legendNode.appendChild(t);
+                        legendNode.className = "first";
+                    }
+                    else if (index == 1) {
+                        var t = document.createTextNode("Page Views");
+                        legendNode.appendChild(t);
+                        legendNode.className = "second";
+                    }
+                });
+
+                // ensure legend not gets added multiple times
+                $(".chart-legend-holder").remove();
+                viewMonthsChart.chart.canvas.parentNode.appendChild(legendHolder);
             });
 
             //Get Browser via statsResource - does WebAPI GET call
