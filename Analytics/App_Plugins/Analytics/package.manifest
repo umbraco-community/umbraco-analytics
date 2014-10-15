@@ -6,6 +6,7 @@
 		'~/App_Plugins/Analytics/lib/accountingjs/accounting.min.js',
 		'~/App_Plugins/Analytics/lib/momentjs/moment.min.js',
 		'~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js',
+		'~/App_Plugins/Analytics/backoffice/analyticstree/filters/currency.filter.js',
 	    '~/App_Plugins/Analytics/backoffice/analyticstree/controllers/view.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/edit.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/settings.controller.js',

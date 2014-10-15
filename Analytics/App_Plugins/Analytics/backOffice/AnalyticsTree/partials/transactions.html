@@ -26,7 +26,7 @@
             <tbody>
                 <tr ng-repeat="item in itemTransactions | orderBy:sortField:descending">
                     <td>{{ item.transactionId }}</td>
-                    <td>{{ item.revenue | currency:'DKK' }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
                     <td>{{ item.quantity }}</td>
                 </tr>
             </tbody>

@@ -115,8 +115,9 @@ table.table a span:hover {
     padding: 15px;
     margin: 0px 15px 15px 0px;
     border: 1px solid #ccc;
-    display: inline-block;
-    min-height: 55px;
+    display: block;
+    min-height: 65px;
+    float: left;
 }
 #stat-boxes .box-info .count {
     font-size: 28px;

@@ -32,8 +32,8 @@
                     <td>{{ item.productSku }}</td>
                     <td>{{ item.productName }}</td>
                     <td>{{ item.uniquePurchases }}</td>
-                    <td>{{ item.revenue | currency:'DKK' }}</td>
-                    <td>{{ item.revenuePerItem | currency:'DKK' }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
+                    <td>{{ item.revenuePerItem | currency: currencyCode }}</td>
                     <td>{{ item.itemsPerPurchase }}</td>
                 </tr>
             </tbody>

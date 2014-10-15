@@ -26,6 +26,7 @@
             settingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
                 profileID = response.data.Id;
+                $scope.currencyCode = $scope.profile.Currency;
 
                 if (profileID == null || profileID == "") {
                     $location.path("/analytics/analyticsTree/edit/settings");
