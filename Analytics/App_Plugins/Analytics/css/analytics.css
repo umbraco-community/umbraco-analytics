@@ -1,5 +1,5 @@
 ﻿canvas {
-    position: relative; /* position:relative, otherwise the canvas affect some of the table styling below the canvas */
+    position: relative; /*otherwise the canvas affect some of the table styling below the canvas*/
 }
 table.table a {
     text-decoration: none;
@@ -21,15 +21,28 @@ table.table a span:hover {
 .chart-container {
     position: relative;
 }
-.chart-legend {
+.chart-dashboard {
+    margin-right: 20px;
+}
+.chart-legend, .chart-legend-holder {
     position: absolute;
     top: 0px;
     display: inline-block;
     margin-left: 30px;
 }
-.chart-legend ul {
+.chart-legend-holder.dashboard-view {
+    margin-left: 0px;
+    display: block;
+    right: 0px;
+    top: -30px;
+}
+
+.chart-legend ul, .chart-legend-holder ul {
     list-style: none;
     margin: 30px auto 0;
+}
+.chart-legend-holder.dashboard-view ul {
+    margin-top: 0px;
 }
 .chart-legend li {
     text-indent: 24px;
@@ -57,6 +70,39 @@ table.table a span:hover {
 .chart-legend  li.serie-blue:before {
     border: 1px solid rgba(151, 187, 205, 0.8);
     background-color: rgba(151, 187, 205, 0.5);
+}
+
+.line-legend, .bar-legend {
+    list-style: none; 
+}
+.line-legend li, .bar-legend li {
+    font-weight: 200;
+    font-size: 0.8em;
+    vertical-align: top;
+    margin: 3px 0px;
+    position: relative;
+}
+.chart-legend-holder.dashboard-view .line-legend li {
+    float: left;
+    margin-right: 15px;
+}
+.line-legend li span, .bar-legend li span {
+    width: 18px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 5px;
+    line-height: 1.4;
+    border: 1px solid #606060;
+}
+.line-legend li.first span, .bar-legend li.first span {
+    border-color: rgb(245, 112, 32);
+    border-color: rgba(245, 112, 32, 0.8);
+    background-color: rgba(245, 112, 32, 0.5) !important;
+}
+.line-legend li.second span, .bar-legend li.second span {
+    border-color: rgb(151, 187, 205);
+    border-color: rgba(151, 187, 205, 0.8);
+    background-color: rgba(151, 187, 205, 0.5) !important;
 }
 
 #stat-boxes {
