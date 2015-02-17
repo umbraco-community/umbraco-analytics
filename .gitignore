@@ -3,12 +3,14 @@ packages/
 
 ###### Analytics Test Site
 Analytics.Site/App_Data/TEMP/
+Analytics.Site/App_Data/Logs/
+Analytics.Site/App_Plugins/Analytics/abjerner/
 Analytics.Site/bin/
 Analytics.Site/obj/
-Analytics.Site/App_Plugins/Analytics/abjerner/
 Analytics.Site/media/created-packages/
 
 ###### Analytics Main Project
 Analytics/obj/
 Analytics/bin/
+
 
