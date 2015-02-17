@@ -12,5 +12,5 @@ Analytics.Site/media/created-packages/
 ###### Analytics Main Project
 Analytics/obj/
 Analytics/bin/
-
+Analytics/App_Data/NuGetBackup/
 
