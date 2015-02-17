@@ -9,6 +9,6 @@ Analytics.Site
 
 There is a Umbraco V7 site in the solution to test with the default credentials are as follows:
 
-Username: admin
-Password: password
+**Username**: test@test.co.uk<br/>
+**Password**: password
 
