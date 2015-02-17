@@ -13,12 +13,13 @@
 
         <div id="stat-boxes">
             <div class="box-info">Transactions<span class="count">{{ info.transactions }}</span></div>
-            <div class="box-info">Revenue<span class="count">{{ info.revenue | currency: defaultCurrency }}</span></div>
-            <div class="box-info">Avg. Revenue Per Purchase<span class="count">{{ info.avgRevenue | currency: 'DKK' }}</span></div>
+            <div class="box-info">Revenue<span class="count">{{ info.revenue | currency: currencyCode }}</span></div>
+            <div class="box-info">Avg. Revenue Per Purchase<span class="count">{{ info.avgRevenue | currency: currencyCode }}</span></div>
             <div class="box-info">Avg. Items Per Purchase<span class="count">{{ info.itemsPerPurchase }}</span></div>
             <div class="box-info">Quantities<span class="count">{{ info.itemQuantity }}</span></div>
             <div class="box-info">Conversion Rate<span class="count">{{ info.conversionRate + " %" }}</span></div>
         </div>
+        <div class="clearfix"></div>
 
         <h5>Bestsellers</h5>
         <table id="tbl-bestsellers" class="table table-striped">
@@ -35,11 +36,11 @@
                     <td>{{ item.productSku }}</td>
                     <td>{{ item.productName }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td>{{ item.revenue | currency:'DKK' }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
                 </tr>
             </tbody>
         </table>
-
+        
         <h5>Revenue Per Source</h5>
         <table id="tbl-revenuepersource" class="table table-striped">
             <thead>
@@ -55,7 +56,7 @@
                     <td>{{ item.r_source }}</td>
                     <td>{{ item.r_keyword }}</td>
                     <td>{{ item.r_transactions }}</td>
-                    <td>{{ item.r_revenue | currency:'DKK' }}</td>
+                    <td>{{ item.r_revenue | currency: currencyCode }}</td>
                 </tr>
             </tbody>
         </table>
