@@ -8,11 +8,9 @@ using System.Xml;
 using umbraco;
 using umbraco.cms.businesslogic.macro;
 
-
-
 namespace Analytics.Installer
 {
-    public partial class PostInstall : System.Web.UI.UserControl
+    public class PostInstall : System.Web.UI.UserControl
     {
 
         protected void Page_Load(object sender, EventArgs e)

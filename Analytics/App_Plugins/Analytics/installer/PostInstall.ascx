@@ -8,7 +8,7 @@
 </p>
 <p>
     So to get started click the button below and visit the newly installed section inside your install and visit the 
-    Settings page to Authorize Analyttics to view you statistics with Google oAuth.
+    Settings page to Authorize Analytics to view you statistics with Google oAuth.
 </p>
 
 <p>
