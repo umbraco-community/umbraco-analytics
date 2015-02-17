@@ -126,8 +126,8 @@ namespace Analytics
             foreach (var row in apiResults.Rows)
             {
                 //Get Data out of the api results
-                var country     = row.Cells[0];
-                var visits      = Convert.ToInt32(row.Cells[1]);
+                var country     = row.Cells[0].Value;
+                var visits      = Convert.ToInt32(row.Cells[1].Value);
 
                 //Create an array
                 var dataRow = new object[] { country, visits };
