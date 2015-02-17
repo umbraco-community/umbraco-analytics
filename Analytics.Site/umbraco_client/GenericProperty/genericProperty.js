@@ -12,33 +12,40 @@ function expandCollapse(theId) {
         document.getElementById("desc" + theId).style.display = 'block';
     }
 }
-function duplicatePropertyNameAsSafeAlias(nameId, aliasId) {
-    var input = $(aliasId);
-
-    $(nameId).keyup(function(event) {
-        var value = $(this).val();
-        getSafeAlias(aliasId, value, false, function (alias) {
-            input.val(alias);
+function duplicatePropertyNameAsSafeAlias(propertySelector) {
+    $(propertySelector).each(function() {
+        var prop = $(this);
+        var inputName = prop.find('.prop-name');
+        var inputAlias = prop.find('.prop-alias');
+        inputName.on('input blur', function (event) {
+            getSafeAlias(inputAlias, inputName.val(), false, function (alias) {
+                if (!inputAlias.data('dirty'))
+                    inputAlias.val(alias);
+            });
+        });
+        inputAlias.on('input', function(event) {
+            inputName.off('input blur');
         });
     });
 }
 
-function checkAlias(aliasId) {
-    var input = $(aliasId);
-    
-    input.keyup(function(event) {
-        var value = $(this).val();
-        validateSafeAlias(aliasId, value, false, function (isSafe) {
-            input.toggleClass('aliasValidationError', !isSafe);
+function checkAlias(aliasSelector) {
+    $(aliasSelector).on('input', function (event) {
+        var input = $(this);
+        input.data('dirty', true);
+        var value = input.val();
+        validateSafeAlias(input, value, false, function (isSafe) {
+            input.toggleClass('highlight-error', !isSafe);
         });
-    });
-
-    input.blur(function(event) {
-        var value = $(this).val();
-        getSafeAlias(aliasId, value, true, function (alias) {
+    }).on('blur', function(event) {
+        var input = $(this);
+        if (!input.data('dirty')) return;
+        input.removeData('dirty');
+        var value = input.val();
+        getSafeAlias(input, value, true, function (alias) {
             if (value.toLowerCase() != alias.toLowerCase())
                 input.val(alias);
-            input.removeClass('aliasValidationError');
+            input.removeClass('highlight-error');
         });
     });
 }

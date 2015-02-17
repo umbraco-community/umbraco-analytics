@@ -12,7 +12,8 @@ app.config(function ($routeProvider) {
                 var deferred = $q.defer();
 
                 //don't need to check if we've redirected to login and we've already checked auth
-                if (!$route.current.params.section && $route.current.params.check === false) {
+                if (!$route.current.params.section
+                    && ($route.current.params.check === false || $route.current.params.check === "false")) {
                     deferred.resolve(true);
                     return deferred.promise;
                 }
@@ -25,28 +26,25 @@ app.config(function ($routeProvider) {
                             //This could be the first time has loaded after the user has logged in, in this case
                             // we need to broadcast the authenticated event - this will be handled by the startup (init)
                             // handler to set/broadcast the ready state
-                            if (appState.getGlobalState("isReady") !== true) {
-                                userService.getCurrentUser({ broadcastEvent: true }).then(function(user) {
-                                    //is auth, check if we allow or reject
-                                    if (isRequired) {
-                                        //this will resolve successfully so the route will continue
-                                        deferred.resolve(true);
-                                    }
-                                    else {
-                                        deferred.reject({ path: "/" });
-                                    }
-                                });
-                            }
-                            else {
+                            var broadcast = appState.getGlobalState("isReady") !== true;
+
+                            userService.getCurrentUser({ broadcastEvent: broadcast }).then(function (user) {
                                 //is auth, check if we allow or reject
                                 if (isRequired) {
-                                    //this will resolve successfully so the route will continue
-                                    deferred.resolve(true);
+                                    // U4-5430, Benjamin Howarth
+                                    // We need to change the current route params if the user only has access to a single section
+                                    // To do this we need to grab the current user's allowed sections, then reject the promise with the correct path.
+                                    if (user.allowedSections.indexOf($route.current.params.section) > -1) {
+                                        //this will resolve successfully so the route will continue
+                                        deferred.resolve(true);
+                                    } else {
+                                        deferred.reject({ path: "/" + user.allowedSections[0] });
+                                    }
                                 }
                                 else {
                                     deferred.reject({ path: "/" });
                                 }
-                            }
+                            });
 
                         });
 
@@ -55,7 +53,7 @@ app.config(function ($routeProvider) {
                         if (isRequired) {
                             //the check=false is checked above so that we don't have to make another http call to check
                             //if they are logged in since we already know they are not.
-                            deferred.reject({ path: "/login", search: { check: false } });
+                            deferred.reject({ path: "/login/false" });
                         }
                         else {
                             //this will resolve successfully so the route will continue
@@ -67,12 +65,38 @@ app.config(function ($routeProvider) {
         };
     };
 
+    /** When this is used to resolve it will attempt to log the current user out */
+    var doLogout = function() {
+        return {
+            isLoggedOut: function ($q, userService) {
+                var deferred = $q.defer();
+                userService.logout().then(function () {
+                    //success so continue
+                    deferred.resolve(true);
+                }, function() {
+                    //logout failed somehow ? we'll reject with the login page i suppose
+                    deferred.reject({ path: "/login/false" });
+                });
+                return deferred.promise;
+            }
+        }
+    }
+
     $routeProvider
         .when('/login', {
             templateUrl: 'views/common/login.html',
             //ensure auth is *not* required so it will redirect to / 
             resolve: canRoute(false)
         })
+        .when('/login/:check', {
+            templateUrl: 'views/common/login.html',
+            //ensure auth is *not* required so it will redirect to / 
+            resolve: canRoute(false)
+        })
+         .when('/logout', {
+             redirectTo: '/login/false',             
+             resolve: doLogout()
+         })
         .when('/:section', {
             templateUrl: function (rp) {
                 if (rp.section.toLowerCase() === "default" || rp.section.toLowerCase() === "umbraco" || rp.section === "")

@@ -107,15 +107,19 @@ Umbraco.Sys.registerNamespace("Umbraco.Application");
                     }
                 }
                 else {
-                    //if the path doesn't start with "/" or with the root path then 
-                    //prepend the root path
-                    if (strLocation.substr(0, 1) != "/") {
-                        strLocation = this._rootPath + "/" + strLocation;
-                    }
-                    else if (strLocation.length >= this._rootPath.length
-                        && strLocation.substr(0, this._rootPath.length) != this._rootPath) {
-                        strLocation = this._rootPath + "/" + strLocation;
-                    }
+                    
+                    //its a hash change so process that like angular
+                    if (strLocation.substr(0, 1) !== "#") {                        
+                        if (strLocation.substr(0, 1) != "/") {
+                            //if the path doesn't start with "/" or with the root path then 
+                            //prepend the root path
+                            strLocation = this._rootPath + "/" + strLocation;
+                        }
+                        else if (strLocation.length >= this._rootPath.length
+                            && strLocation.substr(0, this._rootPath.length) != this._rootPath) {
+                            strLocation = this._rootPath + "/" + strLocation;
+                        }
+                    }                    
 
                     this._debug("contentFrame: parsed location: " + strLocation);
 
@@ -157,6 +161,18 @@ Umbraco.Sys.registerNamespace("Umbraco.Application");
 
             },
 
+            /** This is used to launch an angular based modal window instead of the legacy window */
+            rootScope: function () {
+
+                if (!this.mainWindow().UmbClientMgr) {
+                    throw "An angular modal window can only be launched when the modal is running within the main Umbraco application";
+                }
+                else {
+                    return this.mainWindow().UmbClientMgr.rootScope();
+                }
+
+            },
+
             openModalWindow: function(url, name, showHeader, width, height, top, leftOffset, closeTriggers, onCloseCallback) {
                 //need to create the modal on the top window if the top window has a client manager, if not, create it on the current window                
 
@@ -171,6 +187,26 @@ Umbraco.Sys.registerNamespace("Umbraco.Application");
                     if (this.mainWindow().UmbClientMgr) {
                         this.mainWindow().UmbClientMgr.openModalWindow.apply(this.mainWindow().UmbClientMgr,
                             [url, name, showHeader, width, height, top, leftOffset, closeTriggers, onCloseCallback]);
+                    }
+                    else {
+                        return; //exit recurse.
+                    }
+                }
+            },
+            openModalWindowForContent: function (jQueryElement, name, showHeader, width, height, top, leftOffset, closeTriggers, onCloseCallback) {
+                //need to create the modal on the top window if the top window has a client manager, if not, create it on the current window                
+
+                //if this is the top window, or if the top window doesn't have a client manager, create the modal in this manager
+                if (window == this.mainWindow() || !this.mainWindow().UmbClientMgr) {
+                    var m = new Umbraco.Controls.ModalWindow();
+                    this._modal.push(m);
+                    m.show(jQueryElement, name, showHeader, width, height, top, leftOffset, closeTriggers, onCloseCallback);
+                }
+                else {
+                    //if the main window has a client manager, then call the main window's open modal method whilst keeping the context of it's manager.
+                    if (this.mainWindow().UmbClientMgr) {
+                        this.mainWindow().UmbClientMgr.openModalWindowForContent.apply(this.mainWindow().UmbClientMgr,
+                            [jQueryElement, name, showHeader, width, height, top, leftOffset, closeTriggers, onCloseCallback]);
                     }
                     else {
                         return; //exit recurse.

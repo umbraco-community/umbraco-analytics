@@ -1,4 +1,4 @@
-<%@ Control Language="c#" AutoEventWireup="True" CodeBehind="GenericProperty.ascx.cs" Inherits="umbraco.controls.GenericProperties.GenericProperty" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
+<%@ Control Language="c#" AutoEventWireup="True" Inherits="umbraco.controls.GenericProperties.GenericProperty" TargetSchema="http://schemas.microsoft.com/intellisense/ie5" %>
 <%@ Register TagPrefix="cc1" Namespace="umbraco.uicontrols" Assembly="controls" %>
 
 <li id="<%=this.FullId%>" onmousedown="activeDragId = this.id;">
@@ -12,6 +12,7 @@
                 </asp:LinkButton>
 
                 <a href="javascript:expandCollapse('<%=this.ClientID%>');">
+			
 
                     <i class="toggle-button btn btn-mini icon-navigation-down"></i>
                     <asp:Literal ID="FullHeader" runat="server"></asp:Literal>
@@ -48,7 +49,7 @@
                     <asp:DropDownList ID="ddlTab" runat="server" CssClass="propertyFormInput"></asp:DropDownList>
                 </cc1:PropertyPanel>
 
-        <cc1:PropertyPanel ID="PropertyPanel5" runat="server" Text="Mandatory">
+        <cc1:PropertyPanel ID="PropertyPanel5" runat="server" Text="Mandatory" >
                     <asp:CheckBox ID="checkMandatory" runat="server"></asp:CheckBox>
                 </cc1:PropertyPanel>
 

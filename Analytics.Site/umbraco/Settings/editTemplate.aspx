@@ -1,5 +1,8 @@
 <%@ Page MasterPageFile="../masterpages/umbracoPage.Master" Language="c#" CodeBehind="EditTemplate.aspx.cs"
     ValidateRequest="false" AutoEventWireup="True" Inherits="Umbraco.Web.UI.Umbraco.Settings.EditTemplate" %>
+
+<%@ OutputCache Location="None" %>
+
 <%@ Import Namespace="Umbraco.Core" %>
 <%@ Import Namespace="Umbraco.Core.Configuration" %>
 <%@ Import Namespace="Umbraco.Core.IO" %>
@@ -31,10 +34,10 @@
                 masterPageDropDown: $("#<%= MasterTemplate.ClientID %>"),
                 treeSyncPath: '<%=TemplateTreeSyncPath%>',
                 text: {
-                    templateErrorHeader: "<%= umbraco.ui.Text("speechBubbles", "templateErrorHeader") %>",
-                    templateSavedHeader: "<%= umbraco.ui.Text("speechBubbles", "templateSavedHeader") %>",
-                    templateErrorText: "<%= umbraco.ui.Text("speechBubbles", "templateErrorText") %>",
-                    templateSavedText: "<%= umbraco.ui.Text("speechBubbles", "templateSavedText") %>"
+                    templateErrorHeader: "<%= HttpUtility.JavaScriptStringEncode(umbraco.ui.Text("speechBubbles", "templateErrorHeader")) %>",
+                    templateSavedHeader: "<%= HttpUtility.JavaScriptStringEncode(umbraco.ui.Text("speechBubbles", "templateSavedHeader")) %>",
+                    templateErrorText: "<%= HttpUtility.JavaScriptStringEncode(umbraco.ui.Text("speechBubbles", "templateErrorText")) %>",
+                    templateSavedText: "<%= HttpUtility.JavaScriptStringEncode(umbraco.ui.Text("speechBubbles", "templateSavedText")) %>"
                 }
             });
 
@@ -106,20 +109,20 @@
         
         <cc1:Pane ID="Pane7" runat="server">
             <cc1:PropertyPanel ID="pp_name" runat="server">
-                <asp:TextBox ID="NameTxt" Width="350px" runat="server"></asp:TextBox>
+                <asp:TextBox ID="NameTxt" runat="server"></asp:TextBox>
             </cc1:PropertyPanel>
             <cc1:PropertyPanel ID="pp_alias" runat="server">
-                <asp:TextBox ID="AliasTxt" Width="350px" runat="server"></asp:TextBox>
+                <asp:TextBox ID="AliasTxt" runat="server"></asp:TextBox>
             </cc1:PropertyPanel>
             <cc1:PropertyPanel ID="pp_masterTemplate" runat="server">
-                <asp:DropDownList ID="MasterTemplate" Width="350px" runat="server" />
+                <asp:DropDownList ID="MasterTemplate" runat="server" />
             </cc1:PropertyPanel>
         </cc1:Pane>    
         
         <cc1:Pane ID="Pane8" runat="server">
             <cc1:PropertyPanel ID="pp_source" runat="server">
                 <cc1:CodeArea ID="editorSource" runat="server" CodeBase="HtmlMixed" EditorMimeType="text/html" ClientSaveMethod="doSubmit"
-                    AutoResize="true" OffSetX="37" OffSetY="54"/>
+                    AutoResize="false" />
             </cc1:PropertyPanel>
         </cc1:Pane>
 

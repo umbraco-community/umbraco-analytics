@@ -34,7 +34,7 @@
 			<div class="umb-pane">
 				<h5><localize key="user_yourHistory" /></h5>
 				<ul class="umb-tree">
-						<li ng-repeat="item in history | orderBy:'time'">
+						<li ng-repeat="item in history | orderBy:'time':true">
 							<a ng-href="{{item.link}}" ng-click="gotoHistory(item.link)" prevent-default>
 								<i class="{{item.icon}}"></i> {{item.name}}</a>
 						</li>
@@ -43,6 +43,6 @@
 
 		</div>
 
-		<small style="color: #d9d9d9; position: absolute; bottom: 5px; right: 20px">{{version}}</small>
+	    <small class="umb-version">Umbraco version {{version}}</small>
 	</div>
 </div>
