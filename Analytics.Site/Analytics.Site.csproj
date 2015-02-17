@@ -256,6 +256,12 @@
     </None>
     <Content Include="xslt\Web.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Analytics\Analytics.csproj">
+      <Project>{0492ce2a-745c-493a-b600-01c641f3e8ea}</Project>
+      <Name>Analytics</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
