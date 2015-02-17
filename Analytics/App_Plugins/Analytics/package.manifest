@@ -1,10 +1,10 @@
 ﻿{
 	javascript: [
-		'~/App_Plugins/Analytics/lib/chartjs/Chart.min.js',
+		'~/App_Plugins/Analytics/lib/chartjs/Chart.js',
 		'~/App_Plugins/Analytics/lib/angular-chartjs/angular-chartjs.js',
 		'~/App_Plugins/Analytics/lib/angles/angles.js',
-		'~/App_Plugins/Analytics/lib/accountingjs/accounting.min.js',
-		'~/App_Plugins/Analytics/lib/momentjs/moment.min.js',
+		'~/App_Plugins/Analytics/lib/accountingjs/accounting.js',
+		'~/App_Plugins/Analytics/lib/momentjs/moment.js',
 		'~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/filters/currency.filter.js',
 	    '~/App_Plugins/Analytics/backoffice/analyticstree/controllers/view.controller.js',
