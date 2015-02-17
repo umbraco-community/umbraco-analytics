@@ -101,9 +101,9 @@
                 // push objects to items array
                 angular.forEach($scope.views.Rows, function (item) {
                     $scope.items.push({
-                        pagepath: item.Cells[0],
-                        visits: parseInt(item.Cells[1]),
-                        pageviews: parseInt(item.Cells[2])
+                        pagepath: item.Cells[0].Value,
+                        visits: parseInt(item.Cells[1].Value),
+                        pageviews: parseInt(item.Cells[2].Value)
                     });
                 });
 
@@ -133,9 +133,9 @@
                 // push objects to items array
                 angular.forEach($scope.sources.Rows, function (item) {
                     $scope.itemsSources.push({
-                        s_source: item.Cells[0],
-                        s_visits: parseInt(item.Cells[1]),
-                        s_pageviews: parseInt(item.Cells[2])
+                        s_source: item.Cells[0].Value,
+                        s_visits: parseInt(item.Cells[1].Value),
+                        s_pageviews: parseInt(item.Cells[2].Value)
                     });
                 });
 
@@ -165,9 +165,9 @@
                 // push objects to items array
                 angular.forEach($scope.keywords.Rows, function (item) {
                     $scope.itemsKeywords.push({
-                        k_keyword: item.Cells[0],
-                        k_visits: parseInt(item.Cells[1]),
-                        k_pageviews: parseInt(item.Cells[2])
+                        k_keyword: item.Cells[0].Value,
+                        k_visits: parseInt(item.Cells[1].Value),
+                        k_pageviews: parseInt(item.Cells[2].Value)
                     });
                 });
 

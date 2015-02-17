@@ -89,9 +89,9 @@
                         // push objects to items array
                         angular.forEach($scope.browsers.Rows, function (item) {
                             $scope.items.push({
-                                browser: item.Cells[0],
-                                visits: parseInt(item.Cells[1]),
-                                pageviews: parseInt(item.Cells[2])
+                                browser: item.Cells[0].Value,
+                                visits: parseInt(item.Cells[1].Value),
+                                pageviews: parseInt(item.Cells[2].Value)
                             });
                         });
 
@@ -122,10 +122,10 @@
                         // push objects to items array
                         angular.forEach($scope.browserspecifics.Rows, function (item) {
                             $scope.itemSpecs.push({
-                                bs_browser: item.Cells[0],
-                                bs_version: item.Cells[1],
-                                bs_visits: parseInt(item.Cells[2]),
-                                bs_pageviews: parseInt(item.Cells[3])
+                                bs_browser: item.Cells[0].Value,
+                                bs_version: item.Cells[1].Value,
+                                bs_visits: parseInt(item.Cells[2].Value),
+                                bs_pageviews: parseInt(item.Cells[3].Value)
                             });
                         });
 

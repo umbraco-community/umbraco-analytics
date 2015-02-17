@@ -50,9 +50,9 @@
                     // push objects to items array
                     angular.forEach($scope.data.Rows, function (item) {
                         $scope.items.push({
-                            language: item.Cells[0],
-                            visits: parseInt(item.Cells[1]),
-                            pageviews: parseInt(item.Cells[2])
+                            language: item.Cells[0].Value,
+                            visits: parseInt(item.Cells[1].Value),
+                            pageviews: parseInt(item.Cells[2].Value)
                         });
                     });
 

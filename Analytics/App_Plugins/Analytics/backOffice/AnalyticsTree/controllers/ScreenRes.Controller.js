@@ -49,9 +49,9 @@
                     // push objects to items array
                     angular.forEach($scope.resolutions.Rows, function (item) {
                         $scope.items.push({
-                            resolution: item.Cells[0],
-                            visits: parseInt(item.Cells[1]),
-                            pageviews: parseInt(item.Cells[2])
+                            resolution: item.Cells[0].Value,
+                            visits: parseInt(item.Cells[1].Value),
+                            pageviews: parseInt(item.Cells[2].Value)
                         });
                     });
 

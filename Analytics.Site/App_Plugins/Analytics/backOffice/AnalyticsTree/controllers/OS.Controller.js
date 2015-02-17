@@ -88,9 +88,9 @@
                     // push objects to items array
                     angular.forEach($scope.os.Rows, function (item) {
                         $scope.items.push({
-                            operatingsystem: item.Cells[0],
-                            visits: parseInt(item.Cells[1]),
-                            pageviews: parseInt(item.Cells[2])
+                            operatingsystem: item.Cells[0].Value,
+                            visits: parseInt(item.Cells[1].Value),
+                            pageviews: parseInt(item.Cells[2].Value)
                         });
                     });
 
@@ -120,10 +120,10 @@
                     // push objects to items array
                     angular.forEach($scope.osVersions.Rows, function (item) {
                         $scope.itemsVersions.push({
-                            v_operatingsystem: item.Cells[0],
-                            v_version: item.Cells[1],
-                            v_visits: parseInt(item.Cells[2]),
-                            v_pageviews: parseInt(item.Cells[3])
+                            v_operatingsystem: item.Cells[0].Value,
+                            v_version: item.Cells[1].Value,
+                            v_visits: parseInt(item.Cells[2].Value),
+                            v_pageviews: parseInt(item.Cells[3].Value)
                         });
                     });
 

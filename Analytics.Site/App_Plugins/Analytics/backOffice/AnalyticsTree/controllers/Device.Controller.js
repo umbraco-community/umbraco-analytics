@@ -89,9 +89,9 @@
                     // push objects to items array
                     angular.forEach($scope.devicetypes.Rows, function (item) {
                         $scope.types.push({
-                            dt_devicetype: item.Cells[0],
-                            dt_visits: parseInt(item.Cells[1]),
-                            dt_pageviews: parseInt(item.Cells[2])
+                            dt_devicetype: item.Cells[0].Value,
+                            dt_visits: parseInt(item.Cells[1].Value),
+                            dt_pageviews: parseInt(item.Cells[2].Value)
                         });
                     });
 
@@ -121,10 +121,10 @@
                     // push objects to items array
                     angular.forEach($scope.devices.Rows, function (item) {
                         $scope.items.push({
-                            device: item.Cells[0],
-                            model: item.Cells[1],
-                            visits: parseInt(item.Cells[2]),
-                            pageviews: parseInt(item.Cells[3])
+                            device: item.Cells[0].Value,
+                            model: item.Cells[1].Value,
+                            visits: parseInt(item.Cells[2].Value),
+                            pageviews: parseInt(item.Cells[3].Value)
                         });
                     });
 
