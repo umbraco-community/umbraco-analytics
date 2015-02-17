@@ -1,0 +1,26 @@
+﻿<style>
+    table td {
+        word-break: break-all;
+    }
+</style>
+
+<umb-panel ng-controller="Analytics.ViewController">
+    <umb-header>
+        <div class="span12">
+            <!--
+            {{dateFilter}}
+            <div ng-model="dateFilter" date-range-picker class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; margin: 20px 25px 0 0;">
+            </div>
+            -->
+            <h1><span class="icon-pulse"></span>Analytics for Umbraco</h1>
+            
+            
+        </div>
+        
+        
+    </umb-header>
+
+    <div class="umb-panel-body">
+        <div ng-include="templatePartialURL"></div>
+    </div>
+</umb-panel>

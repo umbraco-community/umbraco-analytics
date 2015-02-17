@@ -1,0 +1,33 @@
+﻿<div ng-controller="Analytics.CountryController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
+        </div>
+
+        <h4>Country</h4>
+            
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <div id="countryChart"></div>
+
+        <table id="tbl-countries" class="table table-striped">
+            <thead>
+                <tr>
+                    <th id="country"><a href="#" ng-click="sort('country')" prevent-default><span>Country</span> <i class="icon"></i></a></th>
+                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
+                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                    <td>{{ item.country }}</td>
+                    <td>{{ item.visits }}</td>
+                    <td>{{ item.pageviews }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

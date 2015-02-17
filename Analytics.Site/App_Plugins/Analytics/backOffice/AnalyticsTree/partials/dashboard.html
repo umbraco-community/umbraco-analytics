@@ -1,0 +1,79 @@
+﻿<div ng-controller="Analytics.DashboardController">
+    <div class="umb-pane">
+
+        <h4>Views</h4>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="chart-container chart-dashboard">
+                    <canvas id="viewMonths" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="span6">
+                <table id="tbl-views" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th id="pagepath"><a href="#" ng-click="sort('pagepath')" prevent-default><span>Page Path</span> <i class="icon"></i></a></th>
+                            <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
+                            <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                        </tr>
+                    </thead>
+                    <p ng-show="loadingViews">Loading data...</p>
+                    <tbody ng-show="!loadingViews">
+                        <tr ng-repeat="item in items | limitTo:10 | orderBy:sortField:descending">
+                            <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
+                            <td>{{ item.visits }}</td>
+                            <td>{{ item.pageviews }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/umbraco/#/analytics/analyticsTree/view/views" class="btn btn-primary">View more details</a>
+            </div>
+        </div>
+    
+        <hr/>
+    
+        <div class="row-fluid">
+            <div class="span6">
+                <h4>Sources</h4>
+                <table id="tbl-sources" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th id="s_source"><a href="#" ng-click="sort('s_source')" prevent-default><span>Source</span> <i class="icon"></i></a></th>
+                            <th id="s_visits"><a href="#" ng-click="sort('s_visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
+                            <th id="s_pageviews"><a href="#" ng-click="sort('s_pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in itemsSources | limitTo:10 | orderBy:sortField:descending">
+                            <td>{{ item.s_source }}</td>
+                            <td>{{ item.s_visits }}</td>
+                            <td>{{ item.s_pageviews }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/umbraco/#/analyticsanalytics/analyticsTree/view/views" class="btn btn-primary">View more details</a>
+            </div>
+            <div class="span6">
+                <h4>Keywords</h4>
+                <table id="tbl-keywords" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th id="k_keyword"><a href="#" ng-click="sort('k_keyword')" prevent-default><span>Keyword</span> <i class="icon"></i></a></th>
+                            <th id="k_visits"><a href="#" ng-click="sort('k_visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
+                            <th id="k_pageviews"><a href="#" ng-click="sort('k_pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in itemsKeywords | limitTo:10 | orderBy:sortField:descending">
+                            <td>{{ item.k_keyword }}</td>
+                            <td>{{ item.k_visits }}</td>
+                            <td>{{ item.k_pageviews }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/umbraco/#/analyticsanalytics/analyticsTree/view/keywords" class="btn btn-primary">View more details</a>
+            </div>
+        </div>
+    </div>
+</div>
