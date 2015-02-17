@@ -28,7 +28,7 @@
                 <tr ng-repeat="item in itemSales | orderBy:sortField:descending">
                     <td>{{ item.date | date:'yyyy-MM-dd' }}</td>
                     <td>{{ item.uniquePurchases }}</td>
-                    <td>{{ item.revenue | currency:'DKK' }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
                 </tr>
             </tbody>
         </table>
