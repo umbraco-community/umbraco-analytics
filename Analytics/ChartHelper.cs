@@ -20,7 +20,7 @@ namespace Analytics
             // Initialize the data object
             ChartData cd = new ChartData
             {
-                labels      = apiResults.Rows.Select(row => row.Cells[0]).ToArray(),
+                labels      = apiResults.Rows.Select(row => row.Cells[0].Value).ToArray(),
                 datasets    = new ChartDataSet[metrics]
             };
 
@@ -40,7 +40,7 @@ namespace Analytics
                 {
 
                     // Get the value
-                    string value = apiResults.Rows[row].Cells[dimensions + metric];
+                    string value = apiResults.Rows[row].Cells[dimensions + metric].Value;
 
                     // Set the value with the proper type
                     if (Regex.IsMatch(value, "^[0-9]+$"))
@@ -98,7 +98,7 @@ namespace Analytics
                 for (int row = 0; row < apiResults.Rows.Length; row++)
                 {
                     // Get the value
-                    string value = apiResults.Rows[row].Cells[dimensions + metric];
+                    string value = apiResults.Rows[row].Cells[dimensions + metric].Value;
 
                     // Set the value with the proper type
                     if (Regex.IsMatch(value, "^[0-9]+$"))

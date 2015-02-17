@@ -42,7 +42,7 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
             }
 
             // Initalize a new instance of the GoogleService class
-            GoogleService service = GoogleService.CreateFromRequestToken(AnalyticsConfig.ClientId, AnalyticsConfig.ClientSecret, refreshToken);
+            GoogleService service = GoogleService.CreateFromRefreshToken(AnalyticsConfig.ClientId, AnalyticsConfig.ClientSecret, refreshToken);
 
             try {
 

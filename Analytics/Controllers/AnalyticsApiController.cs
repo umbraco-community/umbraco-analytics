@@ -17,7 +17,7 @@ namespace Analytics.Controllers
     public class AnalyticsApiController : UmbracoAuthorizedApiController
     {  
         private GoogleService GetGoogleService() {
-            return GoogleService.CreateFromRequestToken(AnalyticsConfig.ClientId, AnalyticsConfig.ClientSecret, AnalyticsConfig.RefreshToken);
+            return GoogleService.CreateFromRefreshToken(AnalyticsConfig.ClientId, AnalyticsConfig.ClientSecret, AnalyticsConfig.RefreshToken);
         }
 
         /// <summary>
