@@ -89,9 +89,9 @@
                     // push objects to items array
                     angular.forEach($scope.transactions.Rows, function (item) {
                         $scope.itemTransactions.push({
-                            transactionId: item.Cells[0],
-                            quantity: parseInt(item.Cells[1]),
-                            revenue: parseFloat(item.Cells[2])
+                            transactionId: item.Cells[0].Value,
+                            quantity: parseInt(item.Cells[1].Value),
+                            revenue: parseFloat(item.Cells[2].Value)
                         });
                     });
 
