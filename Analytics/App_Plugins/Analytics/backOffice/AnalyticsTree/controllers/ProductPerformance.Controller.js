@@ -89,12 +89,12 @@
                     // push objects to items array
                     angular.forEach($scope.productperformance.Rows, function (item) {
                         $scope.itemProducts.push({
-                            productSku: item.Cells[0],
-                            productName: item.Cells[1],
-                            uniquePurchases: parseInt(item.Cells[2]),
-                            revenue: parseFloat(item.Cells[3]),
-                            revenuePerItem: parseFloat(item.Cells[4]),
-                            itemsPerPurchase: parseFloat(item.Cells[5])
+                            productSku: item.Cells[0].Value,
+                            productName: item.Cells[1].Value,
+                            uniquePurchases: parseInt(item.Cells[2].Value),
+                            revenue: parseFloat(item.Cells[3].Value),
+                            revenuePerItem: parseFloat(item.Cells[4].Value),
+                            itemsPerPurchase: parseFloat(item.Cells[5].Value).toFixed(2)
                         });
                     });
 
