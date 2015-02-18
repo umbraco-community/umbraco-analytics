@@ -25,7 +25,7 @@ namespace Analytics
             Install.AddSectionLanguageKeys();
 
             //Add Section Dashboard XML
-            //Install.AddSectionDashboard();
+            Install.AddSectionDashboard();
 
             //Add OLD Style Package Event
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
@@ -65,6 +65,7 @@ namespace Analytics
                 AnalyticsApiController gaApi = new AnalyticsApiController();
                 SettingsApiController settingsApi = new SettingsApiController();
                 Profile profile = settingsApi.GetProfile();
+
                 if (profile != null)
                 {
                     var ecommerceNode = e.Nodes.SingleOrDefault(x => x.Id.ToString() == "ecommerce");
@@ -74,15 +75,17 @@ namespace Analytics
                         {
                             // check if profile has any ecommerce data for last 3 years
                             StatsApiResult transactions = gaApi.GetTransactions(profile.Id, DateTime.Now.AddYears(-3), DateTime.Now);
-                            if (transactions.ApiResult.Rows.Count() == 0)
+                            if (!transactions.ApiResult.Rows.Any())
                             {
                                 //Remove the ecommerce node from the collection
+                                //If no Rows returned from API - then remove the node from the tree
                                 e.Nodes.Remove(ecommerceNode);
                             }
                         }
                         catch
                         {
                             //Remove the ecommerce node from the collection
+                            //If the API throws an ex then remove the node from the tree as well
                             e.Nodes.Remove(ecommerceNode);
                         }
                     }
