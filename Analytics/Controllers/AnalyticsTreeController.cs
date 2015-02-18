@@ -51,7 +51,7 @@ namespace Analytics.Controllers
                     //When clicked - /App_Plugins/Diagnostics/backoffice/diagnosticsTree/edit.html
                     //URL in address bar - /developer/diagnosticsTree/General/someID
                     //var route = string.Format("/analytics/analyticsTree/view/{0}", item.Value);
-                    bool hasChildNodes = item.Id == "ecommerce" ? true : false;
+                    bool hasChildNodes = item.Id == "ecommerce";
                     var nodeToAdd = CreateTreeNode(item.Id, null, queryStrings, item.Title, item.Icon, hasChildNodes, item.Route);
 
                     //Add it to the collection
