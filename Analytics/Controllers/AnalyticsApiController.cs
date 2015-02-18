@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Analytics.Models;
 using Skybrud.Social.Google;
-using Skybrud.Social.Google.Analytics;
 using Skybrud.Social.Google.Analytics.Objects;
 using Skybrud.Social.Google.Analytics.Responses;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
-using Analytics.SkybrudSocialExtensionMethods;
 
 namespace Analytics.Controllers
 {

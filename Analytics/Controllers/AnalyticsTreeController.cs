@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Analytics.Models;
-using Lucene.Net.Analysis;
 using Umbraco.Core;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;

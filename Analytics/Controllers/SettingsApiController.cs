@@ -2,11 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Web.Hosting;
-using System.Web.Http;
 using System.Xml;
 using Analytics.Models;
-using Skybrud.Social.Google.Analytics.Objects;
-using Skybrud.Social.Json;
 using Umbraco.Core.Configuration;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
