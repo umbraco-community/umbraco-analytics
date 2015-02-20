@@ -111,9 +111,9 @@ table.table a span:hover {
     margin-top: 20px;
 }
 #stat-boxes .box-info {
-    width: 200px;
+    width: 220px;
     padding: 15px;
-    margin: 0px 15px 15px 0px;
+    margin: 0 15px 15px 0;
     border: 1px solid #ccc;
     display: block;
     min-height: 65px;
