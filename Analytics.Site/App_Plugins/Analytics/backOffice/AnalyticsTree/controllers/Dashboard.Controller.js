@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.DashboardController",
-    function ($scope, $location, statsResource, settingsResource) {
+    function ($scope, $location, statsResource, settingsResource, localizationService) {
 
         var profileID = "";
 
@@ -73,16 +73,21 @@
 
                 var helpers = Chart.helpers;
                 helpers.each(legendHolder.firstChild.childNodes, function (legendNode, index) {
-
                     if (index == 0) {
-                        var t = document.createTextNode("Visits");
-                        legendNode.appendChild(t);
-                        legendNode.className = "first";
+                        localizationService.localize("analytics_visits").then(function (value) {
+                            var text = value != null ? value : "Visits";
+                            var t = document.createTextNode(text);
+                            legendNode.appendChild(t);
+                            legendNode.className = "first";
+                        });
                     }
                     else if (index == 1) {
-                        var t = document.createTextNode("Page Views");
-                        legendNode.appendChild(t);
-                        legendNode.className = "second";
+                        localizationService.localize("analytics_pageViews").then(function (value) {
+                            var text = value != null ? value : "Page Views";
+                            var t = document.createTextNode(text);
+                            legendNode.appendChild(t);
+                            legendNode.className = "second";
+                        });
                     }
                 });
 

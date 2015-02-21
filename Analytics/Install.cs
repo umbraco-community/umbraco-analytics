@@ -26,7 +26,6 @@ namespace Analytics
             {
                 //So let's create it the section
                 sectionService.MakeNew("Analytics", "analytics", "icon-pulse");
-
             }
         }
 

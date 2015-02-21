@@ -4,7 +4,7 @@
         <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
         </div>
 
-        <h4>Social network</h4>
+        <h4><localize key="analytics_socialNetwork">Social Network</localize></h4>
 
         <div class="clearfix"></div>
         <div ng-show="loadingViews" class="loading-bar">
@@ -18,9 +18,9 @@
         <table id="tbl-social" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="socialnetwork"><a href="#" ng-click="sort('socialnetwork')" prevent-default><span>Social Network</span> <i class="icon"></i></a></th>
-                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
-                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                    <th id="socialnetwork"><a href="#" ng-click="sort('socialnetwork')" prevent-default><span><localize key="analytics_socialNetwork">Social Network</localize></span> <i class="icon"></i></a></th>
+                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
+                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>

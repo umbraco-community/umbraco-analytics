@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.SettingsController",
-    function ($scope, settingsResource, notificationsService) {
+    function ($scope, settingsResource, notificationsService, localizationService, navigationService) {
 
         //By default user has not authorised
         var hasUserAuthd = false;
@@ -88,9 +88,9 @@
             //Save settings resource - does a WebAPI POST call
             settingsResource.save(settings).then(function (response) {
                 $scope.settings = response.data;
-                
+
                 //Display Success message
-                notificationsService.success("Success settings have been saved");
+                notificationsService.success(localizationService.localize("analytics_settingsSaved"));
             });
 
             //Save settings resource - does a WebAPI POST call
@@ -98,7 +98,7 @@
                 //Don't need anything from response.data back
 
                 //Display Success message
-                notificationsService.success("Success account details have been saved");
+                notificationsService.success(localizationService.localize("analytics_accountDetailsSaved"));
             });
 
             //Save settings resource - does a WebAPI POST call
@@ -106,8 +106,12 @@
                 //Don't need anything from response.data back
 
                 //Display Success message
-                notificationsService.success("Success profile details have been saved");
+                notificationsService.success(localizationService.localize("analytics_profileDetailsSaved"));
             });
+
+            //Sync ('refresh') the tree!
+            //This should work, but somehow it seems to fails sometimes when you click "save" and receive an error in a dialog on the right.
+            //navigationService.syncTree({ tree: 'analyticsTree', path: [-1, -1], forceReload: false, activate: true });
         };
 
     });

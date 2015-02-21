@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PostInstall.ascx.cs" Inherits="Analytics.Installer.PostInstall" %>
 
-<h1><span class="icon-pulse"></span> Analytics for Umbraco</h1>
+<h1><span class="icon-pulse"></span>Analytics for Umbraco</h1>
 <h3>Thank You!</h3>
 <p>
     The Analytics for Umbraco team, would like to thank you for installing this package. We hope you enjoy using it and find 

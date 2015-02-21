@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.ProductPerformanceController",
-    function ($scope, $location, statsResource, settingsResource) {
+    function ($scope, $location, statsResource, settingsResource, localizationService) {
 
         var profileID = "";
 
@@ -67,11 +67,13 @@
 
                     var helpers = Chart.helpers;
                     helpers.each(legendHolder.firstChild.childNodes, function (legendNode, index) {
-
                         if (index == 0) {
-                            var t = document.createTextNode("Unique Purchases");
-                            legendNode.appendChild(t);
-                            legendNode.className = "first";
+                            localizationService.localize("analytics_uniquePurchases").then(function (value) {
+                                var text = value != null ? value : "Unique Purchases";
+                                var t = document.createTextNode(text);
+                                legendNode.appendChild(t);
+                                legendNode.className = "first";
+                            });
                         }
                     });
 
@@ -89,12 +91,12 @@
                     // push objects to items array
                     angular.forEach($scope.productperformance.Rows, function (item) {
                         $scope.itemProducts.push({
-                            productSku: item.Cells[0],
-                            productName: item.Cells[1],
-                            uniquePurchases: parseInt(item.Cells[2]),
-                            revenue: parseFloat(item.Cells[3]),
-                            revenuePerItem: parseFloat(item.Cells[4]),
-                            itemsPerPurchase: parseFloat(item.Cells[5])
+                            productSku: item.Cells[0].Value,
+                            productName: item.Cells[1].Value,
+                            uniquePurchases: parseInt(item.Cells[2].Value),
+                            revenue: parseFloat(item.Cells[3].Value),
+                            revenuePerItem: parseFloat(item.Cells[4].Value),
+                            itemsPerPurchase: parseFloat(item.Cells[5].Value)
                         });
                     });
 

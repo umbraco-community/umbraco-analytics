@@ -1,6 +1,7 @@
 ﻿using System;
 using Skybrud.Social.Google;
 using Umbraco.Web.UI.Pages;
+using umbraco;
 
 namespace Analytics.App_Plugins.Analytics.BackOffice {
 
@@ -15,7 +16,7 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
             if (String.IsNullOrWhiteSpace(state))
             {
                 //Ouput an error message
-                Content.Text += "No state specified.";
+                Content.Text += ui.Text("analytics", "noStateSpecified");
                 return;
             }
 
@@ -26,7 +27,7 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
             if (session == null)
             {
                 //Ouput an error message
-                Content.Text += "Sorry - your session has most likely expired.";
+                Content.Text += ui.Text("analytics", "sorrySessionExpired");
                 return;
             }
 
@@ -37,7 +38,7 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
             if (String.IsNullOrWhiteSpace(refreshToken))
             {
                 //Ouput an error message
-                Content.Text += "Okay. Something went wrong.";
+                Content.Text += ui.Text("analytics", "somethingWentWrong");
                 return;
             }
 
@@ -53,18 +54,17 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
                 AnalyticsConfig.RefreshToken = refreshToken;
 
                 //Ouput some info about the user
-                Content.Text = "Hi there " + user.Name + ". We have saved your information to a config file, so Umbraco can pull stats from your Analytics account.";
-                Content.Text += "<br /><br />You can now <a href=\"javascript: self.close()\">close this window</a>.";
+                //Using UmbracoUser (obsolete) - somehow it fails to compile when using Security.CurrentUser
+                Content.Text = ui.Text("analytics", "informationSavedMessage", user.Name, UmbracoUser);
             } 
             catch
             {
                 //Ouput an error message
-                Content.Text += "Okay. Something went wrong.";
+                Content.Text += ui.Text("analytics", "somethingWentWrong");
             }
 
             // Clear the session state
             Session.Remove("Analytics_" + state);
-
         }
 
     }
