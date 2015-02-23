@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Hosting;
 using System.Xml;
-using umbraco.BusinessLogic;
 using Umbraco.Core;
 
 namespace Analytics
