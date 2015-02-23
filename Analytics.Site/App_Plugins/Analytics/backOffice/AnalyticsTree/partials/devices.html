@@ -3,8 +3,8 @@
         
         <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
         </div> 
-            
-        <h4>Device Types</h4>
+        
+        <h4><localize key="analytics_deviceTypes">Device Types</localize></h4>
    
         <div class="clearfix"></div>
         <div ng-show="loadingViews" class="loading-bar">
@@ -18,9 +18,9 @@
         <table id="tbl-devicetypes" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="dt_devicetype"><a href="#" ng-click="sort('dt_devicetype')" prevent-default><span>Device Type</span> <i class="icon"></i></a></th>
-                    <th id="dt_visits"><a href="#" ng-click="sort('dt_visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
-                    <th id="dt_pageviews"><a href="#" ng-click="sort('dt_pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                    <th id="dt_devicetype"><a href="#" ng-click="sort('dt_devicetype')" prevent-default><span><localize key="analytics_deviceType">Device Type</localize></span> <i class="icon"></i></a></th>
+                    <th id="dt_visits"><a href="#" ng-click="sort('dt_visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
+                    <th id="dt_pageviews"><a href="#" ng-click="sort('dt_pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>
@@ -34,14 +34,14 @@
         
         <hr/>
         
-        <h4>Devices</h4>
+        <h4><localize key="analytics_devices">Devices</localize></h4>
         <table id="tbl-devices" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="device"><a href="#" ng-click="sort('device')" prevent-default><span>Device</span> <i class="icon"></i></a></th>
-                    <th id="model"><a href="#" ng-click="sort('model')" prevent-default><span>Model</span> <i class="icon"></i></a></th>
-                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span>Visits</span> <i class="icon"></i></a></th>
-                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span>Page Views</span> <i class="icon"></i></a></th>
+                    <th id="device"><a href="#" ng-click="sort('device')" prevent-default><span><localize key="analytics_device">Device</localize></span> <i class="icon"></i></a></th>
+                    <th id="model"><a href="#" ng-click="sort('model')" prevent-default><span><localize key="analytics_model">Model</localize></span> <i class="icon"></i></a></th>
+                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
+                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>

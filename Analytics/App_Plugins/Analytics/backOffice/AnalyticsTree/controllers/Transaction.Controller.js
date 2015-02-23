@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.TransactionController",
-    function ($scope, $location, statsResource, settingsResource) {
+    function ($scope, $location, statsResource, settingsResource, localizationService) {
 
         var profileID = "";
 
@@ -67,11 +67,13 @@
 
                     var helpers = Chart.helpers;
                     helpers.each(legendHolder.firstChild.childNodes, function (legendNode, index) {
-
                         if (index == 0) {
-                            var t = document.createTextNode("Transactions");
-                            legendNode.appendChild(t);
-                            legendNode.className = "first";
+                            localizationService.localize("analytics_transactions").then(function (value) {
+                                var text = value != null ? value : "Transactions";
+                                var t = document.createTextNode(text);
+                                legendNode.appendChild(t);
+                                legendNode.className = "first";
+                            });
                         }
                     });
 

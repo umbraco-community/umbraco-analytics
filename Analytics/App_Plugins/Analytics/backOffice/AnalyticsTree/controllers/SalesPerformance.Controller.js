@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.SalesPerformanceController",
-    function ($scope, $location, statsResource, settingsResource) {
+    function ($scope, $location, statsResource, settingsResource, localizationService) {
 
         var profileID = "";
 
@@ -67,11 +67,13 @@
 
                     var helpers = Chart.helpers;
                     helpers.each(legendHolder.firstChild.childNodes, function (legendNode, index) {
-
                         if (index == 0) {
-                            var t = document.createTextNode("Revenue");
-                            legendNode.appendChild(t);
-                            legendNode.className = "first";
+                            localizationService.localize("analytics_revenue").then(function (value) {
+                                var text = value != null ? value : "Revenue";
+                                var t = document.createTextNode(text);
+                                legendNode.appendChild(t);
+                                legendNode.className = "first";
+                            });
                         }
                     });
 

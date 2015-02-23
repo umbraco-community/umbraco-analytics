@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.ProductPerformanceController",
-    function ($scope, $location, statsResource, settingsResource) {
+    function ($scope, $location, statsResource, settingsResource, localizationService) {
 
         var profileID = "";
 
@@ -67,11 +67,13 @@
 
                     var helpers = Chart.helpers;
                     helpers.each(legendHolder.firstChild.childNodes, function (legendNode, index) {
-
                         if (index == 0) {
-                            var t = document.createTextNode("Unique Purchases");
-                            legendNode.appendChild(t);
-                            legendNode.className = "first";
+                            localizationService.localize("analytics_uniquePurchases").then(function (value) {
+                                var text = value != null ? value : "Unique Purchases";
+                                var t = document.createTextNode(text);
+                                legendNode.appendChild(t);
+                                legendNode.className = "first";
+                            });
                         }
                     });
 
@@ -94,7 +96,7 @@
                             uniquePurchases: parseInt(item.Cells[2].Value),
                             revenue: parseFloat(item.Cells[3].Value),
                             revenuePerItem: parseFloat(item.Cells[4].Value),
-                            itemsPerPurchase: parseFloat(item.Cells[5].Value).toFixed(2)
+                            itemsPerPurchase: parseFloat(item.Cells[5].Value)
                         });
                     });
 
