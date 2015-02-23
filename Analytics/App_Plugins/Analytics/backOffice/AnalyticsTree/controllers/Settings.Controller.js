@@ -107,11 +107,11 @@
 
                 //Display Success message
                 notificationsService.success(localizationService.localize("analytics_profileDetailsSaved"));
+
+                //Sync ('refresh') the tree!
+                navigationService.syncTree({ tree: 'analyticsTree', path: [-1, -1], forceReload: true, activate: true });
             });
 
-            //Sync ('refresh') the tree!
-            //This should work, but somehow it seems to fails sometimes when you click "save" and receive an error in a dialog on the right.
-            //navigationService.syncTree({ tree: 'analyticsTree', path: [-1, -1], forceReload: false, activate: true });
         };
 
     });
