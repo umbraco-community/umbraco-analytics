@@ -55,6 +55,8 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
 
                 //Ouput some info about the user
                 //Using UmbracoUser (obsolete) - somehow it fails to compile when using Security.CurrentUser
+                //ui.text requires OLD BusinessLogic User object type not shiny new one
+                //Can we use another helper/library to get the translation text?
                 Content.Text = ui.Text("analytics", "informationSavedMessage", user.Name, UmbracoUser);
             } 
             catch
