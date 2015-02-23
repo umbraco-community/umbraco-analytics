@@ -346,7 +346,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Operating System Info
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -376,7 +376,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Operating System Version Info
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -433,7 +433,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get the Countries
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -463,7 +463,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get the Languages
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -521,7 +521,7 @@ namespace Analytics.Controllers
 
 
         /// <summary>
-        /// 
+        /// Get Transactions over time
         /// </summary>
         /// <param name="profile"></param>
         /// <param name="startDate"></param>
@@ -572,7 +572,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// Get ProductPerformance
+        /// Get Product Performance
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -603,7 +603,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Product Performance Over Time
         /// </summary>
         /// <param name="profile"></param>
         /// <param name="startDate"></param>
@@ -654,7 +654,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// Get SalesPerformance
+        /// Get Sales Performance
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -685,7 +685,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Sales Performance Over Time
         /// </summary>
         /// <param name="profile"></param>
         /// <param name="startDate"></param>
@@ -736,7 +736,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// Get StoreDetails
+        /// Get Store Details
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -767,7 +767,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// Get BestSellers
+        /// Get Best Sellers
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
@@ -798,7 +798,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// Get RevenuePerSource
+        /// Get Revenue Per Source
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
