@@ -148,8 +148,12 @@ namespace Analytics
                     XmlDocument xmlNodeToAdd = new XmlDocument();
                     xmlNodeToAdd.LoadXml(xmlToAdd);
 
+                    var toAdd = xmlNodeToAdd.SelectSingleNode("*");
+
                     //Append the xml above to the dashboard node
-                    dashboardNode.AppendChild(xmlNodeToAdd);
+                    dashboardNode.AppendChild(dashboardNode.OwnerDocument.ImportNode(toAdd, true));
+
+                    
 
                     //Save the file flag to true
                     saveFile = true;
