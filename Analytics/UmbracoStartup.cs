@@ -3,6 +3,7 @@ using System.Linq;
 using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
+using Umbraco.Web;
 using Umbraco.Web.Trees;
 using Analytics.Models;
 using Analytics.Controllers;
@@ -22,7 +23,8 @@ namespace Analytics
             Install.AddSection(applicationContext);
 
             //Check to see if language keys for section needs to be added
-            Install.AddSectionLanguageKeys();
+            //Need to verify that this is no longer needed due to the /config/lang folder in App_Plugins
+            //Install.AddSectionLanguageKeys();
 
             //Add Section Dashboard XML
             Install.AddSectionDashboard();
@@ -59,7 +61,7 @@ namespace Analytics
                 }
             }
 
-            
+            //This will only run on the analyticsTree
             if (sender.TreeAlias == "analyticsTree")
             {
                 AnalyticsApiController gaApi = new AnalyticsApiController();
