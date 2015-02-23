@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Hosting;
+﻿using System.Web.Hosting;
 using System.Xml.Linq;
 
 namespace Analytics {
@@ -8,8 +7,6 @@ namespace Analytics {
     /// This code is not pretty and not intented to be. Will be rewritten later, but for now it
     /// serves as a global way to read from and write to the settings file.
     /// </summary>
-    
-    [Obsolete("This looks to be obsolete and no longer needed?")]
     public class AnalyticsConfig {
 
         /// <summary>
@@ -20,14 +17,12 @@ namespace Analytics {
         }
 
         public static string GetSetting(string key) {
-            // TODO: This is just for POC - use Warren's logic instead
             XElement xAnalytics = XElement.Load(ConfigFilePath);
             XElement xSetting = xAnalytics.Element(key);
             return xSetting == null ? null : xSetting.Value;
         }
 
         public static void SetSetting(string key, string value) {
-            // TODO: This is just for POC - use Warren's logic instead
             XElement xAnalytics = XElement.Load(ConfigFilePath);
             XElement xSetting = xAnalytics.Element(key);
             if (xSetting == null) {
