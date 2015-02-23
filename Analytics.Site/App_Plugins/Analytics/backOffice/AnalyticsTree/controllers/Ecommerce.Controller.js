@@ -44,10 +44,10 @@
                     // push objects to items array
                     angular.forEach($scope.products.Rows, function (item) {
                         $scope.itemProducts.push({
-                            productSku: item.Cells[0],
-                            productName: item.Cells[1],
-                            quantity: parseInt(item.Cells[2]),
-                            revenue: parseFloat(item.Cells[3])
+                            productSku: item.Cells[0].Value,
+                            productName: item.Cells[1].Value,
+                            quantity: parseInt(item.Cells[2].Value),
+                            revenue: parseFloat(item.Cells[3].Value)
                         });
                     });
 
@@ -77,12 +77,13 @@
                     // push objects to items array
                     angular.forEach($scope.revenuepersource.Rows, function (item) {
                         // only where there have been a transaction
-                        if (parseInt(item.Cells[2]) > 0) {
+                        var numberOfTransactions = parseInt(item.Cells[2].Value);
+                        if (numberOfTransactions > 0) {
                             $scope.itemRevenuePerSource.push({
-                                r_source: item.Cells[0],
-                                r_keyword: item.Cells[1],
-                                r_transactions: parseInt(item.Cells[2]),
-                                r_revenue: parseFloat(item.Cells[3])
+                                r_source: item.Cells[0].Value,
+                                r_keyword: item.Cells[1].Value,
+                                r_transactions: parseInt(item.Cells[2].Value),
+                                r_revenue: parseFloat(item.Cells[3].Value)
                             });
                         }
                     });
@@ -108,17 +109,17 @@
                 statsResource.getstoredetails(profileID, $scope.dateFilter.startDate, $scope.dateFilter.endDate).then(function (response) {
                     $scope.storedetails = response.data.ApiResult;
 
-                    var _transactions = $scope.storedetails.Rows[0].Cells[0];
-                    var _transactionRevenue = $scope.storedetails.Rows[0].Cells[1];
-                    var _itemsPerPurchase = $scope.storedetails.Rows[0].Cells[2];
-                    var _itemQuantity = $scope.storedetails.Rows[0].Cells[3];
-                    var _conversionRate = $scope.storedetails.Rows[0].Cells[4];
+                    var _transactions = $scope.storedetails.Rows[0].Cells[0].Value;
+                    var _transactionRevenue = $scope.storedetails.Rows[0].Cells[1].Value;
+                    var _itemsPerPurchase = $scope.storedetails.Rows[0].Cells[2].Value;
+                    var _itemQuantity = $scope.storedetails.Rows[0].Cells[3].Value;
+                    var _conversionRate = $scope.storedetails.Rows[0].Cells[4].Value;
 
                     $scope.info = {
                         transactions: parseInt(_transactions),
                         revenue: 0.0,
                         avgRevenue: 0.0,
-                        itemsPerPurchase: parseFloat(_itemsPerPurchase),
+                        itemsPerPurchase: parseFloat(_itemsPerPurchase).toFixed(2),
                         itemQuantity: parseInt(_itemQuantity),
                         conversionRate: parseFloat(_conversionRate)
                     }

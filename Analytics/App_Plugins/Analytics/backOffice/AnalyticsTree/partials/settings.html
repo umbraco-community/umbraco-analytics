@@ -2,13 +2,13 @@
     <div class="umb-pane form-horizontal">
         
         <p class="alert alert-warning" ng-show="!selectedprofile">
-            Before you can use Analytics, you need to choose a profile you wish to use to view statistics.
+            <localize key="analytics_infoMessage">Before you can use Analytics, you need to choose a profile you wish to use to view statistics.</localize>
         </p>
 
-        <h4>Settings</h4>
+        <h4><localize key="analytics_settings">Settings</localize></h4>
 
-        <umb-control-group ng-hide="hasAuthd()" label="Authorisation" description="Login with Google via oAuth to verify">
-            <button class="btn btn-success" ng-click="auth()"><span class="icon-lock"></span> Authorize</button>
+        <umb-control-group ng-hide="hasAuthd()" label="@analytics_authorisation" description="@analytics_loginWithGoogleViaOAuth">
+            <button class="btn btn-success" ng-click="auth()"><span class="icon-lock"></span> <localize key="analytics_authorize">Authorize</localize></button>
         </umb-control-group>
 
         <umb-control-group ng-repeat="setting in settings" label="{{ setting.Label }}" description="{{ setting.Description }}" style="display:none;">
@@ -21,31 +21,31 @@
             <div class="control-group umb-control-group">
                 <div class="umb-el-wrap">
                     <label class="control-label" for="">
-                        Account
-                        <small>Select which account you wish to view settings from</small>
+                        <localize key="analytics_account">Account</localize>
+                        <small><localize key="analytics_selectAccountMessage">Select which account you wish to view settings from</localize></small>
                     </label>
                   
                     <div class="controls controls-row">
                         
                         <select name="account" ng-model="selectedaccount" ng-change="accountSelected(selectedaccount)" ng-options="account.Name for account in accounts">
-                            <option value="">-- Select an Account --</option>
+                            <option value="" localize-option="analytics_selectAnAccount"></option>
                         </select>
 
                         <br />
 
                         <select name="profile" ng-show="selectedaccount" ng-model="selectedprofile" ng-options="profile.Name for profile in profiles" style="margin-top:10px">
-                            <option value="">-- Select a Profile --</option>
+                            <option value="" localize-option="analytics_selectAProfile"></option>
                         </select>
 
                         <div ng-show="selectedprofile">
                             <hr />
 
-                            <h4>Selected Profile</h4>
+                            <h4><localize key="analytics_selectedProfile">Selected Profile</localize></h4>
 
-                            <h5>Name: {{ selectedprofile.Name }}</h5>
-                            <h5>Website: {{ selectedprofile.WebsiteUrl }}</h5>
-                            <h5>Id: {{ selectedprofile.Id }}</h5>
-                            <h5>Web Property Id: {{ selectedprofile.WebPropertyId }}</h5>
+                            <h5><localize key="analytics_name">Name</localize>: {{ selectedprofile.Name }}</h5>
+                            <h5><localize key="analytics_website">Website</localize>: {{ selectedprofile.WebsiteUrl }}</h5>
+                            <h5><localize key="analytics_id">Id</localize>: {{ selectedprofile.Id }}</h5>
+                            <h5><localize key="analytics_webPropertyId">Web Property Id</localize>: {{ selectedprofile.WebPropertyId }}</h5>
                         </div>
 
                     </div>

@@ -4,7 +4,7 @@
         <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
         </div>   
            
-        <h4>eCommerce</h4>
+        <h4><localize key="analytics_ecommerce">eCommerce</localize></h4>
         
         <div class="clearfix"></div>
         <div ng-show="loadingViews" class="loading-bar">
@@ -12,23 +12,23 @@
         </div>
 
         <div id="stat-boxes">
-            <div class="box-info">Transactions<span class="count">{{ info.transactions }}</span></div>
-            <div class="box-info">Revenue<span class="count">{{ info.revenue | currency: currencyCode }}</span></div>
-            <div class="box-info">Avg. Revenue Per Purchase<span class="count">{{ info.avgRevenue | currency: currencyCode }}</span></div>
-            <div class="box-info">Avg. Items Per Purchase<span class="count">{{ info.itemsPerPurchase }}</span></div>
-            <div class="box-info">Quantities<span class="count">{{ info.itemQuantity }}</span></div>
-            <div class="box-info">Conversion Rate<span class="count">{{ info.conversionRate + " %" }}</span></div>
+            <div class="box-info"><localize key="analytics_transactions">Transactions</localize><span class="count">{{ info.transactions }}</span></div>
+            <div class="box-info"><localize key="analytics_revenue">Revenue</localize><span class="count">{{ info.revenue | currency: currencyCode }}</span></div>
+            <div class="box-info"><localize key="analytics_avgRevenuePerPurchase">Avg. Revenue Per Purchase</localize><span class="count">{{ info.avgRevenue | currency: currencyCode }}</span></div>
+            <div class="box-info"><localize key="analytics_avgItemsPerPurchase">Avg. Items Per Purchase</localize><span class="count">{{ info.itemsPerPurchase }}</span></div>
+            <div class="box-info"><localize key="analytics_quantities">Quantities</localize><span class="count">{{ info.itemQuantity }}</span></div>
+            <div class="box-info"><localize key="analytics_conversionRate">Conversion Rate</localize><span class="count">{{ info.conversionRate + " %" }}</span></div>
         </div>
         <div class="clearfix"></div>
 
-        <h5>Bestsellers</h5>
+        <h5><localize key="analytics_transactions">Bestsellers</localize></h5>
         <table id="tbl-bestsellers" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="productSku"><a href="#" ng-click="sort('productSku')" prevent-default><span>Product SKU</span> <i class="icon"></i></a></th>
-                    <th id="productName"><a href="#" ng-click="sort('productName')" prevent-default><span>Product Name</span> <i class="icon"></i></a></th>
-                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default><span>Quantity</span> <i class="icon"></i></a></th>
-                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span>Revenue</span> <i class="icon"></i></a></th>
+                    <th id="productSku"><a href="#" ng-click="sort('productSku')" prevent-default><span><localize key="analytics_productSku">Product SKU</localize></span> <i class="icon"></i></a></th>
+                    <th id="productName"><a href="#" ng-click="sort('productName')" prevent-default><span><localize key="analytics_productName">Product Name</localize></span> <i class="icon"></i></a></th>
+                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default><span><localize key="analytics_quantity">Quantity</localize></span> <i class="icon"></i></a></th>
+                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span><localize key="analytics_revenue">Revenue</localize></span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,14 +41,14 @@
             </tbody>
         </table>
         
-        <h5>Revenue Per Source</h5>
+        <h5><localize key="analytics_revenuePerSource">Revenue Per Source</localize></h5>
         <table id="tbl-revenuepersource" class="table table-striped">
             <thead>
                 <tr>
-                    <th id="r_source"><a href="#" ng-click="sort('r_source')" prevent-default><span>Source</span> <i class="icon"></i></a></th>
-                    <th id="r_keyword"><a href="#" ng-click="sort('r_keyword')" prevent-default><span>Keyword</span> <i class="icon"></i></a></th>
-                    <th id="r_transactions"><a href="#" ng-click="sort('r_transactions')" prevent-default><span>Transactions</span> <i class="icon"></i></a></th>
-                    <th id="r_revenue"><a href="#" ng-click="sort('r_revenue')" prevent-default><span>Revenue</span> <i class="icon"></i></a></th>
+                    <th id="r_source"><a href="#" ng-click="sort('r_source')" prevent-default><span><localize key="analytics_source">Source</localize></span> <i class="icon"></i></a></th>
+                    <th id="r_keyword"><a href="#" ng-click="sort('r_keyword')" prevent-default><span><localize key="analytics_keyword">Keyword</localize></span> <i class="icon"></i></a></th>
+                    <th id="r_transactions"><a href="#" ng-click="sort('r_transactions')" prevent-default><span><localize key="analytics_transactions">Transactions</localize></span> <i class="icon"></i></a></th>
+                    <th id="r_revenue"><a href="#" ng-click="sort('r_revenue')" prevent-default><span><localize key="analytics_revenue">Revenue</localize></span> <i class="icon"></i></a></th>
                 </tr>
             </thead>
             <tbody>
