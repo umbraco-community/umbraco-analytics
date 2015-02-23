@@ -1,36 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Xml;
-using umbraco;
-using umbraco.cms.businesslogic.macro;
+using Umbraco.Web.UI.Controls;
 
 namespace Analytics.Installer
 {
-    public class PostInstall : System.Web.UI.UserControl
+    public class PostInstall : UmbracoUserControl
     {
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //gives current user access to the analytics section
-            umbraco.BusinessLogic.User currentUser = umbraco.BasePages.UmbracoEnsuredPage.CurrentUser;
-            bool hasAccess = false;
+            //Get the current user
+            var currentUser = Security.CurrentUser;
 
-            foreach (umbraco.BusinessLogic.Application a in currentUser.Applications)
-            {
-                if (a.alias == "analytics")
-                {
-                    hasAccess = true;
-                    break;
-                }
-            }
+            //Check if the user has access to the section
+            bool hasAccess = currentUser.AllowedSections.Contains("analytics");
 
-            //add application
             if (!hasAccess)
-                currentUser.addApplication("analytics");
+            {
+                //Add section if they do not have access to it already
+                currentUser.AddAllowedSection("analytics");
+            }
         }
     }
 }
