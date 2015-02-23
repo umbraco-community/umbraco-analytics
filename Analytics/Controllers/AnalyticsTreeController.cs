@@ -33,8 +33,6 @@ namespace Analytics.Controllers
 
                 //Add nodes
                 var treeNodes = new List<SectionTreeNode>();
-                //treeNodes.Add(new SectionTreeNode() { Id = "real-time", Title = "Real Time", Icon = "icon-connection", Route = string.Format("{0}/view/{1}", mainRoute, "real-time") });
-                
                 treeNodes.Add(new SectionTreeNode() { Id = "views", Title = ui.Text("analytics", "views"), Icon = "icon-activity", Route = string.Format("{0}/view/{1}", mainRoute, "views") });
                 treeNodes.Add(new SectionTreeNode() { Id = "keywords", Title = ui.Text("analytics", "keywords"), Icon = "icon-tags", Route = string.Format("{0}/view/{1}", mainRoute, "keywords") });
                 treeNodes.Add(new SectionTreeNode() { Id = "social", Title = ui.Text("analytics", "socialNetwork"), Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "social") });
@@ -63,7 +61,8 @@ namespace Analytics.Controllers
                 return nodes;
             }
 
-
+            //When you click on the e-commerce node
+            //Render these as the child nodes instead...
             if (id == "ecommerce")
             {
                 //Main Route
@@ -90,7 +89,7 @@ namespace Analytics.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get menu/s for nodes in tree
         /// </summary>
         /// <param name="id"></param>
         /// <param name="queryStrings"></param>
@@ -98,11 +97,14 @@ namespace Analytics.Controllers
         protected override MenuItemCollection GetMenuForNode(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
         {
             var menu = new MenuItemCollection();
+
+            //If the node is the root node (top of tree)
             if (id == Constants.System.Root.ToInvariantString()) 
             {
-                // root actions
+                //Add in refresh action
                 menu.Items.Add<RefreshNode, ActionRefresh>(ui.Text("actions", ActionRefresh.Instance.Alias), false);
             }
+
             return menu;
         }
     }
