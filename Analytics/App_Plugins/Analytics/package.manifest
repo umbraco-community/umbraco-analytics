@@ -6,6 +6,7 @@
 		'~/App_Plugins/Analytics/lib/accountingjs/accounting.js',
 		'~/App_Plugins/Analytics/lib/momentjs/moment.js',
 		'~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js',
+		'~/App_Plugins/Analytics/lib/angular-tablesort/angular-tablesort.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/filters/currency.filter.js',
 	    '~/App_Plugins/Analytics/backoffice/analyticstree/controllers/view.controller.js',
 		'~/App_Plugins/Analytics/backoffice/analyticstree/controllers/edit.controller.js',
@@ -32,6 +33,7 @@
 	],
 	css: [
        '~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css',
+	   '~/App_Plugins/Analytics/lib/angular-tablesort/tablesort.css',
 	   '~/App_Plugins/Analytics/css/analytics.css'
 	]
 }

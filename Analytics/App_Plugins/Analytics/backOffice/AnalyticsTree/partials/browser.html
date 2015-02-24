@@ -15,16 +15,16 @@
             <canvas id="browsers" width="650" height="450"></canvas>
         </div>
 
-        <table id="tbl-browsers" class="table table-striped">
+        <table id="tbl-browsers" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="browser"><a href="#" ng-click="sort('browser')" prevent-default><span><localize key="analytics_browser">Browser</localize></span> <i class="icon"></i></a></th>
-                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
-                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
+                    <th id="browser" ts-criteria="browser"><localize key="analytics_browser">Browser</localize></th>
+                    <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                    <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                <tr ng-repeat="item in items" ts-repeat>
                     <td>{{ item.browser }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>
@@ -36,17 +36,17 @@
         
         <h4><localize key="analytics_browserSpecific">Browser Specific</localize></h4>
 
-        <table id="tbl-browserspecifics" class="table table-striped">
+        <table id="tbl-browserspecifics" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="bs_browser"><a href="#" ng-click="sort('bs_browser')" prevent-default><span><localize key="analytics_browser">Browser</localize></span> <i class="icon"></i></a></th>
-                    <th id="bs_version"><a href="#" ng-click="sort('bs_version')" prevent-default><span><localize key="analytics_version">Version</localize></span> <i class="icon"></i></a></th>
-                    <th id="bs_visits"><a href="#" ng-click="sort('bs_visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
-                    <th id="bs_pageviews"><a href="#" ng-click="sort('bs_pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
+                    <th id="bs_browser" ts-criteria="bs_browser"><localize key="analytics_browser">Browser</localize></th>
+                    <th id="bs_version" ts-criteria="bs_version"><localize key="analytics_version">Version</localize></th>
+                    <th id="bs_visits" ts-criteria="bs_visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                    <th id="bs_pageviews" ts-criteria="bs_pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemSpecs | orderBy:sortField:descending">
+                <tr ng-repeat="item in itemSpecs" ts-repeat>
                     <td>{{ item.bs_browser }}</td>
                     <td>{{ item.bs_version }}</td>
                     <td>{{ item.bs_visits }}</td>

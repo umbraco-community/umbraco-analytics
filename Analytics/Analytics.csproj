@@ -96,6 +96,7 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\DateRangePicker.Directive.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\localizeOptions.Directive.js" />
+    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\filters\currency.filter.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\dashboard.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\ecommerce.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\productperformance.html" />
@@ -133,6 +134,8 @@
     <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.min.js" />
     <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
     <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
+    <Content Include="App_Plugins\Analytics\lib\angular-tablesort\angular-tablesort.js" />
+    <Content Include="App_Plugins\Analytics\lib\angular-tablesort\tablesort.css" />
     <Content Include="App_Plugins\Analytics\lib\chartjs\Chart.js" />
     <Content Include="App_Plugins\Analytics\lib\chartjs\Chart.min.js" />
     <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs2.css" />
