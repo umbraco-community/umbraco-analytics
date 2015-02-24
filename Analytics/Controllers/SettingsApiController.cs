@@ -241,15 +241,8 @@ namespace Analytics.Controllers
             return account;
         }
 
-        public Profile GetProfile()
-        {
-            //Open JSON file from disk
-            var profileAsJson = File.ReadAllText(HostingEnvironment.MapPath(ProfilePath));
-
-            //Deserialize to .NET object
-            var profile = Newtonsoft.Json.JsonConvert.DeserializeObject<Profile>(profileAsJson);
-
-            return profile;
+        public Profile GetProfile() {
+            return AnalyticsHelpers.GetProfile();
         }
 
         public string GetUmbracoVersion()

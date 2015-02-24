@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnalyticsConfig.cs" />
+    <Compile Include="AnalyticsHelpers.cs" />
     <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.cs">
       <DependentUpon>OAuthCallback.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -65,8 +65,8 @@ namespace Analytics
             if (sender.TreeAlias == "analyticsTree")
             {
                 AnalyticsApiController gaApi = new AnalyticsApiController();
-                SettingsApiController settingsApi = new SettingsApiController();
-                Profile profile = settingsApi.GetProfile();
+
+                Profile profile = AnalyticsHelpers.GetProfile();
 
                 if (profile != null)
                 {
