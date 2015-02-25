@@ -11,16 +11,16 @@
             <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
         </div>
 
-        <table id="tbl-keywords" class="table table-striped">
+        <table id="tbl-keywords" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="keyword"><a href="#" ng-click="sort('keyword')" prevent-default><span><localize key="analytics_keyword">Keyword</localize></span> <i class="icon"></i></a></th>
-                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
-                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
-                </tr>
+                    <th id="keyword" ts-criteria="keyword"><localize key="analytics_keyword">Keyword</localize></th>
+                    <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                    <th id="pageviews" ts-critera="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                </tr> 
             </thead>
             <tbody>
-                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                <tr ng-repeat="item in items" ts-repeat>
                     <td>{{ item.keyword }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>
