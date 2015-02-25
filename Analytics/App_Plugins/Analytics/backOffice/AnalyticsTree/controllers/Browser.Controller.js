@@ -1,4 +1,7 @@
 ﻿var app = angular.module("umbraco");
+
+//Only need to inject/requires the tableSort module once
+//As when done all other controllers will have access to it
 app.requires.push('tableSort');
 
 app.controller("Analytics.BrowserController",

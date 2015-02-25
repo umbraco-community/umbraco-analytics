@@ -1,7 +1,4 @@
-﻿var app = angular.module("umbraco");
-app.requires.push('tableSort');
-
-app.controller("Analytics.DashboardController",
+﻿angular.module("umbraco").controller("Analytics.DashboardController",
     function ($scope, $location, statsResource, settingsResource, localizationService) {
 
         var profileID = "";
