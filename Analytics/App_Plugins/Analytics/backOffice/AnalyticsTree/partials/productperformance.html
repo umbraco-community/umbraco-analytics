@@ -16,19 +16,19 @@
             <canvas id="viewProductPerformance" width="650" height="250"></canvas>
         </div>
 
-        <table id="tbl-productperformance" class="table table-striped">
+        <table id="tbl-productperformance" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="productSku"><a href="#" ng-click="sort('productSku')" prevent-default><span><localize key="analytics_productSku">Product SKU</localize></span> <i class="icon"></i></a></th>
-                    <th id="productName"><a href="#" ng-click="sort('productName')" prevent-default><span><localize key="analytics_productName">Product Name</localize></span> <i class="icon"></i></a></th>
-                    <th id="uniquePurchases"><a href="#" ng-click="sort('uniquePurchases')" prevent-default><span><localize key="analytics_uniquePurchases">Unique Purchases</localize></span> <i class="icon"></i></a></th>
-                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span><localize key="analytics_revenue">Revenue</localize></span> <i class="icon"></i></a></th>
-                    <th id="revenuePerItem"><a href="#" ng-click="sort('revenuePerItem')" prevent-default><span><localize key="analytics_revenuePerItem">Revenue Per Item</localize></span> <i class="icon"></i></a></th>
-                    <th id="itemsPerPurchase"><a href="#" ng-click="sort('itemsPerPurchase')" prevent-default><span><localize key="analytics_itemsPerPurchase">Items Per Purchase</localize></span> <i class="icon"></i></a></th>
+                    <th id="productSku" ts-criteria="productSku"><localize key="analytics_productsku">Product SKU</localize></th>
+                    <th id="productName" ts-criteria="productName"><localize key="analytics_productname">Product Name</localize></th>
+                    <th id="uniquePurchases" ts-criteria="uniquePurchases | parseInt"><localize key="analytics_uniquePurchases">Unique Purchases</localize></th>
+                    <th id="revenue" ts-criteria="revenue | parseFloat" ts-default="descending"><localize key="analytics_revenue">Revenue</localize></th>
+                    <th id="revenuePerItem" ts-criteria="revenuePerItem | parseFloat"><localize key="analytics_revenuePerItem">Revenue Per Item</localize></th>
+                    <th id="itemsPerPurchase" ts-criteria="itemsPerPurchase | parseFloat"><localize key="analytics_itemsPerPurchase">Items Per Purchase</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemProducts | orderBy:sortField:descending">
+                <tr ng-repeat="item in itemProducts" ts-repeat>
                     <td>{{ item.productSku }}</td>
                     <td>{{ item.productName }}</td>
                     <td>{{ item.uniquePurchases }}</td>

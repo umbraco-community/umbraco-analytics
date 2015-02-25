@@ -15,16 +15,16 @@
             <canvas id="social" width="650" height="450"></canvas>
         </div>
 
-        <table id="tbl-social" class="table table-striped">
+        <table id="tbl-social" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="socialnetwork"><a href="#" ng-click="sort('socialnetwork')" prevent-default><span><localize key="analytics_socialNetwork">Social Network</localize></span> <i class="icon"></i></a></th>
-                    <th id="visits"><a href="#" ng-click="sort('visits')" prevent-default><span><localize key="analytics_visits">Visits</localize></span> <i class="icon"></i></a></th>
-                    <th id="pageviews"><a href="#" ng-click="sort('pageviews')" prevent-default><span><localize key="analytics_pageViews">Page Views</localize></span> <i class="icon"></i></a></th>
+                    <th id="socialnetwork" ts-criteria="socialnetwork"><localize key=" analytics_socialnetwork">Social Network</localize></th>
+                    <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                    <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items | orderBy:sortField:descending">
+                <tr ng-repeat="item in items" ts-repeat>
                     <td>{{ item.socialnetwork }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>

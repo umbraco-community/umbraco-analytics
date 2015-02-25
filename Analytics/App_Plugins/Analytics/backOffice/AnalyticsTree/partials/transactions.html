@@ -15,16 +15,16 @@
             <canvas id="viewTransactions" width="650" height="250"></canvas>
         </div>
 
-        <table id="tbl-transactions" class="table table-striped">
+        <table id="tbl-transactions" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="transactionId"><a href="#" ng-click="sort('transactionId')" prevent-default><span><localize key="analytics_transactionId">Transaction-id</localize></span> <i class="icon"></i></a></th>
-                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span><localize key="analytics_revenue">Revenue</localize></span> <i class="icon"></i></a></th>
-                    <th id="quantity"><a href="#" ng-click="sort('quantity')" prevent-default><span><localize key="analytics_quantity">Quantity</localize></span> <i class="icon"></i></a></th>
+                    <th id="transactionId" ts-criteria="transactionId" ts-default="descending"><localize key="analytics_transactionId">Transaction-id</localize></th>
+                    <th id="revenue" ts-criteria="quantity | parseFloat"><localize key="analytics_revenue">Revenue</localize></th>
+                    <th id="quantity" ts-criteria="quantity | parseInt"><localize key="analytics_quantity">Quantity</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemTransactions | orderBy:sortField:descending">
+                <tr ng-repeat="item in itemTransactionsg" ts-repeat>
                     <td>{{ item.transactionId }}</td>
                     <td>{{ item.revenue | currency: currencyCode }}</td>
                     <td>{{ item.quantity }}</td>

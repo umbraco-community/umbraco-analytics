@@ -16,16 +16,16 @@
             <canvas id="viewSalesPerformance" width="650" height="250"></canvas>
         </div>
 
-        <table id="tbl-salesperformance" class="table table-striped">
+        <table id="tbl-salesperformance" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="date"><a href="#" ng-click="sort('date')" prevent-default><span><localize key="general_date">Dates</localize></span> <i class="icon"></i></a></th>
-                    <th id="uniquePurchases"><a href="#" ng-click="sort('uniquePurchases')" prevent-default><span><localize key="analytics_uniquePurchases">Unique Purchases</localize></span> <i class="icon"></i></a></th>
-                    <th id="revenue"><a href="#" ng-click="sort('revenue')" prevent-default><span><localize key="analytics_revenue">Revenue</localize></span> <i class="icon"></i></a></th>
+                    <th id="date" ts-criteria="date" ts-default="descending"><localize key="general_date">Dates</localize></th>
+                    <th id="uniquePurchases" ts-criteria="uniquePurchases | parseInt"><localize key="analytics_uniquePurchases">Unique Purchases</localize></th>
+                    <th id="revenue" ts-criteria="revenue | parseFloat"><localize key="analytics_revenue">Revenue</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemSales | orderBy:sortField:descending">
+                <tr ng-repeat="item in itemSales" ts-repeat>
                     <td>{{ item.date | date:'yyyy-MM-dd' }}</td>
                     <td>{{ item.uniquePurchases }}</td>
                     <td>{{ item.revenue | currency: currencyCode }}</td>
