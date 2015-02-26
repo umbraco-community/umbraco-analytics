@@ -11,7 +11,7 @@
                     <canvas id="viewMonths" width="400" height="400"></canvas>
                 </div>
             </div>
-            <div class="span6">
+            <div class="span6 col-right">
                 <table id="tbl-views" class="table table-striped" ts-wrapper>
                     <thead>
                         <tr>
@@ -20,7 +20,6 @@
                             <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                         </tr>
                     </thead>
-                    
                     <tbody ng-show="!loadingViews">
                         <tr ng-repeat="item in items | limitTo:10" ts-repeat>
                             <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
@@ -36,7 +35,7 @@
         <hr/>
     
         <div class="row-fluid">
-            <div class="span6">
+            <div class="span6 col-left">
                 <h4><localize key="analytics_sources">Sources</localize></h4>
                 <table id="tbl-sources" class="table table-striped" ts-wrapper>
                     <thead>
@@ -56,7 +55,7 @@
                 </table>
                 <a href="/umbraco/#/analytics/analyticsTree/view/views" class="btn btn-primary"><localize key="analytics_viewMoreDetails">View more details</localize></a>
             </div>
-            <div class="span6">
+            <div class="span6 col-right">
                 <h4><localize key="analytics_keywords">Keywords</localize></h4>
                 <table id="tbl-keywords" class="table table-striped" ts-wrapper>
                     <thead>
