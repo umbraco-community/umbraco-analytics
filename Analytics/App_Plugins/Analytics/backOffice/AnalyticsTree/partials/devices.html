@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in types" ts-repeat>
+                <tr ng-repeat="item in types track by $id(item)" ts-repeat>
                     <td>{{ item.dt_devicetype }}</td>
                     <td>{{ item.dt_visits }}</td>
                     <td>{{ item.dt_pageviews }}</td>
@@ -45,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.device }}</td>
                     <td>{{ item.model }}</td>
                     <td>{{ item.visits }}</td>

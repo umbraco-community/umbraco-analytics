@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemProducts" ts-repeat>
+                <tr ng-repeat="item in itemProducts track by $id(item)" ts-repeat>
                     <td>{{ item.productSku }}</td>
                     <td>{{ item.productName }}</td>
                     <td>{{ item.uniquePurchases }}</td>

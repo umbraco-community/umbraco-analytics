@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.browser }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>
@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemSpecs" ts-repeat>
+                <tr ng-repeat="item in itemSpecs track by $id(item)" ts-repeat>
                     <td>{{ item.bs_browser }}</td>
                     <td>{{ item.bs_version }}</td>
                     <td>{{ item.bs_visits }}</td>

@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemSales" ts-repeat>
+                <tr ng-repeat="item in itemSales track by $id(item)" ts-repeat>
                     <td>{{ item.date | date:'yyyy-MM-dd' }}</td>
                     <td>{{ item.uniquePurchases }}</td>
                     <td>{{ item.revenue | currency: currencyCode }}</td>

@@ -22,7 +22,7 @@
                     </thead>
                     
                     <tbody ng-show="!loadingViews">
-                        <tr ng-repeat="item in items | limitTo:10" ts-repeat>
+                        <tr ng-repeat="item in items | limitTo:10 track by $id(item)" ts-repeat>
                             <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
                             <td>{{ item.visits }}</td>
                             <td>{{ item.pageviews }}</td>
@@ -47,7 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in itemsSources | limitTo:10" ts-repeat>
+                        <tr ng-repeat="item in itemsSources | limitTo:10 track by $id(item)" ts-repeat>
                             <td>{{ item.s_source }}</td>
                             <td>{{ item.s_visits }}</td>
                             <td>{{ item.s_pageviews }}</td>
@@ -67,7 +67,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in itemsKeywords | limitTo:10" ts-repeat>
+                        <tr ng-repeat="item in itemsKeywords | limitTo:10 track by $id(item)" ts-repeat>
                             <td>{{ item.k_keyword }}</td>
                             <td>{{ item.k_visits }}</td>
                             <td>{{ item.k_pageviews }}</td>
