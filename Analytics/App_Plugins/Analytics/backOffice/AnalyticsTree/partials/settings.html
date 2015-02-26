@@ -28,13 +28,13 @@
                     <div class="controls controls-row">
                         
                         <select name="account" ng-model="selectedaccount" ng-change="accountSelected(selectedaccount)" ng-options="account.Name for account in accounts">
-                            <option value="" localize-option="analytics_selectAnAccount"></option>
+                            <option value="" localize="label" label="@analytics_selectAnAccount"></option>
                         </select>
 
                         <br />
 
                         <select name="profile" ng-show="selectedaccount" ng-model="selectedprofile" ng-options="profile.Name for profile in profiles" style="margin-top:10px">
-                            <option value="" localize-option="analytics_selectAProfile"></option>
+                            <option value="" localize="label" label="@analytics_selectAProfile"></option>
                         </select>
 
                         <div ng-show="selectedprofile">
