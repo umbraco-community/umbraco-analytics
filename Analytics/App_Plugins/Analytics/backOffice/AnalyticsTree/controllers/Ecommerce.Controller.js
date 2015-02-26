@@ -7,22 +7,13 @@
         $scope.itemProducts = [];
         $scope.itemRevenuePerSource = [];
 
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
-        }
-
         $scope.dateFilter = settingsResource.getDateFilter();
         $scope.loadingViews = true;
+
         $scope.$watch('dateFilter', function () {
             $scope.loadingViews = true;
             settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+
             //Get Profile
             settingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
@@ -41,6 +32,7 @@
 
                     // clear existing items
                     $scope.itemProducts.length = 0;
+
                     // push objects to items array
                     angular.forEach($scope.products.Rows, function (item) {
                         $scope.itemProducts.push({
@@ -51,21 +43,6 @@
                         });
                     });
 
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-bestsellers", newSortField);
-                    };
-
-                    var defaultSort = "quantity"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most amount first
-
-                    // change sort icons
-                    iconSorting("tbl-bestsellers", defaultSort);
                 });
 
                 //Get Revenue Per Source via statsResource - does WebAPI GET call
@@ -74,6 +51,7 @@
 
                     // clear existing items
                     $scope.itemRevenuePerSource.length = 0;
+
                     // push objects to items array
                     angular.forEach($scope.revenuepersource.Rows, function (item) {
                         // only where there have been a transaction
@@ -88,21 +66,6 @@
                         }
                     });
 
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-revenuepersource", newSortField);
-                    };
-
-                    var defaultSort = "r_revenue"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most revenue first
-
-                    // change sort icons
-                    iconSorting("tbl-revenuepersource", defaultSort);
                 });
 
                 //Get Store details via statsResource - does WebAPI GET call

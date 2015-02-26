@@ -7,27 +7,12 @@
         $scope.items = [];
         $scope.itemSources = [];
 
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
-        }
-
         $scope.dateFilter = settingsResource.getDateFilter();
 
-        //$scope.$on('DateFilterChanged', function (event, x) {
-        //    console.log("catch change");
-        //    $scope.dateFilter = x;
-        //});
-        
         $scope.$watch('dateFilter', function () {
             
             settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+
             //Get Profile
             settingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
@@ -108,21 +93,6 @@
                         });
                     });
 
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-views", newSortField);
-                    };
-
-                    var defaultSort = "pageviews"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting("tbl-views", defaultSort);
                 });
 
                 //Get Browser specific via statsResource - does WebAPI GET call
@@ -140,21 +110,6 @@
                         });
                     });
 
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-sources", newSortField);
-                    };
-
-                    var defaultSort = "s_pageviews"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting("tbl-sources", defaultSort);
                 });
 
             });

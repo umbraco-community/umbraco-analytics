@@ -13,16 +13,6 @@ app.controller("Analytics.BrowserController",
         $scope.items = [];
         $scope.itemSpecs = [];
 
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
-        }
 
         $scope.loadingViews = true;
         $scope.dateFilter = settingsResource.getDateFilter();
@@ -97,6 +87,7 @@ app.controller("Analytics.BrowserController",
 
                         // clear existing items
                         $scope.items.length = 0;
+
                         // push objects to items array
                         angular.forEach($scope.browsers.Rows, function (item) {
                             $scope.items.push({
@@ -106,21 +97,6 @@ app.controller("Analytics.BrowserController",
                             });
                         });
 
-                        $scope.sort = function (newSortField) {
-                            if ($scope.sortField == newSortField)
-                                $scope.descending = !$scope.descending;
-
-                            // sort by new field and change sort icons
-                            $scope.sortField = newSortField;
-                            iconSorting("tbl-browsers", newSortField);
-                        };
-
-                        var defaultSort = "pageviews"; // default sorting
-                        $scope.sortField = defaultSort;
-                        $scope.descending = true; // most pageviews first
-
-                        // change sort icons
-                        iconSorting("tbl-browsers", defaultSort);
                     });
 
                     //Get Browser specific via statsResource - does WebAPI GET call
@@ -130,6 +106,7 @@ app.controller("Analytics.BrowserController",
 
                         // clear existing items
                         $scope.itemSpecs.length = 0;
+
                         // push objects to items array
                         angular.forEach($scope.browserspecifics.Rows, function (item) {
                             $scope.itemSpecs.push({
@@ -140,18 +117,6 @@ app.controller("Analytics.BrowserController",
                             });
                         });
 
-                        $scope.sort = function (newSortField) {
-                            if ($scope.sortField == newSortField)
-                                $scope.descending = !$scope.descending;
-
-                            // sort by new field and change sort icons
-                            $scope.sortField = newSortField;
-                            iconSorting("tbl-browserspecifics", newSortField);
-                        };
-
-                        var defaultSort = "pageviews"; // default sorting
-                        $scope.sortField = defaultSort;
-                        $scope.descending = true; // most pageviews first
                     });
                 }
             });

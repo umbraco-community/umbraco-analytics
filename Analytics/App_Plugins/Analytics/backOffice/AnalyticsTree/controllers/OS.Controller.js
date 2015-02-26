@@ -7,22 +7,12 @@
         $scope.items = [];
         $scope.itemsVersions = [];
 
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
-        }
-
         $scope.dateFilter = settingsResource.getDateFilter();
 
         $scope.$watch('dateFilter', function () {
             
             settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+
             //Get Profile
             settingsResource.getprofile().then(function(response) {
                 $scope.profile = response.data;
@@ -90,6 +80,7 @@
 
                     // clear existing items
                     $scope.items.length = 0;
+
                     // push objects to items array
                     angular.forEach($scope.os.Rows, function (item) {
                         $scope.items.push({
@@ -99,21 +90,6 @@
                         });
                     });
 
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-os", newSortField);
-                    };
-
-                    var defaultSort = "pageviews"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting("tbl-os", defaultSort);
                 });
 
                 //Get Browser via statsResource - does WebAPI GET call
@@ -122,6 +98,7 @@
 
                     // clear existing items
                     $scope.itemsVersions.length = 0;
+
                     // push objects to items array
                     angular.forEach($scope.osVersions.Rows, function (item) {
                         $scope.itemsVersions.push({
@@ -132,21 +109,6 @@
                         });
                     });
 
-                    $scope.sortVersion = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-osversions", newSortField);
-                    };
-
-                    var defaultSort = "v_pageviews"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting("tbl-osversions", defaultSort);
                 });
 
             });

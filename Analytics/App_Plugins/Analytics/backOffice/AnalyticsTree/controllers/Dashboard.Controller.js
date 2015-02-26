@@ -8,16 +8,6 @@
         $scope.itemsSources = [];
         $scope.itemsKeywords = [];
 
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
-        }
 
         function fitToContainer(canvas) {
             canvas.style.width = '95%';
@@ -26,6 +16,8 @@
             //canvas.height = canvas.offsetHeight;
         }
 
+        //Set the date filter for the last 7 days in code 
+        //and not use/show date picker
         $scope.dateFilter = {};
         $scope.dateFilter.startDate = moment().subtract('days', 6).format('YYYY-MM-DD');
         $scope.dateFilter.endDate = moment().format('YYYY-MM-DD');
@@ -103,6 +95,7 @@
 
                 // clear existing items
                 $scope.items.length = 0;
+
                 // push objects to items array
                 angular.forEach($scope.views.Rows, function (item) {
                     $scope.items.push({
@@ -112,21 +105,6 @@
                     });
                 });
 
-                $scope.sort = function (newSortField) {
-                    if ($scope.sortField == newSortField)
-                        $scope.descending = !$scope.descending;
-
-                    // sort by new field and change sort icons
-                    $scope.sortField = newSortField;
-                    iconSorting("tbl-views", newSortField);
-                };
-
-                var defaultSort = "pageviews"; // default sorting
-                $scope.sortField = defaultSort;
-                $scope.descending = true; // most pageviews first
-
-                // change sort icons
-                iconSorting("tbl-views", defaultSort);
             });
 
             //Get Browser specific via statsResource - does WebAPI GET call
@@ -135,6 +113,7 @@
 
                 // clear existing items
                 $scope.itemsSources.length = 0;
+
                 // push objects to items array
                 angular.forEach($scope.sources.Rows, function (item) {
                     $scope.itemsSources.push({
@@ -144,21 +123,6 @@
                     });
                 });
 
-                $scope.sort = function (newSortField) {
-                    if ($scope.sortField == newSortField)
-                        $scope.descending = !$scope.descending;
-
-                    // sort by new field and change sort icons
-                    $scope.sortField = newSortField;
-                    iconSorting("tbl-sources", newSortField);
-                };
-
-                var defaultSort = "s_pageviews"; // default sorting
-                $scope.sortField = defaultSort;
-                $scope.descending = true; // most pageviews first
-
-                // change sort icons
-                iconSorting("tbl-sources", defaultSort);
             });
             
             //Keywords
@@ -167,6 +131,7 @@
 
                 // clear existing items
                 $scope.itemsKeywords.length = 0;
+
                 // push objects to items array
                 angular.forEach($scope.keywords.Rows, function (item) {
                     $scope.itemsKeywords.push({
@@ -176,21 +141,6 @@
                     });
                 });
 
-                $scope.sort = function (newSortField) {
-                    if ($scope.sortField == newSortField)
-                        $scope.descending = !$scope.descending;
-
-                    // sort by new field and change sort icons
-                    $scope.sortField = newSortField;
-                    iconSorting("tbl-keywords", newSortField);
-                };
-
-                var defaultSort = "k_pageviews"; // default sorting
-                $scope.sortField = defaultSort;
-                $scope.descending = true; // most pageviews first
-
-                // change sort icons
-                iconSorting("tbl-keywords", defaultSort);
             });
         });
 });

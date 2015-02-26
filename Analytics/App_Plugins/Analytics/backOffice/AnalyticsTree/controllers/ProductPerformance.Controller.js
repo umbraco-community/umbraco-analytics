@@ -6,22 +6,13 @@
         // items list array
         $scope.itemProducts = [];
 
-        // change sort icons
-        function iconSorting(tableId, field) {
-            $('#' + tableId + ' th i').each(function () {
-                $(this).removeClass().addClass('icon'); // reset sort icon for columns with existing icons
-            });
-            if ($scope.descending)
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-down');
-            else
-                $('#' + tableId + ' #' + field + ' i').removeClass().addClass('icon-navigation-up');
-        }
-
         $scope.dateFilter = settingsResource.getDateFilter();
         $scope.loadingViews = true;
+
         $scope.$watch('dateFilter', function () {
             $scope.loadingViews = true;
             settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+
             //Get Profile
             settingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
@@ -88,6 +79,7 @@
 
                     // clear existing items
                     $scope.itemProducts.length = 0;
+
                     // push objects to items array
                     angular.forEach($scope.productperformance.Rows, function (item) {
                         $scope.itemProducts.push({
@@ -100,21 +92,6 @@
                         });
                     });
 
-                    $scope.sort = function (newSortField) {
-                        if ($scope.sortField == newSortField)
-                            $scope.descending = !$scope.descending;
-
-                        // sort by new field and change sort icons
-                        $scope.sortField = newSortField;
-                        iconSorting("tbl-productperformance", newSortField);
-                    };
-
-                    var defaultSort = "revenue"; // default sorting
-                    $scope.sortField = defaultSort;
-                    $scope.descending = true; // most pageviews first
-
-                    // change sort icons
-                    iconSorting("tbl-productperformance", defaultSort);
                 });
 
             });
