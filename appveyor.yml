@@ -8,7 +8,7 @@ install:
   - cmd: cd BuildPackage
   - cmd: Build.bat
 
-# to disable automatic builds
+# to disable automatic builds and use our build.bat file with MSBUILD above
 build: off
 
 artifacts:

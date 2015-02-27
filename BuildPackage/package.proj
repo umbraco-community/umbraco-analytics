@@ -75,15 +75,19 @@
 
   <!-- CLEAN -->
   <Target Name="Clean" DependsOnTargets="GetProductVersion">
+
+    <!-- Remove the directories from previous build -->
     <RemoveDir Directories="$(BuildUmbDir)" Condition="Exists('$(BuildUmbDir)')" />
     <RemoveDir Directories="$(BuildNuGetDir)" Condition="Exists('$(BuildNuGetDir)')" />
     <RemoveDir Directories="$(ArtifactsDir)" Condition="Exists('$(ArtifactsDir)')" />
+
+    <!-- Create new folders to output our builds -->
     <MakeDir Directories="$(BuildUmbDir)" />
     <MakeDir Directories="$(BuildNuGetDir)" />
     <MakeDir Directories="$(ArtifactsDir)" />
   </Target>
 
-    <!-- UPDATE PROJECT ASSEMBLEY VERSION -->
+  <!-- UPDATE PROJECT ASSEMBLEY VERSION -->
   <Target Name="UpdateAssemblyInfo" DependsOnTargets="Clean">
     <FileUpdate Encoding="ASCII" Files="$(CoreProjectDir)\Properties\AssemblyInfo.cs" Regex="AssemblyVersion\(&quot;.*&quot;\)\]" ReplacementText="AssemblyVersion(&quot;$(FileVersion)&quot;)]" />
     <FileUpdate Encoding="ASCII" Files="$(CoreProjectDir)\Properties\AssemblyInfo.cs" Regex="AssemblyFileVersion\(&quot;.*&quot;\)\]" ReplacementText="AssemblyFileVersion(&quot;$(FileVersion)&quot;)]" />
@@ -170,15 +174,18 @@
 			OutputDirectory="$(ArtifactsDir)"
 			Files="@(PackageFiles)" />
 
+
     <MSBuild.NuGet.Tasks.Pack NuGetExePath="$(RootDir)\BuildPackage\Tools\NuGet.exe"
           ManifestFile="$(BuildNuGetDir)\package.nuspec"
           BasePath="$(BuildNuGetDir)"
           Version="$(ProductVersion)"
+          Symbols="True"
           OutputDirectory="$(ArtifactsDir)" />
 
+          <!--
     <RemoveDir Directories="$(BuildUmbDir)" Condition="Exists('$(BuildUmbDir)')" />
     <RemoveDir Directories="$(BuildNuGetDir)" Condition="Exists('$(BuildNuGetDir)')" />
-
+  -->
   </Target>
   
 </Project>
