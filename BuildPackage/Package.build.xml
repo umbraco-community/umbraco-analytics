@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Package">
+
+	<!-- IMPORTS -->
+	<PropertyGroup>
+		<MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
+		<MSBuildUmbracoTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildUmbracoTasks</MSBuildUmbracoTasksPath>
+    <MSBuildNugetTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildNugetTasks</MSBuildNugetTasksPath>
+    <AppVeyorUmbracoPath>$(MSBuildProjectDirectory)\Tools\AppVeyorUmbraco</AppVeyorUmbracoPath>
+  </PropertyGroup>
+
+	<Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+	<Import Project="$(MSBuildUmbracoTasksPath)\MSBuild.Umbraco.Tasks.Targets" />
+  <Import Project="$(MSBuildNugetTasksPath)\MSBuild.NuGet.Tasks.Targets" />
+  <Import Project="$(AppVeyorUmbracoPath)\AppVeyorUmbraco.Targets" />
+
+  <!-- PROPERTIES -->
+  <PropertyGroup >
+    <MinUmbracoVersion>$(UMBRACO_PACKAGE_MIN_VERSION)</MinUmbracoVersion>
+    <FileVersion>$(APPVEYOR_BUILD_VERSION)</FileVersion>
+  </PropertyGroup>
+
+  <Choose >
+    <When Condition="$(APPVEYOR_BUILD_NUMBER) != '' And $(APPVEYOR_REPO_BRANCH) != 'master' ">
+      <PropertyGroup>
+        <!-- Append 'build-12' -->
+        <VersionSuffix>build-$(APPVEYOR_BUILD_NUMBER)</VersionSuffix>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <!-- Master/Release Branch if there is a env-var set it -->
+      <PropertyGroup>
+        <VersionSuffix>$(UMBRACO_PACKAGE_PRERELEASE_SUFFIX)</VersionSuffix>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+	<PropertyGroup>
+		<RootDir>$(MSBuildProjectDirectory)\..</RootDir>
+		<BuildDir>$(MSBuildProjectDirectory)\Build</BuildDir>
+		<PackageDir>$(MSBuildProjectDirectory)\Package</PackageDir>    
+		<CoreProjectDir>$(RootDir)\Analytics</CoreProjectDir>
+    <PropertyEditorProjectDir>$(CoreProjectDir)</PropertyEditorProjectDir>
+	</PropertyGroup>
+
+  <!-- Generate Product Version Number -->
+  <Target Name="GenProductVersion">
+    <GetProductVersion BuildVersion="$(APPVEYOR_BUILD_VERSION)" BuildSuffix="$(VersionSuffix)">
+      <Output TaskParameter="ProductVersion" PropertyName="ProductVersion"/>
+    </GetProductVersion>
+  </Target>
+
+  <!-- CLEAN -->
+	<Target Name="Clean" DependsOnTargets="GenProductVersion">
+		<RemoveDir Directories="$(BuildDir)" Condition="Exists('$(BuildDir)')" />
+		<RemoveDir Directories="$(PackageDir)" Condition="Exists('$(PackageDir)')" />
+		<MakeDir Directories="$(BuildDir)" />
+		<MakeDir Directories="$(PackageDir)" />
+    <MakeDir Directories="$(BuildNuGetDir)" />
+    <MakeDir Directories="$(AppPluginDir)" />
+	</Target>
+
+  <!-- COMPILE -->
+	<Target Name="Compile" DependsOnTargets="Clean">
+		<MSBuild Projects="$(CoreProjectDir)\Analytics.csproj" />
+	</Target>
+
+	<!-- PREPARE FILES -->
+	<Target Name="PrepareFiles" DependsOnTargets="Compile">
+		<ItemGroup>
+			<CoreBinFile Include="$(CoreProjectDir)\Bin\Debug\Analytics.dll" />
+      <SkyBrudSocialBinFile Include="$(CoreProjectDir)\Bin\Debug\Skybrud.Social.dll" />
+			<UmbracoPackageFile Include="$(MSBuildProjectDirectory)\Package.xml" />
+      <AppPluginFiles Include="$(PropertyEditorProjectDir)\App_Plugins\**\*" />
+    </ItemGroup>
+		<Copy SourceFiles="@(CoreBinFile)" DestinationFolder="$(BuildDir)\bin" />
+    <Copy SourceFiles="@(SkyBrudSocialBinFile)" DestinationFolder="$(BuildDir)\bin" />
+		<Copy SourceFiles="@(UmbracoPackageFile)" DestinationFolder="$(BuildDir)" />
+    <Copy SourceFiles="@(AppPluginFiles)" DestinationFiles="@(AppPluginFiles->'$(BuildDir)\App_Plugins\%(RecursiveDir)%(Filename)%(Extension)')" />   
+  </Target>
+
+  <!-- MANIFEST -->
+  <Target Name="Manifest" DependsOnTargets="PrepareFiles">
+    <ItemGroup>
+      <ManifestFiles Include="$(BuildDir)\**\*" Exclude="$(BuildDir)\Package.xml" />
+    </ItemGroup>
+    <ManifestUpdate ManifestFile="$(BuildDir)\package.xml"
+			WorkingDirectory="$(BuildDir)"
+			MinimumRequiredUmbracoVersion="$(MinUmbracoVersion)"
+			PackageVersion="$(ProductVersion)"
+			Files="@(ManifestFiles)" />
+  </Target>
+
+  <!-- PACKAGE -->
+  <Target Name="Package" DependsOnTargets="Manifest">
+    <ItemGroup>
+      <PackageFiles Include="$(BuildDir)\**\*.*" />
+    </ItemGroup>
+
+    <Package ManifestFile="$(BuildDir)\Package.xml"
+			WorkingDirectory="$(BuildDir)"
+			OutputDirectory="$(PackageDir)"
+			Files="@(PackageFiles)" />  
+
+      <!--
+      <RemoveDir Directories="$(BuildDir)" Condition="Exists('$(BuildDir)')" />
+      <RemoveDir Directories="$(BuildNuGetDir)" Condition="Exists('$(BuildNuGetDir)')" />
+      -->
+  </Target>
+
+</Project>
