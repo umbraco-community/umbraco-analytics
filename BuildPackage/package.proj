@@ -180,5 +180,5 @@
     <RemoveDir Directories="$(BuildNuGetDir)" Condition="Exists('$(BuildNuGetDir)')" />
 
   </Target>
-
+  
 </Project>
