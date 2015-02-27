@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>
@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemSources" ts-repeat>
+                <tr ng-repeat="item in itemSources track by $id(item)" ts-repeat>
                     <td>{{ item.s_source }}</td>
                     <td>{{ item.s_visits }}</td>
                     <td>{{ item.s_pageviews }}</td>

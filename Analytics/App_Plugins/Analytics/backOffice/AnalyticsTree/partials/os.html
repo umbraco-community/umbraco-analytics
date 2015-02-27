@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.operatingsystem }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>
@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemsVersions" ts-repeat>
+                <tr ng-repeat="item in itemsVersions track by $id(item)" ts-repeat>
                     <td>{{ item.v_operatingsystem }}</td>
                     <td>{{ item.v_version }}</td>
                     <td>{{ item.v_visits }}</td>
