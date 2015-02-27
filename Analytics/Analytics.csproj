@@ -95,7 +95,6 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Transaction.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\DateRangePicker.Directive.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\localizeOptions.Directive.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\filters\currency.filter.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\dashboard.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\ecommerce.html" />
