@@ -16,6 +16,8 @@ Analytics/App_Data/NuGetBackup/
 
 ###### Analytics Build Output
 BuildPackage/Build/
-BuildPackage/Package/
+BuildPackage/artifacts/
+BuildPackage/_umbraco/
+BuildPackage/_nuget/
 
-
+*.suo

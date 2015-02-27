@@ -1,18 +1,20 @@
-version: 1.1.0.{build}-BleedingEdge
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
-nuget:
-  project_feed: true
-before_build:
-- nuget restore
-build:
-  publish_nuget: true
-  publish_nuget_symbols: true
-  verbosity: normal
+# version format
+version: 1.1.0.{build}
+
+# UMBRACO_PACKAGE_PRERELEASE_SUFFIX will only be used for Release builds
+# example UMBRACO_PACKAGE_PRERELEASE_SUFFIX=beta
+install:
+  - cmd: set UMBRACO_PACKAGE_PRERELEASE_SUFFIX=beta
+  - cmd: cd BuildPackage
+  - cmd: Build.bat
+
+# to disable automatic builds
+build: off
+
+artifacts:
+  - path: BuildPackage\artifacts\*.nupkg
+  - path: BuildPackage\artifacts\*.zip
+
 deploy:
 - provider: NuGet
   api_key:
