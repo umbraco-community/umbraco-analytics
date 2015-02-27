@@ -99,7 +99,7 @@
 	<Target Name="PrepareFiles" DependsOnTargets="Compile">
 		<ItemGroup>
       <CoreBinFile Include="$(CoreProjectDir)\Bin\$(BuildConfig)\Analytics.dll" />
-      <SkyBrudSocialBinFile Include="$(CoreProjectDir)\Bin\Debug\Skybrud.Social.dll" />
+      <SkyBrudSocialBinFile Include="$(CoreProjectDir)\Bin\$(BuildConfig)\Skybrud.Social.dll" />
       <PackageFile Include="$(MSBuildProjectDirectory)\package.xml" />
       <NuSpecFile Include="$(MSBuildProjectDirectory)\package.nuspec" />
       <AppPluginFiles Include="$(PropertyEditorProjectDir)\App_Plugins\**\*" />
