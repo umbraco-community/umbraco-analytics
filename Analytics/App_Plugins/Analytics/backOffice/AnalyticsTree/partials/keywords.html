@@ -16,11 +16,11 @@
                 <tr>
                     <th id="keyword" ts-criteria="keyword"><localize key="analytics_keyword">Keyword</localize></th>
                     <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
-                    <th id="pageviews" ts-critera="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                    <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr> 
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.keyword }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>

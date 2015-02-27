@@ -18,13 +18,13 @@
         <table id="tbl-os" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="operatingsystem" ts-criteria="operatingsystem"><localize key="analytics_operatingsystem">Operating System</localize></th>
+                    <th id="operatingsystem" ts-criteria="operatingsystem"><localize key="analytics_operatingSystem">Operating System</localize></th>
                     <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
                     <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.operatingsystem }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>
@@ -39,14 +39,14 @@
         <table id="tbl-osversions" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="v_operatingsystem" ts-criteria="v_operatingsystem"><localize key=" analytics_operatingsystem">Operating System</localize></th>
+                    <th id="v_operatingsystem" ts-criteria="v_operatingsystem"><localize key=" analytics_operatingSystem">Operating System</localize></th>
                     <th id="v_version" ts-criteria="v_version"><localize key=" analytics_version">Version</localize></th>
                     <th id="v_visits" ts-criteria="v_visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
                     <th id="v_pageviews" ts-criteria="v_pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemsVersions" ts-repeat>
+                <tr ng-repeat="item in itemsVersions track by $id(item)" ts-repeat>
                     <td>{{ item.v_operatingsystem }}</td>
                     <td>{{ item.v_version }}</td>
                     <td>{{ item.v_visits }}</td>

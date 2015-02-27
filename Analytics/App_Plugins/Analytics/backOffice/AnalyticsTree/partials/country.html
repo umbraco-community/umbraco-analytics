@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.country }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>

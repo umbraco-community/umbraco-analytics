@@ -18,13 +18,13 @@
         <table id="tbl-social" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="socialnetwork" ts-criteria="socialnetwork"><localize key="analytics_socialnetwork">Social Network</localize></th>
+                    <th id="socialnetwork" ts-criteria="socialnetwork"><localize key="analytics_socialNetwork">Social Network</localize></th>
                     <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
                     <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in items" ts-repeat>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
                     <td>{{ item.socialnetwork }}</td>
                     <td>{{ item.visits }}</td>
                     <td>{{ item.pageviews }}</td>

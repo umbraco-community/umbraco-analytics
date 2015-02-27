@@ -21,7 +21,8 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
             // The query string to send to the authentication site
             NameValueCollection nvc = new NameValueCollection {
                 {"clientcallback", callback},
-                {"clientstate", state}
+                {"clientstate", state},
+                {"lang", UmbracoContext.Security.CurrentUser.Language}
             };
 
             // Generate the URL for the authentication page

@@ -19,8 +19,8 @@
         <table id="tbl-productperformance" class="table table-striped" ts-wrapper>
             <thead>
                 <tr>
-                    <th id="productSku" ts-criteria="productSku"><localize key="analytics_productsku">Product SKU</localize></th>
-                    <th id="productName" ts-criteria="productName"><localize key="analytics_productname">Product Name</localize></th>
+                    <th id="productSku" ts-criteria="productSku"><localize key="analytics_productSku">Product SKU</localize></th>
+                    <th id="productName" ts-criteria="productName"><localize key="analytics_productName">Product Name</localize></th>
                     <th id="uniquePurchases" ts-criteria="uniquePurchases | parseInt"><localize key="analytics_uniquePurchases">Unique Purchases</localize></th>
                     <th id="revenue" ts-criteria="revenue | parseFloat" ts-default="descending"><localize key="analytics_revenue">Revenue</localize></th>
                     <th id="revenuePerItem" ts-criteria="revenuePerItem | parseFloat"><localize key="analytics_revenuePerItem">Revenue Per Item</localize></th>
@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in itemProducts" ts-repeat>
+                <tr ng-repeat="item in itemProducts track by $id(item)" ts-repeat>
                     <td>{{ item.productSku }}</td>
                     <td>{{ item.productName }}</td>
                     <td>{{ item.uniquePurchases }}</td>
