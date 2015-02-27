@@ -102,7 +102,7 @@
       <SkyBrudSocialBinFile Include="$(CoreProjectDir)\Bin\$(BuildConfig)\Skybrud.Social.dll" />
       <PackageFile Include="$(MSBuildProjectDirectory)\package.xml" />
       <NuSpecFile Include="$(MSBuildProjectDirectory)\package.nuspec" />
-      <AppPluginFiles Include="$(PropertyEditorProjectDir)\App_Plugins\**\*" />
+      <AppPluginFiles Include="$(PropertyEditorProjectDir)\App_Plugins\**\*" Exclude="$(PropertyEditorProjectDir)\App_Plugins\**\*.cs" />
     </ItemGroup>
     <Copy SourceFiles="@(CoreBinFile)" DestinationFolder="$(BuildUmbDir)\bin" />
     <Copy SourceFiles="@(SkyBrudSocialBinFile)" DestinationFolder="$(BuildUmbDir)\bin" />
