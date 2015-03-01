@@ -29,7 +29,7 @@
 
   <Actions/>
 
-  <control />
+  <control>/App_Plugins/Analytics/installer/PostInstall.ascx</control>
 
   <files />
 
