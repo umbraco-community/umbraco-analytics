@@ -19,7 +19,7 @@
     <PackageName>Analytics</PackageName>
     <MinUmbracoVersion>7.2.1</MinUmbracoVersion>
     <Readme>This package adds a new section to your Umbraco installation which allows you to view your Google Analytics statistical information directly inside Umbraco, without having to open a new tab or window.</Readme>
-    <AuthorName>Warren Buckley</AuthorName>
+    <AuthorName>Warren Buckley and The Umbraco Community</AuthorName>
     <AuthorUrl>https://github.com/warrenbuckley/</AuthorUrl>
     <PackageLicenseName>MIT license</PackageLicenseName>
     <PackageLicenseUrl>http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
@@ -30,9 +30,9 @@
   <PropertyGroup>
     <NuGetPackageName>Analytics for Umbraco</NuGetPackageName>
     <PackageId>Analytics.Umbraco</PackageId>
-    <Copyright>Warren Buckley</Copyright>
+    <Copyright>Warren Buckley and The Umbraco Community</Copyright>
     <Owners>Warren Buckley</Owners>
-    <IconUrl>https://raw.githubusercontent.com/Jeavon/Umbraco-Core-Property-Value-Converters/master/PropertyValueConverters.png</IconUrl>
+    <IconUrl>http://analytics-oauth.azurewebsites.net/img/analytics.png</IconUrl>
     <Tags>Umbraco UmbracoCMS GoogleAnalytics Analytics Google</Tags>
     <Language>en-GB</Language>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
