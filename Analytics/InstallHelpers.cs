@@ -2,62 +2,32 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Web.Hosting;
 using System.Xml;
 using Umbraco.Core;
-using Umbraco.Web;
+using Umbraco.Core.Logging;
 
 namespace Analytics
 {
-    public static class Install
+    public class InstallHelpers
     {
         // Set the path of the language files directory
         private const string UmbracoLangPath = "~/umbraco/config/lang/";
         private const string AnalyticsLangPath = "~/App_Plugins/Analytics/Config/Lang/";
 
-        /// <summary>
-        /// KUDOS Again to the Merchello guys!!
-        /// 
-        /// Returns the path to the root of the application, by getting the path to where the assembly where this
-        /// method is included is present, then traversing until it's past the /bin directory. This makes it work
-        /// even if the assembly is in a /bin/debug or /bin/release folder
-        /// </summary>
-        /// <returns>
-        /// The root directory path
-        /// </returns>
-        public static string GetRootDirectory()
-        {
-            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            var uri = new Uri(codeBase);
-            var path = uri.LocalPath;
-            var baseDirectory = Path.GetDirectoryName(path);
-
-            if (string.IsNullOrEmpty(baseDirectory))
-            {
-                throw new Exception("No root directory could be resolved. Please ensure that your Umbraco solution is correctly configured.");
-
-            }
-                
-            var rootDir = baseDirectory.Contains("bin")
-                           ? baseDirectory.Substring(0, baseDirectory.LastIndexOf("bin", StringComparison.OrdinalIgnoreCase) - 1)
-                           : baseDirectory;
-
-            return rootDir;
-        }
-
         public static IEnumerable<FileInfo> GetUmbracoLanguageFiles()
         {
-            var di = new DirectoryInfo(string.Format("{0}{1}", GetRootDirectory(), UmbracoLangPath.Replace("~", string.Empty).Replace("/", "\\")));
+            var umbPath = HostingEnvironment.MapPath(UmbracoLangPath);
+            var di = new DirectoryInfo(umbPath);
             return di.GetFiles("*.xml");
         }
 
         public static IEnumerable<FileInfo> GetAnalyticsLanguageFiles()
         {
-            var di = new DirectoryInfo(string.Format("{0}{1}", GetRootDirectory(), AnalyticsLangPath.Replace("~", string.Empty).Replace("/", "\\")));
+            var analyticsPath = HostingEnvironment.MapPath(AnalyticsLangPath);
+            var di = new DirectoryInfo(analyticsPath);
             return di.GetFiles("*.xml");
         }
-
 
         public static IEnumerable<FileInfo> GetUmbracoLanguageFilesToInsertLocalizationData()
         {
@@ -69,9 +39,69 @@ namespace Analytics
         /// Umbraco lang files
         /// https://github.com/Merchello/Merchello/blob/1.7.1/src/Merchello.Web/PackageActions/AddLocalizationAreas.cs
         /// </summary>
-        public static void AddTranslations()
+        public void AddTranslations()
         {
+            var analyticsFiles = GetAnalyticsLanguageFiles();
+            LogHelper.Info<InstallHelpers>(string.Format("{0} Analytics Plugin language files to be merged into Umbraco language files", analyticsFiles.Count()));
+            
+            //Convert to an array
+            var analyticsFileArray = analyticsFiles as FileInfo[] ?? analyticsFiles.ToArray();
 
+            //Check which language filenames that we have match up
+            var existingLangs = GetUmbracoLanguageFilesToInsertLocalizationData();
+            LogHelper.Info<InstallHelpers>(string.Format("{0} Umbraco language files that match up with our Analytics language files", existingLangs.Count()));
+
+            //For each umbraco language file...
+            foreach (var lang in existingLangs)
+            {
+                var analytics = new XmlDocument() { PreserveWhitespace = true };
+                var umb = new XmlDocument() { PreserveWhitespace = true };
+
+                try
+                {
+                    //From our analytics language file/s - try & find a file with the same name
+                    var match = analyticsFileArray.FirstOrDefault(x => x.Name == lang.Name);
+
+                    //Ensure we have a match & not null
+                    if (match != null)
+                    {
+                        //Load the two XML files
+                        analytics.LoadXml(File.ReadAllText(match.FullName));
+                        umb.LoadXml(File.ReadAllText(lang.FullName));
+
+                        //Get all of the <area>'s from analytics XML file & their child elements
+                        var areas = analytics.DocumentElement.SelectNodes("//area");
+
+                        //For each <area> in our XML...
+                        foreach (var area in areas)
+                        {
+                            //Import the XML <area> stub into the Umbraco lang file
+                            var import = umb.ImportNode((XmlNode)area, true);
+                            umb.DocumentElement.AppendChild(import);
+
+
+
+                            //TODO: Verify if <area> with alias already exists
+                            //If not exist just import the <area> & all children
+
+                            //If area exists THEN for each <key> in <area>
+                            //Verify if key exists. If no key ADD it
+                            //Otherwise ignore it as may override/conflict with an existing key
+
+
+                            
+                        }
+
+                        //Save the umb lang file with the merged contents
+                        umb.Save(lang.FullName);
+                    }
+                }
+                catch (Exception ex)
+                {   
+                    LogHelper.Error<InstallHelpers>("Failed to add Analytics localization values to language file", ex);
+                }
+
+            }
         }
 
 
@@ -79,7 +109,7 @@ namespace Analytics
         /// Adds the application/custom section to Umbraco
         /// </summary>
         /// <param name="applicationContext"></param>
-        public static void AddSection(ApplicationContext applicationContext)
+        public void AddSection(ApplicationContext applicationContext)
         {
             //Get SectionService
             var sectionService = applicationContext.Services.SectionService;
@@ -100,7 +130,7 @@ namespace Analytics
         /// <summary>
         /// Adds the required XML to the dashboard.config file
         /// </summary>
-        public static void AddSectionDashboard()
+        public void AddSectionDashboard()
         {
             bool saveFile = false;
 
@@ -165,7 +195,7 @@ namespace Analytics
         /// 
         /// </summary>
         [Obsolete]
-        public static void AddSectionLanguageKeys()
+        public void AddSectionLanguageKeys()
         {
             bool saveFile = false;
 
@@ -238,10 +268,6 @@ namespace Analytics
                 langXml.Save(langFilePath);
             }
         }
-
-
-       
-
         
     }
 }

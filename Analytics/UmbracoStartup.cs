@@ -19,15 +19,17 @@ namespace Analytics
         /// <param name="applicationContext"></param>
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
+            var install = new InstallHelpers();
+
             //Check to see if section needs to be added
-            Install.AddSection(applicationContext);
+            install.AddSection(applicationContext);
 
             //Check to see if language keys for section needs to be added
             //Need to verify that this is no longer needed due to the /config/lang folder in App_Plugins
-            //Install.AddSectionLanguageKeys();
+            install.AddTranslations();
 
             //Add Section Dashboard XML
-            Install.AddSectionDashboard();
+            install.AddSectionDashboard();
 
             //Add OLD Style Package Event
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
