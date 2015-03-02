@@ -1,13 +1,36 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Web.UI;
 using Skybrud.Social;
-using Umbraco.Web.UI.Pages;
+using umbraco;
+using Umbraco.Web;
 
 namespace Analytics.App_Plugins.Analytics.BackOffice {
 
-    public partial class OAuth : UmbracoEnsuredPage {
+    public partial class OAuth : Page {
 
         protected void Page_Load(object sender, EventArgs e) {
+
+            //Get current user
+            var currentUser = UmbracoContext.Current.Security.CurrentUser;
+
+            //Check a user is logged into backoffice
+            if (currentUser == null)
+            {
+                //Ouput an error message
+                Content.Text += ui.Text("analytics", "noAccess");
+                return;
+            }
+
+            //Check the user has access to the analytics section
+            //Prevents anyone with this URL to page from just hitting it
+            if (!currentUser.AllowedSections.Contains("analytics"))
+            {
+                //Ouput an error message
+                Content.Text += ui.Text("analytics", "noAccess");
+                return;
+            }
 
             // The Analytics authentication site should redirect back to this URI
             string callback = Request.Url.AbsoluteUri.Replace("/OAuth.aspx", "/OAuthCallback.aspx");
@@ -20,9 +43,9 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
 
             // The query string to send to the authentication site
             NameValueCollection nvc = new NameValueCollection {
-                {"clientcallback", callback},
-                {"clientstate", state},
-                {"lang", UmbracoContext.Security.CurrentUser.Language}
+                { "clientcallback", callback },
+                { "clientstate", state },
+                { "lang", UmbracoContext.Current.Security.CurrentUser.Language }
             };
 
             // Generate the URL for the authentication page

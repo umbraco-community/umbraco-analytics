@@ -67,5 +67,12 @@
     <key alias="sorrySessionExpired">Beklager - din session er sandsynligvis udløbet.</key>
     <key alias="somethingWentWrong">Okay. Der gik noget galt.</key>
     <key alias="informationSavedMessage"><![CDATA[Hej %0%. Vi har gemt din information til en konfigurationsfil, så Umbraco kan hente statistik fra din Google Analytics konto.<br /><br />Du kan nu <a href='javascript:self.close();'>lukke dette vindue</a>.]]></key>
+    <key alias="noAccess">Sorry you do not have access.</key>
+  </area>
+  <area alias="treeHeaders">
+    <key alias="analytics">Analytics</key>
+  </area>
+  <area alias="sections">
+    <key alias="analytics">Analytics</key>
   </area>
 </language>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
+using System.Web.Configuration;
 using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.packager;
 using Umbraco.Core;
@@ -12,6 +14,8 @@ namespace Analytics
 {
     public class UmbracoStartup : ApplicationEventHandler
     {
+        private const string AppSettingKey = "AnalyticsStartupInstalled";
+
         /// <summary>
         /// Register Install & Uninstall Events
         /// </summary>
@@ -19,17 +23,29 @@ namespace Analytics
         /// <param name="applicationContext"></param>
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            var install = new InstallHelpers();
+            //Check to see if appSetting AnalyticsStartupInstalled is true or even present
+            var installAppSetting = WebConfigurationManager.AppSettings[AppSettingKey];
 
-            //Check to see if section needs to be added
-            install.AddSection(applicationContext);
+            if (string.IsNullOrEmpty(installAppSetting) || installAppSetting != true.ToString())
+            {
+                var install = new InstallHelpers();
 
-            //Check to see if language keys for section needs to be added
-            //Need to verify that this is no longer needed due to the /config/lang folder in App_Plugins
-            install.AddTranslations();
+                //Check to see if language keys for section needs to be added
+                install.AddTranslations();
 
-            //Add Section Dashboard XML
-            install.AddSectionDashboard();
+                //Check to see if section needs to be added
+                install.AddSection(applicationContext);
+
+                //Add Section Dashboard XML
+                install.AddSectionDashboard();
+
+                //All done installing our custom stuff
+                //As we only want this to run once - not every startup of Umbraco
+                var webConfig = WebConfigurationManager.OpenWebConfiguration("/");
+                webConfig.AppSettings.Settings.Add(AppSettingKey, true.ToString());
+                webConfig.Save();
+
+            }
 
             //Add OLD Style Package Event
             InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
@@ -107,9 +123,15 @@ namespace Analytics
             //Check which package is being uninstalled
             if (sender.Data.Name == "Analytics")
             {
+                var uninstall = new UninstallHelpers();
+
                 //Start Uninstall - clean up process...
-                Uninstall.RemoveSection();
-                Uninstall.RemoveSectionLanguageKeys();
+                uninstall.RemoveSection();
+                uninstall.RemoveTranslations();
+                uninstall.RemoveSectionDashboard();
+
+                //Remove AppSetting key when all done
+                ConfigurationManager.AppSettings.Remove(AppSettingKey);
             }
         }
     }
