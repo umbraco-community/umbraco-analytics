@@ -103,6 +103,8 @@
 	<Target Name="PrepareFiles" DependsOnTargets="Compile">
 		<ItemGroup>
       <CoreBinFile Include="$(CoreProjectDir)\Bin\$(BuildConfig)\Analytics.dll" />
+      <CorePdbFile Include="$(CoreProjectDir)\Bin\$(BuildConfig)\Analytics.pdb" />
+      <SrcFiles Include="$(CoreProjectDir)\**\*.cs" Exclude="$(CoreProjectDir)\obj\**"/>
       <SkyBrudSocialBinFile Include="$(CoreProjectDir)\Bin\$(BuildConfig)\Skybrud.Social.dll" />
       <PackageFile Include="$(MSBuildProjectDirectory)\package.xml" />
       <NuSpecFile Include="$(MSBuildProjectDirectory)\package.nuspec" />
@@ -113,6 +115,9 @@
     <Copy SourceFiles="@(PackageFile)" DestinationFolder="$(BuildUmbDir)" />
     <Copy SourceFiles="@(AppPluginFiles)" DestinationFiles="@(AppPluginFiles->'$(BuildUmbDir)\App_Plugins\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(CoreBinFile)" DestinationFolder="$(BuildNuGetDir)\lib\net45" />
+    <Copy SourceFiles="@(CorePdbFile)" DestinationFolder="$(BuildNuGetDir)\lib\net45" />
+    <Copy SourceFiles="@(SrcFiles)"
+   DestinationFiles="@(SrcFiles->'$(BuildNuGetDir)\src\%(RecursiveDir)%(Filename)%(Extension)')" />    
     <Copy SourceFiles="@(NuSpecFile)" DestinationFolder="$(BuildNuGetDir)" />
     <Copy SourceFiles="@(AppPluginFiles)" DestinationFiles="@(AppPluginFiles->'$(BuildNuGetDir)\Content\App_Plugins\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
@@ -182,10 +187,10 @@
           Symbols="True"
           OutputDirectory="$(ArtifactsDir)" />
 
-          <!--
+          
     <RemoveDir Directories="$(BuildUmbDir)" Condition="Exists('$(BuildUmbDir)')" />
     <RemoveDir Directories="$(BuildNuGetDir)" Condition="Exists('$(BuildNuGetDir)')" />
-  -->
+  
   </Target>
   
 </Project>
