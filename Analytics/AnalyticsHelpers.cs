@@ -13,6 +13,10 @@ namespace Analytics {
 
         public const string ProfilePath = "~/App_Plugins/Analytics/profile.config";
 
+        public static string UmbracoVersion {
+            get { return Umbraco.Core.Configuration.UmbracoVersion.Current.ToString(); }
+        }
+
         /// <summary>
         /// Reads the contents of the file at the specified <code>path</code>. The path may be either virtual, relative or absolute.
         /// </summary>

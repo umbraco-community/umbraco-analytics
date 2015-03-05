@@ -1,14 +1,30 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using Skybrud.Social;
 using umbraco;
+using Umbraco.Core.Security;
 using Umbraco.Web;
 
 namespace Analytics.App_Plugins.Analytics.BackOffice {
 
     public partial class OAuth : Page {
+
+        protected override void OnPreInit(EventArgs e) {
+
+            base.OnPreInit(e);
+            
+            if (AnalyticsHelpers.UmbracoVersion != "7.2.2") return;
+
+            // Handle authentication stuff to counteract bug in Umbraco 7.2.2 (see U4-6342)
+            HttpContextWrapper http = new HttpContextWrapper(Context);
+            FormsAuthenticationTicket ticket = http.GetUmbracoAuthTicket();
+            http.AuthenticateCurrentRequest(ticket, true);
+        
+        }
 
         protected void Page_Load(object sender, EventArgs e) {
 
