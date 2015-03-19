@@ -3,15 +3,15 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using System.Web.UI;
 using Skybrud.Social;
+using Umbraco.Web.UI.Pages;
 using umbraco;
 using Umbraco.Core.Security;
 using Umbraco.Web;
 
 namespace Analytics.App_Plugins.Analytics.BackOffice {
 
-    public partial class OAuth : Page {
+    public partial class OAuth : UmbracoEnsuredPage {
 
         protected override void OnPreInit(EventArgs e) {
 

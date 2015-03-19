@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using System.Web.UI;
 using Skybrud.Social.Google;
+using Umbraco.Web.UI.Pages;
 using umbraco.BusinessLogic;
 using Umbraco.Core.Security;
 using Umbraco.Web;
@@ -11,7 +11,7 @@ using umbraco;
 
 namespace Analytics.App_Plugins.Analytics.BackOffice {
 
-    public partial class OAuthCalllback : Page {
+    public partial class OAuthCalllback : UmbracoEnsuredPage {
 
         protected override void OnPreInit(EventArgs e) {
 
