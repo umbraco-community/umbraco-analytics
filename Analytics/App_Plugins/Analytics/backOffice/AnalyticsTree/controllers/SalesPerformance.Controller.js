@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.SalesPerformanceController",
-    function ($scope, $location, statsResource, settingsResource, localizationService) {
+    function ($scope, $location, $routeParams, statsResource, settingsResource, localizationService, navigationService) {
 
         var profileID = "";
 
@@ -96,4 +96,7 @@
 
             });
         });
+
+        // todo: possible to find "ecommerce" alias dynamic? "ecommerce" is parent tree alias
+        navigationService.syncTree({ tree: 'analyticsTree', path: ["-1", "ecommerce", $routeParams.id], forceReload: false });
     });

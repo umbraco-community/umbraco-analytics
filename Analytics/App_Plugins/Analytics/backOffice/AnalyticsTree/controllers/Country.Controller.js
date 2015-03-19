@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.CountryController",
-    function ($scope, $location, statsResource, settingsResource, assetsService) {
+    function ($scope, $location, $routeParams, statsResource, settingsResource, assetsService, navigationService) {
 
         var profileID = "";
 
@@ -68,4 +68,6 @@
                 });
             });
         };
+
+        navigationService.syncTree({ tree: 'analyticsTree', path: ["-1", $routeParams.id], forceReload: false });
     });

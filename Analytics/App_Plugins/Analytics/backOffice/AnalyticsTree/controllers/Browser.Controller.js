@@ -5,14 +5,13 @@
 app.requires.push('tableSort');
 
 app.controller("Analytics.BrowserController",
-    function ($scope, $location, statsResource, settingsResource, localizationService) {
+    function ($scope, $location, $routeParams, statsResource, settingsResource, localizationService, navigationService) {
 
         var profileID = "";
 
         // items list array
         $scope.items = [];
         $scope.itemSpecs = [];
-
 
         $scope.loadingViews = true;
         $scope.dateFilter = settingsResource.getDateFilter();
@@ -121,4 +120,6 @@ app.controller("Analytics.BrowserController",
                 }
             });
         });
+        
+        navigationService.syncTree({ tree: 'analyticsTree', path: ["-1", $routeParams.id], forceReload: false });
     });
