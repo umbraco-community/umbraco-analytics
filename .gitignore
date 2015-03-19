@@ -14,3 +14,10 @@ Analytics/obj/
 Analytics/bin/
 Analytics/App_Data/NuGetBackup/
 
+###### Analytics Build Output
+BuildPackage/Build/
+BuildPackage/artifacts/
+BuildPackage/_umbraco/
+BuildPackage/_nuget/
+
+*.suo

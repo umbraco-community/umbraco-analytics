@@ -1,13 +1,52 @@
 ﻿using System;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
 using Skybrud.Social.Google;
 using Umbraco.Web.UI.Pages;
+using umbraco.BusinessLogic;
+using Umbraco.Core.Security;
+using Umbraco.Web;
 using umbraco;
 
 namespace Analytics.App_Plugins.Analytics.BackOffice {
 
     public partial class OAuthCalllback : UmbracoEnsuredPage {
 
-        protected void Page_Load(object sender, EventArgs e) {
+        protected override void OnPreInit(EventArgs e) {
+
+            base.OnPreInit(e);
+            
+            if (AnalyticsHelpers.UmbracoVersion != "7.2.2") return;
+
+            // Handle authentication stuff to counteract bug in Umbraco 7.2.2 (see U4-6342)
+            HttpContextWrapper http = new HttpContextWrapper(Context);
+            FormsAuthenticationTicket ticket = http.GetUmbracoAuthTicket();
+            http.AuthenticateCurrentRequest(ticket, true);
+        
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //Get current user
+            var currentUser = UmbracoContext.Current.Security.CurrentUser;
+
+            //Check a user is logged into backoffice
+            if (currentUser == null)
+            {
+                //Ouput an error message
+                Content.Text += ui.Text("analytics", "noAccess");
+                return;
+            }
+
+            //Check the user has access to the analytics section
+            //Prevents anyone with this URL to page from just hitting it
+            if (!currentUser.AllowedSections.Contains("analytics"))
+            {
+                //Ouput an error message
+                Content.Text += ui.Text("analytics", "noAccess");
+                return;
+            }
 
             // Get the state from the query string
             string state = Request.QueryString["state"];
@@ -52,12 +91,14 @@ namespace Analytics.App_Plugins.Analytics.BackOffice {
 
                 //Set the refresh token in our config
                 AnalyticsConfig.RefreshToken = refreshToken;
+                
 
                 //Ouput some info about the user
                 //Using UmbracoUser (obsolete) - somehow it fails to compile when using Security.CurrentUser
                 //ui.text requires OLD BusinessLogic User object type not shiny new one
                 //Can we use another helper/library to get the translation text?
-                Content.Text = ui.Text("analytics", "informationSavedMessage", user.Name, UmbracoUser);
+                var umbUser = new User(currentUser.Id);
+                Content.Text = ui.Text("analytics", "informationSavedMessage", user.Name, umbUser);
             } 
             catch
             {

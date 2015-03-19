@@ -1,18 +1,31 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Web.Hosting;
+using System.Web.UI.WebControls;
 using System.Xml;
 using Umbraco.Core;
+using Umbraco.Core.Logging;
 
 namespace Analytics
 {
-    public static class Install
+    public class InstallHelpers
     {
+        /// <summary>
+        /// Add & merge in tranlsations from our lang files into Umbraco lang files
+        /// </summary>
+        public void AddTranslations()
+        {
+            TranslationHelper.AddTranslations();
+        }
+
 
         /// <summary>
-        /// 
+        /// Adds the application/custom section to Umbraco
         /// </summary>
         /// <param name="applicationContext"></param>
-        public static void AddSection(ApplicationContext applicationContext)
+        public void AddSection(ApplicationContext applicationContext)
         {
             //Get SectionService
             var sectionService = applicationContext.Services.SectionService;
@@ -28,87 +41,12 @@ namespace Analytics
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void AddSectionLanguageKeys()
-        {
-            bool saveFile = false;
-
-            //Open up language file
-            //umbraco/config/lang/en.xml
-            var langPath = "~/umbraco/config/lang/en.xml";
-
-            //Path to the file resolved
-            var langFilePath = HostingEnvironment.MapPath(langPath);
-
-            //Load settings.config XML file
-            XmlDocument langXml = new XmlDocument();
-            langXml.Load(langFilePath);
-
-            // Section Node
-            // <area alias="sections">
-            XmlNode sectionNode = langXml.SelectSingleNode("//area [@alias='sections']");
-
-            if (sectionNode != null)
-            {
-                XmlNode findSectionKey = sectionNode.SelectSingleNode("./key [@alias='analytics']");
-
-                if (findSectionKey == null)
-                {
-                    //Let's add the key
-                    var attrToAdd       = langXml.CreateAttribute("alias");
-                    attrToAdd.Value     = "analytics";
-
-                    var keyToAdd        = langXml.CreateElement("key");
-                    keyToAdd.InnerText  = "Analytics";
-                    keyToAdd.Attributes.Append(attrToAdd);
-
-                    sectionNode.AppendChild(keyToAdd);
-
-                    //Save the file flag to true
-                    saveFile = true;
-                }
-            }
-
-            // Section Node
-            // <area alias="treeHeaders">
-            XmlNode treeNode = langXml.SelectSingleNode("//area [@alias='treeHeaders']");
-
-            if (treeNode != null)
-            {
-                XmlNode findTreeKey = treeNode.SelectSingleNode("./key [@alias='analytics']");
-
-                if (findTreeKey == null)
-                {
-                    //Let's add the key
-                    var attrToAdd       = langXml.CreateAttribute("alias");
-                    attrToAdd.Value     = "analytics";
-
-                    var keyToAdd        = langXml.CreateElement("key");
-                    keyToAdd.InnerText  = "Analytics";
-                    keyToAdd.Attributes.Append(attrToAdd);
-
-                    treeNode.AppendChild(keyToAdd);
-
-                    //Save the file flag to true
-                    saveFile = true;
-                }
-            }
-
-
-            //If saveFile flag is true then save the file
-            if (saveFile)
-            {
-                //Save the XML file
-                langXml.Save(langFilePath);
-            }
-        }
+        
 
         /// <summary>
-        /// 
+        /// Adds the required XML to the dashboard.config file
         /// </summary>
-        public static void AddSectionDashboard()
+        public void AddSectionDashboard()
         {
             bool saveFile = false;
 
@@ -153,7 +91,7 @@ namespace Analytics
                     //Append the xml above to the dashboard node
                     dashboardNode.AppendChild(dashboardNode.OwnerDocument.ImportNode(toAdd, true));
 
-                    
+
 
                     //Save the file flag to true
                     saveFile = true;
@@ -167,5 +105,6 @@ namespace Analytics
                 dashboardXml.Save(dashboardFilePath);
             }
         }
+        
     }
 }
