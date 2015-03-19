@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.KeywordController",
-    function ($scope, $location, statsResource, settingsResource) {
+    function ($scope, $location, $routeParams, statsResource, settingsResource, navigationService) {
 
         var profileID = "";
 
@@ -43,4 +43,6 @@
 
             });
         });
+
+        navigationService.syncTree({ tree: 'analyticsTree', path: ["-1", $routeParams.id], forceReload: false });
     });

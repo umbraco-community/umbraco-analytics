@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.SettingsController",
-    function ($scope, settingsResource, notificationsService, localizationService, navigationService) {
+    function ($scope, $routeParams, settingsResource, notificationsService, localizationService, navigationService) {
 
         //By default user has not authorised
         var hasUserAuthd = false;
@@ -43,8 +43,7 @@
 
             //Only load/fetch if showAuth is true
             if (hasUserAuthd === true) {
-
-                console.log("get accounts");
+                
                 //Get all accounts via settingsResource - does WebAPI GET call
                 settingsResource.getaccounts().then(function (response) {
                     $scope.accounts = response.data;
@@ -64,7 +63,6 @@
 
                 //When an account is selected
                 $scope.accountSelected = function (selectedAccount) {
-                    console.log(selectedAccount);
 
                     settingsResource.getprofiles(selectedAccount.Id).then(function (response) {
                         $scope.profiles = response.data;
@@ -109,9 +107,10 @@
                 notificationsService.success(localizationService.localize("analytics_profileDetailsSaved"));
 
                 //Sync ('refresh') the tree!
-                navigationService.syncTree({ tree: 'analyticsTree', path: [-1, -1], forceReload: true, activate: true });
+                navigationService.syncTree({ tree: 'analyticsTree', path: [-1, $routeParams.id], forceReload: true, activate: true });
             });
 
         };
 
+        navigationService.syncTree({ tree: 'analyticsTree', path: ["-1", $routeParams.id], forceReload: false });
     });
