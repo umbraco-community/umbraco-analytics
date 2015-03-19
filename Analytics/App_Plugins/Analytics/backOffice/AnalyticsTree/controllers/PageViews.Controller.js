@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.PageViewsController",
-    function ($scope, $location, statsResource, settingsResource, dateRangeService, localizationService) {
+    function ($scope, $location, $routeParams, statsResource, settingsResource, dateRangeService, localizationService, navigationService) {
 
         var profileID = "";
 
@@ -114,4 +114,6 @@
 
             });
         });
+
+        navigationService.syncTree({ tree: 'analyticsTree', path: ["-1", $routeParams.id], forceReload: false });
     });
