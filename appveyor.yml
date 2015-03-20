@@ -1,15 +1,17 @@
 # version format
 version: 1.1.0.{build}
 
+# Do not build on tags
+skip_tags: true
+
 # UMBRACO_PACKAGE_PRERELEASE_SUFFIX will only be used for Release builds
 # example UMBRACO_PACKAGE_PRERELEASE_SUFFIX=beta
-install:
-  - cmd: set UMBRACO_PACKAGE_PRERELEASE_SUFFIX=
-  - cmd: cd BuildPackage
-  - cmd: Build.bat
+init:
+- set UMBRACO_PACKAGE_PRERELEASE_SUFFIX=
 
-# to disable automatic builds and use our build.bat file with MSBUILD above
-build: off
+build_script:
+- cd BuildPackage
+- Build.bat
 
 artifacts:
   - path: BuildPackage\artifacts\*.nupkg
