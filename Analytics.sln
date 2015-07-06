@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildPackage", "BuildPackag
 		BuildPackage\package.xml = BuildPackage\package.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.730", "Analytics.730\Analytics.730.csproj", "{90DDC5B3-1663-4213-B777-9F77EA1682F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
