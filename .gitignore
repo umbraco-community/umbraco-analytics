@@ -9,6 +9,14 @@ Analytics.Site/bin/
 Analytics.Site/obj/
 Analytics.Site/media/created-packages/
 
+###### Analytics 7.3.0 Test Site
+Analytics.730/App_Data/TEMP/
+Analytics.730/App_Data/Logs/
+Analytics.730/App_Plugins/Analytics/
+Analytics.730/bin/
+Analytics.730/obj/
+Analytics.730/media/created-packages/
+
 ###### Analytics Main Project
 Analytics/obj/
 Analytics/bin/
