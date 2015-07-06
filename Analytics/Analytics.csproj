@@ -338,7 +338,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)App_Plugins\*.*" "$(ProjectDir)..\Analytics.Site\App_Plugins\" /a /e /k /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)App_Plugins\*.*" "$(ProjectDir)..\Analytics.730\App_Plugins\" /a /e /k /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
