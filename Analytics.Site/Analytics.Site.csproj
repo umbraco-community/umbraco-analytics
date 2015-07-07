@@ -1,23 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\UmbracoCms.7.2.6\build\UmbracoCms.props" Condition="Exists('..\packages\UmbracoCms.7.2.6\build\UmbracoCms.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0492CE2A-745C-493A-B600-01C641F3E8EA}</ProjectGuid>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{192B0EC8-2158-4E71-95C0-E9A9250434CA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Analytics</RootNamespace>
-    <AssemblyName>Analytics</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RootNamespace>Analytics.Site</RootNamespace>
+    <AssemblyName>Analytics.Site</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <NuGetPackageImportStamp>d933db38</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,127 +34,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="AnalyticsConfig.cs" />
-    <Compile Include="AnalyticsHelpers.cs" />
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.cs">
-      <DependentUpon>OAuthCallback.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.designer.cs">
-      <DependentUpon>OAuthCallback.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.cs">
-      <DependentUpon>OAuth.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.designer.cs">
-      <DependentUpon>OAuth.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\installer\PostInstall.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ChartHelper.cs" />
-    <Compile Include="Controllers\AnalyticsApiController.cs" />
-    <Compile Include="Controllers\AnalyticsTreeController.cs" />
-    <Compile Include="Controllers\oAuthApiController.cs" />
-    <Compile Include="Controllers\SettingsApiController.cs" />
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\AccountProfile.cs" />
-    <Compile Include="Models\ChartData.cs" />
-    <Compile Include="Models\StatsApiResult.cs" />
-    <Compile Include="Models\Profile.cs" />
-    <Compile Include="Models\SectionTreeNode.cs" />
-    <Compile Include="Models\SettingsValue.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SkybrudSocialExtensionMethods\GoogleAnalyticsExtensionMethods.cs" />
-    <Compile Include="TranslationHelper.cs" />
-    <Compile Include="UmbracoStartup.cs" />
-    <Compile Include="InstallHelpers.cs" />
-    <Compile Include="UninstallHelpers.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="App_Plugins\Analytics\profile.config" />
-    <None Include="App_Plugins\Analytics\package.manifest" />
-    <None Include="App_Plugins\Analytics\account.config" />
-    <None Include="App_Plugins\Analytics\settings.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Dashboard.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Ecommerce.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\PageViews.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Keyword.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\ProductPerformance.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\SalesPerformance.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Social.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\OS.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\ScreenRes.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Device.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Country.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Language.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Browser.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Settings.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Transaction.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\DateRangePicker.Directive.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\filters\currency.filter.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\dashboard.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\ecommerce.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\productperformance.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\salesperformance.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\transactions.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\views.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\keywords.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\social.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\screenres.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\devices.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\country.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\language.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\os.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\browser.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\settings.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Stats.Resource.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\services\DateRange.Service.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App_Plugins\Analytics\backOffice\OAuth.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App_Plugins\Analytics\config\lang\da.xml" />
-    <Content Include="App_Plugins\Analytics\config\lang\en.xml" />
-    <Content Include="App_Plugins\Analytics\config\lang\en_us.xml" />
-    <Content Include="App_Plugins\Analytics\css\analytics.css" />
-    <Content Include="App_Plugins\Analytics\installer\PostInstall.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.js" />
-    <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.min.js" />
-    <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
-    <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
-    <Content Include="App_Plugins\Analytics\lib\angular-tablesort\angular-tablesort.js" />
-    <Content Include="App_Plugins\Analytics\lib\angular-tablesort\tablesort.css" />
-    <Content Include="App_Plugins\Analytics\lib\chartjs\Chart.js" />
-    <Content Include="App_Plugins\Analytics\lib\chartjs\Chart.min.js" />
-    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs2.css" />
-    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs3.css" />
-    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment-with-langs.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment-with-langs.min.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment.min.js" />
-  </ItemGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.dll</HintPath>
@@ -236,16 +129,10 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Skybrud.Social, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Skybrud.Social.0.9.0\lib\Skybrud.Social.dll</HintPath>
-    </Reference>
     <Reference Include="SQLCE4Umbraco, Version=1.0.5632.22684, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.2.6\lib\SQLCE4Umbraco.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.2.6\lib\System.Data.SqlServerCe.dll</HintPath>
       <Private>True</Private>
@@ -254,13 +141,19 @@
       <HintPath>..\packages\UmbracoCms.Core.7.2.6\lib\System.Data.SqlServerCe.Entity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.WebRequest" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -293,8 +186,13 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="TidyNet, Version=1.0.0.0, Culture=neutral">
       <HintPath>..\packages\UmbracoCms.Core.7.2.6\lib\TidyNet.dll</HintPath>
       <Private>True</Private>
@@ -336,10 +234,97 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Config\UrlRewriting.config" />
+    <Content Include="Config\umbracoSettings.config" />
+    <Content Include="Config\trees.config" />
+    <Content Include="Config\tinyMceConfig.config" />
+    <Content Include="Config\scripting.config" />
+    <Content Include="Config\metablogConfig.config" />
+    <Content Include="Config\log4net.config" />
+    <Content Include="Config\FileSystemProviders.config" />
+    <Content Include="Config\feedProxy.config" />
+    <Content Include="Config\ExamineSettings.config" />
+    <Content Include="Config\ExamineIndex.config" />
+    <Content Include="Config\EmbeddedMedia.config" />
+    <Content Include="Config\Dashboard.config" />
+    <Content Include="Config\ClientDependency.config" />
+    <Content Include="Config\BaseRestExtensions.config" />
+    <Content Include="Config\applications.config" />
+    <Content Include="Config\404handlers.config" />
+    <Content Include="Views\BlogOverview.cshtml" />
+    <Content Include="Views\BlogPost.cshtml" />
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Master.cshtml" />
+    <Content Include="Views\Partials\BottomNavigation.cshtml" />
+    <Content Include="Views\Partials\Grid\Fanoe.cshtml" />
+    <Content Include="Views\Partials\MainNavigation.cshtml" />
+    <Content Include="Views\TextPage.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\grid.editors.config.js" />
+    <Content Include="default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Analytics\Analytics.csproj">
+      <Project>{0492ce2a-745c-493a-b600-01c641f3e8ea}</Project>
+      <Name>Analytics</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)App_Plugins\*.*" "$(ProjectDir)..\Analytics.Site\App_Plugins\" /a /e /k /y</PostBuildEvent>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52498</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62315/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\UmbracoCms.7.2.6\build\UmbracoCms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.7.2.6\build\UmbracoCms.props'))" />
+    <Error Condition="!Exists('..\packages\UmbracoCms.7.2.6\build\UmbracoCms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.7.2.6\build\UmbracoCms.targets'))" />
+  </Target>
+  <Import Project="..\packages\UmbracoCms.7.2.6\build\UmbracoCms.targets" Condition="Exists('..\packages\UmbracoCms.7.2.6\build\UmbracoCms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

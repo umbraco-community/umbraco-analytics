@@ -4,6 +4,7 @@ packages/
 ###### Analytics Test Site
 Analytics.Site/App_Data/TEMP/
 Analytics.Site/App_Data/Logs/
+Analytics.Site/App_Data/NuGetBackup/
 Analytics.Site/App_Plugins/Analytics/
 Analytics.Site/bin/
 Analytics.Site/obj/
@@ -29,3 +30,4 @@ BuildPackage/_umbraco/
 BuildPackage/_nuget/
 
 *.suo
+

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildPackage", "BuildPackag
 		BuildPackage\package.xml = BuildPackage\package.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.730", "Analytics.730\Analytics.730.csproj", "{90DDC5B3-1663-4213-B777-9F77EA1682F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.Site", "Analytics.Site\Analytics.Site.csproj", "{192B0EC8-2158-4E71-95C0-E9A9250434CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,10 @@ Global
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
