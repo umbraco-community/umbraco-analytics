@@ -1,6 +1,19 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@using Umbraco.Web.Models
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = "Master.cshtml";
 }
 
+@{
+    var children = CurrentPage.Children;
+    var hasChildrenToShow = children.Where(" visible").Any();
+}
+
+
+@if (hasChildrenToShow)
+{
+    <p>Any() Works</p>
+}
+
 @CurrentPage.GetGridHtml("content", "fanoe")
+
