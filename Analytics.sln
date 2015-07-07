@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics", "Analytics\Analytics.csproj", "{0492CE2A-745C-493A-B600-01C641F3E8EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.Site", "Analytics.Site\Analytics.Site.csproj", "{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildPackage", "BuildPackage", "{407B7DE7-11C8-4540-86C1-96F841326171}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
@@ -29,10 +27,6 @@ Global
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3820D76D-E7DA-46DC-B9F1-7CCAD345E30C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90DDC5B3-1663-4213-B777-9F77EA1682F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
