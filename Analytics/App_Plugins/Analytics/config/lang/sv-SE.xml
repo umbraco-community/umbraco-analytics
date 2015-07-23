@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="se" intName="Swedish " localName="Svenska " lcid="" culture="se-SV">
+  <area alias="analytics">
+    <key alias="viewMoreDetails">Visa fler detaljer</key>
+    <key alias="visits">Besök</key>
+    <key alias="pagePath">Sidsökväg</key>
+    <key alias="pageViews">Sidvisningar</key>
+    <key alias="views">Visningar</key>
+    <key alias="source">Källa</key>
+    <key alias="sources">Källor</key>
+    <key alias="loadingData">Hämtar data...</key>
+    <key alias="keyword">Nyckelord</key>
+    <key alias="keywords">Nyckelord</key>
+    <key alias="socialNetwork">Sociala nätverk</key>
+    <key alias="os">OS</key>
+    <key alias="osVersions">OS Versions</key>
+    <key alias="operatingSystem">Operativsystem</key>
+    <key alias="version">Version</key>
+    <key alias="screenResolution">Skärmupplösning</key>
+    <key alias="resolution">Upplösning</key>
+    <key alias="deviceType">Enhetstyp</key>
+    <key alias="deviceTypes">Enhetstyper</key>
+    <key alias="devices">Enheter</key>
+    <key alias="device">Enhet</key>
+    <key alias="model">Modell</key>
+    <key alias="browser">Webbläsare</key>
+    <key alias="browserSpecific">Webläsarspecifikt</key>
+    <key alias="language">Språk</key>
+    <key alias="country">Land</key>
+    <key alias="infoMessage">Innan du kan använda Analytics, så måste du välja vilken profil du önskar se statistik ifrån.</key>
+    <key alias="settings">Inställningar</key>
+    <key alias="settingsSaved">Inställningar har sparats</key>
+    <key alias="accountDetailsSaved">Kontoinställningar har sparats</key>
+    <key alias="profileDetailsSaved">Profilinställningar har sparats</key>
+    <key alias="loginWithGoogleViaOAuth">Logga in med Google via oAuth för att verifiera</key>
+    <key alias="authorisation">Tillstånd</key>
+    <key alias="authorize">Ge tillstånd</key>
+    <key alias="account">Konto</key>
+    <key alias="selectAccountMessage">Välj vilket konto du vill se intställningar ifrån</key>
+    <key alias="selectAnAccount">-- Välj ett konto --</key>
+    <key alias="selectAProfile">-- Välj en profil --</key>
+    <key alias="selectedProfile">Vald profil</key>
+    <key alias="name">Namn</key>
+    <key alias="website">Hemsida</key>
+    <key alias="id">Id</key>
+    <key alias="webPropertyId">Web Property Id</key>
+    <key alias="ecommerce">E-handel</key>
+    <key alias="transactions">Transaktioner</key>
+    <key alias="revenue">Intäkter</key>
+    <key alias="avgRevenuePerPurchase">Genomsnittlig intäkt per köp</key>
+    <key alias="avgItemsPerPurchase">Genomsnittligt antal varor per köp</key>
+    <key alias="conversionRate">Konverteringsfrekvens</key>
+    <key alias="bestsellers">Bästsäljare</key>
+    <key alias="productSku">Produkt SKU</key>
+    <key alias="productName">Produktnamn</key>
+    <key alias="quantity">Antal</key>
+    <key alias="quantities">Antal</key>
+    <key alias="revenuePerSource">Intäkter per källa</key>
+    <key alias="transactionId">Transaktions-id</key>
+    <key alias="revenuePerItem">Intäkter per föremål</key>
+    <key alias="itemsPerPurchase">Föremål per inköp</key>
+    <key alias="uniquePurchases">Unika inköp</key>
+    <key alias="productPerformance">Produkteffektivitet</key>
+    <key alias="salesPerformance">Säljeffektivitet</key>
+    <key alias="analyticsForUmbraco">Analytics för Umbraco</key>
+    <key alias="noStateSpecified">Inget tillstånd specificerat.</key>
+    <key alias="sorrySessionExpired">Ursäkta - din session har sannolikt löpt ut.</key>
+    <key alias="somethingWentWrong">Okej. Något gick fel.</key>
+    <key alias="informationSavedMessage"><![CDATA[Hej %0%. Vi har sparat din information till en config-fil så att Umbraco kan hämta statistik från ert Google Analytics konto.<br /><br />Du kan nu <a href='javascript:self.close();'>stänga detta fönstret</a>.]]></key>
+    <key alias="noAccess">Tyvärr, du har ej tillgång.</key>
+  </area>
+  <area alias="treeHeaders">
+    <key alias="analytics">Analytics</key>
+  </area>
+  <area alias="sections">
+    <key alias="analytics">Analytics</key>
+  </area>
+</language>
