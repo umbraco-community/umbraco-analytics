@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="de" intName="German (Germany)" localName="Deutsch (Deutschland)" lcid="" culture="de-DE">
+  <area alias="analytics">
+    <key alias="viewMoreDetails">Mehr Details anzeigen</key>
+    <key alias="visits">Sitzungen</key>
+    <key alias="pagePath">Pfad</key>
+    <key alias="pageViews">Seitenaufrufe</key>
+    <key alias="views">Aufrufe</key>
+    <key alias="source">Quelle</key>
+    <key alias="sources">Quellen</key>
+    <key alias="loadingData">Lade Daten ...</key>
+    <key alias="keyword">Suchbegriff</key>
+    <key alias="keywords">Suchbegriffe</key>
+    <key alias="socialNetwork">Soziales Netzwerk</key>
+    <key alias="os">System</key>
+    <key alias="osVersions">Systemversionen</key>
+    <key alias="operatingSystem">Betriebssystem</key>
+    <key alias="version">Version</key>
+    <key alias="screenResolution">Bildschirmauflösung</key>
+    <key alias="resolution">Auflösung</key>
+    <key alias="deviceType">Geräteart</key>
+    <key alias="deviceTypes">Gerätearten</key>
+    <key alias="devices">Geräte</key>
+    <key alias="device">Gerät</key>
+    <key alias="model">Modell</key>
+    <key alias="browser">Browser</key>
+    <key alias="browserSpecific">Browserdetails</key>
+    <key alias="language">Sprache</key>
+    <key alias="country">Land</key>
+    <key alias="infoMessage">Um Analytics zu verwenden, wählen Sie bitte zuerst das Profil, das Sie zum Zugriff auf die Statistiken verwenden möchten.</key>
+    <key alias="settings">Einstellungen</key>
+    <key alias="settingsSaved">Einstellungen wurden übernommen</key>
+    <key alias="accountDetailsSaved">Kontodetails wurden übernommen</key>
+    <key alias="profileDetailsSaved">Profilddaten wurden übernommen</key>
+    <key alias="loginWithGoogleViaOAuth">Anmeldung mit Google (oAuth)</key>
+    <key alias="authorisation">Freigabe</key>
+    <key alias="authorize">Konto freigeben</key>
+    <key alias="account">Konto</key>
+    <key alias="selectAccountMessage">Wählen Sie das Konto aus, dessen Einstellungen Sie anzeigen möchten</key>
+    <key alias="selectAnAccount">-- Konto auswählen --</key>
+    <key alias="selectAProfile">-- Profil auswählen --</key>
+    <key alias="selectedProfile">Ausgewähltes Profil</key>
+    <key alias="name">Name</key>
+    <key alias="website">Website</key>
+    <key alias="id">Id</key>
+    <key alias="webPropertyId">Web Property Id</key>
+    <key alias="ecommerce">E-Commerce</key>
+    <key alias="transactions">Transaktionen</key>
+    <key alias="revenue">Umsatz</key>
+    <key alias="avgRevenuePerPurchase">Durchschnittlicher Umsatz je Einkauf</key>
+    <key alias="avgItemsPerPurchase">Durchschnittliche Anzahl an Artikel je Einkauf</key>
+    <key alias="conversionRate">Conversion Rate</key>
+    <key alias="bestsellers">Bestsellers</key>
+    <key alias="productSku">Artikelnummer</key>
+    <key alias="productName">Produktbezeichnung</key>
+    <key alias="quantity">Menge</key>
+    <key alias="quantities">Mengen</key>
+    <key alias="revenuePerSource">Umsatz je Quelle</key>
+    <key alias="transactionId">Transaktionskennung</key>
+    <key alias="revenuePerItem">Umsatz je Artikel</key>
+    <key alias="itemsPerPurchase">Artikel je Einkauf</key>
+    <key alias="uniquePurchases">Eindeutige Einkäufe</key>
+    <key alias="productPerformance">Produktleistung</key>
+    <key alias="salesPerformance">Verkaufsleistung</key>
+    <key alias="analyticsForUmbraco">Analytics für Umbraco</key>
+    <key alias="noStateSpecified">Kein stat.</key>
+    <key alias="sorrySessionExpired">Entschuldigung, die Sitzung ist aller Wahrscheinlichkeit nach abgelaufen.</key>
+    <key alias="somethingWentWrong">Ah, da ging was schief.</key>
+    <key alias="informationSavedMessage"><![CDATA[Hallo %0%, Ihre Angaben wurden in die Konfigurationsdatei gespeichert, damit die Daten aus Google Analytics in Zukunft direkt geladen werden können.<br /><br /><a href='javascript:self.close();'>Fenster schließen</a>]]></key>
+    <key alias="noAccess">Darauf haben Sie leider keinen Zugriff.</key>
+  </area>
+  <area alias="treeHeaders">
+    <key alias="analytics">Analytics</key>
+  </area>
+  <area alias="sections">
+    <key alias="analytics">Analytics</key>
+  </area>
+</language>
