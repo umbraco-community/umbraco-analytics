@@ -65,7 +65,11 @@ namespace Analytics
 
             if (apiResults.ColumnHeaders.Count() == 5)
             {
-                chartLabels = apiResults.Rows.Select(row => row.Cells[2] + "/" + row.Cells[1] + "/" + row.Cells[0]).ToArray();
+                // EU
+                // chartLabels = apiResults.Rows.Select(row => row.Cells[2] + "/" + row.Cells[1] + "/" + row.Cells[0]).ToArray();
+                
+                // US
+                chartLabels = apiResults.Rows.Select(row => row.Cells[1] + "/" + row.Cells[2] + "/" + row.Cells[0]).ToArray();
             }
             else
             {
