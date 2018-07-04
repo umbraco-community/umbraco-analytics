@@ -5,7 +5,7 @@
 app.requires.push('tableSort');
 
 app.controller("Analytics.BrowserController",
-    function ($scope, $location, $routeParams, statsResource, settingsResource, localizationService, navigationService) {
+    function ($scope, $location, $routeParams, statsResource, analyticsSettingsResource, localizationService, navigationService) {
 
         var profileID = "";
 
@@ -14,13 +14,13 @@ app.controller("Analytics.BrowserController",
         $scope.itemSpecs = [];
 
         $scope.loadingViews = true;
-        $scope.dateFilter = settingsResource.getDateFilter();
+        $scope.dateFilter = analyticsSettingsResource.getDateFilter();
 
         $scope.$watch('dateFilter', function () {
             $scope.loadingViews = true;
-            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+            analyticsSettingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
             //Get Profile
-            settingsResource.getprofile().then(function (response) {
+            analyticsSettingsResource.getprofile().then(function (response) {
                 $scope.profile  = response.data;
                 profileID = response.data.Id;
 

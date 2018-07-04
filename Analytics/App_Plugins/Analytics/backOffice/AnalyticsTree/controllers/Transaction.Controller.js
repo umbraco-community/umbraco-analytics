@@ -1,20 +1,20 @@
 ﻿angular.module("umbraco").controller("Analytics.TransactionController",
-    function ($scope, $location, $routeParams, statsResource, settingsResource, localizationService, navigationService) {
+    function ($scope, $location, $routeParams, statsResource, analyticsSettingsResource, localizationService, navigationService) {
 
         var profileID = "";
 
         // items list array
         $scope.itemTransactions = [];
 
-        $scope.dateFilter = settingsResource.getDateFilter();
+        $scope.dateFilter = analyticsSettingsResource.getDateFilter();
         $scope.loadingViews = true;
 
         $scope.$watch('dateFilter', function () {
             $scope.loadingViews = true;
-            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+            analyticsSettingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
 
             //Get Profile
-            settingsResource.getprofile().then(function (response) {
+            analyticsSettingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
                 profileID = response.data.Id;
                 $scope.currencyCode = $scope.profile.Currency;

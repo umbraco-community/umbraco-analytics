@@ -1,16 +1,16 @@
 ﻿angular.module("umbraco").controller("Analytics.SettingsController",
-    function ($scope, $routeParams, settingsResource, notificationsService, localizationService, navigationService) {
+    function ($scope, $routeParams, analyticsSettingsResource, notificationsService, localizationService, navigationService) {
 
         //By default user has not authorised
         var hasUserAuthd = false;
 
-        //Get all settings via settingsResource - does WebAPI GET call
-        settingsResource.getall().then(function (response) {
+        //Get all settings via analyticsSettingsResource - does WebAPI GET call
+        analyticsSettingsResource.getall().then(function (response) {
             $scope.settings = response.data;
         });
 
         //Get Account JSON & bind back to dropdown
-        settingsResource.getaccount().then(function (response) {
+        analyticsSettingsResource.getaccount().then(function (response) {
             if (response.data === "null") {
                 $scope.selectedaccount = null;
             }
@@ -20,7 +20,7 @@
         });
 
         //Get Profile JSON & bind back to dropdown
-        settingsResource.getprofile().then(function (response) {
+        analyticsSettingsResource.getprofile().then(function (response) {
             if (response.data === "null") {
                 $scope.selectedprofile = null;
             }
@@ -31,7 +31,7 @@
 
 
         //Get oAuth Check - WebAPI GET (Basically checks if RefreshToken has a value)
-        settingsResource.checkauth().then(function (response) {
+        analyticsSettingsResource.checkauth().then(function (response) {
 
             //Show or hide the auth button (set on scope & local var for if check)
             hasUserAuthd = response.data === "true";
@@ -44,14 +44,14 @@
             //Only load/fetch if showAuth is true
             if (hasUserAuthd === true) {
                 
-                //Get all accounts via settingsResource - does WebAPI GET call
-                settingsResource.getaccounts().then(function (response) {
+                //Get all accounts via analyticsSettingsResource - does WebAPI GET call
+                analyticsSettingsResource.getaccounts().then(function (response) {
                     $scope.accounts = response.data;
 
                     if ($scope.selectedaccount != null) {
                         $scope.selectedaccount = _.where($scope.accounts, { Id: $scope.selectedaccount.Id })[0];
                         
-                        settingsResource.getprofiles($scope.selectedaccount.Id).then(function (response) {
+                        analyticsSettingsResource.getprofiles($scope.selectedaccount.Id).then(function (response) {
                             $scope.profiles = response.data;
                             if ($scope.selectedprofile != null) {
                                 $scope.selectedprofile = _.where($scope.profiles, { Id: $scope.selectedprofile.Id })[0];
@@ -63,7 +63,7 @@
 
                 //When an account is selected
                 $scope.accountSelected = function (selectedAccount) {
-                    settingsResource.getprofiles(selectedAccount.Id).then(function (response) {
+                    analyticsSettingsResource.getprofiles(selectedAccount.Id).then(function (response) {
                         $scope.profiles = response.data;
                     });
                 };
@@ -83,7 +83,7 @@
         $scope.save = function (settings, account, profile) {
 
             //Save settings resource - does a WebAPI POST call
-            settingsResource.save(settings).then(function (response) {
+            analyticsSettingsResource.save(settings).then(function (response) {
                 $scope.settings = response.data;
 
                 //Display Success message
@@ -91,7 +91,7 @@
             });
 
             //Save settings resource - does a WebAPI POST call
-            settingsResource.saveAccount(account).then(function (response) {
+            analyticsSettingsResource.saveAccount(account).then(function (response) {
                 //Don't need anything from response.data back
 
                 //Display Success message
@@ -99,7 +99,7 @@
             });
 
             //Save settings resource - does a WebAPI POST call
-            settingsResource.saveProfile(profile).then(function (response) {
+            analyticsSettingsResource.saveProfile(profile).then(function (response) {
                 //Don't need anything from response.data back
 
                 //Display Success message

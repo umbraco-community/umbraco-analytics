@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.DashboardController",
-    function ($scope, $location, statsResource, settingsResource, localizationService) {
+    function ($scope, $location, statsResource, analyticsSettingsResource, localizationService) {
 
         var profileID = "";
 
@@ -22,7 +22,7 @@
         $scope.dateFilter.startDate = moment().subtract('days', 6).format('YYYY-MM-DD');
         $scope.dateFilter.endDate = moment().format('YYYY-MM-DD');
         
-        settingsResource.getprofile().then(function(response) {
+        analyticsSettingsResource.getprofile().then(function(response) {
             $scope.profile = response.data;
             profileID = response.data.Id;
 

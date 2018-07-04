@@ -47,7 +47,7 @@
                    },
                    function (start, end) {
                       
-                       //settingsResource.setDateFilter(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+                       //analyticsSettingsResource.setDateFilter(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
 
                        var dateFilter = {};
                        dateFilter.startDate = start.format('YYYY-MM-DD');
