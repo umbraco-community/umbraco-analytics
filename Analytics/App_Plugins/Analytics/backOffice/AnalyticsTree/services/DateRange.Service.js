@@ -1,12 +1,12 @@
 ﻿angular.module("umbraco")
-    .service('dateRangeService', function ($rootScope, settingsResource) {
-        var filter =  settingsResource.getDateFilter();
+    .service('dateRangeService', function ($rootScope, analyticsSettingsResource) {
+        var filter =  analyticsSettingsResource.getDateFilter();
         return {
             getFilter: function() {
                 return filter;
             },
             setFilter: function (filt) {
-                settingsResource.setDateFilter(filt.startDate, filt.endDate);
+                analyticsSettingsResource.setDateFilter(filt.startDate, filt.endDate);
                 filter.startDate = filt.startDate;
                 filter.endDate = filt.endDate;
                 console.log("broad start");

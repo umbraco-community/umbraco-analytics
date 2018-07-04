@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.CountryController",
-    function ($scope, $location, $routeParams, statsResource, settingsResource, assetsService, navigationService) {
+    function ($scope, $location, $routeParams, statsResource, analyticsSettingsResource, assetsService, navigationService) {
 
         var profileID = "";
 
@@ -17,18 +17,18 @@
                 });
             });
 
-        $scope.dateFilter = settingsResource.getDateFilter();
+        $scope.dateFilter = analyticsSettingsResource.getDateFilter();
 
         $scope.$watch('dateFilter', function() {
 
-            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+            analyticsSettingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
             initChart();
         });
         
         function initChart() {
             $scope.loadingViews = true;
             //Get Profile
-            settingsResource.getprofile().then(function(response) {
+            analyticsSettingsResource.getprofile().then(function(response) {
                 $scope.profile  = response.data;
                 profileID       = response.data.Id;
 

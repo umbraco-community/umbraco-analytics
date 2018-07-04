@@ -1,9 +1,9 @@
 ﻿angular.module("umbraco").controller("Analytics.ViewController",
-    function ($scope, $routeParams, settingsResource, assetsService) {
+    function ($scope, $routeParams, analyticsSettingsResource, assetsService) {
 
         //Currently loading /umbraco/general.html
         //Need it to look at /App_Plugins/
-        //$scope.dateFilter = settingsResource.getDateFilter();
+        //$scope.dateFilter = analyticsSettingsResource.getDateFilter();
         //$scope.$watch('dateFilter', function () {
         //    console.log("parent watch");
         //});

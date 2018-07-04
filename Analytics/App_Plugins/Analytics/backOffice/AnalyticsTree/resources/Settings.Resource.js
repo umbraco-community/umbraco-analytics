@@ -1,6 +1,6 @@
 ﻿
 angular.module("umbraco.resources")
-    .factory("settingsResource", function ($http, $cookieStore) {
+    .factory("analyticsSettingsResource", function ($http, $cookieStore) {
         return {
             
             checkauth: function () {

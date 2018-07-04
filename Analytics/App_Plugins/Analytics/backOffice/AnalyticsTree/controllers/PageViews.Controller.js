@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.PageViewsController",
-    function ($scope, $location, $routeParams, statsResource, settingsResource, dateRangeService, localizationService, navigationService) {
+    function ($scope, $location, $routeParams, statsResource, analyticsSettingsResource, dateRangeService, localizationService, navigationService) {
 
         var profileID = "";
 
@@ -7,14 +7,14 @@
         $scope.items = [];
         $scope.itemSources = [];
 
-        $scope.dateFilter = settingsResource.getDateFilter();
+        $scope.dateFilter = analyticsSettingsResource.getDateFilter();
 
         $scope.$watch('dateFilter', function () {
             
-            settingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
+            analyticsSettingsResource.setDateFilter($scope.dateFilter.startDate, $scope.dateFilter.endDate);
 
             //Get Profile
-            settingsResource.getprofile().then(function (response) {
+            analyticsSettingsResource.getprofile().then(function (response) {
                 $scope.profile = response.data;
                 profileID = response.data.Id;
 
