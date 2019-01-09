@@ -29,15 +29,9 @@ namespace Analytics
             if (string.IsNullOrEmpty(installAppSetting) || installAppSetting != true.ToString())
             {
                 var install = new InstallHelpers();
-
-                //Check to see if language keys for section needs to be added
-                install.AddTranslations();
-
+                
                 //Check to see if section needs to be added
-                install.AddSection(applicationContext);
-
-                //Add Section Dashboard XML
-                install.AddSectionDashboard();
+                install.AddSection();
 
                 //All done installing our custom stuff
                 //As we only want this to run once - not every startup of Umbraco
