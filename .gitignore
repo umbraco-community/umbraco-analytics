@@ -31,3 +31,5 @@ BuildPackage/_nuget/
 
 *.suo
 
+.vs/
+Analytics.Site/Analytics.Site.csproj.user
