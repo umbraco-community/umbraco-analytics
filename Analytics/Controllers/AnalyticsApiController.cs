@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using Analytics.Models;
-using Skybrud.Social.Google;
-using Skybrud.Social.Google.Analytics.Objects;
-using Skybrud.Social.Google.Analytics.Responses;
+using Skybrud.Social.Google.Analytics.Models.Accounts;
+using Skybrud.Social.Google.Analytics.Models.Dimensions;
+using Skybrud.Social.Google.Analytics.Models.Metrics;
+using Skybrud.Social.Google.Analytics.Models.Profiles;
+using Skybrud.Social.Google.Common;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
