@@ -35,22 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnalyticsApplication.cs" />
+    <Compile Include="AnalyticsComposer.cs" />
     <Compile Include="AnalyticsConfig.cs" />
     <Compile Include="AnalyticsHelpers.cs" />
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.cs">
-      <DependentUpon>OAuthCallback.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.designer.cs">
-      <DependentUpon>OAuthCallback.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.cs">
-      <DependentUpon>OAuth.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App_Plugins\Analytics\backOffice\OAuth.aspx.designer.cs">
-      <DependentUpon>OAuth.aspx.cs</DependentUpon>
-    </Compile>
     <Compile Include="App_Plugins\Analytics\installer\PostInstall.ascx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -68,7 +55,7 @@
     <Compile Include="Models\SettingsValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkybrudSocialExtensionMethods\GoogleAnalyticsExtensionMethods.cs" />
-    <Compile Include="UmbracoStartup.cs" />
+    <Compile Include="AnalyticsComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -118,12 +105,6 @@
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\services\DateRange.Service.js" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
     <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="App_Plugins\Analytics\backOffice\OAuth.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="App_Plugins\Analytics\config\lang\da.xml" />
     <Content Include="App_Plugins\Analytics\config\lang\en.xml" />
     <Content Include="App_Plugins\Analytics\config\lang\en_us.xml" />

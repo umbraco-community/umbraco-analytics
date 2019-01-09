@@ -1,28 +1,24 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
-using System.Web.Configuration;
-using umbraco.BusinessLogic;
-using umbraco.cms.businesslogic.packager;
-using Umbraco.Core;
-using Umbraco.Web;
 using Umbraco.Web.Trees;
 using Analytics.Models;
 using Analytics.Controllers;
+using Umbraco.Core.Components;
+using Umbraco.Web.Composing;
+using Umbraco.Core.Models;
 
 namespace Analytics
 {
-    public class UmbracoStartup : ApplicationEventHandler
+    public class AnalyticsComponent : IComponent
     {
-        /// <summary>
-        /// Register Install & Uninstall Events
-        /// </summary>
-        /// <param name="umbracoApplication"></param>
-        /// <param name="applicationContext"></param>
-        protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        public void Initialize()
         {
             //Add Tree Node Rendering Event - Used to check if user is admin to display settings node in tree
             TreeControllerBase.TreeNodesRendering += TreeControllerBase_TreeNodesRendering;
+        }
+
+        public void Terminate()
+        {
         }
 
         /// <summary>
@@ -33,7 +29,7 @@ namespace Analytics
         void TreeControllerBase_TreeNodesRendering(TreeControllerBase sender, TreeNodesRenderingEventArgs e)
         {
             //Get Current User
-            var currentUser = User.GetCurrent();
+            var currentUser = Current.UmbracoContext.Security.CurrentUser;
 
             //This will only run on the analyticsTree & if the user is NOT admin
             if (sender.TreeAlias == "analyticsTree" && !currentUser.IsAdmin())
