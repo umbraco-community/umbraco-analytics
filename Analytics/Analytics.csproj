@@ -128,9 +128,6 @@
     <Content Include="App_Plugins\Analytics\config\lang\en.xml" />
     <Content Include="App_Plugins\Analytics\config\lang\en_us.xml" />
     <Content Include="App_Plugins\Analytics\css\analytics.css" />
-    <Content Include="App_Plugins\Analytics\installer\PostInstall.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.js" />
     <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.min.js" />
     <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
