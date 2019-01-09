@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Formatting;
 using Analytics.Models;
 using Umbraco.Core;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
-using umbraco;
-using umbraco.BusinessLogic.Actions;
 
 namespace Analytics.Controllers
 {
@@ -20,7 +19,7 @@ namespace Analytics.Controllers
         /// <param name="id"></param>
         /// <param name="queryStrings"></param>
         /// <returns></returns>
-        protected override TreeNodeCollection GetTreeNodes(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
+        protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
         {
             //check if we're rendering the root node's children
             if (id == Constants.System.Root.ToInvariantString())
@@ -94,15 +93,15 @@ namespace Analytics.Controllers
         /// <param name="id"></param>
         /// <param name="queryStrings"></param>
         /// <returns></returns>
-        protected override MenuItemCollection GetMenuForNode(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
+        protected override MenuItemCollection GetMenuForNode(string id, FormDataCollection queryStrings)
         {
             var menu = new MenuItemCollection();
 
             //If the node is the root node (top of tree)
             if (id == Constants.System.Root.ToInvariantString()) 
             {
-                //Add in refresh action
-                menu.Items.Add<RefreshNode, ActionRefresh>(ui.Text("actions", ActionRefresh.Instance.Alias), false);
+                //Add in refresh
+                menu.Items.Add(new RefreshNode(Services.TextService, true));
             }
 
             return menu;
