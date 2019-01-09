@@ -1,10 +1,10 @@
-﻿using Skybrud.Social.Google.Analytics.Responses;
+﻿using Skybrud.Social.Google.Analytics.Models.Data;
 
 namespace Analytics.Models
 {
     public class StatsApiResult
     {
-        public AnalyticsDataResponse ApiResult { get; set; }
+        public AnalyticsDataCollection ApiResult { get; set; }
 
         public dynamic ChartData { get; set; }
     }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Skybrud.Social;
-using Skybrud.Social.Google.Analytics;
-using Skybrud.Social.Google.Analytics.Objects;
-using Skybrud.Social.Google.Analytics.Responses;
+using Skybrud.Social.Google.Analytics.Endpoints;
+using Skybrud.Social.Google.Analytics.Endpoints.Raw;
+using Skybrud.Social.Google.Analytics.Models.Profiles;
 
-namespace Analytics.SkybrudSocialExtensionMethods {
+namespace Analytics.SkybrudSocialExtensionMethods
+{
 
     public static class GoogleAnalyticsExtensionMethods {
 
@@ -20,10 +21,10 @@ namespace Analytics.SkybrudSocialExtensionMethods {
             query.Add("ids", "ga:" + profileId);
             query.Add("start-date", startDate.ToString("yyyy-MM-dd"));
             query.Add("end-date", endDate.ToString("yyyy-MM-dd"));
-            query.Add("metrics", String.Join(",", metrics));
-            query.Add("dimensions", String.Join(",", dimensions));
-            if (filters != null && filters.Length > 0) query.Add("filters", String.Join(",", filters));
-            if (sort != null && sort.Length > 0) query.Add("sort", String.Join(",", sort));
+            query.Add("metrics", string.Join(",", metrics));
+            query.Add("dimensions", string.Join(",", dimensions));
+            if (filters != null && filters.Length > 0) query.Add("filters", string.Join(",", filters));
+            if (sort != null && sort.Length > 0) query.Add("sort", string.Join(",", sort));
             query.Add("access_token", endpoint.Client.AccessToken);
 
             // Make the call to the API
