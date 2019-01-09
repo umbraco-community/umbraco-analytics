@@ -14,8 +14,6 @@ namespace Analytics
 {
     public class UmbracoStartup : ApplicationEventHandler
     {
-        private const string AppSettingKey = "AnalyticsStartupInstalled";
-
         /// <summary>
         /// Register Install & Uninstall Events
         /// </summary>
@@ -23,30 +21,8 @@ namespace Analytics
         /// <param name="applicationContext"></param>
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            //Check to see if appSetting AnalyticsStartupInstalled is true or even present
-            var installAppSetting = WebConfigurationManager.AppSettings[AppSettingKey];
-
-            if (string.IsNullOrEmpty(installAppSetting) || installAppSetting != true.ToString())
-            {
-                var install = new InstallHelpers();
-                
-                //Check to see if section needs to be added
-                install.AddSection();
-
-                //All done installing our custom stuff
-                //As we only want this to run once - not every startup of Umbraco
-                var webConfig = WebConfigurationManager.OpenWebConfiguration("/");
-                webConfig.AppSettings.Settings.Add(AppSettingKey, true.ToString());
-                webConfig.Save();
-
-            }
-
-            //Add OLD Style Package Event
-            InstalledPackage.BeforeDelete += InstalledPackage_BeforeDelete;
-
             //Add Tree Node Rendering Event - Used to check if user is admin to display settings node in tree
             TreeControllerBase.TreeNodesRendering += TreeControllerBase_TreeNodesRendering;
- 
         }
 
         /// <summary>
@@ -107,26 +83,5 @@ namespace Analytics
             }
         }
 
-        /// <summary>
-        /// Uninstall Package - Before Delete (Old style events, no V6/V7 equivelant)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void InstalledPackage_BeforeDelete(InstalledPackage sender, System.EventArgs e)
-        {
-            //Check which package is being uninstalled
-            if (sender.Data.Name == "Analytics")
-            {
-                var uninstall = new UninstallHelpers();
-
-                //Start Uninstall - clean up process...
-                uninstall.RemoveSection();
-                uninstall.RemoveTranslations();
-                uninstall.RemoveSectionDashboard();
-
-                //Remove AppSetting key when all done
-                ConfigurationManager.AppSettings.Remove(AppSettingKey);
-            }
-        }
     }
 }

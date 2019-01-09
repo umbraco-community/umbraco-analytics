@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnalyticsApplication.cs" />
     <Compile Include="AnalyticsConfig.cs" />
     <Compile Include="AnalyticsHelpers.cs" />
     <Compile Include="App_Plugins\Analytics\backOffice\OAuthCallback.aspx.cs">
@@ -68,8 +69,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkybrudSocialExtensionMethods\GoogleAnalyticsExtensionMethods.cs" />
     <Compile Include="UmbracoStartup.cs" />
-    <Compile Include="InstallHelpers.cs" />
-    <Compile Include="UninstallHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
