@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Analytics.Models;
-using Skybrud.Social.Google.Analytics.Responses;
+using Skybrud.Social.Google.Analytics.Models.Data;
 
 namespace Analytics
 {
     public static class ChartHelper
     {
-        public static ChartData GetChartData(AnalyticsDataResponse apiResults)
+        public static ChartData GetChartData(AnalyticsDataCollection apiResults)
         {
             // Get the amount of dimensions and metrics
-            int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == "DIMENSION");
-            int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == "METRIC");
+            int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == AnalyticsColumnType.Dimension);
+            int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == AnalyticsColumnType.Metric);
 
             // Initialize the data object
             ChartData cd = new ChartData
@@ -55,11 +55,11 @@ namespace Analytics
             return cd;
         }
 
-        public static ChartData GetLineChartData(AnalyticsDataResponse apiResults)
+        public static ChartData GetLineChartData(AnalyticsDataCollection apiResults)
         {            
             // Get the amount of dimensions and metrics
-            int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == "DIMENSION");
-            int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == "METRIC");
+            int dimensions  = apiResults.ColumnHeaders.Count(x => x.ColumnType == AnalyticsColumnType.Dimension);
+            int metrics     = apiResults.ColumnHeaders.Count(x => x.ColumnType == AnalyticsColumnType.Metric);
 
             var chartLabels = new string[]{};
 
@@ -114,7 +114,7 @@ namespace Analytics
             
         }
 
-        public static dynamic GetGeoChartData(AnalyticsDataResponse apiResults)
+        public static dynamic GetGeoChartData(AnalyticsDataCollection apiResults)
         {
             List<object> geoChartData = new List<object>();
 
