@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http.Formatting;
 using Analytics.Models;
 using Umbraco.Core;
+using Umbraco.Core.Services;
+using Umbraco.Web.Composing;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
@@ -21,6 +23,8 @@ namespace Analytics.Controllers
         /// <returns></returns>
         protected override TreeNodeCollection GetTreeNodes(string id, FormDataCollection queryStrings)
         {
+            var textService = Current.Services.TextService;
+
             //check if we're rendering the root node's children
             if (id == Constants.System.Root.ToInvariantString())
             {
@@ -32,17 +36,17 @@ namespace Analytics.Controllers
 
                 //Add nodes
                 var treeNodes = new List<SectionTreeNode>();
-                treeNodes.Add(new SectionTreeNode() { Id = "views", Title = ui.Text("analytics", "views"), Icon = "icon-activity", Route = string.Format("{0}/view/{1}", mainRoute, "views") });
-                treeNodes.Add(new SectionTreeNode() { Id = "keywords", Title = ui.Text("analytics", "keywords"), Icon = "icon-tags", Route = string.Format("{0}/view/{1}", mainRoute, "keywords") });
-                treeNodes.Add(new SectionTreeNode() { Id = "social", Title = ui.Text("analytics", "socialNetwork"), Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "social") });
-                treeNodes.Add(new SectionTreeNode() { Id = "os", Title = ui.Text("analytics", "operatingSystem"), Icon = "icon-windows", Route = string.Format("{0}/view/{1}", mainRoute, "os") });
-                treeNodes.Add(new SectionTreeNode() { Id = "screenres", Title = ui.Text("analytics", "screenResolution"), Icon = "icon-display", Route = string.Format("{0}/view/{1}", mainRoute, "screenres") });
-                treeNodes.Add(new SectionTreeNode() { Id = "devices", Title = ui.Text("analytics", "devices"), Icon = "icon-iphone", Route = string.Format("{0}/view/{1}", mainRoute, "devices") });
-                treeNodes.Add(new SectionTreeNode() { Id = "browser", Title = ui.Text("analytics", "browser"), Icon = "icon-browser-window", Route = string.Format("{0}/view/{1}", mainRoute, "browser") });
-                treeNodes.Add(new SectionTreeNode() { Id = "language", Title = ui.Text("analytics", "language"), Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "language") });
-                treeNodes.Add(new SectionTreeNode() { Id = "country", Title = ui.Text("analytics", "country"), Icon = "icon-globe", Route = string.Format("{0}/view/{1}", mainRoute, "country") });
-                treeNodes.Add(new SectionTreeNode() { Id = "ecommerce", Title = ui.Text("analytics", "ecommerce"), Icon = "icon-shopping-basket", Route = string.Format("{0}/view/{1}", mainRoute, "ecommerce") });
-                treeNodes.Add(new SectionTreeNode() { Id = "settings", Title = ui.Text("analytics", "settings"), Icon = "icon-settings", Route = string.Format("{0}/edit/{1}", mainRoute, "settings") });
+                treeNodes.Add(new SectionTreeNode() { Id = "views", Title = textService.Localize("analytics/views"), Icon = "icon-activity", Route = string.Format("{0}/view/{1}", mainRoute, "views") });
+                treeNodes.Add(new SectionTreeNode() { Id = "keywords", Title = textService.Localize("analytics/keywords"), Icon = "icon-tags", Route = string.Format("{0}/view/{1}", mainRoute, "keywords") });
+                treeNodes.Add(new SectionTreeNode() { Id = "social", Title = textService.Localize("analytics/socialNetwork"), Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "social") });
+                treeNodes.Add(new SectionTreeNode() { Id = "os", Title = textService.Localize("analytics/operatingSystem"), Icon = "icon-windows", Route = string.Format("{0}/view/{1}", mainRoute, "os") });
+                treeNodes.Add(new SectionTreeNode() { Id = "screenres", Title = textService.Localize("analytics/screenResolution"), Icon = "icon-display", Route = string.Format("{0}/view/{1}", mainRoute, "screenres") });
+                treeNodes.Add(new SectionTreeNode() { Id = "devices", Title = textService.Localize("analytics/devices"), Icon = "icon-iphone", Route = string.Format("{0}/view/{1}", mainRoute, "devices") });
+                treeNodes.Add(new SectionTreeNode() { Id = "browser", Title = textService.Localize("analytics/browser"), Icon = "icon-browser-window", Route = string.Format("{0}/view/{1}", mainRoute, "browser") });
+                treeNodes.Add(new SectionTreeNode() { Id = "language", Title = textService.Localize("analytics/language"), Icon = "icon-chat-active", Route = string.Format("{0}/view/{1}", mainRoute, "language") });
+                treeNodes.Add(new SectionTreeNode() { Id = "country", Title = textService.Localize("analytics/country"), Icon = "icon-globe", Route = string.Format("{0}/view/{1}", mainRoute, "country") });
+                treeNodes.Add(new SectionTreeNode() { Id = "ecommerce", Title = textService.Localize("analytics/ecommerce"), Icon = "icon-shopping-basket", Route = string.Format("{0}/view/{1}", mainRoute, "ecommerce") });
+                treeNodes.Add(new SectionTreeNode() { Id = "settings", Title = textService.Localize("analytics/settings"), Icon = "icon-settings", Route = string.Format("{0}/edit/{1}", mainRoute, "settings") });
 
                 foreach (var item in treeNodes)
                 {
@@ -69,9 +73,9 @@ namespace Analytics.Controllers
 
                 var childNodes = new TreeNodeCollection();
                 var childTreeNodes = new List<SectionTreeNode>();
-                childTreeNodes.Add(new SectionTreeNode() { Id = "transactions", Title = ui.Text("analytics", "transactions"), Icon = "icon-credit-card", Route = string.Format("{0}/view/{1}", mainRoute, "transactions") });
-                childTreeNodes.Add(new SectionTreeNode() { Id = "productperformance", Title = ui.Text("analytics", "productPerformance"), Icon = "icon-barcode", Route = string.Format("{0}/view/{1}", mainRoute, "productperformance") });
-                childTreeNodes.Add(new SectionTreeNode() { Id = "salesperformance", Title = ui.Text("analytics", "salesPerformance"), Icon = "icon-bill", Route = string.Format("{0}/view/{1}", mainRoute, "salesperformance") });
+                childTreeNodes.Add(new SectionTreeNode() { Id = "transactions", Title = textService.Localize("analytics/transactions"), Icon = "icon-credit-card", Route = string.Format("{0}/view/{1}", mainRoute, "transactions") });
+                childTreeNodes.Add(new SectionTreeNode() { Id = "productperformance", Title = textService.Localize("analytics/productPerformance"), Icon = "icon-barcode", Route = string.Format("{0}/view/{1}", mainRoute, "productperformance") });
+                childTreeNodes.Add(new SectionTreeNode() { Id = "salesperformance", Title = textService.Localize("analytics/salesPerformance"), Icon = "icon-bill", Route = string.Format("{0}/view/{1}", mainRoute, "salesperformance") });
 
                 foreach (var c in childTreeNodes)
                 {
