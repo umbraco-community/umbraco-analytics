@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Google.Analytics.Objects;
+﻿using Skybrud.Social.Google.Analytics.Models.Accounts;
+using Skybrud.Social.Google.Analytics.Models.Profiles;
 
 namespace Analytics.Models
 {

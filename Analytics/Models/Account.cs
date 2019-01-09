@@ -1,8 +1,9 @@
 ﻿using System;
-using Skybrud.Social.Google.Analytics.Objects;
+using Skybrud.Social.Google.Analytics.Models.Accounts;
 
-namespace Analytics.Models {
-    
+namespace Analytics.Models
+{
+
     public class Account {
 
         public string Id { get; set; }
