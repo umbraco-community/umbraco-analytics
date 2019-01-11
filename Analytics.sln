@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics", "Analytics\Analytics.csproj", "{0492CE2A-745C-493A-B600-01C641F3E8EA}"
 EndProject
@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildPackage", "BuildPackag
 		BuildPackage\package.xml = BuildPackage\package.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.Site", "Analytics.Site\Analytics.Site.csproj", "{192B0EC8-2158-4E71-95C0-E9A9250434CA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,12 +25,11 @@ Global
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0492CE2A-745C-493A-B600-01C641F3E8EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{192B0EC8-2158-4E71-95C0-E9A9250434CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CFD9333-EBCF-4449-BB80-24D3C1BC7C72}
 	EndGlobalSection
 EndGlobal
