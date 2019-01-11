@@ -23,9 +23,9 @@ namespace Analytics.Controllers
         /// <summary>
         /// Does what it says on the tin - the path to the settings.config file
         /// </summary>
-        private const string ConfigPath     = "~/App_Plugins/Analytics/settings.config";
-        private const string AccountPath    = "~/App_Plugins/Analytics/account.config";
-        private const string ProfilePath    = "~/App_Plugins/Analytics/profile.config";
+        private const string ConfigPath     = "~/App_Plugins/Analytics/config/settings.config";
+        private const string AccountPath    = "~/App_Plugins/Analytics/config/account.config";
+        private const string ProfilePath    = "~/App_Plugins/Analytics/config/profile.config";
 
         /// <summary>
         /// Gets Settings from the XML settings.config
