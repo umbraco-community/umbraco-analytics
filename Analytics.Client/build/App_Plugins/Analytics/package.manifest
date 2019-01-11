@@ -5,22 +5,14 @@
     "~/App_Plugins/Analytics/js/analytics.filters.js",
     "~/App_Plugins/Analytics/js/analytics.resources.js",
     "~/App_Plugins/Analytics/js/analytics.services.js",
-
-    "~/App_Plugins/Analytics/lib/chartjs/Chart.js",
-    "~/App_Plugins/Analytics/lib/angular-chartjs/angular-chartjs.js",
-
-    "~/App_Plugins/Analytics/lib/angles/angles.js",
-    "~/App_Plugins/Analytics/lib/accountingjs/accounting.js",
-
-    "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js",
-
-    "~/App_Plugins/Analytics/lib/angular-tablesort/angular-tablesort.js"
-
+    "~/App_Plugins/Analytics/lib/accountingjs/accounting.min.js",
+    "~/App_Plugins/Analytics/lib/angular-tablesort/angular-tablesort.js",
+    "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js"
   ],
   "css": [
-    "~/App_Plugins/Analytics/assets/analytics.css",
-    "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css",
+    "~/App_Plugins/Analytics/assets/css/analytics.css",
     "~/App_Plugins/Analytics/lib/angular-tablesort/tablesort.css"
+    "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css"
   ],
   "dashboards": [
     {
