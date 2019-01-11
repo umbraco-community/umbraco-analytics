@@ -11,7 +11,7 @@
   ],
   "css": [
     "~/App_Plugins/Analytics/assets/css/analytics.css",
-    "~/App_Plugins/Analytics/lib/angular-tablesort/tablesort.css"
+    "~/App_Plugins/Analytics/lib/angular-tablesort/tablesort.css",
     "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css"
   ],
   "dashboards": [
