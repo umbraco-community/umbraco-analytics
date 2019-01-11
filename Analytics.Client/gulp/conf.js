@@ -15,7 +15,7 @@ exports.paths = {
   src: 'src',
   tmp: '.tmp',
   output: 'build/App_Plugins/Analytics',
-  lib: '../Analytics',
+  lib: '../Analytics/',
 };
 exports.patterns = {
   dllPattern: '{Analytics*}.{dll,pdb}'

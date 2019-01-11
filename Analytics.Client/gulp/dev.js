@@ -54,10 +54,7 @@ gulp.task('dev-watch', ['dev-all'], function(cb) {
 
 gulp.task('dev-dll', function() {
   _.forEach(destinations, function (d) {
-    gulp.src(path.join(conf.paths.cloud, 'bin/Debug/' + conf.patterns.dllPattern))
-    .pipe(gulp.dest(path.join(d.folder, '/bin/')));
-
-    gulp.src(path.join(conf.paths.forms, 'bin/Debug/' + conf.patterns.dllPattern))
+    gulp.src(path.join(conf.paths.lib, 'bin/Debug/' + conf.patterns.dllPattern))
     .pipe(gulp.dest(path.join(d.folder, '/bin/')));
   });
 });
