@@ -34,3 +34,4 @@ BuildPackage/_nuget/
 .vs/
 Analytics.Site/Analytics.Site.csproj.user
 Analytics.Client/node_modules/
+Analytics.Client/build/
