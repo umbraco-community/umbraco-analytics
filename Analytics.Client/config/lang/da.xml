@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="da" intName="Danish" localName="dansk" lcid="6" culture="da-DK">
+  <area alias="analytics">
+    <key alias="viewMoreDetails">Vis flere detaljer</key>
+    <key alias="visits">Besøg</key>
+    <key alias="pagePath">Sidesti</key>
+    <key alias="pageViews">Sidevisninger</key>
+    <key alias="views">Visninger</key>
+    <key alias="source">Kilde</key>
+    <key alias="sources">Kilder</key>
+    <key alias="loadingData">Indlæser data...</key>
+    <key alias="keyword">Nøgleord</key>
+    <key alias="keywords">Nøgleord</key>
+    <key alias="socialNetwork">Socialt netværk</key>
+    <key alias="os">OS</key>
+    <key alias="osVersions">OS versioner</key>
+    <key alias="operatingSystem">Operativsystem</key>
+    <key alias="version">Version</key>
+    <key alias="screenResolution">Skærmopløsning</key>
+    <key alias="resolution">Opløsning</key>
+    <key alias="deviceType">Enhedstype</key>
+    <key alias="deviceTypes">Enhedstyper</key>
+    <key alias="devices">Enheder</key>
+    <key alias="device">Enhed</key>
+    <key alias="model">Model</key>
+    <key alias="browser">Browser</key>
+    <key alias="browserSpecific">Browser specifikt</key>
+    <key alias="language">Sprog</key>
+    <key alias="country">Land</key>
+    <key alias="infoMessage">Før du kan bruge Analytics, skal du vælge en profil du vil benytte til at vise statistikker.</key>
+    <key alias="settings">Indstillinger</key>
+    <key alias="settingsSaved">Indstillinger er blevet gemt</key>
+    <key alias="accountDetailsSaved">Kontoinformationer er blevet gemt</key>
+    <key alias="profileDetailsSaved">Profilinformationer er blevet gemt</key>
+    <key alias="loginWithGoogleViaOAuth">Log ind med Google via oAuth for at bekræfte</key>
+    <key alias="authorisation">Godkendelse</key>
+    <key alias="authorize">Godkend</key>
+    <key alias="account">Konto</key>
+    <key alias="selectAccountMessage">Vælg hvilken konto du vil se indstillinger fra</key>
+    <key alias="selectAnAccount">-- Vælg en konto --</key>
+    <key alias="selectAProfile">-- Vælg en profil --</key>
+    <key alias="selectedProfile">Valgt profil</key>
+    <key alias="name">Navn</key>
+    <key alias="website">Hjemmeside</key>
+    <key alias="id">Id</key>
+    <key alias="webPropertyId">Web ejendom id</key>
+    <key alias="ecommerce">E-handel</key>
+    <key alias="transactions">Transaktioner</key>
+    <key alias="revenue">Indtjening</key>
+    <key alias="avgRevenuePerPurchase">Gns. indtjening pr. køb</key>
+    <key alias="avgItemsPerPurchase">Gns. varer pr. køb</key>
+    <key alias="conversionRate">Konverteringsfrekvens</key>
+    <key alias="bestsellers">Mest solgte</key>
+    <key alias="productSku">Produkt SKU</key>
+    <key alias="productName">Produktnavn</key>
+    <key alias="quantity">Mængde</key>
+    <key alias="quantities">Mængde</key>
+    <key alias="revenuePerSource">Indtjening pr. kilde</key>
+    <key alias="transactionId">Transaktions-id</key>
+    <key alias="revenuePerItem">Indtjening pr. vare</key>
+    <key alias="itemsPerPurchase">Varer pr. køb</key>
+    <key alias="uniquePurchases">Unikke køb</key>
+    <key alias="productPerformance">Produkteffektivitet</key>
+    <key alias="salesPerformance">Salgseffektivitet</key>
+    <key alias="analyticsForUmbraco">Analytics til Umbraco</key>
+    <key alias="noStateSpecified">Ingen tilstand specificeret.</key>
+    <key alias="sorrySessionExpired">Beklager - din session er sandsynligvis udløbet.</key>
+    <key alias="somethingWentWrong">Okay. Der gik noget galt.</key>
+    <key alias="informationSavedMessage"><![CDATA[Hej %0%. Vi har gemt din information til en konfigurationsfil, så Umbraco kan hente statistik fra din Google Analytics konto.<br /><br />Du kan nu <a href='javascript:self.close();'>lukke dette vindue</a>.]]></key>
+    <key alias="noAccess">Sorry you do not have access.</key>
+  </area>
+  <area alias="treeHeaders">
+    <key alias="analytics">Analytics</key>
+  </area>
+  <area alias="sections">
+    <key alias="analytics">Analytics</key>
+  </area>
+</language>

@@ -1,6 +1,6 @@
 ﻿
 angular.module("umbraco.resources")
-    .factory("settingsResource", function ($http, $cookieStore) {
+    .factory("settingsResource", function ($http, $cookies) {
         return {
             
             checkauth: function () {
@@ -40,7 +40,7 @@ angular.module("umbraco.resources")
             },
             
             getApiPath: function() {
-                var path = $cookieStore.get("analyticsUmbracoVersion");
+                var path = $cookies.get("analyticsUmbracoVersion");
                 if (path == null) {
                     try {
                         var version = $http.get("backoffice/Analytics/SettingsApi/GetUmbracoVersion");
@@ -54,8 +54,8 @@ angular.module("umbraco.resources")
             },
             
             setDateFilter: function (startDate, endDate) {
-                $cookieStore.put("analyticsStartDate", startDate);
-                $cookieStore.put("analyticsEndDate", endDate);
+                $cookies.put("analyticsStartDate", startDate);
+                $cookies.put("analyticsEndDate", endDate);
 
             },
             getDateFilter: function() {
@@ -66,8 +66,8 @@ angular.module("umbraco.resources")
                 if (dateFilter.startDate == null) {
                     dateFilter.startDate = moment().subtract('days', 29).format('YYYY-MM-DD');
                     dateFilter.endDate = moment().format('YYYY-MM-DD');
-                    $cookieStore.put("analyticsStartDate", dateFilter.startDate);
-                    $cookieStore.put("analyticsEndDate", dateFilter.endDate);
+                    $cookies.put("analyticsStartDate", dateFilter.startDate);
+                    $cookies.put("analyticsEndDate", dateFilter.endDate);
                 }
                 
                 return dateFilter;

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="en_us" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
+  <area alias="analytics">
+    <key alias="viewMoreDetails">View more details</key>
+    <key alias="visits">Visits</key>
+    <key alias="pagePath">Page Path</key>
+    <key alias="pageViews">Page Views</key>
+    <key alias="views">Views</key>
+    <key alias="source">Source</key>
+    <key alias="sources">Sources</key>
+    <key alias="loadingData">Loading data...</key>
+    <key alias="keyword">Keyword</key>
+    <key alias="keywords">Keywords</key>
+    <key alias="socialNetwork">Social Network</key>
+    <key alias="os">OS</key>
+    <key alias="osVersions">OS Versions</key>
+    <key alias="operatingSystem">Operating System</key>
+    <key alias="version">Version</key>
+    <key alias="screenResolution">Screen Resolution</key>
+    <key alias="resolution">Resolution</key>
+    <key alias="deviceType">Device Type</key>
+    <key alias="deviceTypes">Device Types</key>
+    <key alias="devices">Devices</key>
+    <key alias="device">Device</key>
+    <key alias="model">Model</key>
+    <key alias="browser">Browser</key>
+    <key alias="browserSpecific">Browser Specific</key>
+    <key alias="language">Language</key>
+    <key alias="country">Country</key>
+    <key alias="infoMessage">Before you can use Analytics, you need to choose a profile you wish to use to view statistics.</key>
+    <key alias="settings">Settings</key>
+    <key alias="settingsSaved">Settings have been saved</key>
+    <key alias="accountDetailsSaved">Account details have been saved</key>
+    <key alias="profileDetailsSaved">Profile details have been saved</key>
+    <key alias="loginWithGoogleViaOAuth">Login with Google via oAuth to verify</key>
+    <key alias="authorisation">Authorisation</key>
+    <key alias="authorize">Authorize</key>
+    <key alias="account">Account</key>
+    <key alias="selectAccountMessage">Select which account you wish to view settings from</key>
+    <key alias="selectAnAccount">-- Select an Account --</key>
+    <key alias="selectAProfile">-- Select a Profile --</key>
+    <key alias="selectedProfile">Selected Profile</key>
+    <key alias="name">Name</key>
+    <key alias="website">Website</key>
+    <key alias="id">Id</key>
+    <key alias="webPropertyId">Web Property Id</key>
+    <key alias="ecommerce">E-commerce</key>
+    <key alias="transactions">Transactions</key>
+    <key alias="revenue">Revenue</key>
+    <key alias="avgRevenuePerPurchase">Avg. Revenue Per Purchase</key>
+    <key alias="avgItemsPerPurchase">Avg. Items Per Purchase</key>
+    <key alias="conversionRate">Conversion Rate</key>
+    <key alias="bestsellers">Bestsellers</key>
+    <key alias="productSku">Product SKU</key>
+    <key alias="productName">Product Name</key>
+    <key alias="quantity">Quantity</key>
+    <key alias="quantities">Quantities</key>
+    <key alias="revenuePerSource">Revenue Per Source</key>
+    <key alias="transactionId">Transaction-id</key>
+    <key alias="revenuePerItem">Revenue Per Item</key>
+    <key alias="itemsPerPurchase">Items Per Purchase</key>
+    <key alias="uniquePurchases">Unique Purchases</key>
+    <key alias="productPerformance">Product Performance</key>
+    <key alias="salesPerformance">Sales Performance</key>
+    <key alias="analyticsForUmbraco">Analytics for Umbraco</key>
+    <key alias="noStateSpecified">No state specified.</key>
+    <key alias="sorrySessionExpired">Sorry - your session has most likely expired.</key>
+    <key alias="somethingWentWrong">Okay. Something went wrong.</key>
+    <key alias="informationSavedMessage"><![CDATA[Hi there %0%. We have saved your information to a config file, so Umbraco can pull stats from your Google Analytics account.<br /><br />You can now <a href='javascript:self.close();'>close this window</a>.]]></key>
+    <key alias="noAccess">Sorry you do not have access.</key>
+  </area>
+  <area alias="treeHeaders">
+    <key alias="analytics">Analytics</key>
+  </area>
+  <area alias="sections">
+    <key alias="analytics">Analytics</key>
+  </area>
+</language>

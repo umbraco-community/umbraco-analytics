@@ -38,9 +38,6 @@
     <Compile Include="AnalyticsComposer.cs" />
     <Compile Include="AnalyticsConfig.cs" />
     <Compile Include="AnalyticsHelpers.cs" />
-    <Compile Include="App_Plugins\Analytics\installer\PostInstall.ascx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ChartHelper.cs" />
     <Compile Include="Controllers\AnalyticsApiController.cs" />
     <Compile Include="Controllers\AnalyticsTreeController.cs" />
@@ -59,71 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="App_Plugins\Analytics\profile.config" />
-    <None Include="App_Plugins\Analytics\package.manifest" />
-    <None Include="App_Plugins\Analytics\account.config" />
-    <None Include="App_Plugins\Analytics\settings.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Dashboard.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Ecommerce.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\PageViews.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Keyword.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\ProductPerformance.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\SalesPerformance.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Social.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\OS.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\ScreenRes.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Device.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Country.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Language.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Browser.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Settings.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Edit.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\Transaction.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\controllers\View.Controller.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\directives\DateRangePicker.Directive.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\filters\currency.filter.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\dashboard.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\ecommerce.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\productperformance.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\salesperformance.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\transactions.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\views.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\keywords.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\social.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\screenres.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\devices.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\country.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\language.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\os.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\browser.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\partials\settings.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Stats.Resource.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\resources\Settings.Resource.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\services\DateRange.Service.js" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\view.html" />
-    <Content Include="App_Plugins\Analytics\backOffice\AnalyticsTree\edit.html" />
-    <Content Include="App_Plugins\Analytics\lang\da.xml" />
-    <Content Include="App_Plugins\Analytics\lang\en-GB.xml" />
-    <Content Include="App_Plugins\Analytics\lang\en-US.xml" />
-    <Content Include="App_Plugins\Analytics\css\analytics.css" />
-    <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.js" />
-    <Content Include="App_Plugins\Analytics\lib\accountingjs\accounting.min.js" />
-    <Content Include="App_Plugins\Analytics\lib\angles\angles.js" />
-    <Content Include="App_Plugins\Analytics\lib\angular-chartjs\angular-chartjs.js" />
-    <Content Include="App_Plugins\Analytics\lib\angular-tablesort\angular-tablesort.js" />
-    <Content Include="App_Plugins\Analytics\lib\angular-tablesort\tablesort.css" />
-    <Content Include="App_Plugins\Analytics\lib\chartjs\Chart.js" />
-    <Content Include="App_Plugins\Analytics\lib\chartjs\Chart.min.js" />
-    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs2.css" />
-    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker-bs3.css" />
-    <Content Include="App_Plugins\Analytics\lib\daterangepicker\daterangepicker.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment-with-langs.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment-with-langs.min.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment.js" />
-    <Content Include="App_Plugins\Analytics\lib\momentjs\moment.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -321,7 +254,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)App_Plugins\*.*" "$(ProjectDir)..\Analytics.Site\App_Plugins\" /a /e /k /y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
