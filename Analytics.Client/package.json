@@ -1,0 +1,29 @@
+{
+  "name": "analytics.umbraco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Umbraco Community",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-filelist": "^0.5.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-less": "^3.1.0",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-size": "^2.1.0",
+    "gulp-util": "^3.0.7",
+    "gulp-wait": "0.0.2",
+    "inquirer": "^1.1.2",
+    "path": "^0.12.7",
+    "run-sequence": "^1.2.2"
+  }
+}

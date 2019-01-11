@@ -1,0 +1,33 @@
+{
+  "javascript": [
+    "~/App_Plugins/Analytics/js/analytics.controllers.js",
+    "~/App_Plugins/Analytics/js/analytics.directives.js",
+    "~/App_Plugins/Analytics/js/analytics.filters.js",
+    "~/App_Plugins/Analytics/js/analytics.resources.js",
+    "~/App_Plugins/Analytics/js/analytics.services.js",
+
+    "~/App_Plugins/Analytics/lib/chartjs/Chart.js",
+    "~/App_Plugins/Analytics/lib/angular-chartjs/angular-chartjs.js",
+
+    "~/App_Plugins/Analytics/lib/angles/angles.js",
+    "~/App_Plugins/Analytics/lib/accountingjs/accounting.js",
+
+    "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker.js",
+
+    "~/App_Plugins/Analytics/lib/angular-tablesort/angular-tablesort.js"
+
+  ],
+  "css": [
+    "~/App_Plugins/Analytics/assets/analytics.css",
+    "~/App_Plugins/Analytics/lib/daterangepicker/daterangepicker-bs2.css",
+    "~/App_Plugins/Analytics/lib/angular-tablesort/tablesort.css"
+  ],
+  "dashboards": [
+    {
+      "name": "Last 7 days",
+      "alias": "AnalyticsDashboardSection",
+      "view": "~/App_Plugins/Analytics/backOffice/AnalyticsTree/partials/dashboard.html",
+      "sections": [ "analytics" ]
+    }
+  ]
+}

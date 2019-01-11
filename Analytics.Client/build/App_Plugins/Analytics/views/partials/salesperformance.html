@@ -1,0 +1,37 @@
+<div ng-controller="Analytics.SalesPerformanceController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
+        </div>   
+           
+        <h4><localize key="analytics_salesPerformance">Sales Performance</localize></h4>
+        
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <h5><localize key="analytics_revenue">Revenue</localize></h5>
+        <div class="chart-container">
+            <canvas id="viewSalesPerformance" width="650" height="250"></canvas>
+        </div>
+
+        <table id="tbl-salesperformance" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="date" ts-criteria="date" ts-default="descending"><localize key="general_date">Dates</localize></th>
+                    <th id="uniquePurchases" ts-criteria="uniquePurchases | parseInt"><localize key="analytics_uniquePurchases">Unique Purchases</localize></th>
+                    <th id="revenue" ts-criteria="revenue | parseFloat"><localize key="analytics_revenue">Revenue</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemSales track by $id(item)" ts-repeat>
+                    <td>{{ item.date | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ item.uniquePurchases }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div ng-controller="Analytics.TransactionController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
+        </div>   
+           
+        <h4><localize key="analytics_transactions">Transactions</localize></h4>
+        
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="viewTransactions" width="650" height="250"></canvas>
+        </div>
+
+        <table id="tbl-transactions" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="transactionId" ts-criteria="transactionId" ts-default="descending"><localize key="analytics_transactionId">Transaction-id</localize></th>
+                    <th id="revenue" ts-criteria="revenue | parseFloat"><localize key="analytics_revenue">Revenue</localize></th>
+                    <th id="quantity" ts-criteria="quantity | parseInt"><localize key="analytics_quantity">Quantity</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemTransactions track by $id(item)" ts-repeat>
+                    <td>{{ item.transactionId }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

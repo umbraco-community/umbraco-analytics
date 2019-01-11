@@ -1,0 +1,43 @@
+<div ng-controller="Analytics.ProductPerformanceController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
+        </div>   
+           
+        <h4><localize key="analytics_productPerformance">Product Performance</localize></h4>
+        
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <h5><localize key="analytics_uniquePurchases">Unique Purchases</localize></h5>
+        <div class="chart-container">
+            <canvas id="viewProductPerformance" width="650" height="250"></canvas>
+        </div>
+
+        <table id="tbl-productperformance" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="productSku" ts-criteria="productSku"><localize key="analytics_productSku">Product SKU</localize></th>
+                    <th id="productName" ts-criteria="productName"><localize key="analytics_productName">Product Name</localize></th>
+                    <th id="uniquePurchases" ts-criteria="uniquePurchases | parseInt"><localize key="analytics_uniquePurchases">Unique Purchases</localize></th>
+                    <th id="revenue" ts-criteria="revenue | parseFloat" ts-default="descending"><localize key="analytics_revenue">Revenue</localize></th>
+                    <th id="revenuePerItem" ts-criteria="revenuePerItem | parseFloat"><localize key="analytics_revenuePerItem">Revenue Per Item</localize></th>
+                    <th id="itemsPerPurchase" ts-criteria="itemsPerPurchase | parseFloat"><localize key="analytics_itemsPerPurchase">Items Per Purchase</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemProducts track by $id(item)" ts-repeat>
+                    <td>{{ item.productSku }}</td>
+                    <td>{{ item.productName }}</td>
+                    <td>{{ item.uniquePurchases }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
+                    <td>{{ item.revenuePerItem | currency: currencyCode }}</td>
+                    <td>{{ item.itemsPerPurchase }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

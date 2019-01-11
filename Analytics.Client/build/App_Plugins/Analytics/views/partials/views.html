@@ -1,0 +1,58 @@
+<div ng-controller="Analytics.PageViewsController">
+    <h1>HELLO WORLD</h1>
+
+    <div class="umb-pane">
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
+        </div>
+
+        <h4><localize key="analytics_views">Views</localize></h4>
+     
+        <div class="clearfix"></div>
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="viewMonths" width="650" height="450"></canvas>
+        </div>
+
+        <table id="tbl-views" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="pagepath" ts-criteria="pagepath"><localize key="analytics_pagePath">Page Path</localize></th>
+                    <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                    <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in items track by $id(item)" ts-repeat>
+                    <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
+                    <td>{{ item.visits }}</td>
+                    <td>{{ item.pageviews }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <hr/>
+        
+        <h4><localize key="analytics_sources">Sources</localize></h4>
+
+        <table id="tbl-sources" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="s_source" ts-criteria="s_source"><localize key="analytics_source">Source</localize></th>
+                    <th id="s_visits" ts-criteria="s_visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                    <th id="s_pageviews" ts-criteria="s_pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemSources track by $id(item)" ts-repeat>
+                    <td>{{ item.s_source }}</td>
+                    <td>{{ item.s_visits }}</td>
+                    <td>{{ item.s_pageviews }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

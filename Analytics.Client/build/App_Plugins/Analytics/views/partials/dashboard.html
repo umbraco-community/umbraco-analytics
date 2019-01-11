@@ -1,0 +1,80 @@
+<div ng-controller="Analytics.DashboardController">
+    <div class="umb-pane">
+        
+        <p ng-show="loadingViews"><localize key="analytics_loadingData">Loading data...</localize></p>
+
+        <h4><localize key="analytics_views">Views</localize></h4>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="chart-container chart-dashboard">
+                    <canvas id="viewMonths" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div class="span6 col-right">
+                <table id="tbl-views" class="table table-striped" ts-wrapper>
+                    <thead>
+                        <tr>
+                            <th id="pagepath" ts-criteria="pagepath"><localize key="analytics_pagePath">Page Path</localize></th>
+                            <th id="visits" ts-criteria="visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                            <th id="pageviews" ts-criteria="pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-show="!loadingViews">
+                        <tr ng-repeat="item in items | limitTo:10 track by $id(item)" ts-repeat>
+                            <td><a href="{{ item.pagepath }}" target="_blank">{{ item.pagepath }}</a></td>
+                            <td>{{ item.visits }}</td>
+                            <td>{{ item.pageviews }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/umbraco/#/analytics/analyticsTree/view/views" class="btn btn-primary"><localize key="analytics_viewMoreDetails">View more details</localize></a>
+            </div>
+        </div>
+    
+        <hr/>
+    
+        <div class="row-fluid">
+            <div class="span6 col-left">
+                <h4><localize key="analytics_sources">Sources</localize></h4>
+                <table id="tbl-sources" class="table table-striped" ts-wrapper>
+                    <thead>
+                        <tr>
+                            <th id="s_source" ts-criteria="s_source"><localize key="analytics_source">Source</localize></th>
+                            <th id="s_visits" ts-criteria="s_visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                            <th id="s_pageviews" ts-criteria="s_pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in itemsSources | limitTo:10 track by $id(item)" ts-repeat>
+                            <td>{{ item.s_source }}</td>
+                            <td>{{ item.s_visits }}</td>
+                            <td>{{ item.s_pageviews }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/umbraco/#/analytics/analyticsTree/view/views" class="btn btn-primary"><localize key="analytics_viewMoreDetails">View more details</localize></a>
+            </div>
+            <div class="span6 col-right">
+                <h4><localize key="analytics_keywords">Keywords</localize></h4>
+                <table id="tbl-keywords" class="table table-striped" ts-wrapper>
+                    <thead>
+                        <tr>
+                            <th id="k_keyword" ts-criteria="k_keyword"><localize key="analytics_keyword">Keyword</localize></th>
+                            <th id="k_visits" ts-criteria="k_visits | parseInt" ts-default="descending"><localize key="analytics_visits">Visits</localize></th>
+                            <th id="k_pageviews" ts-criteria="k_pageviews | parseInt"><localize key="analytics_pageViews">Page Views</localize></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in itemsKeywords | limitTo:10 track by $id(item)" ts-repeat>
+                            <td>{{ item.k_keyword }}</td>
+                            <td>{{ item.k_visits }}</td>
+                            <td>{{ item.k_pageviews }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/umbraco/#/analytics/analyticsTree/view/keywords" class="btn btn-primary"><localize key="analytics_viewMoreDetails">View more details</localize></a>
+            </div>
+        </div>
+    </div>
+</div>

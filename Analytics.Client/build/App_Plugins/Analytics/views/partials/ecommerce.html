@@ -1,0 +1,66 @@
+<div ng-controller="Analytics.EcommerceController">
+    <div class="umb-pane">
+        
+        <div ng-model="dateFilter" date-range-picker class="date-filter pull-right">
+        </div>   
+           
+        <h4><localize key="analytics_ecommerce">eCommerce</localize></h4>
+        
+        <div class="clearfix"></div>
+
+        <div ng-show="loadingViews" class="loading-bar">
+            <div class="umb-loader" style="height: 10px; margin: 10px 0px;"></div>
+        </div>
+
+        <div id="stat-boxes">
+            <div class="box-info"><localize key="analytics_transactions">Transactions</localize><span class="count">{{ info.transactions }}</span></div>
+            <div class="box-info"><localize key="analytics_revenue">Revenue</localize><span class="count">{{ info.revenue | currency: currencyCode }}</span></div>
+            <div class="box-info"><localize key="analytics_avgRevenuePerPurchase">Avg. Revenue Per Purchase</localize><span class="count">{{ info.avgRevenue | currency: currencyCode }}</span></div>
+            <div class="box-info"><localize key="analytics_avgItemsPerPurchase">Avg. Items Per Purchase</localize><span class="count">{{ info.itemsPerPurchase }}</span></div>
+            <div class="box-info"><localize key="analytics_quantities">Quantities</localize><span class="count">{{ info.itemQuantity }}</span></div>
+            <div class="box-info"><localize key="analytics_conversionRate">Conversion Rate</localize><span class="count">{{ info.conversionRate + " %" }}</span></div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <h5><localize key="analytics_transactions">Bestsellers</localize></h5>
+        <table id="tbl-bestsellers" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="productSku" ts-criteria="productSku"><localize key="analytics_productSku">Product SKU</localize></th>
+                    <th id="productName" ts-criteria="productName"><localize key="analytics_productName">Product Name</localize></th>
+                    <th id="quantity" ts-criteria="quantity | parseInt" ts-default="descending"><localize key="analytics_quantity">Quantity</localize></th>
+                    <th id="revenue" ts-criteria="revenue | parseFloat"><localize key="analytics_revenue">Revenue</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemProducts track by $id(item)" ts-repeat>
+                    <td>{{ item.productSku }}</td>
+                    <td>{{ item.productName }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.revenue | currency: currencyCode }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h5><localize key="analytics_revenuePerSource">Revenue Per Source</localize></h5>
+        <table id="tbl-revenuepersource" class="table table-striped" ts-wrapper>
+            <thead>
+                <tr>
+                    <th id="r_source" ts-criteria="r_source"><localize key="analytics_source">Source</localize></th>
+                    <th id="r_keyword" ts-criteria="r_keyword"><localize key="analytics_keyword">Keyword</localize></th>
+                    <th id="r_transactions" ts-criteria="r_transactions | parseInt"><localize key="analytics_transactions">Transactions</localize></th>
+                    <th id="r_revenue" ts-criteria="r_revenue | parseFloat" ts-default="descending"><localize key="analytics_revenue">Revenue</localize></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itemRevenuePerSource track by $id(item)" ts-repeat>
+                    <td>{{ item.r_source }}</td>
+                    <td>{{ item.r_keyword }}</td>
+                    <td>{{ item.r_transactions }}</td>
+                    <td>{{ item.r_revenue | currency: currencyCode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
