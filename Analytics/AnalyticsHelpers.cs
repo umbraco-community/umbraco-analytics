@@ -7,11 +7,11 @@ namespace Analytics {
 
     public static class AnalyticsHelpers {
         
-        public const string ConfigPath = "~/App_Plugins/Analytics/settings.config";
+        public const string ConfigPath = "~/App_Plugins/Analytics/config/settings.config";
         
-        public const string AccountPath = "~/App_Plugins/Analytics/account.config";
+        public const string AccountPath = "~/App_Plugins/Analytics/config/account.config";
 
-        public const string ProfilePath = "~/App_Plugins/Analytics/profile.config";
+        public const string ProfilePath = "~/App_Plugins/Analytics/config/profile.config";
 
         public static string UmbracoVersion {
             get { return Umbraco.Core.Configuration.UmbracoVersion.Current.ToString(); }
