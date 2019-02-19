@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Analytics.SettingsController",
-    function ($scope, $routeParams, settingsResource, notificationsService, localizationService, navigationService) {
+    function ($scope, $routeParams, $timout, settingsResource, notificationsService, localizationService, navigationService) {
 
         //By default user has not authorised
         var hasUserAuthd = false;
@@ -36,8 +36,8 @@
             //Show or hide the auth button (set on scope & local var for if check)
             hasUserAuthd = response.data === "true";
 
-            //Apply
-            $scope.$apply(function () {
+            //Apply -  $scope.$apply gave a $digest already in progress. So changed it to $timeout.
+            $timout(function () {
                 $scope.hasAuthd = hasUserAuthd;
             });
 
