@@ -63,7 +63,7 @@ namespace Analytics
 
             var chartLabels = new string[]{};
 
-            if (apiResults.ColumnHeaders.Count() == 5)
+            if (apiResults.ColumnHeaders.Count() == 5) 
             {
                 chartLabels = apiResults.Rows.Select(row => row.Cells[2] + "/" + row.Cells[1] + "/" + row.Cells[0]).ToArray();
             }
